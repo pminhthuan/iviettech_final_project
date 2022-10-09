@@ -1,4 +1,4 @@
-package finalproject.controller;
+package com.iviettech.finalproject.controller;
 
 import com.iviettech.finalproject.repository.CategoryRepository;
 import com.iviettech.finalproject.repository.ManufactorRepository;

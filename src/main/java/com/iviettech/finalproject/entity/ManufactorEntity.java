@@ -1,4 +1,4 @@
-package finalproject.entity;
+package com.iviettech.finalproject.entity;
 
 import lombok.Data;
 

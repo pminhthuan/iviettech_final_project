@@ -1,4 +1,4 @@
-package finalproject.config;
+package com.iviettech.finalproject.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

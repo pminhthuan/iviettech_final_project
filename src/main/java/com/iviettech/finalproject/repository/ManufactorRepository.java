@@ -1,4 +1,4 @@
-package finalproject.repository;
+package com.iviettech.finalproject.repository;
 
 import com.iviettech.finalproject.entity.ManufactorEntity;
 import org.springframework.data.repository.CrudRepository;
