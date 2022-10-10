@@ -1,0 +1,36 @@
+package com.iviettech.finalproject.entity;
+
+import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import java.util.Date;
+
+@Entity
+@Data
+@Table(name = "rating")
+public class RatingEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
+
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private ProductEntity product;
+
+    @Column(name = "fullName")
+    private String fullName;
+
+    @Column(name = "content")
+    private String content;
+
+    @Column(name = "created_date")
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern="dd/MM/yyyy")
+    private Date createdDate;
+
+    @Column(name = "status")
+    private String status;
+
+}

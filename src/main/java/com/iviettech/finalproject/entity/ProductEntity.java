@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Data
@@ -34,10 +35,16 @@ public class ProductEntity {
     @JoinColumn(name = "manufactor_id")
     private ManufactorEntity manufactor;
 
-    @Column(name = "image")
-    private String image;
-
     @Column(name = "status")
     private int status;
+
+    @OneToMany(mappedBy = "product")
+    private List<ProductImageEntity> productImageEntityList;
+
+    @OneToMany(mappedBy = "product")
+    private List<ProductPromotionEntity> productPromotionEntityList;
+
+    @OneToMany(mappedBy = "product")
+    private List<OrderDetailEntity> orderDetailEntityList;
 
 }
