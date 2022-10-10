@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name = "district")
+@Table(name = "districts")
 public class DistrictEntity {
     @Id
     @Column(name = "district_id")

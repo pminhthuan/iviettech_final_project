@@ -10,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name = "order")
+@Table(name = "orders")
 public class OrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,8 +18,8 @@ public class OrderEntity {
     private int id;
 
     @ManyToOne
-    @Column(name = "account_id")
-    private UserEntity userEntity;
+    @JoinColumn(name = "account_id")
+    private UserEntity user;
 
     @Column(name = "require_date")
     @Temporal(TemporalType.DATE)
@@ -55,6 +55,6 @@ public class OrderEntity {
     @Column(name = "qr_code_payment")
     private String qrCodePayment;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "orderEntity")
     private List<OrderDetailEntity> orderDetailEntityList;
 }

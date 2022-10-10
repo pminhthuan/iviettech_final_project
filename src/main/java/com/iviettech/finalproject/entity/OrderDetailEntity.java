@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 
 @Entity
 @Data
-@Table(name = "order_detail")
+@Table(name = "order_details")
 public class OrderDetailEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +20,7 @@ public class OrderDetailEntity {
 
     @ManyToOne
     @JoinColumn(name = "order_id")
-    private OrderEntity order;
+    private OrderEntity orderEntity;
 
     @Column(name = "quantity")
     private int quantity;

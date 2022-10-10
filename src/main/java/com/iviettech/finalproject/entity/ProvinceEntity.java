@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name = "province")
+@Table(name = "provinces")
 public class ProvinceEntity {
     @Id
     @Column(name = "province_id")
