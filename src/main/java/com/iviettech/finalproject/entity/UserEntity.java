@@ -40,11 +40,14 @@ public class UserEntity {
     @Comment(value = "1: male; 2: female; 3: others")
     private int gender;
 
+    @Column(name = "address", length = 2000)
+    private String address;
+
     @Column(name = "activation_code")
     private String activationCode;
 
-    @Column(name = "address", length = 2000)
-    private String address;
+    @Column(name = "status")
+    private String status;
 
     @ManyToOne
     @JoinColumn(name = "role_id")
