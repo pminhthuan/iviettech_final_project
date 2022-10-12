@@ -25,9 +25,10 @@ public class ProductController {
     @Autowired
     private ManufactorRepository manufactorRepository;
 
-    @RequestMapping(method = GET)
-    public String test() {
 
-        return "home";
+    @RequestMapping(method = GET)
+    public String home() {
+
+        return "index";
     }
 }
