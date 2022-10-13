@@ -47,7 +47,7 @@ public class OrderEntity {
     private String email;
 
     @Column(name = "total_amount") //tổng tiền
-    private BigDecimal totalAmount;
+    private double totalAmount;
 
     @Column(name = "note")
     private String note;

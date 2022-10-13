@@ -25,11 +25,14 @@ public class ProductEntity {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "addition_info")
+    private String additionInfo;
+
     @Column(name = "orginal_price")
-    private BigDecimal original_price;
+    private double original_price;
 
     @Column(name = "actual_price")
-    private BigDecimal actual_price;
+    private double actual_price;
 
     @ManyToOne
     @JoinColumn(name = "manufactor_id")
