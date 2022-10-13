@@ -1,0 +1,33 @@
+INSERT INTO categories ( name) VALUES ( 'Men');
+INSERT INTO categories ( name) VALUES ( 'Women');
+INSERT INTO categories ( name) VALUES ( 'Kids');
+INSERT INTO categories ( name) VALUES ( 'Accessories');
+
+INSERT INTO category_detail ( name, category_id) VALUES ( 'Shirt', 1);
+INSERT INTO category_detail ( name, category_id) VALUES ( 'T-Shirt', 1);
+INSERT INTO category_detail ( name, category_id) VALUES ( 'Trouser', 1);
+INSERT INTO category_detail ( name, category_id) VALUES ( 'Coat', 1);
+INSERT INTO category_detail ( name, category_id) VALUES ( 'Coat', 2);
+INSERT INTO category_detail ( name, category_id) VALUES ( 'Shirt', 2);
+INSERT INTO category_detail ( name, category_id) VALUES ( 'T-Shirt', 2);
+INSERT INTO category_detail ( name, category_id) VALUES ( 'Dress', 2);
+INSERT INTO category_detail ( name, category_id) VALUES ( 'Skirt', 2);
+INSERT INTO category_detail ( name, category_id) VALUES ( 'Kid Suit', 3);
+INSERT INTO category_detail ( name, category_id) VALUES ( 'Coat', 3);
+INSERT INTO category_detail ( name, category_id) VALUES ( 'Trouser', 3);
+INSERT INTO category_detail ( name, category_id) VALUES ( 'T-Shirt', 3);
+INSERT INTO category_detail ( name, category_id) VALUES ( 'Wallet', 4);
+INSERT INTO category_detail ( name, category_id) VALUES ( 'Belt', 4);
+INSERT INTO category_detail ( name, category_id) VALUES ( 'HandBag', 4);
+
+INSERT INTO manufactors ( name) VALUES ( 'Versace');
+INSERT INTO manufactors ( name) VALUES ( 'Prada');
+INSERT INTO manufactors ( name) VALUES ( 'Hermes');
+INSERT INTO manufactors ( name) VALUES ( 'Bottega Veneta');
+
+INSERT INTO products ( actual_price, description, name, orginal_price, category_detail_id, manufactor_id ) 
+VALUES ( 28,'','Men's Cotton Compact with Reflective Lettering', 15, 2, 1);
+
+
+
+
