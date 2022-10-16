@@ -1,6 +1,7 @@
 package com.iviettech.finalproject.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
@@ -13,13 +14,14 @@ public class ProductImageEntity {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "image_url")
+    @Column(name = "image_url", length = 5000)
     private String imageUrl;
 
     @Column(name = "image_alt")
     private String imageAlt;
 
     @Column(name = "is_main_image")
+    @ColumnDefault("0")
     private int isMainImage;
 
     @ManyToOne

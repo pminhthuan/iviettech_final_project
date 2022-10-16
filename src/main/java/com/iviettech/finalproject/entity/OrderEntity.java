@@ -31,8 +31,8 @@ public class OrderEntity {
     @DateTimeFormat(pattern="dd/MM/yyyy")
     private Date shippingDate;
 
-    @Column(name = "status")
-    private String status;
+    @Column(name = "status", columnDefinition = "integer default 0")
+    private int status;
 
     @Column(name = "fullName")
     private String fullName;
@@ -43,13 +43,13 @@ public class OrderEntity {
     @Column(name = "address", length = 2000)
     private String address;
 
-    @Column(name = "email")
+    @Column(name = "email", length = 1024)
     private String email;
 
     @Column(name = "total_amount") //tổng tiền
     private double totalAmount;
 
-    @Column(name = "note")
+    @Column(name = "note", length = 1024)
     private String note;
 
     @Column(name = "qr_code_payment")

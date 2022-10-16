@@ -19,7 +19,7 @@ public class ProductPromotionEntity {
     @JoinColumn(name = "product_id")
     private ProductEntity product;
 
-    @Column(name = "description")
+    @Column(name = "description", length = 2048)
     private String description;
 
     @Column(name = "start_date")
@@ -33,5 +33,5 @@ public class ProductPromotionEntity {
     private Date endDate;
 
     @Column(name = "sale_off")
-    private Date saleOff;
+    private double saleOff;
 }

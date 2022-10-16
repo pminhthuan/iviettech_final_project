@@ -15,14 +15,14 @@ public class BannerEntity {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "image_url")
+    @Column(name = "image_url", length = 5000)
     private String imageUrl;
 
-    @Column(name = "image_link")
+    @Column(name = "image_link", length = 1024)
     private String imageLink;
 
-    @Column(name = "status")
-    private String status;
+    @Column(name = "status", columnDefinition = "integer default 0")
+    private int status;
 
     @Column(name = "start_date")
     @Temporal(TemporalType.DATE)

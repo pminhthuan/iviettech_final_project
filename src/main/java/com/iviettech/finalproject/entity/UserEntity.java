@@ -22,7 +22,7 @@ public class UserEntity {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "email", unique = true)
+    @Column(name = "email", unique = true, length = 1024)
     private String email;
 
     @Column(name = "phone_number")
@@ -47,7 +47,8 @@ public class UserEntity {
     private String activationCode;
 
     @Column(name = "status")
-    private String status;
+    @ColumnDefault("0")
+    private int status;
 
     @ManyToOne
     @JoinColumn(name = "role_id")

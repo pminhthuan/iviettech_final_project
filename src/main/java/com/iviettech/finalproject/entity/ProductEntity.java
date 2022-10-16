@@ -15,17 +15,17 @@ public class ProductEntity {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "name")
+    @Column(name = "name", length = 1024)
     private String name;
 
     @ManyToOne
     @JoinColumn(name = "category_detail_id")
     private CategoryDetailEntity categoryDetail;
 
-    @Column(name = "description")
+    @Column(name = "description", length = 40000)
     private String description;
 
-    @Column(name = "addition_info")
+    @Column(name = "addition_info", length = 40000)
     private String additionInfo;
 
     @Column(name = "orginal_price")
@@ -38,7 +38,7 @@ public class ProductEntity {
     @JoinColumn(name = "manufactor_id")
     private ManufactorEntity manufactor;
 
-    @Column(name = "status")
+    @Column(name = "status", columnDefinition = "integer default 0")
     private int status;
 
     @OneToMany(mappedBy = "product")

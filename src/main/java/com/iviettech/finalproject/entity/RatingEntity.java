@@ -22,7 +22,7 @@ public class RatingEntity {
     @Column(name = "fullName")
     private String fullName;
 
-    @Column(name = "content")
+    @Column(name = "content", length = 5000)
     private String content;
 
     @Column(name = "created_date")
@@ -30,7 +30,7 @@ public class RatingEntity {
     @DateTimeFormat(pattern="dd/MM/yyyy")
     private Date createdDate;
 
-    @Column(name = "status")
-    private String status;
+    @Column(name = "status", columnDefinition = "integer default 0")
+    private int status;
 
 }
