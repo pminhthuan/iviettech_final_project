@@ -10,8 +10,5 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 public interface ProductRepository extends CrudRepository<ProductEntity, Integer> {
-    @Query(value = "select * from products as p left join product_image  as i on p.id = i.product_id\n" +
-            "where i.is_main_image = 1",
-            nativeQuery = true)
-    List<ProductEntity> getProductListWithImage();
+
 }

@@ -17,11 +17,6 @@ public class ProductService {
     @Autowired
     ProductImageRepository productImageRepository;
 
-//    public List<ProductImageEntity> productWithImgeList(){
-//        List<ProductEntity> producList =  productImageRepository.getProductListWithImage();
-//
-//        return productList;
-//    }
 
 
 }

@@ -31,7 +31,7 @@ public class ProductController {
 
     @RequestMapping(method = GET)
     public String home(Model model) {
-        List<ProductEntity> productEntityList = productRepository.getProductListWithImage();
+        List<ProductImageEntity> productEntityList = productImageRepository.getProductListWithImage();
         model.addAttribute("productList", productEntityList);
         return "index";
     }
