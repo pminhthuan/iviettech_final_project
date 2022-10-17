@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Home 02</title>
+    <title>T&T Fashion - Home</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
@@ -71,7 +71,7 @@
                         </li>
 
                         <li>
-                            <a href="product.html">Shop</a>
+                            <a href="/shop">Shop</a>
                         </li>
 
                         <li class="label1" data-label1="hot">
@@ -163,7 +163,7 @@
             </li>
 
             <li>
-                <a href="product.html">Shop</a>
+                <a href="/shop">Shop</a>
             </li>
 
             <li>

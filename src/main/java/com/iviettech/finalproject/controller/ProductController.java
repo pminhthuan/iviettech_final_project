@@ -30,9 +30,18 @@ public class ProductController {
     ProductImageRepository productImageRepository;
 
     @RequestMapping(method = GET)
-    public String home(Model model) {
+    public String viewHome(Model model) {
         List<ProductImageEntity> productEntityList = productImageRepository.getProductListWithImage();
         model.addAttribute("productList", productEntityList);
         return "index";
     }
+
+    @RequestMapping(value = "/shop",method = GET)
+    public String viewShop(Model model) {
+        List<ProductImageEntity> productEntityList = productImageRepository.getProductListWithImage();
+        model.addAttribute("productList", productEntityList);
+        return "product";
+    }
+
+
 }
