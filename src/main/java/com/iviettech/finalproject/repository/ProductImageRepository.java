@@ -14,4 +14,6 @@ public interface ProductImageRepository extends CrudRepository<ProductImageEntit
             "where i.is_main_image = 1",
             nativeQuery = true)
     List<ProductImageEntity> getProductListWithImage();
+
+    List<ProductImageEntity> findByProduct_Id(int id);
 }

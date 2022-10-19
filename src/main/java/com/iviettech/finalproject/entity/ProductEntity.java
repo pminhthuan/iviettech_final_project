@@ -42,6 +42,9 @@ public class ProductEntity {
     private int status;
 
     @OneToMany(mappedBy = "product")
+    private List<ProductDetailEntity> productDetailEntityList;
+
+    @OneToMany(mappedBy = "product")
     private List<ProductImageEntity> productImageEntityList;
 
     @OneToMany(mappedBy = "product")
@@ -49,5 +52,23 @@ public class ProductEntity {
 
     @OneToMany(mappedBy = "product")
     private List<OrderDetailEntity> orderDetailEntityList;
+
+
+
+    @OneToMany(mappedBy = "product")
+    private List<RatingEntity> ratingEntityList;
+
+
+    //private String mainProductImageURL;
+    public String getMainProductImageURL() {
+        String url = "";
+        for(ProductImageEntity productImageEntity : this.productImageEntityList) {
+            if (productImageEntity.getIsMainImage() == 1) {
+                url = productImageEntity.getImageUrl();
+                break;
+            }
+        }
+        return url;
+    }
 
 }
