@@ -1,6 +1,8 @@
 package com.iviettech.finalproject.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -42,9 +44,11 @@ public class ProductEntity {
     private int status;
 
     @OneToMany(mappedBy = "product")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<ProductDetailEntity> productDetailEntityList;
 
     @OneToMany(mappedBy = "product")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<ProductImageEntity> productImageEntityList;
 
     @OneToMany(mappedBy = "product")

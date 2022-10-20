@@ -20,4 +20,6 @@ public interface ProductDetailRepository extends CrudRepository<ProductDetailEnt
             "where d.product.id = ?1 order by d.size asc")
     List<String> getSizeByProductId(int id);
 
+    List<ProductDetailEntity> findProductDetailEntityByProduct_Id(int id);
+
 }

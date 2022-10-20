@@ -173,93 +173,6 @@
 </aside>
 
 
-<!-- Cart -->
-<div class="wrap-header-cart js-panel-cart">
-    <div class="s-full js-hide-cart"></div>
-
-    <div class="header-cart flex-col-l p-l-65 p-r-25">
-        <div class="header-cart-title flex-w flex-sb-m p-b-8">
-				<span class="mtext-103 cl2">
-					Your Cart
-				</span>
-
-            <div class="fs-35 lh-10 cl2 p-lr-5 pointer hov-cl1 trans-04 js-hide-cart">
-                <i class="zmdi zmdi-close"></i>
-            </div>
-        </div>
-
-        <div class="header-cart-content flex-w js-pscroll">
-            <ul class="header-cart-wrapitem w-full">
-                <li class="header-cart-item flex-w flex-t m-b-12">
-                    <div class="header-cart-item-img">
-                        <img src="/resources/images/item-cart-01.jpg" alt="IMG">
-                    </div>
-
-                    <div class="header-cart-item-txt p-t-8">
-                        <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-                            White Shirt Pleat
-                        </a>
-
-                        <span class="header-cart-item-info">
-								1 x $19.00
-							</span>
-                    </div>
-                </li>
-
-                <li class="header-cart-item flex-w flex-t m-b-12">
-                    <div class="header-cart-item-img">
-                        <img src="/resources/images/item-cart-02.jpg" alt="IMG">
-                    </div>
-
-                    <div class="header-cart-item-txt p-t-8">
-                        <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-                            Converse All Star
-                        </a>
-
-                        <span class="header-cart-item-info">
-								1 x $39.00
-							</span>
-                    </div>
-                </li>
-
-                <li class="header-cart-item flex-w flex-t m-b-12">
-                    <div class="header-cart-item-img">
-                        <img src="/resources/images/item-cart-03.jpg" alt="IMG">
-                    </div>
-
-                    <div class="header-cart-item-txt p-t-8">
-                        <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-                            Nixon Porter Leather
-                        </a>
-
-                        <span class="header-cart-item-info">
-								1 x $17.00
-							</span>
-                    </div>
-                </li>
-            </ul>
-
-            <div class="w-full">
-                <div class="header-cart-total w-full p-tb-40">
-                    Total: $75.00
-                </div>
-
-                <div class="header-cart-buttons flex-w w-full">
-                    <a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
-                        View Cart
-                    </a>
-
-                    <a href="shoping-cart.html" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
-                        Check Out
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
 <!-- Slider -->
 <section class="section-slide">
     <div class="wrap-slick1 rs1-slick1">
@@ -464,7 +377,9 @@
                                 <!-- Block2 -->
                                 <div class="block2">
                                     <div class="block2-pic hov-img0">
-                                        <img src="${p.imageUrl}" alt="${p.imageAlt}">
+                                        <a href="<c:url value="/view/${p.product.id}"/>">
+                                            <img src="${p.imageUrl}" alt="${p.imageAlt}">
+                                        </a>
 
                                         <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
                                             Quick View
@@ -1653,25 +1568,6 @@
                                     </div>
                                 </div>
 
-                                <div class="item-slick3" data-thumb="/resources/images/product-detail-02.jpg">
-                                    <div class="wrap-pic-w pos-relative">
-                                        <img src="/resources/images/product-detail-02.jpg" alt="IMG-PRODUCT">
-
-                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="/resources/images/product-detail-02.jpg">
-                                            <i class="fa fa-expand"></i>
-                                        </a>
-                                    </div>
-                                </div>
-
-                                <div class="item-slick3" data-thumb="/resources/images/product-detail-03.jpg">
-                                    <div class="wrap-pic-w pos-relative">
-                                        <img src="/resources/images/product-detail-03.jpg" alt="IMG-PRODUCT">
-
-                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="/resources/images/product-detail-03.jpg">
-                                            <i class="fa fa-expand"></i>
-                                        </a>
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>
