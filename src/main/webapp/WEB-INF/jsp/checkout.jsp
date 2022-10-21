@@ -15,7 +15,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!--===============================================================================================-->
-  <link rel="icon" type="image/png" href="/resources/images/icons/logo_T_T_Black.png" />
+  <link rel="icon" type="image/png" href="/resources/images/icons/logo_T_T_Black.png"/>
   <!--===============================================================================================-->
   <link rel="stylesheet" type="text/css" href="/resources/vendor/bootstrap/css/bootstrap.min.css">
   <!--===============================================================================================-->
@@ -33,6 +33,12 @@
   <!--===============================================================================================-->
   <link rel="stylesheet" type="text/css" href="/resources/vendor/select2/select2.min.css">
   <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="/resources/vendor/daterangepicker/daterangepicker.css">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="/resources/vendor/slick/slick.css">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="/resources/vendor/MagnificPopup/magnific-popup.css">
+  <!--===============================================================================================-->
   <link rel="stylesheet" type="text/css" href="/resources/vendor/perfect-scrollbar/perfect-scrollbar.css">
   <!--===============================================================================================-->
   <link rel="stylesheet" type="text/css" href="/resources/css/util.css">
@@ -40,23 +46,6 @@
   <link rel="stylesheet" type="text/css" href="/resources/css/custom.css">
   <!--===============================================================================================-->
   <link href="/resources/vendor/bootstrap/css/bootstrap.min.02.css" rel="stylesheet">
-
-  <style>
-    .bd-placeholder-img {
-      font-size: 1.125rem;
-      text-anchor: middle;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
-
-    @media (min-width: 768px) {
-      .bd-placeholder-img-lg {
-        font-size: 3.5rem;
-      }
-    }
-  </style>
   <!-- Custom styles for this template -->
   <link href="/resources/css/form-validation.css" rel="stylesheet">
   <!--===============================================================================================-->
@@ -166,7 +155,7 @@
 
         <div class="mb-3">
           <label for="email">Email <span class="text-muted">(Optional)</span></label>
-          <input type="email" class="form-control" id="email" placeholder="you@example.com">
+          <input type="email" class="form-control" id="email" placeholder="example@gmail.com">
           <div class="invalid-feedback">
             Please enter a valid email address for shipping updates.
           </div>

@@ -24,7 +24,8 @@ jQuery(document).ready(function($) {
                    swal($("#product_title").text(), "is added to cart !", "success");
                } else if (data == "1") {
                    // there is a new item has been added to cart, therefore need update the cart badge by 1
-                   $("#cart_item_quantity").text(Number($("#cart_item_quantity").html()) + 1);
+                   //$("#cart_item_quantity").text(Number($("#cart_item_quantity").html()) + 1);
+                   $("#cart_number").attr("data-notify", Number($("#cart_number").attr("data-notify")) + 1);
                    swal($("#product_title").text(), "is added to cart !", "success");
                } else {
                    alert("Oops, there is something wrong - please try again later!")

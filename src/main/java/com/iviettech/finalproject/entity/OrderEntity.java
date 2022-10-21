@@ -34,8 +34,11 @@ public class OrderEntity {
     @Column(name = "status", columnDefinition = "integer default 0")
     private int status;
 
-    @Column(name = "fullName")
-    private String fullName;
+    @Column(name = "first_name", length = 1024)
+    private String firstName;
+
+    @Column(name = "last_name", length = 1024)
+    private String lastName;
 
     @Column(name = "phone_number")
     private String phoneNumber;
