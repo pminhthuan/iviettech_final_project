@@ -1,7 +1,6 @@
 package com.iviettech.finalproject.controller;
 
 import com.iviettech.finalproject.entity.ProductDetailEntity;
-import com.iviettech.finalproject.entity.ProductEntity;
 import com.iviettech.finalproject.entity.ProductImageEntity;
 import com.iviettech.finalproject.pojo.CartItem;
 import com.iviettech.finalproject.repository.*;
@@ -16,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
 @RequestMapping(value = "/")
@@ -142,7 +140,7 @@ public class ProductController {
         model.addAttribute("shopping_cart_list", cart);
         model.addAttribute("cart_size", cart.size());
         model.addAttribute("total_price_in_cart", calculateTotalPrice(cart));
-        return "shoping_cart";
+        return "shopping_cart";
     }
 
 
