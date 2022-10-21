@@ -1,6 +1,6 @@
 .site-section {
-    padding-top: 75px;
-    padding-bottom: 85px;
+    padding-top: 50px;
+    padding-bottom: 70px;
 }
 
 .btn.btn-primary {
@@ -13,8 +13,8 @@
 
 .btn-primary:hover {
     color: #fff;
-    background-color: #5a50e5;
-    border-color: #4f45e3;
+    background-color: #222 !important;
+    border-color: #222 !important;
 }
 
 .btn {
@@ -79,7 +79,7 @@ p {
 .input-group>.input-group-append>.btn {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-    padding-bottom: 14px;
+    /* padding-bottom: 14px; */
 }
 
 .site-blocks-table .product-thumbnail {
@@ -92,7 +92,7 @@ p {
     border-width: 1px !important;
     vertical-align: middle;
     color: #212529;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .site-blocks-table tbody tr:first-child td {
@@ -111,7 +111,7 @@ p {
 
 }
 
-/* .form-remove {
+.form-remove {
     width: 5%;
 }
 
@@ -121,4 +121,10 @@ p {
 
 .form-size-color {
     width: 10%;
-} */
+}
+
+.checkout-form {
+    padding-top: 50px;
+    padding-bottom: 70px;
+    padding-left: 20px;
+}

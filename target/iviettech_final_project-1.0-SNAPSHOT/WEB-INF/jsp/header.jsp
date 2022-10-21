@@ -42,6 +42,7 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="/resources/css/util.css">
     <link rel="stylesheet" type="text/css" href="/resources/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/resources/css/custom.css">
     <!--===============================================================================================-->
 </head>
 <body class="animsition">
@@ -130,17 +131,16 @@
                     </div>
                     <c:choose>
                         <c:when test="${sessionScope.shopping_cart == null}">
-                            <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="0">
+                            <div id="cart_number" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="0">
                                 <i class="zmdi zmdi-shopping-cart"></i>
                             </div>
                         </c:when>
                         <c:when test="${sessionScope.shopping_cart != null}">
-                            <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="${sessionScope.shopping_cart.size()}">
+                            <div id="cart_number" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="${sessionScope.shopping_cart.size()}">
                                 <i class="zmdi zmdi-shopping-cart"></i>
                             </div>
                         </c:when>
                     </c:choose>
-
                     <a href="#" class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti" data-notify="0">
                         <i class="zmdi zmdi-favorite-outline"></i>
                     </a>
@@ -306,16 +306,25 @@
             </ul>
 
             <div class="w-full">
-                <div class="header-cart-total w-full p-tb-40">
-                    Total: $75.00
-                </div>
+                <c:choose>
+                    <c:when test="${sessionScope.shopping_cart == null}">
+                        <div class="header-cart-total w-full p-tb-40">
+                            Total: $0
+                        </div>
+                    </c:when>
+                    <c:when test="${sessionScope.shopping_cart != null}">
+                        <div class="header-cart-total w-full p-tb-40">
+                            Total: <c:out value="${sessionScope.total_price_in_cart}"/>
+                        </div>
+                    </c:when>
+                </c:choose>
 
                 <div class="header-cart-buttons flex-w w-full">
                     <a href="/cart" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-r-8 m-b-10">
                         View Cart
                     </a>
 
-                    <a href="/cart" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+                    <a href="/checkout" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
                         Check Out
                     </a>
                 </div>

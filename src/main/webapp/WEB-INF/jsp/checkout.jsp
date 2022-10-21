@@ -15,31 +15,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!--===============================================================================================-->
-  <link rel="icon" type="image/png" href="images/icons/favicon.png" />
+  <link rel="icon" type="image/png" href="/resources/images/icons/logo_T_T_Black.png" />
   <!--===============================================================================================-->
-  <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/resources/vendor/bootstrap/css/bootstrap.min.css">
   <!--===============================================================================================-->
-  <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="/resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
   <!--===============================================================================================-->
-  <link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
+  <link rel="stylesheet" type="text/css" href="/resources/fonts/iconic/css/material-design-iconic-font.min.css">
   <!--===============================================================================================-->
-  <link rel="stylesheet" type="text/css" href="fonts/linearicons-v1.0.0/icon-font.min.css">
+  <link rel="stylesheet" type="text/css" href="/resources/fonts/linearicons-v1.0.0/icon-font.min.css">
   <!--===============================================================================================-->
-  <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+  <link rel="stylesheet" type="text/css" href="/resources/vendor/animate/animate.css">
   <!--===============================================================================================-->
-  <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+  <link rel="stylesheet" type="text/css" href="/resources/vendor/css-hamburgers/hamburgers.min.css">
   <!--===============================================================================================-->
-  <link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+  <link rel="stylesheet" type="text/css" href="/resources/vendor/animsition/css/animsition.min.css">
   <!--===============================================================================================-->
-  <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+  <link rel="stylesheet" type="text/css" href="/resources/vendor/select2/select2.min.css">
   <!--===============================================================================================-->
-  <link rel="stylesheet" type="text/css" href="vendor/perfect-scrollbar/perfect-scrollbar.css">
+  <link rel="stylesheet" type="text/css" href="/resources/vendor/perfect-scrollbar/perfect-scrollbar.css">
   <!--===============================================================================================-->
-  <link rel="stylesheet" type="text/css" href="css/util.css">
-  <link rel="stylesheet" type="text/css" href="css/main.css">
-  <link rel="stylesheet" type="text/css" href="css/custom.css">
+  <link rel="stylesheet" type="text/css" href="/resources/css/util.css">
+  <link rel="stylesheet" type="text/css" href="/resources/css/main.css">
+  <link rel="stylesheet" type="text/css" href="/resources/css/custom.css">
   <!--===============================================================================================-->
-  <link href="vendor/bootstrap/css/bootstrap.min.02.css" rel="stylesheet">
+  <link href="/resources/vendor/bootstrap/css/bootstrap.min.02.css" rel="stylesheet">
 
   <style>
     .bd-placeholder-img {
@@ -58,7 +58,7 @@
     }
   </style>
   <!-- Custom styles for this template -->
-  <link href="css/form-validation.css" rel="stylesheet">
+  <link href="/resources/css/form-validation.css" rel="stylesheet">
   <!--===============================================================================================-->
 </head>
 <jsp:include page="header.jsp"></jsp:include>
@@ -84,40 +84,44 @@
     <div class="col-md-4 order-md-2 mb-4">
       <h4 class="d-flex justify-content-between align-items-center mb-3">
         <span class="text-muted">Your cart</span>
-        <span class="badge badge-secondary badge-pill">3</span>
+        <c:choose>
+          <c:when test="${sessionScope.shopping_cart == null}">
+            <span class="badge badge-secondary badge-pill">No items</span>
+          </c:when>
+          <c:when test="${sessionScope.shopping_cart != null}">
+            <span class="badge badge-secondary badge-pill"><c:out value="${sessionScope.shopping_cart.size()}"/> items</span>
+          </c:when>
+        </c:choose>
+
       </h4>
       <ul class="list-group mb-3">
+        <c:forEach items="${sessionScope.shopping_cart}" var="item">
         <li class="list-group-item d-flex justify-content-between lh-condensed">
           <div>
-            <h6 class="my-0">Product name</h6>
-            <small class="text-muted">Brief description</small>
+            <h6 class="my-0">${item.title}</h6>
+            <small class="text-muted">x ${item.quantity}</small>
           </div>
-          <span class="text-muted">$12</span>
+          <span class="text-muted">$${item.totalPriceInNumber}</span>
         </li>
-        <li class="list-group-item d-flex justify-content-between lh-condensed">
-          <div>
-            <h6 class="my-0">Second product</h6>
-            <small class="text-muted">Brief description</small>
-          </div>
-          <span class="text-muted">$8</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between lh-condensed">
-          <div>
-            <h6 class="my-0">Third item</h6>
-            <small class="text-muted">Brief description</small>
-          </div>
-          <span class="text-muted">$5</span>
-        </li>
+        </c:forEach>
         <li class="list-group-item d-flex justify-content-between bg-light">
           <div class="text-success">
             <h6 class="my-0">Promo code</h6>
-            <small>EXAMPLECODE</small>
+<%--            <small>EXAMPLECODE</small>--%>
           </div>
-          <span class="text-success">-$5</span>
+          <span class="text-success">-$0</span>
         </li>
         <li class="list-group-item d-flex justify-content-between">
           <span>Total (USD)</span>
-          <strong>$20</strong>
+          <c:choose>
+            <c:when test="${sessionScope.shopping_cart == null}">
+              <strong>$0</strong>
+            </c:when>
+            <c:when test="${sessionScope.shopping_cart != null}">
+              <strong><c:out value="${sessionScope.total_price_in_cart}"/></strong>
+            </c:when>
+          </c:choose>
+
         </li>
       </ul>
 
@@ -151,14 +155,11 @@
         </div>
 
         <div class="mb-3">
-          <label for="username">Username</label>
+          <label for="phonenumber">Phone number</label>
           <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text">@</span>
-            </div>
-            <input type="text" class="form-control" id="username" placeholder="Username" required>
+            <input type="text" class="form-control" id="phonenumber" placeholder="0905545462" required>
             <div class="invalid-feedback" style="width: 100%;">
-              Your username is required.
+              Your phone number is required.
             </div>
           </div>
         </div>
@@ -172,44 +173,47 @@
         </div>
 
         <div class="mb-3">
-          <label for="address">Address</label>
-          <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
+          <label for="address">Address detail</label>
+          <input type="text" class="form-control" id="address" placeholder="234 Hang Ma St or Phuong Nam Village" required>
           <div class="invalid-feedback">
             Please enter your shipping address.
           </div>
         </div>
 
-        <div class="mb-3">
-          <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>
-          <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
-        </div>
+<%--        <div class="mb-3">--%>
+<%--          <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>--%>
+<%--          <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">--%>
+<%--        </div>--%>
 
         <div class="row">
-          <div class="col-md-5 mb-3">
-            <label for="country">Country</label>
-            <select class="custom-select d-block w-100" id="country" required>
+          <div class="col-md-4 mb-3">
+            <label for="province">Province</label>
+            <select class="custom-select d-block w-100" id="province" required>
               <option value="">Choose...</option>
-              <option>United States</option>
+              <option>Ha Noi</option>
             </select>
             <div class="invalid-feedback">
-              Please select a valid country.
+              Please select a valid province.
             </div>
           </div>
           <div class="col-md-4 mb-3">
-            <label for="state">State</label>
-            <select class="custom-select d-block w-100" id="state" required>
+            <label for="district">District</label>
+            <select class="custom-select d-block w-100" id="district" required>
               <option value="">Choose...</option>
-              <option>California</option>
+              <option>Hoan Kiem</option>
             </select>
             <div class="invalid-feedback">
-              Please provide a valid state.
+              Please provide a valid district.
             </div>
           </div>
-          <div class="col-md-3 mb-3">
-            <label for="zip">Zip</label>
-            <input type="text" class="form-control" id="zip" placeholder="" required>
+          <div class="col-md-4 mb-3">
+            <label for="ward">Ward</label>
+            <select class="custom-select d-block w-100" id="ward" required>
+              <option value="">Choose...</option>
+              <option>Dong Xuan</option>
+            </select>
             <div class="invalid-feedback">
-              Zip code required.
+              Please provide a valid ward.
             </div>
           </div>
         </div>
@@ -230,52 +234,52 @@
 
         <div class="d-block my-3">
           <div class="custom-control custom-radio">
-            <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked
+            <input id="cod" name="paymentMethod" type="radio" class="custom-control-input" checked
                    required>
-            <label class="custom-control-label" for="credit">Credit card</label>
+            <label class="custom-control-label" for="cod">COD</label>
           </div>
           <div class="custom-control custom-radio">
-            <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>
-            <label class="custom-control-label" for="debit">Debit card</label>
+            <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" required>
+            <label class="custom-control-label" for="credit">Credit card</label>
           </div>
           <div class="custom-control custom-radio">
             <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>
             <label class="custom-control-label" for="paypal">PayPal</label>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <label for="cc-name">Name on card</label>
-            <input type="text" class="form-control" id="cc-name" placeholder="" required>
-            <small class="text-muted">Full name as displayed on card</small>
-            <div class="invalid-feedback">
-              Name on card is required
-            </div>
-          </div>
-          <div class="col-md-6 mb-3">
-            <label for="cc-number">Credit card number</label>
-            <input type="text" class="form-control" id="cc-number" placeholder="" required>
-            <div class="invalid-feedback">
-              Credit card number is required
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-3 mb-3">
-            <label for="cc-expiration">Expiration</label>
-            <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
-            <div class="invalid-feedback">
-              Expiration date required
-            </div>
-          </div>
-          <div class="col-md-3 mb-3">
-            <label for="cc-cvv">CVV</label>
-            <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
-            <div class="invalid-feedback">
-              Security code required
-            </div>
-          </div>
-        </div>
+<%--        <div class="row">--%>
+<%--          <div class="col-md-6 mb-3">--%>
+<%--            <label for="cc-name">Name on card</label>--%>
+<%--            <input type="text" class="form-control" id="cc-name" placeholder="" required>--%>
+<%--            <small class="text-muted">Full name as displayed on card</small>--%>
+<%--            <div class="invalid-feedback">--%>
+<%--              Name on card is required--%>
+<%--            </div>--%>
+<%--          </div>--%>
+<%--          <div class="col-md-6 mb-3">--%>
+<%--            <label for="cc-number">Credit card number</label>--%>
+<%--            <input type="text" class="form-control" id="cc-number" placeholder="" required>--%>
+<%--            <div class="invalid-feedback">--%>
+<%--              Credit card number is required--%>
+<%--            </div>--%>
+<%--          </div>--%>
+<%--        </div>--%>
+<%--        <div class="row">--%>
+<%--          <div class="col-md-3 mb-3">--%>
+<%--            <label for="cc-expiration">Expiration</label>--%>
+<%--            <input type="text" class="form-control" id="cc-expiration" placeholder="" required>--%>
+<%--            <div class="invalid-feedback">--%>
+<%--              Expiration date required--%>
+<%--            </div>--%>
+<%--          </div>--%>
+<%--          <div class="col-md-3 mb-3">--%>
+<%--            <label for="cc-cvv">CVV</label>--%>
+<%--            <input type="text" class="form-control" id="cc-cvv" placeholder="" required>--%>
+<%--            <div class="invalid-feedback">--%>
+<%--              Security code required--%>
+<%--            </div>--%>
+<%--          </div>--%>
+<%--        </div>--%>
         <hr class="mb-4">
         <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
       </form>
@@ -399,23 +403,23 @@
     <div class="p-t-40">
       <div class="flex-c-m flex-w p-b-18">
         <a href="#" class="m-all-1">
-          <img src="images/icons/icon-pay-01.png" alt="ICON-PAY">
+          <img src="/resources/images/icons/icon-pay-01.png" alt="ICON-PAY">
         </a>
 
         <a href="#" class="m-all-1">
-          <img src="images/icons/icon-pay-02.png" alt="ICON-PAY">
+          <img src="/resources/images/icons/icon-pay-02.png" alt="ICON-PAY">
         </a>
 
         <a href="#" class="m-all-1">
-          <img src="images/icons/icon-pay-03.png" alt="ICON-PAY">
+          <img src="/resources/images/icons/icon-pay-03.png" alt="ICON-PAY">
         </a>
 
         <a href="#" class="m-all-1">
-          <img src="images/icons/icon-pay-04.png" alt="ICON-PAY">
+          <img src="/resources/images/icons/icon-pay-04.png" alt="ICON-PAY">
         </a>
 
         <a href="#" class="m-all-1">
-          <img src="images/icons/icon-pay-05.png" alt="ICON-PAY">
+          <img src="/resources/images/icons/icon-pay-05.png" alt="ICON-PAY">
         </a>
       </div>
 
@@ -442,14 +446,14 @@
 </div>
 
 <!--===============================================================================================-->
-<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="/resources/vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
-<script src="vendor/animsition/js/animsition.min.js"></script>
+<script src="/resources/vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->
-<script src="vendor/bootstrap/js/popper.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="/resources/vendor/bootstrap/js/popper.js"></script>
+<script src="/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
 <!--===============================================================================================-->
-<script src="vendor/select2/select2.min.js"></script>
+<script src="/resources/vendor/select2/select2.min.js"></script>
 <script>
   $(".js-select2").each(function () {
     $(this).select2({
@@ -459,9 +463,9 @@
   })
 </script>
 <!--===============================================================================================-->
-<script src="vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+<script src="/resources/vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
 <!--===============================================================================================-->
-<script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="/resources/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script>
   $('.js-pscroll').each(function () {
     $(this).css('position', 'relative');
@@ -478,14 +482,12 @@
   });
 </script>
 <!--===============================================================================================-->
-<script src="js/main.js"></script>
+<script src="/resources/js/main.js"></script>
 <!--===============================================================================================-->
-<script src="vendor/jquery/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.02.js"></script>
-<script src="js/form-validation.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.js" integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM=" crossorigin="anonymous"></script>
+<%--<script>window.jQuery || document.write('<script src="../assets/js//resources/vendor/jquery.slim.min.js"><\/script>')</script>--%>
+<script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.02.js"></script>
+<script src="/resources/js/form-validation.js"></script>
 <!--===============================================================================================-->
 </body>
 

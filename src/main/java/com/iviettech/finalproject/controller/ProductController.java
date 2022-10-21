@@ -86,6 +86,7 @@ public class ProductController {
                     List<CartItem> cart = new ArrayList<CartItem>();
                     cart.add(new CartItem(productId, quantity, imgSource, title, price, size, color));
                     session.setAttribute("shopping_cart", cart);
+                    session.setAttribute("total_price_in_cart", calculateTotalPrice(cart));
                     returnedValue = "1";
                 } else { // cart has items
                     List<CartItem> cart = (List<CartItem>) session.getAttribute("shopping_cart");
@@ -103,6 +104,7 @@ public class ProductController {
                         returnedValue = "0";
                     }
                     session.setAttribute("shopping_cart", cart);
+                    session.setAttribute("total_price_in_cart", calculateTotalPrice(cart));
                 }
                 // save comment to DB
                 return returnedValue;
@@ -141,6 +143,11 @@ public class ProductController {
         model.addAttribute("cart_size", cart.size());
         model.addAttribute("total_price_in_cart", calculateTotalPrice(cart));
         return "shopping_cart";
+    }
+
+    @RequestMapping(value = "/checkout",method = GET)
+    public String checkOut(Model model) {
+        return "checkout";
     }
 
 

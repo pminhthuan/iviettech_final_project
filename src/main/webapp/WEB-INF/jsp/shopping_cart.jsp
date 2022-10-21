@@ -77,17 +77,17 @@
                             </tr>
                             </thead>
                             <tbody>
+                            <c:forEach items="${shopping_cart_list}" var="item">
                             <tr>
                                 <td class="product-thumbnail">
-                                    <img src="images/product-03.jpg" alt="Image" class="img-fluid">
+                                    <img src="${item.imgSource}" alt="Image" class="img-fluid">
                                 </td>
                                 <td class="product-name">
-                                    <h2 class="h6 text-black">How to Create a Shopping Cart UI using CSS &
-                                        JavaScript</h2>
+                                    <h2 class="h6 text-black">${item.title}</h2>
                                 </td>
-                                <td class="form-size-color">White</td>
-                                <td class="form-size-color">L</td>
-                                <td class="form-price">$49.00</td>
+                                <td class="form-size-color">${item.color}</td>
+                                <td class="form-size-size">${item.size}</td>
+                                <td class="form-price">$${item.price}</td>
                                 <td class="form-quantity">
                                     <div class="wrap-num-product flex-w m-l-auto m-r-0">
                                         <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
@@ -95,7 +95,7 @@
                                         </div>
 
                                         <input class="mtext-104 cl3 txt-center num-product" type="number"
-                                               name="num-product1" value="1">
+                                               name="num-product1" value="${item.quantity}">
 
                                         <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
                                             <i class="fs-16 zmdi zmdi-plus"></i>
@@ -103,38 +103,11 @@
                                     </div>
 
                                 </td>
-                                <td class="form-price">$49.00</td>
-                                <td class="form-remove"><a href="#" class="btn btn-primary">X</a></td>
+                                <td class="form-price">$${item.totalPriceInNumber}</td>
+                                <td class="form-remove">
+                                    <a href="#" class="btn btn-primary" style="font-size: 0.8rem;">X</a></td>
                             </tr>
-
-                            <tr>
-                                <td class="product-thumbnail">
-                                    <img src="images/product-08.jpg" alt="Image" class="img-fluid">
-                                </td>
-                                <td class="product-name">
-                                    <h2 class="h6 text-black">Polo Shirt</h2>
-                                </td>
-                                <td class="form-size-color">Black</td>
-                                <td class="form-size-color">XL</td>
-                                <td class="form-price">$49.00</td>
-                                <td class="form-quantity">
-                                    <div class="wrap-num-product flex-w m-l-auto m-r-0">
-                                        <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-                                            <i class="fs-16 zmdi zmdi-minus"></i>
-                                        </div>
-
-                                        <input class="mtext-104 cl3 txt-center num-product" type="number"
-                                               name="num-product1" value="1">
-
-                                        <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-                                            <i class="fs-16 zmdi zmdi-plus"></i>
-                                        </div>
-                                    </div>
-
-                                </td>
-                                <td class="form-price">$49.00</td>
-                                <td class="form-remove"><a href="#" class="btn btn-primary">X</a></td>
-                            </tr>
+                            </c:forEach>
                             </tbody>
                         </table>
                     </div>
@@ -170,7 +143,7 @@
                         <div class="col-md-7 cart-total">
                             <div class="row">
                                 <div class="col-md-12 text-right border-bottom mb-5">
-                                    <h6 class="text-black h4 text-uppercase">Cart Totals</h6>
+                                    <h5 class="text-black h5 text-uppercase">Cart Totals</h5>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -178,7 +151,7 @@
                                     <span class="text-black">Subtotal</span>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <strong class="text-black">$230.00</strong>
+                                    <strong class="text-black"><c:out value="${total_price_in_cart}"/></strong>
                                 </div>
                             </div>
                             <div class="row mb-5">
@@ -186,14 +159,17 @@
                                     <span class="text-black">Total</span>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <strong class="text-black">$230.00</strong>
+                                    <strong class="text-black"><c:out value="${total_price_in_cart}"/></strong>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-12">
-                                    <button class="btn-checkout btn btn-primary btn-lg py-3 btn-block"
-                                            onclick="window.location='checkout.html'">Proceed To Checkout</button>
+<%--                                    <button class="btn-checkout btn btn-primary btn-lg py-3 btn-block"--%>
+<%--                                            onclick="window.location='/checkout'">Proceed To Checkout</button>--%>
+                                    <a href="/checkout">
+                                        <button class="btn-checkout btn btn-primary btn-lg py-3 btn-block">Proceed To Checkout</button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
