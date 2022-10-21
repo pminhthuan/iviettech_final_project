@@ -118,8 +118,8 @@
 
                             <div class="size-204 respon6-next">
                                 <div class="rs1-select2 bor8 bg0">
-                                    <select id="size" class="js-select2" name="time" required>
-                                        <option>Choose an option</option>
+                                    <select id="size" class="js-select2" name="size" required>
+                                        <option>Select an option</option>
                                         <c:forEach items="${productSizeList}" var="size">
                                         <option value="${size}">${size}</option>
                                         </c:forEach>
@@ -136,8 +136,8 @@
 
                             <div class="size-204 respon6-next">
                                 <div class="rs1-select2 bor8 bg0">
-                                    <select id="color" class="js-select2" name="time">
-                                        <option>Choose an option</option>
+                                    <select id="color" class="js-select2" name="color">
+                                        <option>Select an option</option>
                                         <c:forEach items="${productColorList}" var="color">
                                             <option value="${color}">${color}</option>
                                         </c:forEach>
@@ -1076,7 +1076,6 @@
         // gán ID cố định, vd = 123 cho selected option.
         $(this).find('option:selected').attr('id', 'product_color');
         $(this).find('option:not(:selected)').removeAttr('id', product_color);
-
         // test lại xem có đúng là chỉ có selected option là có ID, các option còn lại KO có ID hay ko
         // duyệt qua tất cả option của dropdown list
         $('#color option').each(function () {
