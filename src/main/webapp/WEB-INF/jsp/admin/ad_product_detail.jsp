@@ -30,6 +30,9 @@
         <main>
             <div class="card mb-4">
             <div class="card-header">
+                <a
+                        href="/admin/newProductDetail"
+                        class="btn btn-primary btn-block text-uppercase me-1">Add product Detail</a>
                 <i class="fas fa-table me-1"></i>
                 Product Detail
             </div>
@@ -60,7 +63,9 @@
                             <td>${pd.color}</td>
                             <td>${pd.size}</td>
                             <td>${pd.quantity}</td>
-                            <td>Edit</td>
+                            <td>
+                                <a href="<c:url value="/admin/editProductDetail/${pd.id}"/>">Edit</a>
+                            </td>
                         </tr>
                     </c:forEach>
                     </tbody>

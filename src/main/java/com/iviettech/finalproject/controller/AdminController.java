@@ -66,7 +66,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/newProduct", method = GET)
-    public String showNewProduct(Model model) {
+    public String newProduct(Model model) {
         model.addAttribute("product", new ProductEntity());
         model.addAttribute("msg", "Add a new product");
         model.addAttribute("action", "newProduct");
@@ -86,7 +86,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/editProduct/{id}", method = GET)
-    public String showEditBook(Model model, @PathVariable int id) {
+    public String editProduct(Model model, @PathVariable int id) {
         model.addAttribute("product", productRepository.findById(id));
         model.addAttribute("msg", "Update product information");
         model.addAttribute("type", "updateProduct");
@@ -99,7 +99,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/updateProduct", method = POST)
-    public String updateBook(@ModelAttribute ProductEntity product) {
+    public String updateProduct(@ModelAttribute ProductEntity product) {
         productRepository.save(product);
         return "redirect:/admin/adProduct";
     }
@@ -113,6 +113,43 @@ public class AdminController {
         model.addAttribute("productDetailsList", productDetailsList);
 
         return "admin/ad_product_detail";
+    }
+
+    @RequestMapping(value = "/newProductDetail", method = GET)
+    public String newProductDetail(Model model) {
+        model.addAttribute("productDetail", new ProductDetailEntity());
+        model.addAttribute("msg", "Add a new product detail");
+        model.addAttribute("action", "newProductDetail");
+
+        setProductDropDownlist(model);
+
+        return "admin/ad_edit_product_detail";
+    }
+
+    @RequestMapping(value = "/newProductDetail", method = POST, produces = "text/plain;charset=UTF-8")
+    public String saveProductDetail(ProductDetailEntity productDetail, Model model) {
+        productDetailRepository.save(productDetail);
+        model.addAttribute("message","You are add success!");
+        return "redirect:/admin/adProductDetail/" + productDetail.getProduct().getId();
+    }
+
+    @RequestMapping(value = "/editProductDetail/{id}", method = GET)
+    public String editProductDetail(Model model, @PathVariable int id) {
+        model.addAttribute("productDetail", productDetailRepository.findById(id));
+        model.addAttribute("msg", "Update product detail information");
+        model.addAttribute("type", "updateProductDetail");
+        model.addAttribute("action", "/admin/updateProductDetail");
+
+        setProductDropDownlist(model);
+
+        return "admin/ad_edit_product";
+    }
+
+    @RequestMapping(value = "/updateProductDetail", method = POST)
+    public String updateProductDetail(@ModelAttribute ProductDetailEntity productDetail) {
+        productDetailRepository.save(productDetail);
+
+        return "redirect:/admin/adProductDetail/" + productDetail.getProduct().getId();
     }
 
     //Product Image
@@ -191,7 +228,7 @@ public class AdminController {
             for(CategoryEntity categoryEntity : cateList) {
                 cateMap.put(categoryEntity.getId(), categoryEntity.getName());
             }
-            model.addAttribute("categoryList", cateMap);
+            model.addAttribute("cateList", cateMap);
         }
     }
 
@@ -214,6 +251,17 @@ public class AdminController {
                 cateDetailMap.put(categoryDetailEntity.getId(), categoryDetailEntity.getDescription());
             }
             model.addAttribute("categoryDetailList", cateDetailMap);
+        }
+    }
+
+    private void setProductDropDownlist(Model model) {
+        List<ProductEntity> productList = (List<ProductEntity>) productRepository.findAll();
+        if (!productList.isEmpty()) {
+            Map<Integer, String> productMap = new LinkedHashMap<>();
+            for(ProductEntity productEntity : productList) {
+                productMap.put(productEntity.getId(), productEntity.getName());
+            }
+            model.addAttribute("productList", productMap);
         }
     }
 }
