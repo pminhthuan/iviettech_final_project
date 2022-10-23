@@ -25,6 +25,13 @@ public class OrderDetailEntity {
     @Column(name = "quantity")
     private int quantity;
 
-    @Column(name = "amount") //thành tiền
-    private BigDecimal amount;
+    @Column(name = "price")
+    private double amount;
+
+    @Column(name = "color")
+    private String color;
+
+    @Column(name = "size")
+    private String size;
+
 }

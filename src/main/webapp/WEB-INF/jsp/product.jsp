@@ -293,11 +293,12 @@
             </div>
         </div>
 
-        <div class="row isotope-grid">
+        <div class="row">
+            <!-- single product -->
             <c:forEach items="${productList}" var="p">
-            <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+                <div class="col-lg-3 col-md-4 col-sm-6">
                 <!-- Block2 -->
-                <div class="block2">
+                    <div class="block2">
                     <div class="block2-pic hov-img0">
                         <a href="<c:url value="/view/${p.product.id}"/>">
                             <img src="${p.imageUrl}" alt="${p.imageAlt}">
