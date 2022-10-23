@@ -1,15 +1,13 @@
 <%--
   Created by IntelliJ IDEA.
   User: phamv
-  Date: 10/21/22
-  Time: 11:15 PM
+  Date: 10/23/22
+  Time: 10:13 AM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Product</title>
+    <title>Mamufactor</title>
     <link rel="stylesheet" type="text/css" href="/resources/admin/assets/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/resources/admin/css/dashboard.css">
     <link rel="stylesheet" type="text/css" href="/resources/admin/css/custom.css">
@@ -32,56 +30,33 @@
             <div class="card mb-4">
                 <div class="card-header">
                     <i class="fas fa-table me-1"></i>
-                    Product table
+                    Order detail
                 </div>
                 <div class="card-body">
                     <table id="datatablesSimple">
                         <thead>
                         <tr>
                             <th>Id</th>
-                            <th>Product name</th>
-                            <th>Category detail</th>
-                            <th>Manufactor</th>
-                            <th>Orginal price</th>
-                            <th>Actual price</th>
-                            <th>Discription</th>
-                            <th>Status</th>
-                            <th>Image</th>
-                            <th>Edit</th>
+                            <th>Image Url</th>
+                            <th>Image Alt</th>
                         </tr>
                         </thead>
                         <tfoot>
                         <tr>
                             <th>Id</th>
-                            <th>Product name</th>
-                            <th>Category detail</th>
-                            <th>Manufactor</th>
-                            <th>Orginal price</th>
-                            <th>Actual price</th>
-                            <th>Discription</th>
-                            <th>Status</th>
-                            <th>Image</th>
-                            <th>Edit</th>
+                            <th>Image Url</th>
+                            <th>Image Alt</th>
                         </tr>
                         </tfoot>
                         <tbody>
-                        <c:forEach items="${productList}" var="p">
-                        <tr>
-                            <td>${p.id}</td>
-                            <td>
-                                <a href="<c:url value="/admin/adProductDetail/${p.id}"/>">${p.name}</a>
-                            </td>
-                            <td>${p.categoryDetail.name}</td>
-                            <td>${p.manufactor.name}</td>
-                            <td>${p.original_price}</td>
-                            <td>${p.actual_price}</td>
-                            <td>${p.description}</td>
-                            <td>${p.status}</td>
-                            <td>
-                                <a href="<c:url value="/admin/adProductImage/${p.id}"/>">Image</a>
-                            </td>
-                            <td>Edit</td>
-                        </tr>
+                        <c:forEach items="${productImageList}" var="pi">
+                            <tr>
+                                <td>${pi.id}</td>
+                                <td>
+                                    <img src="${pi.imageUrl}" style=width:284px, hight:379px">
+                                </td>
+                                <td>${pi.imageAlt}</td>
+                            </tr>
                         </c:forEach>
                         </tbody>
                     </table>

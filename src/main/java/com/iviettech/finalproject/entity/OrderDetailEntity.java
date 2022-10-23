@@ -19,6 +19,10 @@ public class OrderDetailEntity {
     private ProductEntity product;
 
     @ManyToOne
+    @JoinColumn(name = "product_detail_id")
+    private ProductDetailEntity productDetail;
+
+    @ManyToOne
     @JoinColumn(name = "order_id")
     private OrderEntity orderEntity;
 

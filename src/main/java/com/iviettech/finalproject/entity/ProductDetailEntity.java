@@ -3,6 +3,7 @@ package com.iviettech.finalproject.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -26,4 +27,7 @@ public class ProductDetailEntity {
     @Column(name = "quantity")
     private int quantity;
 
+    @OneToMany
+    @JoinColumn(name = "product_detail_id")
+    private List<ProductDetailEntity> productDetail;
 }

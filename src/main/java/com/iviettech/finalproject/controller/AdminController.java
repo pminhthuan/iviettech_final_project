@@ -67,6 +67,18 @@ public class AdminController {
         return "admin/ad_product_detail";
     }
 
+    //Product Image
+    @RequestMapping(value = "/adProductImage/{id}", method = GET)
+    public String viewProductImage(@PathVariable("id") int id, Model model) {
+
+        List<ProductImageEntity> productImageList =
+                productImageRepository.findByProduct_Id(id);
+        model.addAttribute("productImageList", productImageList);
+
+        return "admin/ad_product_image";
+
+    }
+
     //Category
     @RequestMapping(value = "/adCategory", method = GET)
     public String viewCategory(Model model){

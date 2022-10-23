@@ -29,66 +29,65 @@
     <%@include file="ad_sidebar_menu.jsp"%>
     <div id="layoutSidenav_content">
         <main>
-            <div class="card mb-4">
-                <div class="card-header">
-                    <i class="fas fa-table me-1"></i>
-                    Order
-                </div>
-                <div class="card-body">
-                    <table id="datatablesSimple">
-                        <thead>
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Order
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                        <th>Require date</th>
+                        <th>Shipping date</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Note</th>
+                        <th>Edit</th>
+                    </tr>
+                    </thead>
+                    <tfoot>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                        <th>Require date</th>
+                        <th>Shipping date</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Note</th>
+                        <th>Edit</th>
+                    </tr>
+                    </tfoot>
+                    <tbody>
+                    <c:forEach items="${orderList}" var="o">
                         <tr>
-                            <th>Id</th>
-                            <th>Name</th>
-                            <th>Phone</th>
-                            <th>Email</th>
-                            <th>Address</th>
-                            <th>Require date</th>
-                            <th>Shipping date</th>
-                            <th>Total</th>
-                            <th>Status</th>
-                            <th>Note</th>
-                            <th>Edit</th>
+                            <td>${o.id}</td>
+                            <td>
+                                <a href="<c:url value="/admin/adOrderDetail/${o.id}"/>">${o.fullName}</a>
+                            </td>
+                            <td>${o.phoneNumber}</td>
+                            <td>${o.email}</td>
+                            <td>${o.address}</td>
+                            <td>${o.requireDate}</td>
+                            <td>${o.shippingDate}</td>
+                            <td>${o.totalAmount}</td>
+                            <td>${o.status}</td>
+                            <td>${o.note}</td>
+                            <td>
+                                <a href="<c:url value="#${o.id}"/>">Edit</a>
+                            </td>
                         </tr>
-                        </thead>
-                        <tfoot>
-                        <tr>
-                            <th>Id</th>
-                            <th>Name</th>
-                            <th>Phone</th>
-                            <th>Email</th>
-                            <th>Address</th>
-                            <th>Require date</th>
-                            <th>Shipping date</th>
-                            <th>Total</th>
-                            <th>Status</th>
-                            <th>Note</th>
-                            <th>Edit</th>
-                        </tr>
-                        </tfoot>
-                        <tbody>
-                        <c:forEach items="${orderList}" var="o">
-                            <tr>
-                                <td>${o.id}</td>
-                                <td>
-                                    <a href="<c:url value="/admin/adOrderDetail/${o.id}"/>">${o.fullName}</a>
-                                </td>
-                                <td>${o.phoneNumber}</td>
-                                <td>${o.email}</td>
-                                <td>${o.address}</td>
-                                <td>${o.requireDate}</td>
-                                <td>${o.shippingDate}</td>
-                                <td>${o.totalAmount}</td>
-                                <td>${o.status}</td>
-                                <td>${o.note}</td>
-                                <td>
-                                    <a href="<c:url value="#${o.id}"/>">Edit</a>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                        </tbody>
-                    </table>
-                </div>
+                    </c:forEach>
+                    </tbody>
+                </table>
+
             </div>
         </main>
         <%@include file="ad_footer.jsp"%>

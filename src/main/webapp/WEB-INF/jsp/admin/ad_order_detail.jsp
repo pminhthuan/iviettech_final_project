@@ -39,6 +39,8 @@
                             <th>Id</th>
                             <th>Product name</th>
                             <th>Quantity</th>
+                            <th>Size</th>
+                            <th>Color</th>
                             <th>Amount</th>
                         </tr>
                         </thead>
@@ -47,6 +49,8 @@
                             <th>Id</th>
                             <th>Product name</th>
                             <th>Quantity</th>
+                            <th>Size</th>
+                            <th>Color</th>
                             <th>Amount</th>
                         </tr>
                         </tfoot>
@@ -56,6 +60,8 @@
                                 <td>${od.id}</td>
                                 <td>${od.product.name}</td>
                                 <td>${od.quantity}</td>
+                                <td>${od.color}</td>
+                                <td>${od.size}</td>
                                 <td>${od.amount}</td>
                                 <td>
                                     <a href="<c:url value="#/${m.id}"/>">Edit</a>
