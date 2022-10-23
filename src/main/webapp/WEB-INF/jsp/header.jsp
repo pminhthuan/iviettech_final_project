@@ -245,7 +245,6 @@
                 <i class="zmdi zmdi-close"></i>
             </div>
         </div>
-
         <div class="header-cart-content flex-w js-pscroll">
             <ul class="header-cart-wrapitem w-full">
                 <c:forEach items="${sessionScope.shopping_cart}" var="cart">
