@@ -62,6 +62,9 @@ public class ProductEntity {
     @OneToMany(mappedBy = "product")
     private List<RatingEntity> ratingEntityList;
 
+    public ProductEntity(){
+
+    }
 
     //private String mainProductImageURL;
     public String getMainProductImageURL() {
