@@ -154,7 +154,7 @@
                                         <i class="fs-16 zmdi zmdi-minus"></i>
                                     </div>
 
-                                    <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1" id="quantity_change_input">
+                                    <input class="mtext-104 cl3 txt-center num-product" min="1" type="number" name="num-product" value="1" id="quantity_change_input">
 
                                     <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
                                         <i class="fs-16 zmdi zmdi-plus"></i>

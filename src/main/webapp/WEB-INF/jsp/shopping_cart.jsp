@@ -14,7 +14,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
-    <link rel="icon" type="image/png" href="/resources/images/icons/favicon.png"/>
+    <link rel="icon" type="image/png" href="/resources/images/icons/logo_T_T_Black.png"/>
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="/resources/vendor/bootstrap/css/bootstrap.min.css">
     <!--===============================================================================================-->
@@ -121,7 +121,7 @@
                             <button class="btn btn-primary btn-sm btn-block">Update Cart</button>
                         </div>
                         <div class="col-md-6">
-                            <button class="btn btn-outline-primary btn-sm btn-block">Continue Shopping</button>
+                            <a href="/shop"><button class="btn btn-outline-primary btn-sm btn-block">Continue Shopping</button></a>
                         </div>
                     </div>
                     <div class="row">
@@ -168,7 +168,7 @@
 <%--                                    <button class="btn-checkout btn btn-primary btn-lg py-3 btn-block"--%>
 <%--                                            onclick="window.location='/checkout'">Proceed To Checkout</button>--%>
                                     <a href="/checkout">
-                                        <button class="btn-checkout btn btn-primary btn-lg py-3 btn-block">Proceed To Checkout</button>
+                                        <button <c:if test="${sessionScope.shopping_cart == null}"><c:out value="disabled='disabled'"/></c:if> class="btn-checkout btn btn-primary btn-lg py-3 btn-block">Proceed To Checkout</button>
                                     </a>
                                 </div>
                             </div>

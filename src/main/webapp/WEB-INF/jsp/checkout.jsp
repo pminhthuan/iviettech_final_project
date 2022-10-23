@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -125,18 +126,18 @@
     </div>
     <div class="col-md-8 order-md-1">
       <h4 class="mb-3">Billing address</h4>
-      <form class="needs-validation" novalidate>
+      <form:form action="checkout" method="post" modelAttribute="order" class="needs-validation" novalidate="true">
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="firstName">First name</label>
-            <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+            <form:input path="firstName" type="text" class="form-control" id="firstName" placeholder="" value="" required="true"/>
             <div class="invalid-feedback">
               Valid first name is required.
             </div>
           </div>
           <div class="col-md-6 mb-3">
             <label for="lastName">Last name</label>
-            <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+            <form:input path="lastName" type="text" class="form-control" id="lastName" placeholder="" value="" required="true"/>
             <div class="invalid-feedback">
               Valid last name is required.
             </div>
@@ -144,9 +145,9 @@
         </div>
 
         <div class="mb-3">
-          <label for="phonenumber">Phone number</label>
+          <label for="phoneNumber">Phone number</label>
           <div class="input-group">
-            <input type="text" class="form-control" id="phonenumber" placeholder="0905545462" required>
+            <form:input path="phoneNumber"  type="text" class="form-control" id="phoneNumber" placeholder="0905545462" required="true"/>
             <div class="invalid-feedback" style="width: 100%;">
               Your phone number is required.
             </div>
@@ -155,17 +156,9 @@
 
         <div class="mb-3">
           <label for="email">Email <span class="text-muted">(Optional)</span></label>
-          <input type="email" class="form-control" id="email" placeholder="example@gmail.com">
+          <form:input path="email" type="email" class="form-control" id="email" placeholder="example@gmail.com"/>
           <div class="invalid-feedback">
             Please enter a valid email address for shipping updates.
-          </div>
-        </div>
-
-        <div class="mb-3">
-          <label for="address">Address detail</label>
-          <input type="text" class="form-control" id="address" placeholder="234 Hang Ma St or Phuong Nam Village" required>
-          <div class="invalid-feedback">
-            Please enter your shipping address.
           </div>
         </div>
 
@@ -180,6 +173,7 @@
             <select class="custom-select d-block w-100" id="province" required>
               <option value="">Choose...</option>
               <option>Ha Noi</option>
+              <option>Ho Chi Minh</option>
             </select>
             <div class="invalid-feedback">
               Please select a valid province.
@@ -190,6 +184,7 @@
             <select class="custom-select d-block w-100" id="district" required>
               <option value="">Choose...</option>
               <option>Hoan Kiem</option>
+              <option>Thu Duc</option>
             </select>
             <div class="invalid-feedback">
               Please provide a valid district.
@@ -200,10 +195,18 @@
             <select class="custom-select d-block w-100" id="ward" required>
               <option value="">Choose...</option>
               <option>Dong Xuan</option>
+              <option>Thu Thiem</option>
             </select>
             <div class="invalid-feedback">
               Please provide a valid ward.
             </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="address">Address detail</label>
+          <form:input path="address" type="text" class="form-control" id="address" placeholder="234 Hang Ma St or Phuong Nam Village" required="true"/>
+          <div class="invalid-feedback">
+            Please enter your shipping address.
           </div>
         </div>
         <hr class="mb-4">
@@ -271,7 +274,7 @@
 <%--        </div>--%>
         <hr class="mb-4">
         <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
-      </form>
+      </form:form>
     </div>
   </div>
 </div>

@@ -10,19 +10,32 @@ import java.util.List;
 @Table(name = "districts")
 public class DistrictEntity {
     @Id
-    @Column(name = "district_id")
-    private String districtId;
+    @Column(name = "code")
+    private int id;
 
     @Column(name = "name")
     private String name;
 
-    @Column(name = "type")
-    private String type;
+    @Column(name = "name_en")
+    private String nameEn;
+
+    @Column(name = "full_name")
+    private String fullName;
+
+    @Column(name = "full_name_en")
+    private String fullNameEn;
+
+    @Column(name = "code_name")
+    private String codeName;
 
     @ManyToOne
-    @JoinColumn(name = "province_id")
+    @JoinColumn(name = "administrative_unit_id")
+    private UnitEntity unitEntity;
+
+    @ManyToOne
+    @JoinColumn(name = "province_code")
     private ProvinceEntity provinceEntity;
 
-    @OneToMany(mappedBy = "districtEntity")
+    @OneToMany(mappedBy = "districtEntity",fetch = FetchType.EAGER)
     private List<WardEntity> wardEntityList;
 }

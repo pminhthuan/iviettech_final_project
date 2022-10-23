@@ -15,10 +15,6 @@ public class CartItem {
     private Double totalPriceInNumber;
 
     // can be replaced by lombok lib
-    public CartItem(int productId, int quantity) {
-        this.productId = productId;
-        this.quantity = quantity;
-    }
 
     public CartItem(int productId, int quantity, String imgSource, String title, String price, String size, String color) {
         this.productId = productId;

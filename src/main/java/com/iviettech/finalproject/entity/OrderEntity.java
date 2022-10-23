@@ -58,6 +58,6 @@ public class OrderEntity {
     @Column(name = "qr_code_payment")
     private String qrCodePayment;
 
-    @OneToMany(mappedBy = "orderEntity")
+    @OneToMany(mappedBy = "orderEntity",fetch = FetchType.EAGER)
     private List<OrderDetailEntity> orderDetailEntityList;
 }
