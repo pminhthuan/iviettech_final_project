@@ -34,6 +34,12 @@ public class AdminController {
     @Autowired
     ManufactorRepository manufactorRepository;
 
+    @Autowired
+    OrderRepository orderRepository;
+
+    @Autowired
+    OrderDetailRepository orderDetailRepository;
+
     @RequestMapping(method = GET)
     public String viewAdmin(Model model) {
 
@@ -54,7 +60,8 @@ public class AdminController {
 
     @RequestMapping(value = "/adProductDetail/{id}", method = GET)
     public String viewProductDetail(@PathVariable("id") int id, Model model) {
-        List<ProductDetailEntity> productDetailsList = (List<ProductDetailEntity>) productDetailRepository.findProductDetailEntityByProduct_Id(id);
+        List<ProductDetailEntity> productDetailsList =
+                (List<ProductDetailEntity>) productDetailRepository.findProductDetailEntityByProduct_Id(id);
         model.addAttribute("productDetailsList", productDetailsList);
 
         return "admin/ad_product_detail";
@@ -76,4 +83,36 @@ public class AdminController {
         return "admin/ad_category";
     }
 
+    //Mamufactor
+    @RequestMapping(value = "/adManyfactor", method = GET)
+    public String viewManufactor(Model model) {
+
+        List<ManufactorEntity> manufactorList =
+                (List<ManufactorEntity>) manufactorRepository.findAll();
+        model.addAttribute("manufactorList", manufactorList);
+
+        return "admin/ad_manufactor";
+    }
+
+    //Order
+    @RequestMapping(value = "/adOrder", method = GET)
+    public String viewOrder(Model model) {
+
+        List<OrderEntity> orderList =
+                (List<OrderEntity>) orderRepository.findAll();
+        model.addAttribute("orderList", orderList);
+
+        return "admin/ad_order";
+    }
+
+    //Order Detail
+    @RequestMapping(value = "/adOrderDetail/{id}", method = GET)
+    public String viewOrderDetail(Model model, @PathVariable("id") int id) {
+
+        List<OrderDetailEntity> orderDetailList =
+                (List<OrderDetailEntity>) orderDetailRepository.findByOrderEntityId(id);
+        model.addAttribute("orderDetailList", orderDetailList);
+
+        return "admin/ad_order_detail";
+    }
 }

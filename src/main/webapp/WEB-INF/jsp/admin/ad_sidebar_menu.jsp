@@ -44,6 +44,7 @@
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link" href="/admin/adProduct">Product</a>
                         <a class="nav-link" href="/admin/adCategory">Category</a>
+                        <a class="nav-link" href="/admin/adManyfactor">Manufactor</a>
                     </nav>
                 </div>
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
