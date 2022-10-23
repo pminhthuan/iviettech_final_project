@@ -31,9 +31,15 @@
         <main>
             <div class="card mb-4">
                 <div class="card-header">
+                    <a
+                            href="/admin/newProduct"
+                            class="btn btn-primary btn-block text-uppercase me-1">Add new product</a>
+
                     <i class="fas fa-table me-1"></i>
                     Product table
+
                 </div>
+
                 <div class="card-body">
                     <table id="datatablesSimple">
                         <thead>
@@ -80,13 +86,23 @@
                             <td>
                                 <a href="<c:url value="/admin/adProductImage/${p.id}"/>">Image</a>
                             </td>
-                            <td>Edit</td>
+                            <td>
+                                <a href="<c:url value="/admin/editProduct/${p.id}"/>">Edit</a>
+                            </td>
                         </tr>
                         </c:forEach>
                         </tbody>
                     </table>
                 </div>
             </div>
+
+<%--            <div>--%>
+<%--                <button href="/admin/newProduct" class="accordion-button fa-solid fa-plus me-0" type="button">--%>
+<%--                    &lt;%&ndash;                        <a href="/admin/newProduct" class="fa-solid fa-plus me-0">&ndash;%&gt;--%>
+<%--                    &lt;%&ndash;                        <i class="fa-solid fa-plus">New product</i>&ndash;%&gt;New product--%>
+<%--                    &lt;%&ndash;                    </a>&ndash;%&gt;--%>
+<%--                </button>--%>
+<%--            </div>--%>
         </main>
         <%@include file="ad_footer.jsp"%>
     </div>

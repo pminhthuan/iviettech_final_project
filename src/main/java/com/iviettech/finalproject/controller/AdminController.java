@@ -3,14 +3,23 @@ package com.iviettech.finalproject.controller;
 import com.iviettech.finalproject.entity.*;
 import com.iviettech.finalproject.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -54,6 +63,45 @@ public class AdminController {
         model.addAttribute("productList", productList);
 
         return "admin/ad_product";
+    }
+
+    @RequestMapping(value = "/newProduct", method = GET)
+    public String showNewProduct(Model model) {
+        model.addAttribute("product", new ProductEntity());
+        model.addAttribute("msg", "Add a new product");
+        model.addAttribute("action", "newProduct");
+
+        setCategoryDetailDropDownlist(model);
+        setManufactorDropDownlist(model);
+        setCategoryDropDownlist(model);
+
+        return "admin/ad_edit_product";
+    }
+
+    @RequestMapping(value = "/newProduct", method = POST, produces = "text/plain;charset=UTF-8")
+    public String saveProduct(ProductEntity product, Model model) {
+        productRepository.save(product);
+        model.addAttribute("message","You are add success!");
+        return "redirect:/admin/adProduct";
+    }
+
+    @RequestMapping(value = "/editProduct/{id}", method = GET)
+    public String showEditBook(Model model, @PathVariable int id) {
+        model.addAttribute("product", productRepository.findById(id));
+        model.addAttribute("msg", "Update product information");
+        model.addAttribute("type", "updateProduct");
+        model.addAttribute("action", "/admin/updateProduct");
+
+        setCategoryDetailDropDownlist(model);
+        setManufactorDropDownlist(model);
+        setCategoryDropDownlist(model);
+        return "admin/ad_edit_product";
+    }
+
+    @RequestMapping(value = "/updateProduct", method = POST)
+    public String updateBook(@ModelAttribute ProductEntity product) {
+        productRepository.save(product);
+        return "redirect:/admin/adProduct";
     }
 
     //Product Details
@@ -126,5 +174,46 @@ public class AdminController {
         model.addAttribute("orderDetailList", orderDetailList);
 
         return "admin/ad_order_detail";
+    }
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        sdf.setLenient(true);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
+    }
+
+    //Map
+    private void setCategoryDropDownlist(Model model) {
+        List<CategoryEntity> cateList = (List<CategoryEntity>) categoryRepository.findAll();
+        if (!cateList.isEmpty()) {
+            Map<Integer, String> cateMap = new LinkedHashMap<>();
+            for(CategoryEntity categoryEntity : cateList) {
+                cateMap.put(categoryEntity.getId(), categoryEntity.getName());
+            }
+            model.addAttribute("categoryList", cateMap);
+        }
+    }
+
+    private void setManufactorDropDownlist(Model model) {
+        List<ManufactorEntity> manufactorList = (List<ManufactorEntity>) manufactorRepository.findAll();
+        if (!manufactorList.isEmpty()) {
+            Map<Integer, String> manufactorMap = new LinkedHashMap<>();
+            for(ManufactorEntity manufactorEntity : manufactorList) {
+                manufactorMap.put(manufactorEntity.getId(), manufactorEntity.getName());
+            }
+            model.addAttribute("manufactorList", manufactorMap);
+        }
+    }
+
+    private void setCategoryDetailDropDownlist(Model model) {
+        List<CategoryDetailEntity> cateDetailList = (List<CategoryDetailEntity>) categoryDetailRepository.findAll();
+        if (!cateDetailList.isEmpty()) {
+            Map<Integer, String> cateDetailMap = new LinkedHashMap<>();
+            for(CategoryDetailEntity categoryDetailEntity : cateDetailList) {
+                cateDetailMap.put(categoryDetailEntity.getId(), categoryDetailEntity.getDescription());
+            }
+            model.addAttribute("categoryDetailList", cateDetailMap);
+        }
     }
 }

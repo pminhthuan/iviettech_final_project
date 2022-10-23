@@ -27,7 +27,4 @@ public class ProductDetailEntity {
     @Column(name = "quantity")
     private int quantity;
 
-    @OneToMany
-    @JoinColumn(name = "product_detail_id")
-    private List<ProductDetailEntity> productDetail;
 }

@@ -23,7 +23,7 @@
   <script src="/resources/admin/js/simple-datatables@latest.js" crossorigin="anonymous"></script>
   <script src="/resources/admin/js/datatables-simple-demo.js"></script>
 </head>
-<body class="sb-nav-fixed">
+<body>
 <%@include file="ad_header.jsp"%>
 <div id="layoutSidenav">
   <%@include file="ad_sidebar_menu.jsp"%>
