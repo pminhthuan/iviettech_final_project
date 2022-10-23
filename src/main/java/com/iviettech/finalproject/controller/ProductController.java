@@ -1,7 +1,6 @@
 package com.iviettech.finalproject.controller;
 
-import com.iviettech.finalproject.entity.ProductDetailEntity;
-import com.iviettech.finalproject.entity.ProductImageEntity;
+import com.iviettech.finalproject.entity.*;
 import com.iviettech.finalproject.pojo.CartItem;
 import com.iviettech.finalproject.repository.*;
 import com.iviettech.finalproject.service.ProductService;
@@ -15,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
 @RequestMapping(value = "/")
@@ -31,6 +31,12 @@ public class ProductController {
 
     @Autowired
     ProductDetailRepository productDetailRepository;
+
+    @Autowired
+    OrderRepository orderRepository;
+
+    @Autowired
+    OrderDetailRepository orderDetailRepository;
 
     @RequestMapping(method = GET)
     public String viewHome(Model model) {
@@ -146,9 +152,32 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/checkout",method = GET)
-    public String checkOut(Model model) {
+    public String viewCheckoutForm(Model model) {
+        model.addAttribute("order", new OrderEntity());
+
         return "checkout";
     }
 
+    @RequestMapping(value = "/checkout", method = POST, produces = "text/plain;charset=UTF-8") //produces:data type will return
+    public String saveOrder(OrderEntity order, HttpSession session, Model model) {
+        orderRepository.save(order);
+        List<CartItem> cart = (List<CartItem>) session.getAttribute("shopping_cart");
+        List<OrderDetailEntity> orderDetailList = new ArrayList<>();
+        for (CartItem item: cart) {
+            OrderDetailEntity orderDetail = new OrderDetailEntity();
+            orderDetail.setSize(item.getSize());
+            orderDetail.setColor(item.getColor());
+            orderDetail.setQuantity(item.getQuantity());
+            orderDetail.setPrice(Double.parseDouble(item.getPrice()));
+            ProductEntity product = new ProductEntity();
+            product.setId(item.getProductId());
+            orderDetail.setProduct(product);
+            orderDetail.setOrderEntity(order);
+            orderDetailList.add(orderDetail);
+        }
+        orderDetailRepository.saveAll(orderDetailList);
+        session.removeAttribute("shopping_cart");
+        return "thankyou";
+    }
 
 }

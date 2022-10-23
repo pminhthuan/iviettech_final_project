@@ -26,7 +26,7 @@ public class OrderDetailEntity {
     private int quantity;
 
     @Column(name = "price")
-    private double amount;
+    private double price;
 
     @Column(name = "color")
     private String color;
