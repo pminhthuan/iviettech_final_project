@@ -31,6 +31,9 @@
     <main>
       <div class="card mb-4">
         <div class="card-header">
+          <a
+                  href="/admin/newManufactor"
+                  class="btn btn-primary btn-block text-uppercase me-1">Add Manufactor</a>
           <i class="fas fa-table me-1"></i>
           Manufactory
         </div>
@@ -53,7 +56,7 @@
               <tr>
                 <td>${m.id}</td>
                 <td>
-                  <a href="<c:url value="#/${m.id}"/>">${m.name}</a>
+                  <a href="<c:url value="/admin/editManufactor/${m.id}"/>">${m.name}</a>
                 </td>
               </tr>
             </c:forEach>
