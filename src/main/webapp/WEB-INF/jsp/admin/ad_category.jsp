@@ -33,6 +33,9 @@
                 <div class="form-group mb-3 col-xs-12 col-sm-8">
                     <div class="card mb-4">
                         <div class="card-header">
+                            <a
+                                    href="/admin/newCategoryDetail"
+                                    class="btn btn-primary btn-block text-uppercase me-1">New category detail</a>
                             <i class="fas fa-table me-1"></i>
                             Category Detail
                         </div>
@@ -63,7 +66,9 @@
                                         <td>${cd.name}</td>
                                         <td>${cd.description}</td>
                                         <td>${cd.category.name}</td>
-                                        <td>Edit</td>
+                                        <td>
+                                            <a href="<c:url value="/admin/editCategoryDetail/${cd.id}"/>">Edit</a>
+                                        </td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
@@ -74,6 +79,9 @@
                 <div class="form-group mb-3 col-xs-12 col-sm-4">
                     <div class="card mb-4">
                         <div class="card-header">
+                            <a
+                                    href="/admin/newCategory"
+                                    class="btn btn-primary btn-block text-uppercase me-1">Add new category</a>
                             <i class="fas fa-table me-1"></i>
                             Category Detail
                         </div>
@@ -98,7 +106,9 @@
                                     <tr>
                                         <td>${c.id}</td>
                                         <td>${c.name}</td>
-                                        <td>Edit</td>
+                                        <td>
+                                            <a href="<c:url value="/admin/editCategory/${c.id}"/>">Edit</a>
+                                        </td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>

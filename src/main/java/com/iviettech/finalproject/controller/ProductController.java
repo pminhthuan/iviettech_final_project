@@ -1,6 +1,7 @@
 package com.iviettech.finalproject.controller;
 
 import com.iviettech.finalproject.entity.*;
+import com.iviettech.finalproject.helper.GmailSender;
 import com.iviettech.finalproject.pojo.CartItem;
 import com.iviettech.finalproject.repository.*;
 import com.iviettech.finalproject.service.ProductService;
@@ -9,7 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +63,9 @@ public class ProductController {
         List<String> productColorList = productDetailRepository.getColorByProductId(id);
         List<String> productSizeList = productDetailRepository.getSizeByProductId(id);
         List<ProductDetailEntity> productDetailEntityList = productDetailRepository.findProductDetailEntityByProduct_Id(id);
+
+        List<ProductImageEntity> productEntityList = productImageRepository.getProductListWithImage(); //related product
+        model.addAttribute("productList", productEntityList); //related product
         model.addAttribute("productImageEntityList", productImageEntityList);
         model.addAttribute("productEntity", productRepository.findById(id));
         model.addAttribute("productColorList", productColorList);
@@ -160,6 +168,7 @@ public class ProductController {
 
     @RequestMapping(value = "/checkout", method = POST, produces = "text/plain;charset=UTF-8") //produces:data type will return
     public String saveOrder(OrderEntity order, HttpSession session, Model model) {
+        order.setRequireDate(Date.valueOf(LocalDate.now()));
         orderRepository.save(order);
         List<CartItem> cart = (List<CartItem>) session.getAttribute("shopping_cart");
         List<OrderDetailEntity> orderDetailList = new ArrayList<>();
@@ -177,7 +186,23 @@ public class ProductController {
         }
         orderDetailRepository.saveAll(orderDetailList);
         session.removeAttribute("shopping_cart");
+        sendActivationEmail(order);
         return "thankyou";
+    }
+
+    private void sendActivationEmail(OrderEntity order)  {
+        String subject = "Confirm Your Order";
+        String confirmationUrl = "http://localhost:8080/activateAccount?name=" + order.getFirstName()+order.getLastName()+ "&ordercode=" + order.getId();
+        String mailBody = "<h1> Dear " + order.getFirstName()+" "+order.getLastName() + ",<h1>"
+                + "<h2>You've ordered successfully from our website. Enjoy with us</h2>"
+                + "<br/>Please click on the following link to confirm your order."
+                + "<br/>" + confirmationUrl;
+
+        try {
+            GmailSender.send(order.getEmail(), subject, mailBody, true);
+        } catch (MessagingException | UnsupportedEncodingException e) {
+            System.out.println(e);
+        }
     }
 
 }
