@@ -505,146 +505,131 @@
                 <img src="/resources/images/icons/icon-close.png" alt="CLOSE">
             </button>
 
-            <div class="row">
-                <div class="col-md-6 col-lg-7 p-b-30">
-                    <div class="p-l-25 p-r-30 p-lr-0-lg">
-                        <div class="wrap-slick3 flex-sb flex-w">
-                            <div class="wrap-slick3-dots"></div>
-                            <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
+<%--            <div class="row">--%>
+<%--                <div class="col-md-6 col-lg-7 p-b-30">--%>
+<%--                    <div class="p-l-25 p-r-30 p-lr-0-lg">--%>
+<%--                        <div class="wrap-slick3 flex-sb flex-w">--%>
+<%--                            <div class="wrap-slick3-dots"></div>--%>
+<%--                            <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>--%>
 
-                            <div class="slick3 gallery-lb">
-                                <div class="item-slick3" data-thumb="/resources/images/product-detail-01.jpg">
-                                    <div class="wrap-pic-w pos-relative">
-                                        <img src="/resources/images/product-detail-01.jpg" alt="IMG-PRODUCT">
+<%--                            <div class="slick3 gallery-lb">--%>
+<%--                                <c:forEach items="${productImageEntityList}" var="i">--%>
+<%--                                    <div class="item-slick3" data-thumb="${i.imageUrl}">--%>
+<%--                                        <div class="wrap-pic-w pos-relative">--%>
+<%--                                            <img src="${i.imageUrl}" alt="${i.imageAlt}">--%>
 
-                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="/resources/images/product-detail-01.jpg">
-                                            <i class="fa fa-expand"></i>
-                                        </a>
-                                    </div>
-                                </div>
+<%--                                            <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="${i.imageUrl}">--%>
+<%--                                                <i class="fa fa-expand"></i>--%>
+<%--                                            </a>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
+<%--                                </c:forEach>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
 
-                                <div class="item-slick3" data-thumb="/resources/images/product-detail-02.jpg">
-                                    <div class="wrap-pic-w pos-relative">
-                                        <img src="/resources/images/product-detail-02.jpg" alt="IMG-PRODUCT">
+<%--                <div class="col-md-6 col-lg-5 p-b-30">--%>
+<%--                    <div class="p-r-50 p-t-5 p-lr-0-lg">--%>
+<%--                        <h4 class="mtext-105 cl2 js-name-detail p-b-14">--%>
+<%--                            <c:out value="${productEntity.get().name}"/>--%>
+<%--                        </h4>--%>
 
-                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="/resources/images/product-detail-02.jpg">
-                                            <i class="fa fa-expand"></i>
-                                        </a>
-                                    </div>
-                                </div>
+<%--                        <span class="mtext-106 cl2">--%>
+<%--							$<c:out value="${productEntity.get().actual_price}"/>--%>
+<%--						</span>--%>
 
-                                <div class="item-slick3" data-thumb="/resources/images/product-detail-03.jpg">
-                                    <div class="wrap-pic-w pos-relative">
-                                        <img src="/resources/images/product-detail-03.jpg" alt="IMG-PRODUCT">
+<%--                        <p class="stext-102 cl3 p-t-23">--%>
+<%--                            <c:out value="${productEntity.get().description}"/>--%>
+<%--                        </p>--%>
 
-                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href="/resources/images/product-detail-03.jpg">
-                                            <i class="fa fa-expand"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<%--                        <!--  -->--%>
+<%--                        <div class="p-t-33">--%>
+<%--                            <div class="flex-w flex-r-m p-b-10">--%>
+<%--                                <div class="size-203 flex-c-m respon6">--%>
+<%--                                    Size--%>
+<%--                                </div>--%>
 
-                <div class="col-md-6 col-lg-5 p-b-30">
-                    <div class="p-r-50 p-t-5 p-lr-0-lg">
-                        <h4 class="mtext-105 cl2 js-name-detail p-b-14">
-                            Lightweight Jacket
-                        </h4>
+<%--                                <div class="size-204 respon6-next">--%>
+<%--                                    <div class="rs1-select2 bor8 bg0">--%>
+<%--                                        <select id="size" class="js-select2" name="size" required>--%>
+<%--                                            <option>Select an option</option>--%>
+<%--                                            <c:forEach items="${productSizeList}" var="size">--%>
+<%--                                                <option value="${size}">${size}</option>--%>
+<%--                                            </c:forEach>--%>
+<%--                                        </select>--%>
+<%--                                        <div class="dropDownSelect2"></div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
 
-                        <span class="mtext-106 cl2">
-								$58.79
-							</span>
+<%--                            <div class="flex-w flex-r-m p-b-10">--%>
+<%--                                <div class="size-203 flex-c-m respon6">--%>
+<%--                                    Color--%>
+<%--                                </div>--%>
 
-                        <p class="stext-102 cl3 p-t-23">
-                            Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
-                        </p>
+<%--                                <div class="size-204 respon6-next">--%>
+<%--                                    <div class="rs1-select2 bor8 bg0">--%>
+<%--                                        <select id="color" class="js-select2" name="color">--%>
+<%--                                            <option>Select an option</option>--%>
+<%--                                            <c:forEach items="${productColorList}" var="color">--%>
+<%--                                                <option value="${color}">${color}</option>--%>
+<%--                                            </c:forEach>--%>
+<%--                                        </select>--%>
+<%--                                        <div class="dropDownSelect2"></div>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
 
-                        <!--  -->
-                        <div class="p-t-33">
-                            <div class="flex-w flex-r-m p-b-10">
-                                <div class="size-203 flex-c-m respon6">
-                                    Size
-                                </div>
+<%--                            <div class="flex-w flex-r-m p-b-10">--%>
+<%--                                <div class="size-204 flex-w flex-m respon6-next">--%>
+<%--                                    <div class="wrap-num-product flex-w m-r-20 m-tb-10">--%>
+<%--                                        <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">--%>
+<%--                                            <i class="fs-16 zmdi zmdi-minus"></i>--%>
+<%--                                        </div>--%>
 
-                                <div class="size-204 respon6-next">
-                                    <div class="rs1-select2 bor8 bg0">
-                                        <select class="js-select2" name="time">
-                                            <option>Choose an option</option>
-                                            <option>Size S</option>
-                                            <option>Size M</option>
-                                            <option>Size L</option>
-                                            <option>Size XL</option>
-                                        </select>
-                                        <div class="dropDownSelect2"></div>
-                                    </div>
-                                </div>
-                            </div>
+<%--                                        <input class="mtext-104 cl3 txt-center num-product" min="1" type="number" name="num-product" value="1" id="quantity_change_input">--%>
 
-                            <div class="flex-w flex-r-m p-b-10">
-                                <div class="size-203 flex-c-m respon6">
-                                    Color
-                                </div>
+<%--                                        <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">--%>
+<%--                                            <i class="fs-16 zmdi zmdi-plus"></i>--%>
+<%--                                        </div>--%>
+<%--                                    </div>--%>
 
-                                <div class="size-204 respon6-next">
-                                    <div class="rs1-select2 bor8 bg0">
-                                        <select class="js-select2" name="time">
-                                            <option>Choose an option</option>
-                                            <option>Red</option>
-                                            <option>Blue</option>
-                                            <option>White</option>
-                                            <option>Grey</option>
-                                        </select>
-                                        <div class="dropDownSelect2"></div>
-                                    </div>
-                                </div>
-                            </div>
+<%--                                    &lt;%&ndash;                                <button id="add2cart_btn" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">&ndash;%&gt;--%>
+<%--                                    &lt;%&ndash;                                    Add to cart&ndash;%&gt;--%>
+<%--                                    &lt;%&ndash;                                </button>&ndash;%&gt;--%>
+<%--                                    <a href="#" id="add2cart_btn" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">ADD TO CARD</a>--%>
+<%--                                    <span hidden id="product_id"><c:out value="${productEntity.get().id}"/></span>--%>
+<%--                                    <span hidden id="product_image"><c:out value="${productEntity.get().mainProductImageURL}"/></span>--%>
+<%--                                    <span hidden id="product_title"><c:out value="${productEntity.get().name}"/></span>--%>
+<%--                                    <span hidden id="product_price"><c:out value="${productEntity.get().actual_price}"/></span>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
 
-                            <div class="flex-w flex-r-m p-b-10">
-                                <div class="size-204 flex-w flex-m respon6-next">
-                                    <div class="wrap-num-product flex-w m-r-20 m-tb-10">
-                                        <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-                                            <i class="fs-16 zmdi zmdi-minus"></i>
-                                        </div>
+<%--                        <!--  -->--%>
+<%--                        <div class="flex-w flex-m p-l-100 p-t-40 respon7">--%>
+<%--                            <div class="flex-m bor9 p-r-10 m-r-11">--%>
+<%--                                <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">--%>
+<%--                                    <i class="zmdi zmdi-favorite"></i>--%>
+<%--                                </a>--%>
+<%--                            </div>--%>
 
-                                        <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1">
+<%--                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">--%>
+<%--                                <i class="fa fa-facebook"></i>--%>
+<%--                            </a>--%>
 
-                                        <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-                                            <i class="fs-16 zmdi zmdi-plus"></i>
-                                        </div>
-                                    </div>
+<%--                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">--%>
+<%--                                <i class="fa fa-twitter"></i>--%>
+<%--                            </a>--%>
 
-                                    <button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-                                        Add to cart
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--  -->
-                        <div class="flex-w flex-m p-l-100 p-t-40 respon7">
-                            <div class="flex-m bor9 p-r-10 m-r-11">
-                                <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
-                                    <i class="zmdi zmdi-favorite"></i>
-                                </a>
-                            </div>
-
-                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
-                                <i class="fa fa-facebook"></i>
-                            </a>
-
-                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
-                                <i class="fa fa-twitter"></i>
-                            </a>
-
-                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Google Plus">
-                                <i class="fa fa-google-plus"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<%--                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Google Plus">--%>
+<%--                                <i class="fa fa-google-plus"></i>--%>
+<%--                            </a>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
         </div>
     </div>
 </div>
