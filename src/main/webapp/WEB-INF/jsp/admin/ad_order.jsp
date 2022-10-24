@@ -81,7 +81,7 @@
                             <td>${o.status}</td>
                             <td>${o.note}</td>
                             <td>
-                                <a href="<c:url value="#${o.id}"/>">Edit</a>
+                                <a href="<c:url value="/admin/editOrder/${o.id}"/>">Edit</a>
                             </td>
                         </tr>
                     </c:forEach>

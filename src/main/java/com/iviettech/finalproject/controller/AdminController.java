@@ -235,7 +235,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/newCategoryDetail", method = POST, produces = "text/plain;charset=UTF-8")
-    public String saveCategory(CategoryDetailEntity categoryDetail, Model model) {
+    public String saveCategoryDetail(CategoryDetailEntity categoryDetail, Model model) {
         categoryDetailRepository.save(categoryDetail);
         model.addAttribute("message","You are add success!");
         return "redirect:/admin/adCategory";
@@ -311,6 +311,38 @@ public class AdminController {
         model.addAttribute("orderList", orderList);
 
         return "admin/ad_order";
+    }
+
+    @RequestMapping(value = "/newOrder", method = GET)
+    public String newOrder(Model model) {
+        model.addAttribute("order", new OrderEntity());
+        model.addAttribute("msg", "Add a order");
+        model.addAttribute("action", "neworder");
+
+        return "admin/ad_edit_order";
+    }
+
+//    @RequestMapping(value = "/newOrder", method = POST, produces = "text/plain;charset=UTF-8")
+//    public String saveOrder(OrderEntity order, Model model) {
+//        orderRepository.save(order);
+//        model.addAttribute("message","You are add success!");
+//        return "redirect:/admin/adOrder";
+//    }
+
+    @RequestMapping(value = "/editOrder/{id}", method = GET)
+    public String editOrder(Model model, @PathVariable int id) {
+        model.addAttribute("order", orderRepository.findById(id));
+        model.addAttribute("msg", "Update order information");
+        model.addAttribute("type", "updateOrder");
+        model.addAttribute("action", "/admin/updateOrder");
+
+        return "admin/ad_edit_order";
+    }
+
+    @RequestMapping(value = "/updateOrder", method = POST)
+    public String updateOrder(@ModelAttribute OrderEntity order) {
+        orderRepository.save(order);
+        return "redirect:/admin/adOrder";
     }
 
     //Order Detail

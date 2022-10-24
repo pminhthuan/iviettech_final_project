@@ -43,7 +43,7 @@
                             <th>Quantity</th>
                             <th>Size</th>
                             <th>Color</th>
-                            <th>Amount</th>
+                            <th>Price</th>
                         </tr>
                         </thead>
                         <tfoot>
@@ -53,7 +53,7 @@
                             <th>Quantity</th>
                             <th>Size</th>
                             <th>Color</th>
-                            <th>Amount</th>
+                            <th>Price</th>
                         </tr>
                         </tfoot>
                         <tbody>
@@ -65,9 +65,6 @@
                                 <td>${od.color}</td>
                                 <td>${od.size}</td>
                                 <td>${od.price}</td>
-                                <td>
-                                    <a href="<c:url value="#/${od.id}"/>">Edit</a>
-                                </td>
                             </tr>
                         </c:forEach>
                         </tbody>
