@@ -97,7 +97,16 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
   src: url('../fonts/Montserrat/Montserrat-Bold.ttf'); 
 }
 
+html ::-webkit-scrollbar {
+  border-radius: 0;
+  height: 8px;
+  width: 8px;
+}
 
+html ::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, .15);
+  border-radius: 4px;
+}
 /*//////////////////////////////////////////////////////////////////
 [ RS PLUGIN ]*/
 
@@ -1430,6 +1439,7 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 [ Slick3 ]*/
 .wrap-slick3 {
   position: relative;
+  justify-content: flex-end;
 }
 
 /*---------------------------------------------*/
@@ -1467,6 +1477,10 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 /*---------------------------------------------*/
 .wrap-slick3-dots {
   width: 11.111111%;
+  position: absolute;
+  left: 0;
+  height: 100%;
+  overflow-y: scroll;
 }
 
 .slick3 {
