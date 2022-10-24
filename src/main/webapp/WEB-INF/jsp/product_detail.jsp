@@ -118,7 +118,7 @@
 
                             <div class="size-204 respon6-next">
                                 <div class="rs1-select2 bor8 bg0">
-                                    <select id="size" class="js-select2" name="size" required>
+                                    <select id="size" class="js-select2" name="size" required="true">
                                         <option>Select an option</option>
                                         <c:forEach items="${productSizeList}" var="size">
                                         <option value="${size}">${size}</option>
@@ -128,7 +128,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="flex-w flex-r-m p-b-10">
                             <div class="size-203 flex-c-m respon6">
                                 Color

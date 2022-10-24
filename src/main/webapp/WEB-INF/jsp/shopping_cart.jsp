@@ -167,8 +167,8 @@
                                 <div class="col-md-12">
 <%--                                    <button class="btn-checkout btn btn-primary btn-lg py-3 btn-block"--%>
 <%--                                            onclick="window.location='/checkout'">Proceed To Checkout</button>--%>
-                                    <a href="/checkout">
-                                        <button <c:if test="${sessionScope.shopping_cart == null}"><c:out value="disabled='disabled'"/></c:if> class="btn-checkout btn btn-primary btn-lg py-3 btn-block">Proceed To Checkout</button>
+                                    <a href="/checkout" id="check_out">
+                                        <button id="btn_check_out" <c:if test="${sessionScope.shopping_cart == null}"><c:out value="disabled='disabled'"/></c:if> class="btn-checkout btn btn-primary btn-lg py-3 btn-block">Proceed To Checkout</button>
                                     </a>
                                 </div>
                             </div>
@@ -368,6 +368,17 @@
             ps.update();
         })
     });
+
+
+    // $("#btn_check_out").click(function() {
+    //     //alert( "Handler for .click() called." );
+    //     $("#check_out").attr('target', '/checkout?data=11');
+    // });
+
+    // $('#check_out a').each(function() {
+    //     alert('aa');
+    //     $(this).attr('target', (this.href.match( homeURL )) ? '_self' :'_blank');
+    // });
 </script>
 <!--===============================================================================================-->
 <script src="/resources/js/main.js"></script>

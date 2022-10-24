@@ -33,7 +33,7 @@ public class GmailSender {
         }
 
         // 3 - address the message
-        Address fromAddress = new InternetAddress(SENDER_EMAIL, "T_T Fashion");
+        Address fromAddress = new InternetAddress(SENDER_EMAIL, "T&T Fashion");
         Address toAddress = new InternetAddress(to);
         message.setFrom(fromAddress);
         message.setRecipient(Message.RecipientType.TO, toAddress);

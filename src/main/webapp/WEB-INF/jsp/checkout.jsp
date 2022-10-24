@@ -50,6 +50,7 @@
   <!-- Custom styles for this template -->
   <link href="/resources/css/form-validation.css" rel="stylesheet">
   <!--===============================================================================================-->
+
 </head>
 <jsp:include page="header.jsp"></jsp:include>
 
@@ -171,9 +172,9 @@
           <div class="col-md-4 mb-3">
             <label for="province">Province</label>
             <select class="custom-select d-block w-100" id="province" required>
-              <option value="">Choose...</option>
-              <option>Ha Noi</option>
-              <option>Ho Chi Minh</option>
+              <c:forEach items="${province}" var="provice">
+              <option value="${provice.id }">${provice.nameEn}</option>
+              </c:forEach>
             </select>
             <div class="invalid-feedback">
               Please select a valid province.
@@ -182,9 +183,6 @@
           <div class="col-md-4 mb-3">
             <label for="district">District</label>
             <select class="custom-select d-block w-100" id="district" required>
-              <option value="">Choose...</option>
-              <option>Hoan Kiem</option>
-              <option>Thu Duc</option>
             </select>
             <div class="invalid-feedback">
               Please provide a valid district.
@@ -193,9 +191,6 @@
           <div class="col-md-4 mb-3">
             <label for="ward">Ward</label>
             <select class="custom-select d-block w-100" id="ward" required>
-              <option value="">Choose...</option>
-              <option>Dong Xuan</option>
-              <option>Thu Thiem</option>
             </select>
             <div class="invalid-feedback">
               Please provide a valid ward.
@@ -481,6 +476,47 @@
 <script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.02.js"></script>
 <script src="/resources/js/form-validation.js"></script>
 <!--===============================================================================================-->
+<script src="${pageContext.request.contextPath }/resources/js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    $('#province').on('change', function(){
+      var provinceCode = $(this).val();
+      $.ajax({
+        type: 'GET',
+        url: '${pageContext.request.contextPath }/checkout/loadDistrictByProvince/' + provinceCode,
+        success: function(result) {
+          var result = JSON.parse(result);
+          var s = '';
+          for(var i = 0; i < result.length; i++) {
+            s += '<option value="' + result[i].id + '">' + result[i].name + '</option>';
+          }
+          $('#district').html(s);
+        }
+      });
+    });
+
+
+    $('#district').on('change', function(){
+      var districtCode = $(this).val();
+      $.ajax({
+        type: 'GET',
+        url: '${pageContext.request.contextPath }/checkout/loadWardByDistrict/' + districtCode,
+        success: function(result) {
+          var result = JSON.parse(result);
+          var s = '';
+          for(var i = 0; i < result.length; i++) {
+            s += '<option value="' + result[i].id + '">' + result[i].name + '</option>';
+          }
+          $('#ward').html(s);
+        }
+      });
+    });
+
+
+
+  });
+</script>
 </body>
 
 </html>

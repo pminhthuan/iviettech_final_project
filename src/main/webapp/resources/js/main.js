@@ -195,7 +195,11 @@
     /*==================================================================
     [ Cart ]*/
     $('.js-show-cart').on('click',function(){
+        //location.reload();
         $('.js-panel-cart').addClass('show-header-cart');
+        // setTimeout(function(){
+        //
+        // }, 2000);
     });
 
     $('.js-hide-cart').on('click',function(){

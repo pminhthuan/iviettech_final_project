@@ -1,5 +1,6 @@
 package com.iviettech.finalproject.controller;
 
+import com.google.gson.Gson;
 import com.iviettech.finalproject.entity.*;
 import com.iviettech.finalproject.helper.GmailSender;
 import com.iviettech.finalproject.pojo.CartItem;
@@ -42,6 +43,16 @@ public class ProductController {
 
     @Autowired
     OrderDetailRepository orderDetailRepository;
+
+    @Autowired
+    ProvinceRepository provinceRepository;
+
+    @Autowired
+    DistrictRepository districtRepository;
+
+    @Autowired
+    WardRepository wardRepository;
+
 
     @RequestMapping(method = GET)
     public String viewHome(Model model) {
@@ -159,10 +170,14 @@ public class ProductController {
         return "shopping_cart";
     }
 
-    @RequestMapping(value = "/checkout",method = GET)
+    @RequestMapping(value = "/checkout",method = RequestMethod.GET)
     public String viewCheckoutForm(Model model) {
+        // data: 1-2--4-1
+        // product id = 1, quantity = 2
+        // product id = 4, quantity = 19999
+        List<ProvinceEntity> provinceEntityList = (List<ProvinceEntity>) provinceRepository.findAll();
         model.addAttribute("order", new OrderEntity());
-
+        model.addAttribute("province",provinceEntityList);
         return "checkout";
     }
 
@@ -194,7 +209,7 @@ public class ProductController {
         String subject = "Confirm Your Order";
         String confirmationUrl = "http://localhost:8080/activateAccount?name=" + order.getFirstName()+order.getLastName()+ "&ordercode=" + order.getId();
         String mailBody = "<h1> Dear " + order.getFirstName()+" "+order.getLastName() + ",<h1>"
-                + "<h2>You've ordered successfully from our website. Enjoy with us</h2>"
+                + "<h4>You've ordered successfully from our website. Enjoy with us</h4>"
                 + "<br/>Please click on the following link to confirm your order."
                 + "<br/>" + confirmationUrl;
 
@@ -204,5 +219,20 @@ public class ProductController {
             System.out.println(e);
         }
     }
+
+    @ResponseBody
+    @RequestMapping(value = "loadDistrictByProvince/{id}", method = RequestMethod.GET)
+    public String loadDistrictByProvince(@PathVariable("id") int id) {
+        Gson gson = new Gson();
+        return gson.toJson(districtRepository.findByProvince_Code(id));
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "loadWardByDistrict/{id}", method = RequestMethod.GET)
+    public String loadWardByDistrict(@PathVariable("id") int id) {
+        Gson gson = new Gson();
+        return gson.toJson(wardRepository.findByDistrict_Code(id));
+    }
+
 
 }
