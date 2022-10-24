@@ -70,7 +70,7 @@
                         <tr>
                             <td>${o.id}</td>
                             <td>
-                                <a href="<c:url value="/admin/adOrderDetail/${o.id}"/>">${o.fullName}</a>
+                                <a href="<c:url value="/admin/adOrderDetail/${o.id}"/>">${o.firstName} ${o.lastName}</a>
                             </td>
                             <td>${o.phoneNumber}</td>
                             <td>${o.email}</td>

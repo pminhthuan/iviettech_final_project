@@ -5,9 +5,11 @@
   Time: 9:46 AM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>Mamufactor</title>
+    <title>Order detail</title>
     <link rel="stylesheet" type="text/css" href="/resources/admin/assets/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/resources/admin/css/dashboard.css">
     <link rel="stylesheet" type="text/css" href="/resources/admin/css/custom.css">
@@ -62,9 +64,9 @@
                                 <td>${od.quantity}</td>
                                 <td>${od.color}</td>
                                 <td>${od.size}</td>
-                                <td>${od.amount}</td>
+                                <td>${od.price}</td>
                                 <td>
-                                    <a href="<c:url value="#/${m.id}"/>">Edit</a>
+                                    <a href="<c:url value="#/${od.id}"/>">Edit</a>
                                 </td>
                             </tr>
                         </c:forEach>

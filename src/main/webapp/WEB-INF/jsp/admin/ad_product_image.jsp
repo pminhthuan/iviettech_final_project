@@ -5,9 +5,12 @@
   Time: 10:13 AM
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <html>
 <head>
-    <title>Mamufactor</title>
+    <title>Product image</title>
     <link rel="stylesheet" type="text/css" href="/resources/admin/assets/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/resources/admin/css/dashboard.css">
     <link rel="stylesheet" type="text/css" href="/resources/admin/css/custom.css">
@@ -110,12 +113,12 @@
 
                                                     <div class="block2-txt flex-w flex-t p-t-14">
                                                         <div class="block2-txt-child1 flex-col-l ">
-                                                            <a href="<c:url value="/viewImage/${pi.id}"/>" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                                                            <a href="<c:url value="/admin/viewImage/${pi.id}"/>" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
                                                                     ${p.product.name}
                                                             </a>
 
                                                             <span class="stext-105 cl3">
-                                                                         <a href="<c:url value="/deleteImage/${pi.id}"/>">
+                                                                         <a href="<c:url value="/admin/deleteImage/${pi.id}/${pi.product.id}"/>">
                                                                              Delete
                                                                          </a>
                                                                     </span>
@@ -139,6 +142,7 @@
                     </div>
 <%--                </div>--%>
 <%--            </div>--%>
+
         </main>
         <%@include file="ad_footer.jsp"%>
     </div>

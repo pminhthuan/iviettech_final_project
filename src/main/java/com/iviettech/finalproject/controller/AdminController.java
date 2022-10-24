@@ -7,16 +7,14 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -163,6 +161,17 @@ public class AdminController {
         return "admin/ad_product_image";
 
     }
+
+    @RequestMapping(value = "/deleteImage/{id}/{pid}", method = GET)
+    public String deleteProductImage(@PathVariable("id") int id, @PathVariable("pid") int pid, Model model) {
+
+        productImageRepository.deleteById(id);
+
+        return "redirect:/admin/adProductImage/" + pid;
+    }
+
+
+
 
     //Category
     @RequestMapping(value = "/adCategory", method = GET)
