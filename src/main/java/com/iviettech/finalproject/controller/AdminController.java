@@ -142,7 +142,7 @@ public class AdminController {
 
         setProductDropDownlist(model);
 
-        return "admin/ad_edit_product";
+        return "admin/ad_edit_product_detail";
     }
 
     @RequestMapping(value = "/updateProductDetail", method = POST)
@@ -180,7 +180,77 @@ public class AdminController {
         return "admin/ad_category";
     }
 
-    //Mamufactor
+    @RequestMapping(value = "/newCategory", method = GET)
+    public String newCategory(Model model) {
+        model.addAttribute("category", new CategoryEntity());
+        model.addAttribute("msg", "Add a category");
+        model.addAttribute("action", "newCategory");
+
+        return "admin/ad_edit_category";
+    }
+
+    @RequestMapping(value = "/newCategory", method = POST, produces = "text/plain;charset=UTF-8")
+    public String saveCategory(CategoryEntity category, Model model) {
+        categoryRepository.save(category);
+        model.addAttribute("message","You are add success!");
+        return "redirect:/admin/adCategory";
+    }
+
+    @RequestMapping(value = "/editCategory/{id}", method = GET)
+    public String editCategory(Model model, @PathVariable int id) {
+        model.addAttribute("category", categoryRepository.findById(id));
+        model.addAttribute("msg", "Update category information");
+        model.addAttribute("type", "updateCategory");
+        model.addAttribute("action", "/admin/updateCategory");
+
+        return "admin/ad_edit_category";
+    }
+
+    @RequestMapping(value = "/updateCategory", method = POST)
+    public String updateCategory(@ModelAttribute CategoryEntity category) {
+        categoryRepository.save(category);
+        return "redirect:/admin/adCategory";
+    }
+
+    //Category detail
+
+    @RequestMapping(value = "/newCategoryDetail", method = GET)
+    public String newCategoryDetail(Model model) {
+        model.addAttribute("categoryDetail", new CategoryDetailEntity());
+        model.addAttribute("msg", "Add a category detail");
+        model.addAttribute("action", "newCategoryDetail");
+
+        setCategoryDropDownlist(model);
+
+        return "admin/ad_edit_category_detail";
+    }
+
+    @RequestMapping(value = "/newCategoryDetail", method = POST, produces = "text/plain;charset=UTF-8")
+    public String saveCategory(CategoryDetailEntity categoryDetail, Model model) {
+        categoryDetailRepository.save(categoryDetail);
+        model.addAttribute("message","You are add success!");
+        return "redirect:/admin/adCategory";
+    }
+
+    @RequestMapping(value = "/editCategoryDetail/{id}", method = GET)
+    public String editCategoryDetail(Model model, @PathVariable int id) {
+        model.addAttribute("categoryDetail", categoryDetailRepository.findById(id));
+        model.addAttribute("msg", "Update category detail information");
+        model.addAttribute("type", "updateCategoryDetail");
+        model.addAttribute("action", "/admin/updateCategoryDetail");
+
+        setCategoryDropDownlist(model);
+
+        return "admin/ad_edit_category_detail";
+    }
+
+    @RequestMapping(value = "/updateCategoryDetail", method = POST)
+    public String updateCategoryDetail(@ModelAttribute CategoryDetailEntity categoryDetail) {
+        categoryDetailRepository.save(categoryDetail);
+        return "redirect:/admin/adCategory";
+    }
+
+    //Manufactor
     @RequestMapping(value = "/adManyfactor", method = GET)
     public String viewManufactor(Model model) {
 
@@ -189,6 +259,38 @@ public class AdminController {
         model.addAttribute("manufactorList", manufactorList);
 
         return "admin/ad_manufactor";
+    }
+
+    @RequestMapping(value = "/newManufactor", method = GET)
+    public String newManufactor(Model model) {
+        model.addAttribute("manufactor", new ManufactorEntity());
+        model.addAttribute("msg", "Add a manufactor");
+        model.addAttribute("action", "newManufactor");
+
+        return "admin/ad_edit_manufactor";
+    }
+
+    @RequestMapping(value = "/newManufactor", method = POST, produces = "text/plain;charset=UTF-8")
+    public String saveManufactor(ManufactorEntity manufactor, Model model) {
+        manufactorRepository.save(manufactor);
+        model.addAttribute("message","You are add success!");
+        return "redirect:/admin/adManyfactor";
+    }
+
+    @RequestMapping(value = "/editManufactor/{id}", method = GET)
+    public String editManufactor(Model model, @PathVariable int id) {
+        model.addAttribute("manufactor", manufactorRepository.findById(id));
+        model.addAttribute("msg", "Update manufactor information");
+        model.addAttribute("type", "updateManufactor");
+        model.addAttribute("action", "/admin/updateManufactor");
+
+        return "admin/ad_edit_manufactor";
+    }
+
+    @RequestMapping(value = "/updateManufactor", method = POST)
+    public String updateManufactor(@ModelAttribute ManufactorEntity manufactor) {
+        manufactorRepository.save(manufactor);
+        return "redirect:/admin/adManyfactor";
     }
 
     //Order
