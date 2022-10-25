@@ -78,35 +78,36 @@
                             </thead>
                             <tbody>
                             <c:forEach items="${shopping_cart_list}" var="item">
-                            <tr>
-                                <td class="product-thumbnail">
-                                    <img src="${item.imgSource}" alt="Image" class="img-fluid">
-                                </td>
-                                <td class="product-name">
-                                    <h2 class="h6 text-black">${item.title}</h2>
-                                </td>
-                                <td class="form-size-color">${item.color}</td>
-                                <td class="form-size-size">${item.size}</td>
-                                <td class="form-price">$${item.price}</td>
-                                <td class="form-quantity">
-                                    <div class="wrap-num-product flex-w m-l-auto m-r-0">
-                                        <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-                                            <i class="fs-16 zmdi zmdi-minus"></i>
+                                <tr>
+                                    <td class="product-thumbnail">
+                                        <img src="${item.imgSource}" alt="Image" class="img-fluid">
+                                    </td>
+                                    <td class="product-name">
+                                        <h2 class="h6 text-black">${item.title}</h2>
+                                        <span class="product-ID" hidden style="white-space:nowrap">${item.productId}</>
+                                    </td>
+                                    <td class="form-size-color">${item.size}</td>
+                                    <td class="form-size-size">${item.color}</td>
+                                    <td class="form-price">$${item.price}</td>
+                                    <td class="form-quantity">
+                                        <div class="wrap-num-product flex-w m-l-auto m-r-0">
+                                            <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+                                                <i class="fs-16 zmdi zmdi-minus"></i>
+                                            </div>
+
+                                            <input class="mtext-104 cl3 txt-center num-product" type="number"
+                                                   name="num-product1" value="${item.quantity}">
+
+                                            <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+                                                <i class="fs-16 zmdi zmdi-plus"></i>
+                                            </div>
                                         </div>
 
-                                        <input class="mtext-104 cl3 txt-center num-product" type="number"
-                                               name="num-product1" value="${item.quantity}">
-
-                                        <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-                                            <i class="fs-16 zmdi zmdi-plus"></i>
-                                        </div>
-                                    </div>
-
-                                </td>
-                                <td class="form-price">$${item.totalPriceInNumber}</td>
-                                <td class="form-remove">
-                                    <a href="#" class="btn btn-primary" style="font-size: 0.8rem;">X</a></td>
-                            </tr>
+                                    </td>
+                                    <td class="form-price total">$${item.totalPriceInNumber}</td>
+                                    <td class="form-remove">
+                                        <a href="#" class="btn btn-primary" style="font-size: 0.8rem;">X</a></td>
+                                </tr>
                             </c:forEach>
                             </tbody>
                         </table>
@@ -151,7 +152,7 @@
                                     <span class="text-black">Subtotal</span>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <strong class="text-black"><c:out value="${total_price_in_cart}"/></strong>
+                                    <strong id="sub_total_sum" class="text-black"><c:out value="${total_price_in_cart}"/></strong>
                                 </div>
                             </div>
                             <div class="row mb-5">
@@ -159,14 +160,14 @@
                                     <span class="text-black">Total</span>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <strong class="text-black"><c:out value="${total_price_in_cart}"/></strong>
+                                    <strong id="total_sum" class="text-black"><c:out value="${total_price_in_cart}"/></strong>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-12">
-<%--                                    <button class="btn-checkout btn btn-primary btn-lg py-3 btn-block"--%>
-<%--                                            onclick="window.location='/checkout'">Proceed To Checkout</button>--%>
+                                    <%--                                    <button class="btn-checkout btn btn-primary btn-lg py-3 btn-block"--%>
+                                    <%--                                            onclick="window.location='/checkout'">Proceed To Checkout</button>--%>
                                     <a href="/checkout" id="check_out">
                                         <button id="btn_check_out" <c:if test="${sessionScope.shopping_cart == null}"><c:out value="disabled='disabled'"/></c:if> class="btn-checkout btn btn-primary btn-lg py-3 btn-block">Proceed To Checkout</button>
                                     </a>
@@ -370,15 +371,66 @@
     });
 
 
-    // $("#btn_check_out").click(function() {
-    //     //alert( "Handler for .click() called." );
-    //     $("#check_out").attr('target', '/checkout?data=11');
-    // });
+    /* Handle when reducing the product quantity in cart */
+    $(".btn-num-product-down").click(function() {
+        let oldValue = $(this).parent().parent().find('input').val();
+        if (oldValue == 0) {
+            return;
+        } else {
+            // Don't allow decrementing below zero
+            if (oldValue > 0) {
+                var newVal = parseFloat(oldValue) - 1;
+            } else {
+                newVal = 0;
+            }
+        }
 
-    // $('#check_out a').each(function() {
-    //     alert('aa');
-    //     $(this).attr('target', (this.href.match( homeURL )) ? '_self' :'_blank');
-    // });
+        let row = $(this).parent().parent().parent();
+        let currentBasePrice = row.find('.form-price').html();
+        // get the number part, e.g. $52 -> 52
+        currentBasePrice = currentBasePrice.substr(currentBasePrice.indexOf("$") + 1);
+        // update price for each item in cart
+        row.find('.form-price.total').text('$' + Number(currentBasePrice * newVal));
+
+        let currentSubTotal = $("#sub_total_sum").html();
+        currentSubTotal = currentSubTotal.substr(currentSubTotal.indexOf("$") + 1);
+        // update total & sub-total price
+        $("#sub_total_sum").text('$' + Number(Number(currentSubTotal) - Number(currentBasePrice)));
+        $("#total_sum").text($("#sub_total_sum").html());
+    });
+
+    /* Handle when increasing the product quantity in cart */
+    $(".btn-num-product-up").click(function() {
+        let oldValue = $(this).parent().parent().find('input').val();
+        var newVal = parseFloat(oldValue) + 1;
+
+        let row = $(this).parent().parent().parent();
+        let currentBasePrice = row.find('.form-price').html();
+        // get the number part, e.g. $52 -> 52
+        currentBasePrice = currentBasePrice.substr(currentBasePrice.indexOf("$") + 1);
+        row.find('.form-price.total').text('$' + Number(currentBasePrice * newVal));
+
+        let currentSubTotal = $("#sub_total_sum").html();
+        currentSubTotal = currentSubTotal.substr(currentSubTotal.indexOf("$") + 1);
+        $("#sub_total_sum").text('$' + Number(Number(currentSubTotal) + Number(currentBasePrice)));
+        $("#total_sum").text($("#sub_total_sum").html());
+    });
+
+
+
+    // before check out button is clicked, update the HREF attribute of the <a> tag
+    // the HRED includes the query param ?data which contains all productID & latest quantity pairs
+    $("#btn_check_out").click(function(){
+        $('#check_out').each(function() {
+            let newHref = '';
+            $(".table.table-bordered tbody tr").each(function() {
+                newHref = newHref + $(this).find(".product-ID").text().trim() + '_' +  $(this).find("input").val() + '__';
+            });;
+            // remove the last 2 characters __
+            newHref = newHref.slice(0,-2);
+            $(this).attr('href', '/checkout?data=' + newHref);
+        });
+    });
 </script>
 <!--===============================================================================================-->
 <script src="/resources/js/main.js"></script>

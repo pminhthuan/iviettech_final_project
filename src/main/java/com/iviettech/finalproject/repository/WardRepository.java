@@ -11,5 +11,5 @@ import java.util.List;
 public interface WardRepository extends CrudRepository<WardEntity, Integer> {
     @Query(value = "select * from wards w where w.district_code = ?1",
             nativeQuery = true)
-    List<WardEntity> findByDistrict_Code(int id);
+    List<WardEntity> findByDistrict_Code(int districtCode);
 }

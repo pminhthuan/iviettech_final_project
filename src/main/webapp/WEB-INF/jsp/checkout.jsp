@@ -172,6 +172,7 @@
           <div class="col-md-4 mb-3">
             <label for="province">Province</label>
             <select class="custom-select d-block w-100" id="province" required>
+              <option value='-1'>Select an option</option>
               <c:forEach items="${province}" var="provice">
               <option value="${provice.id }">${provice.nameEn}</option>
               </c:forEach>
@@ -476,45 +477,50 @@
 <script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.02.js"></script>
 <script src="/resources/js/form-validation.js"></script>
 <!--===============================================================================================-->
-<script src="${pageContext.request.contextPath }/resources/js/jquery-1.7.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
-  $(document).ready(function(){
-
-    $('#province').on('change', function(){
-      var provinceCode = $(this).val();
-      $.ajax({
-        type: 'GET',
-        url: '${pageContext.request.contextPath }/checkout/loadDistrictByProvince/' + provinceCode,
-        success: function(result) {
-          var result = JSON.parse(result);
-          var s = '';
-          for(var i = 0; i < result.length; i++) {
-            s += '<option value="' + result[i].id + '">' + result[i].name + '</option>';
+  $(document).ready(function() {
+    $("#province").change(function() {
+      var provinceId = $(this).val();
+      var s = '<option value=' + -1 + '>Select an option</option>';
+      if (provinceId > 0) {
+        $.ajax({
+          url : 'getDistricts',
+          data : { "provinceId" : provinceId },
+          success : function(result) {
+            var result = JSON.parse(result);
+            for (var i = 0; i < result.length; i++) {
+              s += '<option value="' + result[i][0] + '">'+ result[i][1]+ '</option>';
+            }
+            $('#district').html(s);
           }
-          $('#district').html(s);
-        }
-      });
+        });
+      }
+      //reset data
+      $('#district').html(s);
+      $('#ward').html(s);
+
     });
 
-
-    $('#district').on('change', function(){
-      var districtCode = $(this).val();
-      $.ajax({
-        type: 'GET',
-        url: '${pageContext.request.contextPath }/checkout/loadWardByDistrict/' + districtCode,
-        success: function(result) {
-          var result = JSON.parse(result);
-          var s = '';
-          for(var i = 0; i < result.length; i++) {
-            s += '<option value="' + result[i].id + '">' + result[i].name + '</option>';
+    $("#district").change(function() {
+      var districtId = $(this).val();
+      var s = '<option value=' + -1 + '>Select an option</option>';
+      if (districtId > 0) {
+        $.ajax({
+          url : 'getWards',
+          data : {"districtId" : districtId},
+          success : function(result) {
+            var result = JSON.parse(result);
+            for (var i = 0; i < result.length; i++) {
+              s += '<option value="' + result[i][0] + '">'+ result[i][1]+ '</option>';
+            }
+            $('#ward').html(s);
           }
-          $('#ward').html(s);
-        }
-      });
+        });
+      }
+      //reset data
+      $('#ward').html(s);
     });
-
-
-
   });
 </script>
 </body>

@@ -1,5 +1,7 @@
 package com.iviettech.finalproject.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.iviettech.finalproject.entity.*;
 import com.iviettech.finalproject.helper.GmailSender;
@@ -171,10 +173,28 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/checkout",method = RequestMethod.GET)
-    public String viewCheckoutForm(Model model) {
+    public String viewCheckoutForm(Model model, @RequestParam(value = "data", required = false) String data,
+                                   HttpSession session) {
         // data: 1-2--4-1
         // product id = 1, quantity = 2
         // product id = 4, quantity = 19999
+
+        if (!data.isEmpty()) {
+            String[] tmpData = data.split("__");
+            List<CartItem> cart;
+            if (session.getAttribute("shopping_cart") != null) {
+                cart = (List<CartItem>) session.getAttribute("shopping_cart");
+                for(CartItem item : cart) {
+                    for (int i = 0; i < tmpData.length; i++) {
+                        if (item.getProductId() == Integer.valueOf(tmpData[i].split("_")[0])) {
+                            // update the product quantity and then save to http session shopping_cart
+                            item.setQuantity(Integer.valueOf(tmpData[i].split("_")[1]));
+                        }
+                    }
+                }
+                session.setAttribute("shopping_cart", cart);
+            }
+        }
         List<ProvinceEntity> provinceEntityList = (List<ProvinceEntity>) provinceRepository.findAll();
         model.addAttribute("order", new OrderEntity());
         model.addAttribute("province",provinceEntityList);
@@ -220,19 +240,31 @@ public class ProductController {
         }
     }
 
-    @ResponseBody
-    @RequestMapping(value = "loadDistrictByProvince/{id}", method = RequestMethod.GET)
-    public String loadDistrictByProvince(@PathVariable("id") int id) {
-        Gson gson = new Gson();
-        return gson.toJson(districtRepository.findByProvince_Code(id));
+
+    @GetMapping("/getDistricts")
+    public @ResponseBody String getDistricts(@RequestParam Integer provinceId)
+    {
+        String json = null;
+        List<Object[]> list = provinceRepository.getDistrictByProvince(provinceId);
+        try {
+            json = new ObjectMapper().writeValueAsString(list);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return json;
     }
 
-    @ResponseBody
-    @RequestMapping(value = "loadWardByDistrict/{id}", method = RequestMethod.GET)
-    public String loadWardByDistrict(@PathVariable("id") int id) {
-        Gson gson = new Gson();
-        return gson.toJson(wardRepository.findByDistrict_Code(id));
+    @GetMapping("/getWards")
+    public @ResponseBody String getWards(@RequestParam Integer districtId)
+    {
+        String json = null;
+        List<Object[]> list = districtRepository.getWardByDistrict(districtId);
+        try {
+            json = new ObjectMapper().writeValueAsString(list);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return json;
     }
-
 
 }
