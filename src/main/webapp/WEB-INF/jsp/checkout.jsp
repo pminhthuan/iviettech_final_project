@@ -173,8 +173,8 @@
             <label for="province">Province</label>
             <select class="custom-select d-block w-100" id="province" required>
               <option value='-1'>Select an option</option>
-              <c:forEach items="${province}" var="provice">
-              <option value="${provice.id }">${provice.nameEn}</option>
+              <c:forEach items="${province}" var="province">
+              <option value="${province.id }">${province.nameEn}</option>
               </c:forEach>
             </select>
             <div class="invalid-feedback">
@@ -200,7 +200,7 @@
         </div>
         <div class="mb-3">
           <label for="address">Address detail</label>
-          <form:input path="address" type="text" class="form-control" id="address" placeholder="234 Hang Ma St or Phuong Nam Village" required="true"/>
+          <form:input path="addressDetail" type="text" class="form-control" id="address" placeholder="234 Hang Ma St or Phuong Nam Village" required="true"/>
           <div class="invalid-feedback">
             Please enter your shipping address.
           </div>

@@ -19,7 +19,9 @@ import java.io.UnsupportedEncodingException;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -196,6 +198,12 @@ public class ProductController {
             }
         }
         List<ProvinceEntity> provinceEntityList = (List<ProvinceEntity>) provinceRepository.findAll();
+
+//        Map<Integer, String> provinceMap = new LinkedHashMap<>();
+//        for(ProvinceEntity provinceEntity : provinceEntityList) {
+//            provinceMap.put(provinceEntity.getId(), provinceEntity.getNameEn());
+//        }
+
         model.addAttribute("order", new OrderEntity());
         model.addAttribute("province",provinceEntityList);
         return "checkout";
