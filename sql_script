@@ -53,6 +53,41 @@ INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, ma
 VALUES ( 159,'Super Warm 3 Layers VIP Men''s Life jacket', 82, 5, 2);
 INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Áo Phao Nam VIP 3 Lớp Siêu Ấm "akm4027"
 VALUES ( 79,'3C Men''s 2 Layers Sports Jacket', 35, 5, 2);
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Quần Âu Nam Ống Đứng Vải Nano Melange "qam3191"
+VALUES ( 95,'Nano Melange Fabric Men''s Stand Up Pants', 50, 3, 4);
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Quần Âu Nam Vải Nano Cao Cấp Giữ Phom "qam3127"
+VALUES ( 104,'High Quality Nano Fabric Men''s Trousers Keeps Shape', 57, 3, 4);
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Áo Sơ Mi Nữ Cổ Nơ Bèo Tay "smn4274"
+VALUES ( 45,'Women''s Shirt with Bow Neck with Ruffled Sleeves', 22, 7, 1);
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Áo Sơ Mi Nữ Tay Dài Form Rộng "smn5056"
+VALUES ( 42,'Women''s Long Sleeve Shirt Wide Form', 20, 7, 1);
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Áo Sơ Mi Nữ Tay Ngắn Nano "scn3000"
+VALUES ( 47,'Nano Short Sleeve Women''s Shirt', 24, 7, 1);
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Áo Sơ Mi Dài Tay Nữ Cafe "smn5202"
+VALUES ( 53,'Women''s Cafe Long Sleeve Shirt', 26, 7, 1);
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Áo T-Shirt Nữ Cotton USA Phiên Bản Premium "tsn5302"
+VALUES ( 32,'Cotton USA Women''s T-Shirt Premium Edition', 14, 8, 1);
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Áo Thun Nữ Form Rộng "tsn5168"
+VALUES ( 30,'Women''s T-shirt Wide Form', 13, 8, 1);
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Áo T-Shirt Nữ Cotton USA "tsn5234"
+VALUES ( 35,'Women''s Cotton T-Shirt USA', 15, 8, 2);
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Váy Voan Cổ Vuông Xẻ Tà Chấm Bi "van5152"
+VALUES ( 59,'Square Neck Chiffon Dress With Polka Dot Slits', 29, 9, 1);
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Váy Lụa Xòe Cổ V "van5184"
+VALUES ( 55,'V-neck Silk Skirt', 25, 9, 1);
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Váy Voan Hoa Nhí Cổ Tim Tay Bồng "van5124"
+VALUES ( 52,'Small Floral Chiffon Dress Puffy Sleeve Heart Neck', 22, 9, 2);
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Áo Phao Nữ Siêu Nhẹ Có Mũ "phn4000"
+VALUES ( 107,'Women''s Super Light Lifejacket With Hood', 60, 11, 2);
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Áo Khoác Gió Nữ Thể Thao "akn4024"
+VALUES ( 89,'Women''s Sports Wind Jacket', 40, 11, 4);
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Bộ Đồ Thể Thao Trẻ Emo "sdk5007"
+VALUES ( 96,'Children''s Sports Suits', 43, 12, 2);
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Bộ Đồ Trẻ Em Thu Đông In Mặt Cười Đáng Yêu "btk5027"
+VALUES ( 99,'Children''s Suits Autumn and Winter With Lovely Smiley Print', 45, 12, 2);
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Bộ Đồ Trẻ Em Thu Đông In Mặt Cười Đáng Yêu "btk5027"
+VALUES ( 40,'Children''s Long Sleeve T-shirt with Bear Print', 20, 15, 2);
+
 
 INSERT INTO product_image (image_alt, image_url, is_main_image, product_id) VALUES ('Men''s Cotton Compact', '/resources/images/products/tsm1-den-1.jpg',1, 1);
 INSERT INTO product_image (image_alt, image_url, product_id) VALUES ('Men''s Cotton Compact', '/resources/images/products/tsm1-den-2.jpg', 1);
@@ -128,13 +163,120 @@ INSERT INTO product_image (image_alt, image_url, product_id) VALUES
 INSERT INTO product_image (image_alt, image_url,is_main_image, product_id) VALUES ('Super Warm 3 Layers VIP Men''s Life jacket', '/resources/images/products/pvm5003-den-6.jpg',1, 12);
 INSERT INTO product_image (image_alt, image_url, product_id) VALUES 
 ('Super Warm 3 Layers VIP Men''s Life jacket', '/resources/images/products/pvm5003-den-8.jpg', 12),
-('Super Warm 3 Layers VIP Men''s Life jacket', '/resources/images/products/pvm5003-tit-1-2.jpg', 12,
+('Super Warm 3 Layers VIP Men''s Life jacket', '/resources/images/products/pvm5003-tit-1-2.jpg', 12),
 ('Super Warm 3 Layers VIP Men''s Life jacket', '/resources/images/products/pvm5003-tit-1-6.jpg', 12);
-INSERT INTO product_image (image_alt, image_url,is_main_image, product_id) VALUES ('3C Men''s 2 Layers Sports Jacket', '/resources/images/products/akm4027-xdm-qjm3077-xde-6.jpg',1, 12);
+INSERT INTO product_image (image_alt, image_url,is_main_image, product_id) VALUES ('3C Men''s 2 Layers Sports Jacket', '/resources/images/products/akm4027-xdm-qjm3077-xde-6.jpg',1, 13);
 INSERT INTO product_image (image_alt, image_url, product_id) VALUES 
-('3C Men''s 2 Layers Sports Jacket', '/resources/images/products/akm4027-den-qjm3077-xde-3.jpg', 12),
-('3C Men''s 2 Layers Sports Jacket', '/resources/images/products/akm4027-den-qjm3077-xde-4.jpg', 12,
-('3C Men''s 2 Layers Sports Jacket', '/resources/images/products/akm4027-nau-3.jpg', 12);
+('3C Men''s 2 Layers Sports Jacket', '/resources/images/products/akm4027-den-qjm3077-xde-3.jpg', 13),
+('3C Men''s 2 Layers Sports Jacket', '/resources/images/products/akm4027-den-qjm3077-xde-4.jpg', 13),
+('3C Men''s 2 Layers Sports Jacket', '/resources/images/products/akm4027-nau-3.jpg', 13);
+INSERT INTO product_image (image_alt, image_url,is_main_image, product_id) VALUES ('Nano Melange Fabric Men''s Stand Up Pants', '/resources/images/products/qam3191-tit-5.jpg',1, 14);
+INSERT INTO product_image (image_alt, image_url, product_id) VALUES 
+('Nano Melange Fabric Men''s Stand Up Pants', '/resources/images/products/qam3191-tit-2.jpg', 14),
+('Nano Melange Fabric Men''s Stand Up Pants', '/resources/images/products/qam3191-bee-4.jpg', 14),
+('Nano Melange Fabric Men''s Stand Up Pants', '/resources/images/products/qam3191-bee-7.jpg', 14),
+('Nano Melange Fabric Men''s Stand Up Pants', '/resources/images/products/qam3191-ghs-1.jpg', 14),
+('Nano Melange Fabric Men''s Stand Up Pants', '/resources/images/products/qam3191-ghs-5.jpg', 14);
+INSERT INTO product_image (image_alt, image_url,is_main_image, product_id) VALUES ('High Quality Nano Fabric Men''s Trousers', '/resources/images/products/qam3127-den-2.jpg',1, 15);
+INSERT INTO product_image (image_alt, image_url, product_id) VALUES 
+('High Quality Nano Fabric Men''s Trousers', '/resources/images/products/qam3127-den-22222.jpg', 15),
+('High Quality Nano Fabric Men''s Trousers', '/resources/images/products/qam3127-xdm-2.jpg', 15),
+('High Quality Nano Fabric Men''s Trousers', '/resources/images/products/qam3127-xdm-8.jpg', 15);
+INSERT INTO product_image (image_alt, image_url,is_main_image, product_id) VALUES ('Women''s Shirt with Bow Neck', '/resources/images/products/smn4274-nau-5.jpg',1, 16);
+INSERT INTO product_image (image_alt, image_url, product_id) VALUES 
+('Women''s Shirt with Bow Neck', '/resources/images/products/smn4274-nau-1.jpg', 16),
+('Women''s Shirt with Bow Neck', '/resources/images/products/smn4274-nau-6.jpg', 16),
+('Women''s Shirt with Bow Neck', '/resources/images/products/smn4274-hog.jpg', 16),
+('Women''s Shirt with Bow Neck', '/resources/images/products/smn4274-hog-1.jpg', 16),
+('Women''s Shirt with Bow Neck', '/resources/images/products/smn4274-tra-5.jpg', 16),
+('Women''s Shirt with Bow Neck', '/resources/images/products/smn4274-tra-6.jpg', 16);
+INSERT INTO product_image (image_alt, image_url,is_main_image, product_id) VALUES ('Women''s Long Sleeve Shirt Wide Form', '/resources/images/products/smn5056-tra-7.jpg',1, 17);
+INSERT INTO product_image (image_alt, image_url, product_id) VALUES 
+('Women''s Long Sleeve Shirt Wide Form', '/resources/images/products/smn5056-tra-4.jpg', 17),
+('Women''s Long Sleeve Shirt Wide Form', '/resources/images/products/smn5056-xah-2.jpg', 17),
+('Women''s Long Sleeve Shirt Wide Form', '/resources/images/products/smn5056-xah-7.jpg', 17);
+INSERT INTO product_image (image_alt, image_url,is_main_image, product_id) VALUES ('Nano Short Sleeve Women''s Shirt', '/resources/images/products/scn3000-tra-5.jpg',1, 18);
+INSERT INTO product_image (image_alt, image_url, product_id) VALUES 
+('Nano Short Sleeve Women''s Shirt', '/resources/images/products/scn3000-tra-1.jpg', 18),
+('Nano Short Sleeve Women''s Shirt', '/resources/images/products/scn3000-xnh-4.jpg', 18),
+('Nano Short Sleeve Women''s Shirt', '/resources/images/products/scn3000-xnh-5.jpg', 18),
+('Nano Short Sleeve Women''s Shirt', '/resources/images/products/scn3000-tmn.jpg', 18),
+('Nano Short Sleeve Women''s Shirt', '/resources/images/products/scn3000-tmn-3.jpg', 18),
+('Nano Short Sleeve Women''s Shirt', '/resources/images/products/scn3000-tit.jpg', 18),
+('Nano Short Sleeve Women''s Shirt', '/resources/images/products/scn3000-tit-7.jpg', 18);
+INSERT INTO product_image (image_alt, image_url,is_main_image, product_id) VALUES ('Women''s Cafe Long Sleeve Shirt', '/resources/images/products/smn5202-hog-2.jpg',1, 19);
+INSERT INTO product_image (image_alt, image_url, product_id) VALUES 
+('Women''s Cafe Long Sleeve Shirt', '/resources/images/products/smn5202-hog-5.jpg', 19),
+('Women''s Cafe Long Sleeve Shirt', '/resources/images/products/smn5202-xgi-1.jpg', 19);
+INSERT INTO product_image (image_alt, image_url,is_main_image, product_id) VALUES ('Cotton USA Women''s T-Shirt Premium Edition', '/resources/images/products/tsn5302-tra-4.jpg',1, 20);
+INSERT INTO product_image (image_alt, image_url, product_id) VALUES 
+('Cotton USA Women''s T-Shirt Premium Edition', '/resources/images/products/tsn5302-tra-3.jpg', 20),
+('Cotton USA Women''s T-Shirt Premium Edition', '/resources/images/products/tsn5302-cam-1.jpg', 20),
+('Cotton USA Women''s T-Shirt Premium Edition', '/resources/images/products/tsn5302-cam-4.jpg', 20),
+('Cotton USA Women''s T-Shirt Premium Edition', '/resources/images/products/tsn5302-ddo-1.jpg', 20),
+('Cotton USA Women''s T-Shirt Premium Edition', '/resources/images/products/tsn5302-ddo-3.jpg', 20),
+('Cotton USA Women''s T-Shirt Premium Edition', '/resources/images/products/tsn5302-tit-1.jpg', 20),
+('Cotton USA Women''s T-Shirt Premium Edition', '/resources/images/products/tsn5302-tit-3.jpg', 20);
+INSERT INTO product_image (image_alt, image_url,is_main_image, product_id) VALUES ('Women''s T-shirt Wide Form', '/resources/images/products/tsn5168-vag4.jpg',1, 21);
+INSERT INTO product_image (image_alt, image_url, product_id) VALUES 
+('Women''s T-shirt Wide Form', '/resources/images/products/tsn5168-vag6.jpg', 21),
+('Women''s T-shirt Wide Form', '/resources/images/products/tsn5168-den5.jpg', 21),
+('Women''s T-shirt Wide Form', '/resources/images/products/tsn5168-den3.jpg', 21),
+('Women''s T-shirt Wide Form', '/resources/images/products/tsn5168-nau2.jpg', 21),
+('Women''s T-shirt Wide Form', '/resources/images/products/tsn5168-nau5.jpg', 21),
+('Women''s T-shirt Wide Form', '/resources/images/products/tsn5168-tra2.jpg', 21),
+('Women''s T-shirt Wide Form', '/resources/images/products/tsn5168-tra4.jpg', 21);
+INSERT INTO product_image (image_alt, image_url,is_main_image, product_id) VALUES ('Women''s Cotton T-Shirt USA', '/resources/images/products/tsn5234-tra-4.jpg',1, 22);
+INSERT INTO product_image (image_alt, image_url, product_id) VALUES 
+('Women''s Cotton T-Shirt USA', '/resources/images/products/tsn5234-tra-5.jpg', 22),
+('Women''s Cotton T-Shirt USA', '/resources/images/products/tsn5234-tra-10.jpg', 22);
+INSERT INTO product_image (image_alt, image_url,is_main_image, product_id) VALUES ('Square Neck Chiffon Dress With Polka Dot Slits', '/resources/images/products/van5152-den-17.jpg',1, 23);
+INSERT INTO product_image (image_alt, image_url, product_id) VALUES 
+('Square Neck Chiffon Dress With Polka Dot Slits', '/resources/images/products/van5152-den-14.jpg', 23),
+('Square Neck Chiffon Dress With Polka Dot Slits', '/resources/images/products/van5152-van-1.jpg', 23),
+('Square Neck Chiffon Dress With Polka Dot Slits', '/resources/images/products/van5152-van-5.jpg', 23),
+('Square Neck Chiffon Dress With Polka Dot Slits', '/resources/images/products/van5152-van-6.jpg', 23);
+INSERT INTO product_image (image_alt, image_url,is_main_image, product_id) VALUES ('V-neck Silk Skirt', '/resources/images/products/van5184-tit-25.jpg',1, 24);
+INSERT INTO product_image (image_alt, image_url, product_id) VALUES 
+('V-neck Silk Skirt', '/resources/images/products/van5184-tit-27.jpg', 24),
+('V-neck Silk Skirt', '/resources/images/products/van5184-den-1.jpg', 24),
+('V-neck Silk Skirt', '/resources/images/products/van5184-den-3.jpg', 24),
+('V-neck Silk Skirt', '/resources/images/products/van5184-tra-20.jpg', 24),
+('V-neck Silk Skirt', '/resources/images/products/van5184-vag-1.jpg', 24),
+('V-neck Silk Skirt', '/resources/images/products/van5184-vag-4.jpg', 24);
+INSERT INTO product_image (image_alt, image_url,is_main_image, product_id) VALUES ('Small Floral Chiffon Dress Puffy Sleeve Heart Neck', '/resources/images/products/van5124-xng1.jpg',1, 25);
+INSERT INTO product_image (image_alt, image_url, product_id) VALUES 
+('Small Floral Chiffon Dress Puffy Sleeve Heart Neck', '/resources/images/products/van5124-xng3.jpg', 25),
+('Small Floral Chiffon Dress Puffy Sleeve Heart Neck', '/resources/images/products/van5124-xu12.jpg', 25),
+('Small Floral Chiffon Dress Puffy Sleeve Heart Neck', '/resources/images/products/van5124-xu13.jpg', 25);
+INSERT INTO product_image (image_alt, image_url,is_main_image, product_id) VALUES ('Women''s Super Light Lifejacket With Hood', '/resources/images/products/phn4000-hog-2.jpg',1, 26);
+INSERT INTO product_image (image_alt, image_url, product_id) VALUES 
+('Women''s Super Light Lifejacket With Hood', '/resources/images/products/phn4000-hog-5.jpg', 26),
+('Women''s Super Light Lifejacket With Hood', '/resources/images/products/phn4000-tim-2.jpg', 26),
+('Women''s Super Light Lifejacket With Hood', '/resources/images/products/phn4000-tim-3.jpg', 26),
+('Women''s Super Light Lifejacket With Hood', '/resources/images/products/phn4000-vag-1.jpg', 26),
+('Women''s Super Light Lifejacket With Hood', '/resources/images/products/phn4000-vag-3.jpg', 26);
+INSERT INTO product_image (image_alt, image_url,is_main_image, product_id) VALUES ('Women''s Sports Wind Jacket', '/resources/images/products/akn4024-hog-3.jpg',1, 27);
+INSERT INTO product_image (image_alt, image_url, product_id) VALUES 
+('Women''s Sports Wind Jacket', '/resources/images/products/akn4024-hog-4.jpg', 27),
+('Women''s Sports Wind Jacket', '/resources/images/products/akn4024-hog-8.jpg', 27),
+('Women''s Sports Wind Jacket', '/resources/images/products/akn4024-tit-6.jpg', 27),
+('Women''s Sports Wind Jacket', '/resources/images/products/akn4024-tit-9.jpg', 27),
+('Women''s Sports Wind Jacket', '/resources/images/products/akn4024-nau-1.jpg', 27),
+('Women''s Sports Wind Jacket', '/resources/images/products/akn4024-nau-3.jpg', 27);
+INSERT INTO product_image (image_alt, image_url,is_main_image, product_id) VALUES ('Children''s Sports Suits', '/resources/images/products/sdk5007-cvt-1.jpg',1, 28);
+INSERT INTO product_image (image_alt, image_url, product_id) VALUES 
+('Children''s Sports Suits', '/resources/images/products/sdk5007-cvt-3.jpg', 28),
+('Children''s Sports Suits', '/resources/images/products/sdk5007-den-4.jpg', 28),
+('Children''s Sports Suits', '/resources/images/products/sdk5007-den-5.jpg', 28);
+INSERT INTO product_image (image_alt, image_url,is_main_image, product_id) VALUES ('Children''s Suits Autumn and Winter', '/resources/images/products/btk5027-tnv03.jpg',1, 28);
+INSERT INTO product_image (image_alt, image_url, product_id) VALUES 
+('Children''s Suits Autumn and Winter', '/resources/images/products/btk5027-tnv05.jpg', 28);
+INSERT INTO product_image (image_alt, image_url,is_main_image, product_id) VALUES ('Children''s Long Sleeve T-shirt', '/resources/images/products/atk5002-nau-3.jpg',1, 29);
+INSERT INTO product_image (image_alt, image_url, product_id) VALUES 
+('Children''s Long Sleeve T-shirt', '/resources/images/products/atk5002-nau-4.jpg', 29),
+('Children''s Long Sleeve T-shirt', '/resources/images/products/atk5002-nav-01.jpg', 29),
+('Children''s Long Sleeve T-shirt', '/resources/images/products/atk5002-nav-03.jpg', 29);
 
 
 INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Black',20,'S', 1);
@@ -240,6 +382,138 @@ INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Grey Str
 INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Grey Blue',20,'M', 9);
 INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Grey Blue',20,'L', 9);
 INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Grey Blue',20,'XL', 9);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Dark Blue',20,'S', 10);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Dark Blue',20,'M', 10);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Dark Blue',20,'L', 10);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Dark Blue',20,'XL', 10);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Light Blue',20,'S', 10);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Light Blue',20,'M', 10);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Light Blue',20,'L', 10);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Light Blue',20,'XL', 10);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Black',20,'S', 10);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Black',20,'M', 10);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Black',20,'L', 10);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Black',20,'XL', 10);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Grey Stripe',20,'S', 10);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Grey Stripe',20,'M', 10);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Grey Stripe',20,'L', 10);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Grey Stripe',20,'XL', 10);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Light Yellow',20,'M', 11);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Light Yellow',20,'L', 11);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Light Yellow',20,'XL', 11);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Red',20,'M', 11);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Red',20,'L', 11);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Red',20,'XL', 11);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Black',20,'M', 11);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Black',20,'L', 11);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Black',20,'XL', 11);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Black',20,'M', 12);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Black',20,'L', 12);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Black',20,'XL', 12);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Dark Blue',20,'M', 12);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Dark Blue',20,'L', 12);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Dark Blue',20,'XL', 12);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Black',20,'M', 13);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Black',20,'L', 13);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Black',20,'XL', 13);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Blue',20,'M', 13);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Blue',20,'L', 13);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Blue',20,'XL', 13);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Light Yellow',20,'M', 13);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Light Yellow',20,'L', 13);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Light Yellow',20,'XL', 13);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Light Yellow',20,'M', 14);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Light Yellow',20,'L', 14);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Light Yellow',20,'XL', 14);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Blue',20,'M', 14);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Blue',20,'L', 14);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Blue',20,'XL', 14);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Grey Stripe',20,'M', 14);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Grey Stripe',20,'L', 14);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Grey Stripe',20,'XL', 14);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Dark Blue',20,'S', 15);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Dark Blue',20,'M', 15);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Dark Blue',20,'L', 15);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Dark Blue',20,'XL', 15);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Black',20,'S', 15);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Black',20,'M', 15);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Black',20,'L', 15);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Black',20,'XL', 15);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Pink',20,'S', 16);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Pink',20,'M', 16);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Pink',20,'L', 16);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Pink',20,'XL', 16);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Brown',20,'S', 16);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Brown',20,'M', 16);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Brown',20,'L', 16);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Brown',20,'XL', 16);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('White',20,'M', 16);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('White',20,'L', 16);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('White',20,'XL', 16);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('White',20,'M', 17);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('White',20,'L', 17);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('White',20,'XL', 17);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Light Blue',20,'M', 17);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Light Blue',20,'L', 17);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Light Blue',20,'XL', 17);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('White',20,'M', 18);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('White',20,'L', 18);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('White',20,'XL', 18);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Light Blue',20,'M', 18);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Light Blue',20,'L', 18);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Light Blue',20,'XL', 18);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Light Purple',20,'M', 18);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Light Purple',20,'L', 18);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Light Purple',20,'XL', 18);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Dark Blue',20,'M', 18);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Dark Blue',20,'L', 18);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Dark Blue',20,'XL', 18);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Pink',20,'Free Size', 19);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Blue Grey',20,'Free Size', 19);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('White',20,'Free Size', 20);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Dark Blue',20,'Free Size', 20);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Red',20,'Free Size', 20);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Orange',20,'Free Size', 20);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('White',20,'Free Size', 21);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Yellow',20,'Free Size', 21);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Brown',20,'Free Size', 21);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Black',20,'Free Size', 21);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('White',20,'Free Size', 22);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Black',20,'M', 23);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Black',20,'L', 23);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Yellow',20,'M', 23);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Yellow',20,'L', 23);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Dark Blue',20,'Free Size', 24);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Black',20,'Free Size', 24);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('White',20,'Free Size', 24);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Yellow',20,'Free Size', 24);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Turquoise',20,'Free Size', 25);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Blue',20,'Free Size', 25);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Pink',20,'S', 26);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Pink',20,'M', 26);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Pink',20,'L', 26);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Purple',20,'S', 26);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Purple',20,'M', 26);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Purple',20,'L', 26);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Yellow',20,'S', 26);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Yellow',20,'M', 26);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Yellow',20,'L', 26);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Pink',20,'S', 27);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Pink',20,'M', 27);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Pink',20,'L', 27);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Brown',20,'S', 27);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Brown',20,'M', 27);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Brown',20,'L', 27);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Dark Blue',20,'S', 27);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Dark Blue',20,'M', 27);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Dark Blue',20,'L', 27);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Black',20,'Free Size', 28);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Blue',20,'Free Size', 28);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Brown',20,'Free Size', 29);
+INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Navi',20,'Free Size', 29);
+
+
+
 
 
 
