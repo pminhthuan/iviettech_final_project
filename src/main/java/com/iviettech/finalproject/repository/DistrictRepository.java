@@ -11,7 +11,7 @@ public interface DistrictRepository extends CrudRepository<DistrictEntity, Integ
             nativeQuery = true)
     List<DistrictEntity>findByProvince_Code(int provinceCode);
 
-    @Query(value = "select w.code, w.name_en from districts d inner join wards w on d.code = w.district_code\n" +
+    @Query(value = "select w.code, w.full_name_en from districts d inner join wards w on d.code = w.district_code\n" +
             "where d.code = ?1",
             nativeQuery = true)
     List<Object[]> getWardByDistrict(int districtId);

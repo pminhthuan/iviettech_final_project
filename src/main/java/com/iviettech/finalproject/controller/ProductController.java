@@ -201,9 +201,8 @@ public class ProductController {
 
         Map<Integer, String> provinceMap = new LinkedHashMap<>();
         for(ProvinceEntity provinceEntity : provinceEntityList) {
-            provinceMap.put(provinceEntity.getId(), provinceEntity.getNameEn());
+            provinceMap.put(provinceEntity.getId(), provinceEntity.getFullNameEn());
         }
-
         model.addAttribute("order", new OrderEntity());
         model.addAttribute("province",provinceMap);
         return "checkout";
