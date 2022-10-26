@@ -197,15 +197,15 @@ public class ProductController {
                 session.setAttribute("shopping_cart", cart);
             }
         }
-        List<ProvinceEntity> provinceEntityList = (List<ProvinceEntity>) provinceRepository.findAll();
+        List<ProvinceEntity> provinceEntityList = provinceRepository.getProvinceOrderByName();
 
-//        Map<Integer, String> provinceMap = new LinkedHashMap<>();
-//        for(ProvinceEntity provinceEntity : provinceEntityList) {
-//            provinceMap.put(provinceEntity.getId(), provinceEntity.getNameEn());
-//        }
+        Map<Integer, String> provinceMap = new LinkedHashMap<>();
+        for(ProvinceEntity provinceEntity : provinceEntityList) {
+            provinceMap.put(provinceEntity.getId(), provinceEntity.getNameEn());
+        }
 
         model.addAttribute("order", new OrderEntity());
-        model.addAttribute("province",provinceEntityList);
+        model.addAttribute("province",provinceMap);
         return "checkout";
     }
 

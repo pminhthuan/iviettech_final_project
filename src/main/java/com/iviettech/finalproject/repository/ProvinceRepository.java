@@ -7,6 +7,12 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface ProvinceRepository extends CrudRepository<ProvinceEntity, Integer> {
+
+    @Query(value = "select * from provinces p order by p.name asc",
+            nativeQuery = true)
+    List<ProvinceEntity> getProvinceOrderByName();
+
+
     @Query(value = "select d.code, d.name_en from provinces p inner join districts d on p.code = d.province_code\n" +
             "where p.code = ?1",
             nativeQuery = true)
