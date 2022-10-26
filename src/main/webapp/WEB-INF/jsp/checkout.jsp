@@ -226,16 +226,24 @@
 
         <div class="d-block my-3">
           <div class="custom-control custom-radio">
-            <input id="cod" name="paymentMethod" type="radio" class="custom-control-input" checked
-                   required>
+            <form:radiobutton path="paymentMethod" value="COD" id="cod" title="paymentMethod" cssClass="custom-control-input" checked="true"
+                              required="true"></form:radiobutton>
+<%--            <form:input path="paymentMethod" id="cod" value="COD" name="paymentMethod" type="radio" class="custom-control-input" checked="true"--%>
+<%--                   required="true"/>--%>
             <label class="custom-control-label" for="cod">COD</label>
           </div>
           <div class="custom-control custom-radio">
-            <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" required>
+            <form:radiobutton path="paymentMethod" value="Credit card" id="credit" title="paymentMethod" cssClass="custom-control-input"
+                              required="true"></form:radiobutton>
+<%--            <form:input path="paymentMethod" id="credit" value="Credit card" name="paymentMethod" type="radio" class="custom-control-input" --%>
+<%--                        required="true"/>--%>
             <label class="custom-control-label" for="credit">Credit card</label>
           </div>
           <div class="custom-control custom-radio">
-            <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>
+            <form:radiobutton path="paymentMethod" value="Paypal" id="paypal" title="paymentMethod" cssClass="custom-control-input"
+                              required="true"></form:radiobutton>
+<%--            <form:input path="paymentMethod" id="paypal" value="Paypal" name="paymentMethod" type="radio" class="custom-control-input" --%>
+<%--                        required="true"/>--%>
             <label class="custom-control-label" for="paypal">PayPal</label>
           </div>
         </div>
