@@ -44,7 +44,15 @@ VALUES ( 45,'Cool Short Sleeve Men''s Shirt', 24, 1, 2);
 INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) 
 VALUES ( 52,'Bamboo Dots Men''s Short Sleeve Shirt', 28, 1, 1); 
 INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) 
-VALUES ( 47,'Fashion Men''s Long Sleeve Plaid Shirt', 24, 1, 3); 
+VALUES ( 47,'Fashion Men''s Long Sleeve Plaid Shirt', 24, 1, 3);
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) --Áo Phao Nam có mũ Siêu Nhẹ Siêu Ấm, ảnh: "phm5001"
+VALUES ( 99,'Men''s Life Jacket With Cap Super Light Super Warm', 50, 5, 2); 
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Áo Khoác Nam Bomber Bổ Ngực "akm5047"
+VALUES ( 109,'Men''s Bomber Jacket Split Bust', 60, 5, 2);
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Áo Phao Nam VIP 3 Lớp Siêu Ấm "pvm5003"
+VALUES ( 159,'Super Warm 3 Layers VIP Men''s Life jacket', 82, 5, 2);
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Áo Phao Nam VIP 3 Lớp Siêu Ấm "akm4027"
+VALUES ( 79,'3C Men''s 2 Layers Sports Jacket', 35, 5, 2);
 
 INSERT INTO product_image (image_alt, image_url, is_main_image, product_id) VALUES ('Men''s Cotton Compact', '/resources/images/products/tsm1-den-1.jpg',1, 1);
 INSERT INTO product_image (image_alt, image_url, product_id) VALUES ('Men''s Cotton Compact', '/resources/images/products/tsm1-den-2.jpg', 1);
@@ -101,6 +109,33 @@ INSERT INTO product_image (image_alt, image_url,is_main_image, product_id) VALUE
 INSERT INTO product_image (image_alt, image_url, product_id) VALUES ('Men''s Long Sleeve Plaid Shirt', '/resources/images/products/sm3-kny-2.jpg', 9);
 INSERT INTO product_image (image_alt, image_url, product_id) VALUES ('Men''s Long Sleeve Plaid Shirt', '/resources/images/products/sm3-kxe-1.jpg', 9);
 INSERT INTO product_image (image_alt, image_url, product_id) VALUES ('Men''s Long Sleeve Plaid Shirt', '/resources/images/products/sm3-kxe-2.jpg', 9);
+INSERT INTO product_image (image_alt, image_url,is_main_image, product_id) VALUES ('Men''s Jacket With Cap', '/resources/images/products/phm5001-tit-3.jpg',1, 10);
+INSERT INTO product_image (image_alt, image_url, product_id) VALUES 
+('Men''s Jacket With Cap', '/resources/images/products/phm5001-tit-4.jpg', 10),
+('Men''s Jacket With Cap', '/resources/images/products/phm5001-den-3.jpg', 10),
+('Men''s Jacket With Cap', '/resources/images/products/phm5001-den-5.jpg', 10),
+('Men''s Jacket With Cap', '/resources/images/products/phm5001-ghi-3.jpg', 10),
+('Men''s Jacket With Cap', '/resources/images/products/phm5001-ghi-5.jpg', 10),
+('Men''s Jacket With Cap', '/resources/images/products/phm5001-xat-1.jpg', 10),
+('Men''s Jacket With Cap', '/resources/images/products/phm5001-xat-3.jpg', 10);
+INSERT INTO product_image (image_alt, image_url,is_main_image, product_id) VALUES ('Men''s Bomber Jacket Split Bust', '/resources/images/products/akm5047-bee-9.jpg',1, 11);
+INSERT INTO product_image (image_alt, image_url, product_id) VALUES 
+('Men''s Bomber Jacket Split Bust', '/resources/images/products/akm5047-bee-10.jpg', 11),
+('Men''s Bomber Jacket Split Bust', '/resources/images/products/akm5047-ddo-7.jpg', 11),
+('Men''s Bomber Jacket Split Bust', '/resources/images/products/akm5047-ddo-8.jpg', 11),
+('Men''s Bomber Jacket Split Bust', '/resources/images/products/akm5047-den-5.jpg', 11),
+('Men''s Bomber Jacket Split Bust', '/resources/images/products/akm5047-den-6.jpg', 11);
+INSERT INTO product_image (image_alt, image_url,is_main_image, product_id) VALUES ('Super Warm 3 Layers VIP Men''s Life jacket', '/resources/images/products/pvm5003-den-6.jpg',1, 12);
+INSERT INTO product_image (image_alt, image_url, product_id) VALUES 
+('Super Warm 3 Layers VIP Men''s Life jacket', '/resources/images/products/pvm5003-den-8.jpg', 12),
+('Super Warm 3 Layers VIP Men''s Life jacket', '/resources/images/products/pvm5003-tit-1-2.jpg', 12,
+('Super Warm 3 Layers VIP Men''s Life jacket', '/resources/images/products/pvm5003-tit-1-6.jpg', 12);
+INSERT INTO product_image (image_alt, image_url,is_main_image, product_id) VALUES ('3C Men''s 2 Layers Sports Jacket', '/resources/images/products/akm4027-xdm-qjm3077-xde-6.jpg',1, 12);
+INSERT INTO product_image (image_alt, image_url, product_id) VALUES 
+('3C Men''s 2 Layers Sports Jacket', '/resources/images/products/akm4027-den-qjm3077-xde-3.jpg', 12),
+('3C Men''s 2 Layers Sports Jacket', '/resources/images/products/akm4027-den-qjm3077-xde-4.jpg', 12,
+('3C Men''s 2 Layers Sports Jacket', '/resources/images/products/akm4027-nau-3.jpg', 12);
+
 
 INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Black',20,'S', 1);
 INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Black',20,'M', 1);

@@ -53,11 +53,11 @@
                     <ul class="main-menu">
                         <li>
                             <a href="/">Home</a>
-                            <ul class="sub-menu">
-                                <li><a href="/">Homepage 1</a></li>
-                                <li><a href="home-02.html">Homepage 2</a></li>
-                                <li><a href="home-03.html">Homepage 3</a></li>
-                            </ul>
+<%--                            <ul class="sub-menu">--%>
+<%--                                <li><a href="/">Homepage 1</a></li>--%>
+<%--                                <li><a href="home-02.html">Homepage 2</a></li>--%>
+<%--                                <li><a href="home-03.html">Homepage 3</a></li>--%>
+<%--                            </ul>--%>
                         </li>
 
                         <li class="label1" data-label1="hot">
@@ -73,15 +73,15 @@
                         </li>
 
                         <li>
-                            <a href="blog.html">Blog</a>
+                            <a href="#">Blog</a>
                         </li>
 
                         <li>
-                            <a href="about.html">About</a>
+                            <a href="#">About</a>
                         </li>
 
                         <li>
-                            <a href="contact.html">Contact</a>
+                            <a href="#">Contact</a>
                         </li>
                     </ul>
                 </div>
