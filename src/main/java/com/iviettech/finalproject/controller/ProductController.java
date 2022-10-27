@@ -225,6 +225,8 @@ public class ProductController {
             orderDetail.setProduct(product);
             orderDetail.setOrderEntity(order);
             orderDetailList.add(orderDetail);
+
+            productDetailRepository.decreaseProductQuantity(item.getQuantity(),item.getProductId(),item.getColor(),item.getSize());
         }
         orderDetailRepository.saveAll(orderDetailList);
         session.removeAttribute("shopping_cart");

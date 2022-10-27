@@ -2,7 +2,11 @@ jQuery(document).ready(function($) {
     $('#add2cart_btn').click(function(e) {
         e.preventDefault();
         if($("#size :selected").text() == 'Select an option' || $("#color :selected").text() == 'Select an option' ){
-            alert('Please select a size or color option!');
+            Swal.fire(
+                'Size and Color?',
+                'Please, select an option!',
+                'question'
+            );
         } else {
             const product = $("#product_id").text()
                 + ",," + $("#product_image").text()
@@ -30,7 +34,12 @@ jQuery(document).ready(function($) {
                         $("#cart_number").attr("data-notify", Number($("#cart_number").attr("data-notify")) + 1);
                         swal($("#product_title").text(), "is added to cart !", "success");
                     } else {
-                        alert("Oops, there is something wrong - please try again later!")
+                        // alert("Oops, there is something wrong - please try again later!")
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Something went wrong - please try again later!'
+                        })
                     }
                 }
             });

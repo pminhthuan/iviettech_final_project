@@ -374,11 +374,11 @@
     /* Handle when reducing the product quantity in cart */
     $(".btn-num-product-down").click(function() {
         let oldValue = $(this).parent().parent().find('input').val();
-        if (oldValue == 0) {
+        if (oldValue == 1) {
             return;
         } else {
             // Don't allow decrementing below zero
-            if (oldValue > 0) {
+            if (oldValue > 1) {
                 var newVal = parseFloat(oldValue) - 1;
             } else {
                 newVal = 0;
@@ -402,7 +402,11 @@
     /* Handle when increasing the product quantity in cart */
     $(".btn-num-product-up").click(function() {
         let oldValue = $(this).parent().parent().find('input').val();
-        var newVal = parseFloat(oldValue) + 1;
+        if (oldValue == 5) {
+            return;
+        } else {
+            var newVal = parseFloat(oldValue) + 1;
+        }
 
         let row = $(this).parent().parent().parent();
         let currentBasePrice = row.find('.form-price').html();

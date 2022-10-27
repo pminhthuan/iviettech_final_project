@@ -22,4 +22,11 @@ public interface ProductDetailRepository extends CrudRepository<ProductDetailEnt
 
     List<ProductDetailEntity> findProductDetailEntityByProduct_Id(int id);
 
+    @Modifying
+    @Transactional
+    @Query(value = "update product_detail set quantity = quantity - ?1\n" +
+            "where product_id = ?2 and color = ?3 and size = ?4",
+            nativeQuery = true)
+    public void decreaseProductQuantity(int quantity,int id, String color, String size);
+
 }

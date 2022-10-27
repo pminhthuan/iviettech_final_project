@@ -153,7 +153,7 @@
                                         <i class="fs-16 zmdi zmdi-minus"></i>
                                     </div>
 
-                                    <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1" id="quantity_change_input" min="1" max="5">
+                                    <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1" id="quantity_change_input">
 
                                     <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
                                         <i class="fs-16 zmdi zmdi-plus"></i>
@@ -851,6 +851,7 @@
 <!--===============================================================================================-->
 <script src="/resources/js/main.js"></script>
 <script src="/resources/js/add-2-cart.js"></script>
+<script src="/resources/vendor/sweetalert/sweetalert2.all.min.js"></script>
 
 </body>
 </html>

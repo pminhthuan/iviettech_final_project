@@ -2,7 +2,11 @@ jQuery(document).ready(function($) {
     $('#add2cart_btn').click(function(e) {
         e.preventDefault();
         if($("#size :selected").text() == 'Select an option' || $("#color :selected").text() == 'Select an option' ){
-            alert('Please select a size or color option!');
+            Swal.fire(
+                'Size and Color?',
+                'Please, select an option!',
+                'question'
+            );
         } else {
             const product = $("#product_id").text()
                 + ",," + $("#product_image").text()

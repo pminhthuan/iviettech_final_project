@@ -20,7 +20,7 @@ public class CategoryDetailEntity {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "categoryDetail")
+    @OneToMany(mappedBy = "categoryDetail", fetch = FetchType.EAGER)
     private List<ProductEntity> productEntityList;
 
     @ManyToOne
