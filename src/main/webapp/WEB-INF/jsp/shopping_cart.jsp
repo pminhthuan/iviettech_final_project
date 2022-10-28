@@ -84,7 +84,8 @@
                                     </td>
                                     <td class="product-name">
                                         <h2 class="h6 text-black">${item.title}</h2>
-                                        <span class="product-ID" hidden style="white-space:nowrap">${item.productId}</>
+                                        <span class="product-Id" hidden style="white-space:nowrap">${item.productId}</>
+                                        <span class="product-detail-Id" hidden style="white-space:nowrap">${item.productDetailId}</>
                                     </td>
                                     <td class="form-size-color">${item.size}</td>
                                     <td class="form-size-size">${item.color}</td>
@@ -168,8 +169,8 @@
                                 <div class="col-md-12">
                                     <%--                                    <button class="btn-checkout btn btn-primary btn-lg py-3 btn-block"--%>
                                     <%--                                            onclick="window.location='/checkout'">Proceed To Checkout</button>--%>
-                                    <a href="/checkout" id="check_out">
-                                        <button id="btn_check_out" <c:if test="${sessionScope.shopping_cart == null}"><c:out value="disabled='disabled'"/></c:if> class="btn-checkout btn btn-primary btn-lg py-3 btn-block">Proceed To Checkout</button>
+                                    <a href="" id="check_out" <c:if test="${sessionScope.shopping_cart == null}"><c:out value="disabled='disabled'"/></c:if>>
+                                        <button id="btn_check_out" class="btn-checkout btn btn-primary btn-lg py-3 btn-block">Proceed To Checkout</button>
                                     </a>
                                 </div>
                             </div>
@@ -428,7 +429,7 @@
         $('#check_out').each(function() {
             let newHref = '';
             $(".table.table-bordered tbody tr").each(function() {
-                newHref = newHref + $(this).find(".product-ID").text().trim() + '_' +  $(this).find("input").val() + '__';
+                newHref = newHref + $(this).find(".product-detail-Id").text().trim() + '_' +  $(this).find("input").val() + '__';
             });;
             // remove the last 2 characters __
             newHref = newHref.slice(0,-2);

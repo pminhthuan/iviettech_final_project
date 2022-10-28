@@ -195,8 +195,8 @@ public class ProductController {
     public String viewCheckoutForm(Model model, @RequestParam(value = "data", required = false) String data,
                                    HttpSession session) {
         // data: 1-2--4-1
-        // product id = 1, quantity = 2
-        // product id = 4, quantity = 19999
+        // product detail id = 1, quantity = 2
+        // product detail id = 4, quantity = 19999
 
         if (!data.isEmpty()) {
             String[] tmpData = data.split("__");
@@ -205,7 +205,7 @@ public class ProductController {
                 cart = (List<CartItem>) session.getAttribute("shopping_cart");
                 for(CartItem item : cart) {
                     for (int i = 0; i < tmpData.length; i++) {
-                        if (item.getProductId() == Integer.valueOf(tmpData[i].split("_")[0])) {
+                        if (item.getProductDetailId() == Integer.valueOf(tmpData[i].split("_")[0])) {
                             // update the product quantity and then save to http session shopping_cart
                             item.setQuantity(Integer.valueOf(tmpData[i].split("_")[1]));
                         }
