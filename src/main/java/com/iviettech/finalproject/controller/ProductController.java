@@ -116,7 +116,7 @@ public class ProductController {
                     List<CartItem> cart = new ArrayList<CartItem>();
                     cart.add(new CartItem(productId, quantity, imgSource, title, price, size, color, proDetailId));
                     session.setAttribute("shopping_cart", cart);
-                    session.setAttribute("total_price_in_cart", calculateTotalPrice(cart));
+                    //session.setAttribute("total_price_in_cart", calculateTotalPrice(cart));
                     returnedValue = "1";
                 } else { // cart has items
                     List<CartItem> cart = (List<CartItem>) session.getAttribute("shopping_cart");
@@ -134,7 +134,7 @@ public class ProductController {
                         returnedValue = "0";
                     }
                     session.setAttribute("shopping_cart", cart);
-                    session.setAttribute("total_price_in_cart", calculateTotalPrice(cart));
+                    //session.setAttribute("total_price_in_cart", calculateTotalPrice(cart));
                 }
                 // save comment to DB
                 return returnedValue;
@@ -176,7 +176,7 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/delete/{productDetailId}", method = GET)
-    public String deleteItemInCart(@PathVariable int productDetailId, HttpSession session) {
+    public String deleteItemInCart(@PathVariable int productDetailId, HttpSession session, Model model) {
 
         List<CartItem> cart = (List<CartItem>) session.getAttribute("shopping_cart");
         CartItem delItem = null;
@@ -188,6 +188,7 @@ public class ProductController {
         }
         cart.remove(delItem);
         session.setAttribute("shopping_cart", cart);
+        session.setAttribute("total_price_in_cart", calculateTotalPrice(cart));
         return "redirect:/cart";
     }
 
@@ -208,10 +209,12 @@ public class ProductController {
                         if (item.getProductDetailId() == Integer.valueOf(tmpData[i].split("_")[0])) {
                             // update the product quantity and then save to http session shopping_cart
                             item.setQuantity(Integer.valueOf(tmpData[i].split("_")[1]));
+                            item.updateTotalPrice();
                         }
                     }
                 }
                 session.setAttribute("shopping_cart", cart);
+                session.setAttribute("total_price_in_cart", calculateTotalPrice(cart));
             }
         }
         List<ProvinceEntity> provinceEntityList = provinceRepository.getProvinceOrderByName();
