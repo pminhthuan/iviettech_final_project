@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class CartItem {
     private int productId;
+    private int productDetailId;
     private int quantity;
     private String imgSource;
     private String title;
@@ -16,7 +17,7 @@ public class CartItem {
 
     // can be replaced by lombok lib
 
-    public CartItem(int productId, int quantity, String imgSource, String title, String price, String size, String color) {
+    public CartItem(int productId, int quantity, String imgSource, String title, String price, String size, String color, int productDetailId) {
         this.productId = productId;
         this.quantity = quantity;
         this.imgSource = imgSource;
@@ -24,6 +25,7 @@ public class CartItem {
         this.price = price;
         this.color = color;
         this.size = size;
+        this.productDetailId = productDetailId;
         updateTotalPrice();
     }
 

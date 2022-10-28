@@ -275,7 +275,7 @@
                     </c:when>
                     <c:when test="${sessionScope.shopping_cart != null}">
                         <div class="header-cart-total w-full p-tb-40">
-                            Total: <c:out value="${sessionScope.total_price_in_cart}"/>
+                            Total: $<c:out value="${sessionScope.total_price_in_cart}"/>
                         </div>
                     </c:when>
                 </c:choose>

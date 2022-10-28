@@ -108,21 +108,22 @@ public class ProductController {
                 String size = data[4];
                 String color = data[5];
                 int quantity = Integer.parseInt(data[6]);
+                int proDetailId = productDetailRepository.findProductDetailId(Integer.parseInt(data[0]),data[5],data[4]);
                 String returnedValue;// 0 or 1
 
                 // cart is empty
                 if (session.getAttribute("shopping_cart") == null) {
                     List<CartItem> cart = new ArrayList<CartItem>();
-                    cart.add(new CartItem(productId, quantity, imgSource, title, price, size, color));
+                    cart.add(new CartItem(productId, quantity, imgSource, title, price, size, color, proDetailId));
                     session.setAttribute("shopping_cart", cart);
                     session.setAttribute("total_price_in_cart", calculateTotalPrice(cart));
                     returnedValue = "1";
                 } else { // cart has items
                     List<CartItem> cart = (List<CartItem>) session.getAttribute("shopping_cart");
-                    int index = checkExistingInCart(productId, cart);
+                    int index = checkExistingInCart(proDetailId, cart);
                     // the product ID doesn't existing in the cart yet
                     if (index == -1) {
-                        cart.add(new CartItem(productId, quantity, imgSource, title, price, size, color));
+                        cart.add(new CartItem(productId, quantity, imgSource, title, price, size, color, proDetailId));
                         returnedValue = "1";
                     } else {
                         // the product ID is existing in the cart yet
@@ -145,21 +146,21 @@ public class ProductController {
         }
     }
 
-    private int checkExistingInCart(int productId, List<CartItem> cart) {
+    private int checkExistingInCart(int productDetailId, List<CartItem> cart) {
         for (int i = 0; i < cart.size(); i++) {
-            if (cart.get(i).getProductId() == productId) {
+            if (cart.get(i).getProductDetailId() == productDetailId) {
                 return i;
             }
         }
         return -1;
     }
 
-    private String calculateTotalPrice(List<CartItem> cart) {
+    private double calculateTotalPrice(List<CartItem> cart) {
         Double totalPrice = 0.0;
         for (CartItem item: cart) {
             totalPrice += item.getTotalPriceInNumber();
         }
-        return "$" + totalPrice;
+        return totalPrice;
     }
 
     @GetMapping(value = "/cart")
@@ -172,6 +173,22 @@ public class ProductController {
         model.addAttribute("cart_size", cart.size());
         model.addAttribute("total_price_in_cart", calculateTotalPrice(cart));
         return "shopping_cart";
+    }
+
+    @RequestMapping(value = "/delete/{productDetailId}", method = GET)
+    public String deleteItemInCart(@PathVariable int productDetailId, HttpSession session) {
+
+        List<CartItem> cart = (List<CartItem>) session.getAttribute("shopping_cart");
+        CartItem delItem = null;
+        for (CartItem t: cart){
+            if(t.getProductDetailId()==productDetailId){
+                delItem = t;
+                break;
+            }
+        }
+        cart.remove(delItem);
+        session.setAttribute("shopping_cart", cart);
+        return "redirect:/cart";
     }
 
     @RequestMapping(value = "/checkout",method = RequestMethod.GET)

@@ -106,7 +106,7 @@
                                     </td>
                                     <td class="form-price total">$${item.totalPriceInNumber}</td>
                                     <td class="form-remove">
-                                        <a href="#" class="btn btn-primary" style="font-size: 0.8rem;">X</a></td>
+                                        <a href="/delete/${item.productDetailId}" class="btn btn-primary" style="font-size: 0.8rem;">X</a></td>
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -152,7 +152,7 @@
                                     <span class="text-black">Subtotal</span>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <strong id="sub_total_sum" class="text-black"><c:out value="${total_price_in_cart}"/></strong>
+                                    <strong id="sub_total_sum" class="text-black">$<c:out value="${total_price_in_cart}"/></strong>
                                 </div>
                             </div>
                             <div class="row mb-5">
@@ -160,7 +160,7 @@
                                     <span class="text-black">Total</span>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <strong id="total_sum" class="text-black"><c:out value="${total_price_in_cart}"/></strong>
+                                    <strong id="total_sum" class="text-black">$<c:out value="${total_price_in_cart}"/></strong>
                                 </div>
                             </div>
 

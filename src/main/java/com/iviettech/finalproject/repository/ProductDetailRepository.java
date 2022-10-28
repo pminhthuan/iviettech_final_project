@@ -27,6 +27,10 @@ public interface ProductDetailRepository extends CrudRepository<ProductDetailEnt
     @Query(value = "update product_detail set quantity = quantity - ?1\n" +
             "where product_id = ?2 and color = ?3 and size = ?4",
             nativeQuery = true)
-    public void decreaseProductQuantity(int quantity,int id, String color, String size);
+    void decreaseProductQuantity(int quantity,int id, String color, String size);
+
+    @Query(value = "select p.id from product_detail p where p.product_id = ?1 and p.color = ?2 and p.size = ?3",
+            nativeQuery = true)
+    int findProductDetailId(int id, String color, String size);
 
 }

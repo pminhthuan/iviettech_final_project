@@ -109,7 +109,7 @@
               <strong>$0</strong>
             </c:when>
             <c:when test="${sessionScope.shopping_cart != null}">
-              <strong><c:out value="${sessionScope.total_price_in_cart}"/></strong>
+              <strong>$<c:out value="${sessionScope.total_price_in_cart}"/></strong>
             </c:when>
           </c:choose>
 
@@ -281,6 +281,7 @@
 <%--          </div>--%>
 <%--        </div>--%>
         <hr class="mb-4">
+        <form:hidden path="totalAmount" value="${sessionScope.total_price_in_cart}"></form:hidden>
         <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
       </form:form>
     </div>
