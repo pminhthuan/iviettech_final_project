@@ -57,10 +57,15 @@ public class ProductController {
     @Autowired
     WardRepository wardRepository;
 
+    @Autowired
+    CategoryRepository categoryRepository;
+
 
     @RequestMapping(method = GET)
     public String viewHome(Model model) {
         List<ProductImageEntity> productEntityList = productImageRepository.getProductListWithImage();
+        List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
+        model.addAttribute("categories", categoryEntityList);
         model.addAttribute("productList", productEntityList);
         return "index";
     }
@@ -68,9 +73,25 @@ public class ProductController {
     @RequestMapping(value = "/shop",method = GET)
     public String viewShop(Model model) {
         List<ProductImageEntity> productEntityList = productImageRepository.getProductListWithImage();
+        List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
+        model.addAttribute("categories", categoryEntityList);
         model.addAttribute("productList", productEntityList);
+        model.addAttribute("activeLink", "how-active1");
         return "product";
     }
+
+
+    @RequestMapping(value = "/shop/category/{id}",method = GET)
+    public String showProductByCategory(@PathVariable("id") int id, Model model) {
+        List<ProductImageEntity> productEntityList = productImageRepository.getProductListWithImageAndCategory(id);
+        List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
+        model.addAttribute("categories", categoryEntityList);
+        model.addAttribute("productList", productEntityList);
+        model.addAttribute("tag", id);
+
+        return "product";
+    }
+
 
     @RequestMapping(value = "/view/{id}",method = GET)
     public String showOrderDetail(@PathVariable("id") int id, Model model) {
@@ -116,7 +137,6 @@ public class ProductController {
                     List<CartItem> cart = new ArrayList<CartItem>();
                     cart.add(new CartItem(productId, quantity, imgSource, title, price, size, color, proDetailId));
                     session.setAttribute("shopping_cart", cart);
-                    //session.setAttribute("total_price_in_cart", calculateTotalPrice(cart));
                     returnedValue = "1";
                 } else { // cart has items
                     List<CartItem> cart = (List<CartItem>) session.getAttribute("shopping_cart");
@@ -134,7 +154,6 @@ public class ProductController {
                         returnedValue = "0";
                     }
                     session.setAttribute("shopping_cart", cart);
-                    //session.setAttribute("total_price_in_cart", calculateTotalPrice(cart));
                 }
                 // save comment to DB
                 return returnedValue;
@@ -188,7 +207,6 @@ public class ProductController {
         }
         cart.remove(delItem);
         session.setAttribute("shopping_cart", cart);
-        session.setAttribute("total_price_in_cart", calculateTotalPrice(cart));
         return "redirect:/cart";
     }
 
@@ -295,5 +313,7 @@ public class ProductController {
         }
         return json;
     }
+
+
 
 }

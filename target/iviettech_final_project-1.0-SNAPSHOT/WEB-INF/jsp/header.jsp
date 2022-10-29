@@ -8,7 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <body class="animsition">
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/resources/js/active-link.js"></script>
 <!-- Header -->
 <header class="header-v4">
     <!-- Header desktop -->
@@ -51,7 +52,7 @@
                 <!-- Menu desktop -->
                 <div class="menu-desktop">
                     <ul class="main-menu">
-                        <li>
+                        <li class="active-menu">
                             <a href="/">Home</a>
 <%--                            <ul class="sub-menu">--%>
 <%--                                <li><a href="/">Homepage 1</a></li>--%>

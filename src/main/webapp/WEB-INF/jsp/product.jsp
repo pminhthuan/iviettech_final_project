@@ -53,29 +53,33 @@
     <div class="container">
         <div class="flex-w flex-sb-m p-b-52">
             <div class="flex-w flex-l-m filter-tope-group m-tb-10">
-                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
-                    All Products
-                </button>
+                <a href="/shop">
+                    <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 ${activeLink}" data-filter="*">
+                        All Products
+                    </button>
+                </a>
+                <c:forEach items="${categories}" var="cate" >
+                <a href="<c:url value="/shop/category/${cate.id}"/>" >
+                    <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 ${tag == cate.id? "how-active1":""}" data-filter=".women">
+                            ${cate.name}
+                    </button>
+                </a>
+                </c:forEach>
+<%--                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men">--%>
+<%--                    Men--%>
+<%--                </button>--%>
 
-                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
-                    Women
-                </button>
+<%--                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".bag">--%>
+<%--                    Bag--%>
+<%--                </button>--%>
 
-                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men">
-                    Men
-                </button>
+<%--                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".shoes">--%>
+<%--                    Shoes--%>
+<%--                </button>--%>
 
-                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".bag">
-                    Bag
-                </button>
-
-                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".shoes">
-                    Shoes
-                </button>
-
-                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".watches">
-                    Watches
-                </button>
+<%--                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".watches">--%>
+<%--                    Watches--%>
+<%--                </button>--%>
             </div>
 
             <div class="flex-w flex-c-m m-tb-10">
@@ -735,6 +739,5 @@
 </script>
 <!--===============================================================================================-->
 <script src="/resources/js/main.js"></script>
-
 </body>
 </html>

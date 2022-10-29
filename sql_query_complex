@@ -1,0 +1,15 @@
+select * from products as p left join product_image  as i on p.id = i.product_id
+left join (select p.id, p.name, sum(pt.quantity) from products as p 
+left join product_detail as pt on pt.product_id = p.id group by p.id) as q on q.id = p.id
+left join category_detail as cd ON cd.id = p.category_detail_id
+left join categories as c ON c.id = cd.category_id
+where i.is_main_image = 1 and q.sum > 0 and c.id = 1 
+
+select p.id, p.name, sum(pt.quantity) from products as p left join product_detail as pt
+on pt.product_id = p.id group by p.id
+having sum(pt.quantity) > 0
+
+select * from products as p left join product_image  as i on p.id = i.product_id
+left join (select p.id, p.name, sum(pt.quantity) from products as p left join product_detail as pt
+on pt.product_id = p.id group by p.id) as q on q.id = p.id
+where i.is_main_image = 1 and q.sum > 0 order by p.name asc

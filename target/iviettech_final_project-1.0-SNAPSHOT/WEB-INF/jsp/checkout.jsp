@@ -64,7 +64,7 @@
 
     <span class="stext-109 cl4">
                 Checkout
-            </span>
+    </span>
   </div>
 </div>
 
@@ -72,219 +72,218 @@
 <!-- Checkout -->
 <div class="container">
   <div class="row checkout-form">
-    <div class="col-md-4 order-md-2 mb-4">
-      <h4 class="d-flex justify-content-between align-items-center mb-3">
-        <span class="text-muted">Your cart</span>
-        <c:choose>
-          <c:when test="${sessionScope.shopping_cart == null}">
-            <span class="badge badge-secondary badge-pill">No items</span>
-          </c:when>
-          <c:when test="${sessionScope.shopping_cart != null}">
-            <span class="badge badge-secondary badge-pill"><c:out value="${sessionScope.shopping_cart.size()}"/> items</span>
-          </c:when>
-        </c:choose>
-
-      </h4>
-      <ul class="list-group mb-3">
-        <c:forEach items="${sessionScope.shopping_cart}" var="item">
-        <li class="list-group-item d-flex justify-content-between lh-condensed">
-          <div>
-            <h6 class="my-0">${item.title}</h6>
-            <small class="text-muted">x ${item.quantity}</small>
-          </div>
-          <span class="text-muted">$${item.totalPriceInNumber}</span>
-        </li>
-        </c:forEach>
-        <li class="list-group-item d-flex justify-content-between bg-light">
-          <div class="text-success">
-            <h6 class="my-0">Promo code</h6>
-<%--            <small>EXAMPLECODE</small>--%>
-          </div>
-          <span class="text-success">-$0</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between">
-          <span>Total (USD)</span>
-          <c:choose>
-            <c:when test="${sessionScope.shopping_cart == null}">
-              <strong>$0</strong>
-            </c:when>
-            <c:when test="${sessionScope.shopping_cart != null}">
-              <strong>$<c:out value="${sessionScope.total_price_in_cart}"/></strong>
-            </c:when>
-          </c:choose>
-
-        </li>
-      </ul>
-
-      <form class="card p-2">
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="Promo code">
-          <div class="input-group-append">
-            <button type="submit" class="btn btn-secondary">Redeem</button>
-          </div>
+    <c:choose>
+    <c:when test="${sessionScope.shopping_cart.size() < 1 || sessionScope.shopping_cart == null}">
+      <div class="card-body cart">
+        <div class="col-sm-12 empty-cart-cls text-center">
+          <img src="/resources/images/icons/icon_empty_cart.png" width="130" height="130" class="img-fluid mb-4 mr-3">
+          <h3><strong>Your Cart is Empty</strong></h3>
+            <%--                            <h4>Add something to make me happy :)</h4>--%>
+          <a href="/shop" class="btn btn-primary cart-btn-transform m-3 h3" data-abc="true">Continue shopping</a>
         </div>
-      </form>
-    </div>
-    <div class="col-md-8 order-md-1">
-      <h4 class="mb-3">Billing address</h4>
-      <form:form action="checkout" method="post" modelAttribute="order" class="needs-validation" novalidate="true">
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <label for="firstName">First name</label>
-            <form:input path="firstName" type="text" class="form-control" id="firstName" placeholder="" value="" required="true"/>
-            <div class="invalid-feedback">
-              Valid first name is required.
+      </div>
+    </c:when>
+      <c:when test="${sessionScope.shopping_cart.size() >= 1}">
+        <div class="col-md-4 order-md-2 mb-4">
+          <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="text-muted">Your cart</span>
+                <span class="badge badge-secondary badge-pill"><c:out value="${sessionScope.shopping_cart.size()}"/> items</span>
+          </h4>
+          <ul class="list-group mb-3">
+            <c:forEach items="${sessionScope.shopping_cart}" var="item">
+              <li class="list-group-item d-flex justify-content-between lh-condensed">
+                <div>
+                  <h6 class="my-0">${item.title}</h6>
+                  <small class="text-muted">x ${item.quantity}</small>
+                </div>
+                <span class="text-muted">$${item.totalPriceInNumber}</span>
+              </li>
+            </c:forEach>
+            <li class="list-group-item d-flex justify-content-between bg-light">
+              <div class="text-success">
+                <h6 class="my-0">Promo code</h6>
+                  <%--            <small>EXAMPLECODE</small>--%>
+              </div>
+              <span class="text-success">-$0</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+              <span>Total (USD)</span>
+                  <strong>$<c:out value="${sessionScope.total_price_in_cart}"/></strong>
+            </li>
+          </ul>
+
+          <form class="card p-2">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Promo code">
+              <div class="input-group-append">
+                <button type="submit" class="btn btn-secondary">Redeem</button>
+              </div>
             </div>
-          </div>
-          <div class="col-md-6 mb-3">
-            <label for="lastName">Last name</label>
-            <form:input path="lastName" type="text" class="form-control" id="lastName" placeholder="" value="" required="true"/>
-            <div class="invalid-feedback">
-              Valid last name is required.
+          </form>
+        </div>
+        <div class="col-md-8 order-md-1">
+          <h4 class="mb-3">Billing address</h4>
+          <form:form action="checkout" method="post" modelAttribute="order" class="needs-validation" novalidate="true">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="firstName">First name</label>
+                <form:input path="firstName" type="text" class="form-control" id="firstName" placeholder="" value="" required="true"/>
+                <div class="invalid-feedback">
+                  Valid first name is required.
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="lastName">Last name</label>
+                <form:input path="lastName" type="text" class="form-control" id="lastName" placeholder="" value="" required="true"/>
+                <div class="invalid-feedback">
+                  Valid last name is required.
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
 
-        <div class="mb-3">
-          <label for="phoneNumber">Phone number</label>
-          <div class="input-group">
-            <form:input path="phoneNumber"  type="text" class="form-control" id="phoneNumber" placeholder="0905545462" required="true"/>
-            <div class="invalid-feedback" style="width: 100%;">
-              Your phone number is required.
+            <div class="mb-3">
+              <label for="phoneNumber">Phone number</label>
+              <div class="input-group">
+                <form:input path="phoneNumber"  type="text" class="form-control" id="phoneNumber" placeholder="0905545462" required="true"/>
+                <div class="invalid-feedback" style="width: 100%;">
+                  Your phone number is required.
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
 
-        <div class="mb-3">
-          <label for="email">Email <span class="text-muted">(Optional)</span></label>
-          <form:input path="email" type="email" class="form-control" id="email" placeholder="example@gmail.com"/>
-          <div class="invalid-feedback">
-            Please enter a valid email address for shipping updates.
-          </div>
-        </div>
-
-<%--        <div class="mb-3">--%>
-<%--          <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>--%>
-<%--          <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">--%>
-<%--        </div>--%>
-
-        <div class="row">
-          <div class="col-md-4 mb-3">
-            <label for="province">Province</label>
-<%--            <select class="custom-select d-block w-100" id="province" required>--%>
-<%--              <option value='-1'>Select an option</option>--%>
-<%--              <c:forEach items="${province}" var="province">--%>
-<%--              <option value="${province.id }">${province.nameEn}</option>--%>
-<%--              </c:forEach>--%>
-<%--            </select>--%>
-            <form:select path="province" class="custom-select d-block w-100" id="province" required="true">
-              <form:option value='-1'>Select an option</form:option>
-                <form:options items="${province}"/>
-            </form:select>
-            <div class="invalid-feedback">
-              Please select a valid province.
+            <div class="mb-3">
+              <label for="email">Email <span class="text-muted">(Optional)</span></label>
+              <form:input path="email" type="email" class="form-control" id="email" placeholder="example@gmail.com"/>
+              <div class="invalid-feedback">
+                Please enter a valid email address for shipping updates.
+              </div>
             </div>
-          </div>
-          <div class="col-md-4 mb-3">
-            <label for="district">District</label>
-            <form:select path="district" class="custom-select d-block w-100" id="district" required="true">
-            </form:select>
-            <div class="invalid-feedback">
-              Please provide a valid district.
-            </div>
-          </div>
-          <div class="col-md-4 mb-3">
-            <label for="ward">Ward</label>
-            <form:select path="ward" class="custom-select d-block w-100" id="ward" required="true">
-            </form:select>
-            <div class="invalid-feedback">
-              Please provide a valid ward.
-            </div>
-          </div>
-        </div>
-        <div class="mb-3">
-          <label for="address">Address detail</label>
-          <form:input path="addressDetail" type="text" class="form-control" id="address" placeholder="234 Hang Ma St or Phuong Nam Village" required="true"/>
-          <div class="invalid-feedback">
-            Please enter your shipping address.
-          </div>
-        </div>
-        <hr class="mb-4">
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="same-address">
-          <label class="custom-control-label" for="same-address">Shipping address is the same as my
-            billing
-            address</label>
-        </div>
-        <div class="custom-control custom-checkbox">
-          <input type="checkbox" class="custom-control-input" id="save-info">
-          <label class="custom-control-label" for="save-info">Save this information for next time</label>
-        </div>
-        <hr class="mb-4">
 
-        <h4 class="mb-3">Payment</h4>
+            <%--        <div class="mb-3">--%>
+            <%--          <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>--%>
+            <%--          <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">--%>
+            <%--        </div>--%>
 
-        <div class="d-block my-3">
-          <div class="custom-control custom-radio">
-            <form:radiobutton path="paymentMethod" value="COD" id="cod" title="paymentMethod" cssClass="custom-control-input" checked="true"
-                              required="true"></form:radiobutton>
-<%--            <form:input path="paymentMethod" id="cod" value="COD" name="paymentMethod" type="radio" class="custom-control-input" checked="true"--%>
-<%--                   required="true"/>--%>
-            <label class="custom-control-label" for="cod">COD</label>
-          </div>
-          <div class="custom-control custom-radio">
-            <form:radiobutton path="paymentMethod" value="Credit card" id="credit" title="paymentMethod" cssClass="custom-control-input"
-                              required="true"></form:radiobutton>
-<%--            <form:input path="paymentMethod" id="credit" value="Credit card" name="paymentMethod" type="radio" class="custom-control-input" --%>
-<%--                        required="true"/>--%>
-            <label class="custom-control-label" for="credit">Credit card</label>
-          </div>
-          <div class="custom-control custom-radio">
-            <form:radiobutton path="paymentMethod" value="Paypal" id="paypal" title="paymentMethod" cssClass="custom-control-input"
-                              required="true"></form:radiobutton>
-<%--            <form:input path="paymentMethod" id="paypal" value="Paypal" name="paymentMethod" type="radio" class="custom-control-input" --%>
-<%--                        required="true"/>--%>
-            <label class="custom-control-label" for="paypal">PayPal</label>
-          </div>
+            <div class="row">
+              <div class="col-md-4 mb-3">
+                <label for="province">Province</label>
+                  <%--            <select class="custom-select d-block w-100" id="province" required>--%>
+                  <%--              <option value='-1'>Select an option</option>--%>
+                  <%--              <c:forEach items="${province}" var="province">--%>
+                  <%--              <option value="${province.id }">${province.nameEn}</option>--%>
+                  <%--              </c:forEach>--%>
+                  <%--            </select>--%>
+                <form:select path="province" class="custom-select d-block w-100" id="province" required="true">
+                  <form:option value='-1'>Select an option</form:option>
+                  <form:options items="${province}"/>
+                </form:select>
+                <div class="invalid-feedback">
+                  Please select a valid province.
+                </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="district">District</label>
+                <form:select path="district" class="custom-select d-block w-100" id="district" required="true">
+                </form:select>
+                <div class="invalid-feedback">
+                  Please provide a valid district.
+                </div>
+              </div>
+              <div class="col-md-4 mb-3">
+                <label for="ward">Ward</label>
+                <form:select path="ward" class="custom-select d-block w-100" id="ward" required="true">
+                </form:select>
+                <div class="invalid-feedback">
+                  Please provide a valid ward.
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="address">Address detail</label>
+              <form:input path="addressDetail" type="text" class="form-control" id="address" placeholder="234 Hang Ma St or Phuong Nam Village" required="true"/>
+              <div class="invalid-feedback">
+                Please enter your shipping address.
+              </div>
+            </div>
+            <hr class="mb-4">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="same-address">
+              <label class="custom-control-label" for="same-address">Shipping address is the same as my
+                billing
+                address</label>
+            </div>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="save-info">
+              <label class="custom-control-label" for="save-info">Save this information for next time</label>
+            </div>
+            <hr class="mb-4">
+
+            <h4 class="mb-3">Payment</h4>
+
+            <div class="d-block my-3">
+              <div class="custom-control custom-radio">
+                <form:radiobutton path="paymentMethod" value="COD" id="cod" title="paymentMethod" cssClass="custom-control-input" checked="true"
+                                  required="true"></form:radiobutton>
+                  <%--            <form:input path="paymentMethod" id="cod" value="COD" name="paymentMethod" type="radio" class="custom-control-input" checked="true"--%>
+                  <%--                   required="true"/>--%>
+                <label class="custom-control-label" for="cod">COD</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <form:radiobutton path="paymentMethod" value="Credit card" id="credit" title="paymentMethod" cssClass="custom-control-input"
+                                  required="true"></form:radiobutton>
+                  <%--            <form:input path="paymentMethod" id="credit" value="Credit card" name="paymentMethod" type="radio" class="custom-control-input" --%>
+                  <%--                        required="true"/>--%>
+                <label class="custom-control-label" for="credit">Credit card</label>
+              </div>
+              <div class="custom-control custom-radio">
+                <form:radiobutton path="paymentMethod" value="Paypal" id="paypal" title="paymentMethod" cssClass="custom-control-input"
+                                  required="true"></form:radiobutton>
+                  <%--            <form:input path="paymentMethod" id="paypal" value="Paypal" name="paymentMethod" type="radio" class="custom-control-input" --%>
+                  <%--                        required="true"/>--%>
+                <label class="custom-control-label" for="paypal">PayPal</label>
+              </div>
+            </div>
+            <%--        <div class="row">--%>
+            <%--          <div class="col-md-6 mb-3">--%>
+            <%--            <label for="cc-name">Name on card</label>--%>
+            <%--            <input type="text" class="form-control" id="cc-name" placeholder="" required>--%>
+            <%--            <small class="text-muted">Full name as displayed on card</small>--%>
+            <%--            <div class="invalid-feedback">--%>
+            <%--              Name on card is required--%>
+            <%--            </div>--%>
+            <%--          </div>--%>
+            <%--          <div class="col-md-6 mb-3">--%>
+            <%--            <label for="cc-number">Credit card number</label>--%>
+            <%--            <input type="text" class="form-control" id="cc-number" placeholder="" required>--%>
+            <%--            <div class="invalid-feedback">--%>
+            <%--              Credit card number is required--%>
+            <%--            </div>--%>
+            <%--          </div>--%>
+            <%--        </div>--%>
+            <%--        <div class="row">--%>
+            <%--          <div class="col-md-3 mb-3">--%>
+            <%--            <label for="cc-expiration">Expiration</label>--%>
+            <%--            <input type="text" class="form-control" id="cc-expiration" placeholder="" required>--%>
+            <%--            <div class="invalid-feedback">--%>
+            <%--              Expiration date required--%>
+            <%--            </div>--%>
+            <%--          </div>--%>
+            <%--          <div class="col-md-3 mb-3">--%>
+            <%--            <label for="cc-cvv">CVV</label>--%>
+            <%--            <input type="text" class="form-control" id="cc-cvv" placeholder="" required>--%>
+            <%--            <div class="invalid-feedback">--%>
+            <%--              Security code required--%>
+            <%--            </div>--%>
+            <%--          </div>--%>
+            <%--        </div>--%>
+            <hr class="mb-4">
+            <form:hidden path="totalAmount" value="${sessionScope.total_price_in_cart}"></form:hidden>
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+          </form:form>
         </div>
-<%--        <div class="row">--%>
-<%--          <div class="col-md-6 mb-3">--%>
-<%--            <label for="cc-name">Name on card</label>--%>
-<%--            <input type="text" class="form-control" id="cc-name" placeholder="" required>--%>
-<%--            <small class="text-muted">Full name as displayed on card</small>--%>
-<%--            <div class="invalid-feedback">--%>
-<%--              Name on card is required--%>
-<%--            </div>--%>
-<%--          </div>--%>
-<%--          <div class="col-md-6 mb-3">--%>
-<%--            <label for="cc-number">Credit card number</label>--%>
-<%--            <input type="text" class="form-control" id="cc-number" placeholder="" required>--%>
-<%--            <div class="invalid-feedback">--%>
-<%--              Credit card number is required--%>
-<%--            </div>--%>
-<%--          </div>--%>
-<%--        </div>--%>
-<%--        <div class="row">--%>
-<%--          <div class="col-md-3 mb-3">--%>
-<%--            <label for="cc-expiration">Expiration</label>--%>
-<%--            <input type="text" class="form-control" id="cc-expiration" placeholder="" required>--%>
-<%--            <div class="invalid-feedback">--%>
-<%--              Expiration date required--%>
-<%--            </div>--%>
-<%--          </div>--%>
-<%--          <div class="col-md-3 mb-3">--%>
-<%--            <label for="cc-cvv">CVV</label>--%>
-<%--            <input type="text" class="form-control" id="cc-cvv" placeholder="" required>--%>
-<%--            <div class="invalid-feedback">--%>
-<%--              Security code required--%>
-<%--            </div>--%>
-<%--          </div>--%>
-<%--        </div>--%>
-        <hr class="mb-4">
-        <form:hidden path="totalAmount" value="${sessionScope.total_price_in_cart}"></form:hidden>
-        <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
-      </form:form>
-    </div>
+      </c:when>
+      </c:choose>
+
   </div>
 </div>
 <!-- Footer -->
