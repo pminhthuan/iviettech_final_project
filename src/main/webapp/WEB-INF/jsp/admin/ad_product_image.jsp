@@ -144,6 +144,17 @@
 <%--            </div>--%>
 
         </main>
+        <div class="custom-file mt-3 mb-3">
+            <h2>Upload a file...</h2>
+            <form:form action="uploadFile" method="POST" enctype="multipart/form-data">
+                <div class="input-group">
+                    <input name="file" type="file" class="form-control"/>
+                    <button type="submit" class="btn btn-info">Upload</button>
+                </div>
+<%--                <button type="submit" class="btn btn-info">Upload</button>--%>
+            </form:form>
+        </div>
+        <br>
         <%@include file="ad_footer.jsp"%>
     </div>
 </div>

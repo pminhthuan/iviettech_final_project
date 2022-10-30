@@ -27,4 +27,5 @@ public class ProductImageEntity {
     @ManyToOne
     @JoinColumn(name = "product_id")
     private ProductEntity product;
+
 }

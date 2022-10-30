@@ -2,10 +2,12 @@ package com.iviettech.finalproject.controller;
 
 import com.iviettech.finalproject.entity.*;
 import com.iviettech.finalproject.repository.*;
+import com.iviettech.finalproject.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -22,6 +25,9 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @Controller
 @RequestMapping(value = "/admin")
 public class AdminController {
+
+    @Autowired
+    private AdminService adminService;
 
     @Autowired
     ProductRepository productRepository;
@@ -102,6 +108,27 @@ public class AdminController {
         return "redirect:/admin/adProduct";
     }
 
+    @RequestMapping(value = "/updateProductStatus/{id}")
+    public String updateProductStatus(@ModelAttribute ProductEntity product ,@PathVariable int id, Model model) {
+
+        List<ProductEntity> productEntity =
+                (List<ProductEntity>) productRepository.findAll();
+        for (ProductEntity p : productEntity) {
+            if (p.getId() == id) {
+                if (p.getStatus() == 0) {
+                    p.setStatus(1);
+                } else {
+                    p.setStatus(0);
+                }
+                break;
+            }
+        }
+        model.addAttribute("product", product);
+        productRepository.save(product);
+        return "redirect:/admin/adProduct";
+
+    }
+
     //Product Details
 
     @RequestMapping(value = "/adProductDetail/{id}", method = GET)
@@ -157,6 +184,7 @@ public class AdminController {
         List<ProductImageEntity> productImageList =
                 productImageRepository.findByProduct_Id(id);
         model.addAttribute("productImageList", productImageList);
+        model.addAttribute("action", "uploadFile");
 
         return "admin/ad_product_image";
 
@@ -170,7 +198,17 @@ public class AdminController {
         return "redirect:/admin/adProductImage/" + pid;
     }
 
+    @RequestMapping(value = "/adProductImage/uploadFile", method = RequestMethod.POST)
+    public String saveImage(@ModelAttribute ProductImageEntity productImage,
+                            @RequestParam(value = "file", required = false) MultipartFile photo ) {
+        productImage.setImageUrl(adminService.uploadFile(photo));
+        productImage.setProduct(productImage.getProduct());
+//        productImage.setImageAlt(adminService.uploadFile());
 
+        productImageRepository.save(productImage);
+
+        return "redirect:/admin/adProductImage/" + productImage.getProduct().getId();
+    }
 
 
     //Category
