@@ -122,7 +122,11 @@ html ::-webkit-scrollbar-thumb {
 [ Slick2 ]*/
 .slick-slide {outline: none !important;}
 
-
+/*@media screen and (max-width: 1600px) and (min-width: 1100px){*/
+/*  .slick-track {*/
+/*  width: 901px !important;*/
+/*  }*/
+/*}*/
 
 
 

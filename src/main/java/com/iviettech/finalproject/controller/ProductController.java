@@ -60,6 +60,9 @@ public class ProductController {
     @Autowired
     CategoryRepository categoryRepository;
 
+    @Autowired
+    CategoryDetailRepository categoryDetailRepository;
+
 
     @RequestMapping(method = GET)
     public String viewHome(Model model) {
@@ -93,22 +96,22 @@ public class ProductController {
     }
 
 
-    @RequestMapping(value = "/view/{id}",method = GET)
+    @RequestMapping(value = "/shop/view/{id}",method = GET)
     public String showOrderDetail(@PathVariable("id") int id, Model model) {
         List<ProductImageEntity> productImageEntityList = productImageRepository.findByProduct_Id(id);
         List<String> productColorList = productDetailRepository.getColorByProductId(id);
         List<String> productSizeList = productDetailRepository.getSizeByProductId(id);
         List<ProductDetailEntity> productDetailEntityList = productDetailRepository.findProductDetailEntityByProduct_Id(id);
+        int categoryDetailId = productRepository.getCategoryDetailIdByProductId(id);
 
-        List<ProductImageEntity> productEntityList = productImageRepository.getProductListWithImage(); //related product
-        model.addAttribute("productList", productEntityList); //related product
+        List<ProductImageEntity> relatedProductList = productImageRepository.getRelatedProductByCategoryDetail(categoryDetailId, id); //related product
+        model.addAttribute("relatedProductList", relatedProductList); //related product
         model.addAttribute("productImageEntityList", productImageEntityList);
         model.addAttribute("productEntity", productRepository.findById(id));
         model.addAttribute("productColorList", productColorList);
         model.addAttribute("productSizeList", productSizeList);
         model.addAttribute("productDetailEntityList",productDetailEntityList);
-
-
+        model.addAttribute("categoryDetailEntity",categoryDetailRepository.findAllByCategoryDetailId(categoryDetailId));
         return "product_detail";
     }
 
@@ -315,5 +318,24 @@ public class ProductController {
     }
 
 
+    @RequestMapping(value = "/contact",method = GET)
+    public String viewContact(Model model) {
+
+        return "contact";
+    }
+
+
+    @RequestMapping(value = "/blog",method = GET)
+    public String viewBlog(Model model) {
+
+        return "blog";
+    }
+
+
+    @RequestMapping(value = "/about",method = GET)
+    public String viewAbout(Model model) {
+
+        return "about";
+    }
 
 }

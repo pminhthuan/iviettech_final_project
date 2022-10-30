@@ -27,4 +27,17 @@ public interface ProductImageRepository extends CrudRepository<ProductImageEntit
     List<ProductImageEntity> getProductListWithImageAndCategory(int id);
 
     List<ProductImageEntity> findByProduct_Id(int id);
+
+
+    @Query(value = "select * from products as p left join product_image  as i on p.id = i.product_id\n" +
+            "left join (select p.id, p.name, sum(pt.quantity) from products as p\n" +
+            "left join product_detail as pt on pt.product_id = p.id group by p.id) as q on q.id = p.id\n" +
+            "left join category_detail as cd ON cd.id = p.category_detail_id\n" +
+            "where i.is_main_image = 1 and q.sum > 0 and cd.id = ?1\n" +
+            "except select * from products as p left join product_image  as i on p.id = i.product_id\n" +
+            "left join (select p.id, p.name, sum(pt.quantity) from products as p\n" +
+            "left join product_detail as pt on pt.product_id = p.id group by p.id) as q on q.id = p.id\n" +
+            "left join category_detail as cd ON cd.id = p.category_detail_id where p.id = ?2",
+            nativeQuery = true)
+    List<ProductImageEntity> getRelatedProductByCategoryDetail(int cateDetailId, int productId);
 }
