@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Home</title>
+    <title>Product Detail</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
@@ -121,7 +121,7 @@
                                 Size
                             </div>
 
-                            <div class="size-204 respon6-next">
+                            <div class="size-204 respon6-next" id="div_size">
                                 <div class="rs1-select2 bor8 bg0">
                                     <select id="size" class="js-select2" name="size" required="true">
                                         <option>Select an option</option>
@@ -138,7 +138,7 @@
                                 Color
                             </div>
 
-                            <div class="size-204 respon6-next">
+                            <div class="size-204 respon6-next" id="div_color">
                                 <div class="rs1-select2 bor8 bg0">
                                     <select id="color" class="js-select2" name="color">
                                         <option>Select an option</option>
@@ -687,6 +687,7 @@
 <script type="text/javascript">
     // bắt sự kiện khi thay đổi option của dropdownlist
     $('#size').change(function () {
+        $("#div_size").removeAttr("style");
 
         // gán ID cố định, vd = 123 cho selected option.
         $(this).find('option:selected').attr('id', 'product_size');
@@ -700,6 +701,7 @@
     });
 
     $('#color').change(function () {
+        $("#div_color").removeAttr("style");
 
         // gán ID cố định, vd = 123 cho selected option.
         $(this).find('option:selected').attr('id', 'product_color');

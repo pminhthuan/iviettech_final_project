@@ -116,6 +116,23 @@ public class ProductController {
     }
 
 
+    @RequestMapping(value = "/shop/search", method = GET)
+    public String search(@RequestParam("searchInput")String searchInput, Model model) {
+        List<ProductImageEntity> resultList;
+        if (searchInput.isEmpty()) {
+            resultList = productImageRepository.getProductListWithImage();
+        } else {
+            resultList = productImageRepository.getProductSearch(searchInput, searchInput);
+        }
+        List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
+
+        model.addAttribute("categories", categoryEntityList);
+        model.addAttribute("searchInput",searchInput);
+        model.addAttribute("productList", resultList);
+        return "product";
+    }
+
+
     @PostMapping(value = "/add2cart", produces = "text/plain;charset=UTF-8")
     @ResponseBody
     // return 1 -> there is a new item has been added to cart
