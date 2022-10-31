@@ -85,6 +85,16 @@
                                 Link 1
                             </button>
                         </a>
+                        <a href="#">
+                            <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5">
+                                Link 2
+                            </button>
+                        </a>
+                        <a href="#">
+                            <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5">
+                                Link 3
+                            </button>
+                        </a>
                     </div>
                 </div>
                 </c:forEach>
