@@ -77,6 +77,7 @@ public class ProductController {
     public String viewShop(Model model) {
         List<ProductImageEntity> productEntityList = productImageRepository.getProductListWithImage();
         List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
+        //List<CategoryDetailEntity> categoryDetailEntityList = categoryDetailRepository.findAllByCategory_Id()
         model.addAttribute("categories", categoryEntityList);
         model.addAttribute("productList", productEntityList);
         model.addAttribute("activeLink", "how-active1");
@@ -122,7 +123,7 @@ public class ProductController {
         if (searchInput.isEmpty()) {
             resultList = productImageRepository.getProductListWithImage();
         } else {
-            resultList = productImageRepository.getProductSearch(searchInput, searchInput);
+            resultList = productImageRepository.getProductBySearch(searchInput, searchInput);
         }
         List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
 

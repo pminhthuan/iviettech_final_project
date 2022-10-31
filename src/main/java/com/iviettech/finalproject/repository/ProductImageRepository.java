@@ -52,6 +52,6 @@ public interface ProductImageRepository extends CrudRepository<ProductImageEntit
             "where i.is_main_image = 1 and q.sum > 0 \n" +
             "and p.name ilike %:cate_name% or c.name ilike %:product_name%",
             nativeQuery = true)
-    List<ProductImageEntity> getProductSearch(@Param("cate_name") String cateName, @Param("product_name") String productName);
+    List<ProductImageEntity> getProductBySearch(@Param("cate_name") String cateName, @Param("product_name") String productName);
 
 }

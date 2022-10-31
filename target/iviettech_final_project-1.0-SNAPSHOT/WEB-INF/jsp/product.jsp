@@ -73,11 +73,20 @@
                     </button>
                 </a>
                 <c:forEach items="${categories}" var="cate" >
-                <a href="<c:url value="/shop/category/${cate.id}"/>" >
-                    <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 ${tag == cate.id? "how-active1":""}" data-filter=".women">
+                <div class="dropdown">
+                    <a href="<c:url value="/shop/category/${cate.id}"/>" >
+                        <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 ${tag == cate.id? "how-active1":""}" data-filter=".women">
                             ${cate.name}
-                    </button>
-                </a>
+                        </button>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="#">
+                            <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5">
+                                Link 1
+                            </button>
+                        </a>
+                    </div>
+                </div>
                 </c:forEach>
 <%--                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men">--%>
 <%--                    Men--%>
