@@ -1,6 +1,10 @@
 package com.iviettech.finalproject.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.iviettech.finalproject.entity.*;
+import com.iviettech.finalproject.helper.GmailSender;
 import com.iviettech.finalproject.pojo.CartItem;
 import com.iviettech.finalproject.repository.*;
 import com.iviettech.finalproject.service.ProductService;
@@ -9,9 +13,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -38,9 +48,27 @@ public class ProductController {
     @Autowired
     OrderDetailRepository orderDetailRepository;
 
+    @Autowired
+    ProvinceRepository provinceRepository;
+
+    @Autowired
+    DistrictRepository districtRepository;
+
+    @Autowired
+    WardRepository wardRepository;
+
+    @Autowired
+    CategoryRepository categoryRepository;
+
+    @Autowired
+    CategoryDetailRepository categoryDetailRepository;
+
+
     @RequestMapping(method = GET)
     public String viewHome(Model model) {
         List<ProductImageEntity> productEntityList = productImageRepository.getProductListWithImage();
+        List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
+        model.addAttribute("categories", categoryEntityList);
         model.addAttribute("productList", productEntityList);
         return "index";
     }
@@ -48,23 +76,42 @@ public class ProductController {
     @RequestMapping(value = "/shop",method = GET)
     public String viewShop(Model model) {
         List<ProductImageEntity> productEntityList = productImageRepository.getProductListWithImage();
+        List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
+        model.addAttribute("categories", categoryEntityList);
         model.addAttribute("productList", productEntityList);
+        model.addAttribute("activeLink", "how-active1");
         return "product";
     }
 
-    @RequestMapping(value = "/view/{id}",method = GET)
+
+    @RequestMapping(value = "/shop/category/{id}",method = GET)
+    public String showProductByCategory(@PathVariable("id") int id, Model model) {
+        List<ProductImageEntity> productEntityList = productImageRepository.getProductListWithImageAndCategory(id);
+        List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
+        model.addAttribute("categories", categoryEntityList);
+        model.addAttribute("productList", productEntityList);
+        model.addAttribute("tag", id);
+
+        return "product";
+    }
+
+
+    @RequestMapping(value = "/shop/view/{id}",method = GET)
     public String showOrderDetail(@PathVariable("id") int id, Model model) {
         List<ProductImageEntity> productImageEntityList = productImageRepository.findByProduct_Id(id);
         List<String> productColorList = productDetailRepository.getColorByProductId(id);
         List<String> productSizeList = productDetailRepository.getSizeByProductId(id);
         List<ProductDetailEntity> productDetailEntityList = productDetailRepository.findProductDetailEntityByProduct_Id(id);
+        int categoryDetailId = productRepository.getCategoryDetailIdByProductId(id);
+
+        List<ProductImageEntity> relatedProductList = productImageRepository.getRelatedProductByCategoryDetail(categoryDetailId, id); //related product
+        model.addAttribute("relatedProductList", relatedProductList); //related product
         model.addAttribute("productImageEntityList", productImageEntityList);
         model.addAttribute("productEntity", productRepository.findById(id));
         model.addAttribute("productColorList", productColorList);
         model.addAttribute("productSizeList", productSizeList);
         model.addAttribute("productDetailEntityList",productDetailEntityList);
-
-
+        model.addAttribute("categoryDetailEntity",categoryDetailRepository.findAllByCategoryDetailId(categoryDetailId));
         return "product_detail";
     }
 
@@ -85,21 +132,21 @@ public class ProductController {
                 String size = data[4];
                 String color = data[5];
                 int quantity = Integer.parseInt(data[6]);
+                int proDetailId = productDetailRepository.findProductDetailId(Integer.parseInt(data[0]),data[5],data[4]);
                 String returnedValue;// 0 or 1
 
                 // cart is empty
                 if (session.getAttribute("shopping_cart") == null) {
                     List<CartItem> cart = new ArrayList<CartItem>();
-                    cart.add(new CartItem(productId, quantity, imgSource, title, price, size, color));
+                    cart.add(new CartItem(productId, quantity, imgSource, title, price, size, color, proDetailId));
                     session.setAttribute("shopping_cart", cart);
-                    session.setAttribute("total_price_in_cart", calculateTotalPrice(cart));
                     returnedValue = "1";
                 } else { // cart has items
                     List<CartItem> cart = (List<CartItem>) session.getAttribute("shopping_cart");
-                    int index = checkExistingInCart(productId, cart);
+                    int index = checkExistingInCart(proDetailId, cart);
                     // the product ID doesn't existing in the cart yet
                     if (index == -1) {
-                        cart.add(new CartItem(productId, quantity, imgSource, title, price, size, color));
+                        cart.add(new CartItem(productId, quantity, imgSource, title, price, size, color, proDetailId));
                         returnedValue = "1";
                     } else {
                         // the product ID is existing in the cart yet
@@ -110,7 +157,6 @@ public class ProductController {
                         returnedValue = "0";
                     }
                     session.setAttribute("shopping_cart", cart);
-                    session.setAttribute("total_price_in_cart", calculateTotalPrice(cart));
                 }
                 // save comment to DB
                 return returnedValue;
@@ -122,21 +168,21 @@ public class ProductController {
         }
     }
 
-    private int checkExistingInCart(int productId, List<CartItem> cart) {
+    private int checkExistingInCart(int productDetailId, List<CartItem> cart) {
         for (int i = 0; i < cart.size(); i++) {
-            if (cart.get(i).getProductId() == productId) {
+            if (cart.get(i).getProductDetailId() == productDetailId) {
                 return i;
             }
         }
         return -1;
     }
 
-    private String calculateTotalPrice(List<CartItem> cart) {
+    private double calculateTotalPrice(List<CartItem> cart) {
         Double totalPrice = 0.0;
         for (CartItem item: cart) {
             totalPrice += item.getTotalPriceInNumber();
         }
-        return "$" + totalPrice;
+        return totalPrice;
     }
 
     @GetMapping(value = "/cart")
@@ -151,15 +197,61 @@ public class ProductController {
         return "shopping_cart";
     }
 
-    @RequestMapping(value = "/checkout",method = GET)
-    public String viewCheckoutForm(Model model) {
-        model.addAttribute("order", new OrderEntity());
+    @RequestMapping(value = "/delete/{productDetailId}", method = GET)
+    public String deleteItemInCart(@PathVariable int productDetailId, HttpSession session, Model model) {
 
+        List<CartItem> cart = (List<CartItem>) session.getAttribute("shopping_cart");
+        CartItem delItem = null;
+        for (CartItem t: cart){
+            if(t.getProductDetailId()==productDetailId){
+                delItem = t;
+                break;
+            }
+        }
+        cart.remove(delItem);
+        session.setAttribute("shopping_cart", cart);
+        return "redirect:/cart";
+    }
+
+    @RequestMapping(value = "/checkout",method = RequestMethod.GET)
+    public String viewCheckoutForm(Model model, @RequestParam(value = "data", required = false) String data,
+                                   HttpSession session) {
+        // data: 1-2--4-1
+        // product detail id = 1, quantity = 2
+        // product detail id = 4, quantity = 19999
+
+        if (!data.isEmpty()) {
+            String[] tmpData = data.split("__");
+            List<CartItem> cart;
+            if (session.getAttribute("shopping_cart") != null) {
+                cart = (List<CartItem>) session.getAttribute("shopping_cart");
+                for(CartItem item : cart) {
+                    for (int i = 0; i < tmpData.length; i++) {
+                        if (item.getProductDetailId() == Integer.valueOf(tmpData[i].split("_")[0])) {
+                            // update the product quantity and then save to http session shopping_cart
+                            item.setQuantity(Integer.valueOf(tmpData[i].split("_")[1]));
+                            item.updateTotalPrice();
+                        }
+                    }
+                }
+                session.setAttribute("shopping_cart", cart);
+                session.setAttribute("total_price_in_cart", calculateTotalPrice(cart));
+            }
+        }
+        List<ProvinceEntity> provinceEntityList = provinceRepository.getProvinceOrderByName();
+
+        Map<Integer, String> provinceMap = new LinkedHashMap<>();
+        for(ProvinceEntity provinceEntity : provinceEntityList) {
+            provinceMap.put(provinceEntity.getId(), provinceEntity.getFullNameEn());
+        }
+        model.addAttribute("order", new OrderEntity());
+        model.addAttribute("province",provinceMap);
         return "checkout";
     }
 
     @RequestMapping(value = "/checkout", method = POST, produces = "text/plain;charset=UTF-8") //produces:data type will return
     public String saveOrder(OrderEntity order, HttpSession session, Model model) {
+        order.setRequireDate(Date.valueOf(LocalDate.now()));
         orderRepository.save(order);
         List<CartItem> cart = (List<CartItem>) session.getAttribute("shopping_cart");
         List<OrderDetailEntity> orderDetailList = new ArrayList<>();
@@ -174,10 +266,76 @@ public class ProductController {
             orderDetail.setProduct(product);
             orderDetail.setOrderEntity(order);
             orderDetailList.add(orderDetail);
+
+            productDetailRepository.decreaseProductQuantity(item.getQuantity(),item.getProductId(),item.getColor(),item.getSize());
         }
         orderDetailRepository.saveAll(orderDetailList);
         session.removeAttribute("shopping_cart");
+        sendActivationEmail(order);
         return "thankyou";
+    }
+
+    private void sendActivationEmail(OrderEntity order)  {
+        String subject = "Confirm Your Order";
+        String confirmationUrl = "http://localhost:8080/activateAccount?name=" + order.getFirstName()+order.getLastName()+ "&ordercode=" + order.getId();
+        String mailBody = "<h1> Dear " + order.getFirstName()+" "+order.getLastName() + ",<h1>"
+                + "<h4>You've ordered successfully from our website. Enjoy with us</h4>"
+                + "<br/>Please click on the following link to confirm your order."
+                + "<br/>" + confirmationUrl;
+
+        try {
+            GmailSender.send(order.getEmail(), subject, mailBody, true);
+        } catch (MessagingException | UnsupportedEncodingException e) {
+            System.out.println(e);
+        }
+    }
+
+
+    @GetMapping("/getDistricts")
+    public @ResponseBody String getDistricts(@RequestParam Integer provinceId)
+    {
+        String json = null;
+        List<Object[]> list = provinceRepository.getDistrictByProvince(provinceId);
+        try {
+            json = new ObjectMapper().writeValueAsString(list);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return json;
+    }
+
+    @GetMapping("/getWards")
+    public @ResponseBody String getWards(@RequestParam Integer districtId)
+    {
+        String json = null;
+        List<Object[]> list = districtRepository.getWardByDistrict(districtId);
+        try {
+            json = new ObjectMapper().writeValueAsString(list);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return json;
+    }
+
+
+    @RequestMapping(value = "/contact",method = GET)
+    public String viewContact(Model model) {
+
+        return "contact";
+    }
+
+
+    @RequestMapping(value = "/blog",method = GET)
+    public String viewBlog(Model model) {
+
+        return "blog";
+    }
+
+
+    @RequestMapping(value = "/about",method = GET)
+    public String viewAbout(Model model) {
+
+        return "about";
     }
 
 }

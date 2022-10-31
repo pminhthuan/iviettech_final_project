@@ -10,5 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 public interface ProductRepository extends CrudRepository<ProductEntity, Integer> {
-
+    @Query(value = "select p.category_detail_id from products p where p.id = ?1", nativeQuery = true)
+    int getCategoryDetailIdByProductId(int id);
 }

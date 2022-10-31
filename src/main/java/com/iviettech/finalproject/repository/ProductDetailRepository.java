@@ -12,14 +12,26 @@ import java.util.List;
 
 public interface ProductDetailRepository extends CrudRepository<ProductDetailEntity, Integer> {
 
-    @Query(value = "select distinct d.color from ProductDetailEntity as d inner join ProductEntity as p on p.id = d.product.id\n" +
-            "where d.product.id = ?1")
+    @Query(value = "select d.color from product_detail as d inner join products as p on p.id = d.product_id\n" +
+            "where d.product_id = ?1 group by d.color having sum(d.quantity) > 0", nativeQuery = true)
     List<String> getColorByProductId(int id);
 
-    @Query(value = "select distinct d.size from ProductDetailEntity as d inner join ProductEntity as p on p.id = d.product.id\n" +
-            "where d.product.id = ?1 order by d.size asc")
+    @Query(value = "select d.size from product_detail as d inner join products as p on p.id = d.product_id\n" +
+            "where d.product_id = ?1 group by d.size having sum(d.quantity) > 0", nativeQuery = true)
     List<String> getSizeByProductId(int id);
 
     List<ProductDetailEntity> findProductDetailEntityByProduct_Id(int id);
+
+    @Modifying
+    @Transactional
+    @Query(value = "update product_detail set quantity = quantity - ?1\n" +
+            "where product_id = ?2 and color = ?3 and size = ?4",
+            nativeQuery = true)
+    void decreaseProductQuantity(int quantity,int id, String color, String size);
+
+    @Query(value = "select p.id from product_detail p where p.product_id = ?1 and p.color = ?2 and p.size = ?3",
+            nativeQuery = true)
+    int findProductDetailId(int id, String color, String size);
+
 
 }

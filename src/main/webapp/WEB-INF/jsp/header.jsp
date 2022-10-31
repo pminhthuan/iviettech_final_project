@@ -8,7 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <body class="animsition">
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/resources/js/active-link.js"></script>
 <!-- Header -->
 <header class="header-v4">
     <!-- Header desktop -->
@@ -51,13 +52,13 @@
                 <!-- Menu desktop -->
                 <div class="menu-desktop">
                     <ul class="main-menu">
-                        <li>
+                        <li class="active-menu">
                             <a href="/">Home</a>
-                            <ul class="sub-menu">
-                                <li><a href="/">Homepage 1</a></li>
-                                <li><a href="home-02.html">Homepage 2</a></li>
-                                <li><a href="home-03.html">Homepage 3</a></li>
-                            </ul>
+<%--                            <ul class="sub-menu">--%>
+<%--                                <li><a href="/">Homepage 1</a></li>--%>
+<%--                                <li><a href="home-02.html">Homepage 2</a></li>--%>
+<%--                                <li><a href="home-03.html">Homepage 3</a></li>--%>
+<%--                            </ul>--%>
                         </li>
 
                         <li class="label1" data-label1="hot">
@@ -73,15 +74,15 @@
                         </li>
 
                         <li>
-                            <a href="blog.html">Blog</a>
+                            <a href="/blog">Blog</a>
                         </li>
 
                         <li>
-                            <a href="about.html">About</a>
+                            <a href="/about">About</a>
                         </li>
 
                         <li>
-                            <a href="contact.html">Contact</a>
+                            <a href="/contact">Contact</a>
                         </li>
                     </ul>
                 </div>
@@ -275,7 +276,7 @@
                     </c:when>
                     <c:when test="${sessionScope.shopping_cart != null}">
                         <div class="header-cart-total w-full p-tb-40">
-                            Total: <c:out value="${sessionScope.total_price_in_cart}"/>
+                            Total: $<c:out value="${sessionScope.total_price_in_cart}"/>
                         </div>
                     </c:when>
                 </c:choose>
@@ -285,7 +286,7 @@
                         View Cart
                     </a>
 
-                    <a href="/checkout" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
+                    <a href="/checkout?data=" class="flex-c-m stext-101 cl0 size-107 bg3 bor2 hov-btn3 p-lr-15 trans-04 m-b-10">
                         Check Out
                     </a>
                 </div>

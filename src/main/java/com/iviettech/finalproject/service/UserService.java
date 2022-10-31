@@ -38,7 +38,7 @@ public class UserService {
         String subject = "Activate Registration";
         String activationUrl = "http://localhost:8080/activateAccount?email=" + user.getEmail() + "&code=" + user.getActivationCode();
         String mailBody = "<h1> Dear " + user.getFirstName()+ user.getLastName() + ",<h1>"
-                + "<h2>You've registered successfully to our website. Enjoy with us</h2>"
+                + "<h4>You've registered successfully to our website. Enjoy with us</h4>"
                 + "<br/>Please click on the following link to activate your account. Once activated, you can sign-in"
                 + "<br/>" + activationUrl;
 

@@ -31,8 +31,11 @@ public class OrderEntity {
     @DateTimeFormat(pattern="dd/MM/yyyy")
     private Date shippingDate;
 
-    @Column(name = "status", columnDefinition = "integer default 0")
-    private int status;
+    @Column(name = "order_status", columnDefinition = "integer default 0")
+    private int orderStatus;
+
+    @Column(name = "confirm_code")
+    private String confirmCode;
 
     @Column(name = "first_name", length = 1024)
     private String firstName;
@@ -43,8 +46,17 @@ public class OrderEntity {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "address", length = 2000)
-    private String address;
+    @Column(name = "province", length = 1024)
+    private String province;
+
+    @Column(name = "district", length = 1024)
+    private String district;
+
+    @Column(name = "ward", length = 1024)
+    private String ward;
+
+    @Column(name = "address_detail", length = 2000)
+    private String addressDetail;
 
     @Column(name = "email", length = 1024)
     private String email;
@@ -52,8 +64,11 @@ public class OrderEntity {
     @Column(name = "total_amount") //tổng tiền
     private double totalAmount;
 
-    @Column(name = "note", length = 1024)
-    private String note;
+    @Column(name = "notes_of_customer", length = 5000)
+    private String notesOfCustomer;
+
+    @Column(name = "payment_method")
+    private String paymentMethod;
 
     @Column(name = "qr_code_payment")
     private String qrCodePayment;
