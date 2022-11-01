@@ -7,7 +7,11 @@ $(function(){
             $('.main-menu li.active-menu').removeClass('active-menu');
             $this.parent().addClass('active-menu');
             e.preventDefault();
+        } else if (current.startsWith("/shop") && $this.html() === 'Shop' ) {
+            $('.main-menu li.active-menu').removeClass('active-menu');
+            $this.parent().addClass('active-menu');
         }
+
     })
 })
 

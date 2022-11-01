@@ -61,10 +61,6 @@
                             <a href="/shop">Shop</a>
                         </li>
 
-                        <!-- <li class="label1" data-label1="hot">
-                            <a href="/cart">Shopping Cart</a>
-                        </li>
-                        -->
                         <li >
                             <a href="/cart">Shopping Cart</a>
                         </li>
@@ -218,11 +214,11 @@
                 <img src="/resources/images/icons/icon-close2.png" alt="CLOSE">
             </button>
 
-            <form class="wrap-search-header flex-w p-l-15">
+            <form class="wrap-search-header flex-w p-l-15" action="/shop/search" method="get">
                 <button class="flex-c-m trans-04">
                     <i class="zmdi zmdi-search"></i>
                 </button>
-                <input class="plh3" type="text" name="search" placeholder="Search...">
+                <input class="plh3" type="text" name="searchInput" value="${searchInput}" placeholder="Search...">
             </form>
         </div>
     </div>

@@ -78,6 +78,7 @@ public class ProductController {
     public String viewShop(Model model) {
         List<ProductImageEntity> productEntityList = productImageRepository.getProductListWithImage();
         List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
+        //List<CategoryDetailEntity> categoryDetailEntityList = categoryDetailRepository.findAllByCategory_Id()
         model.addAttribute("categories", categoryEntityList);
         model.addAttribute("productList", productEntityList);
         model.addAttribute("activeLink", "how-active1");
@@ -114,6 +115,23 @@ public class ProductController {
         model.addAttribute("productDetailEntityList",productDetailEntityList);
         model.addAttribute("categoryDetailEntity",categoryDetailRepository.findAllByCategoryDetailId(categoryDetailId));
         return "product_detail";
+    }
+
+
+    @RequestMapping(value = "/shop/search", method = GET)
+    public String search(@RequestParam("searchInput")String searchInput, Model model) {
+        List<ProductImageEntity> resultList;
+        if (searchInput.isEmpty()) {
+            resultList = productImageRepository.getProductListWithImage();
+        } else {
+            resultList = productImageRepository.getProductBySearch(searchInput, searchInput);
+        }
+        List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
+
+        model.addAttribute("categories", categoryEntityList);
+        model.addAttribute("searchInput",searchInput);
+        model.addAttribute("productList", resultList);
+        return "product";
     }
 
 

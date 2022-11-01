@@ -48,6 +48,20 @@
 
 <jsp:include page="header.jsp"></jsp:include>
 
+<!-- breadcrumb -->
+<div class="container">
+    <div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
+        <a href="/" class="stext-109 cl8 hov-cl1 trans-04">
+            Home
+            <i class="fa fa-angle-right m-l-9 m-r-10" aria-hidden="true"></i>
+        </a>
+
+        <span class="stext-109 cl4">
+                Shop
+            </span>
+    </div>
+</div>
+
 <!-- Product -->
 <div class="bg0 m-t-23 p-b-140">
     <div class="container">
@@ -59,11 +73,30 @@
                     </button>
                 </a>
                 <c:forEach items="${categories}" var="cate" >
-                <a href="<c:url value="/shop/category/${cate.id}"/>" >
-                    <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 ${tag == cate.id? "how-active1":""}" data-filter=".women">
+                <div class="dropdown">
+                    <a href="<c:url value="/shop/category/${cate.id}"/>" >
+                        <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 ${tag == cate.id? "how-active1":""}" data-filter=".women">
                             ${cate.name}
-                    </button>
-                </a>
+                        </button>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="#">
+                            <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5">
+                                Link 1
+                            </button>
+                        </a>
+                        <a href="#">
+                            <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5">
+                                Link 2
+                            </button>
+                        </a>
+                        <a href="#">
+                            <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5">
+                                Link 3
+                            </button>
+                        </a>
+                    </div>
+                </div>
                 </c:forEach>
 <%--                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men">--%>
 <%--                    Men--%>
@@ -91,11 +124,12 @@
             <!-- Search product -->
             <div class="dis-none panel-search w-full p-t-10 p-b-15">
                 <div class="bor8 dis-flex p-l-15">
-                    <button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
-                        <i class="zmdi zmdi-search"></i>
-                    </button>
-
-                    <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
+                    <form action="/shop/search" method="get" style="height: 4rem;">
+                        <button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04" style="float: left">
+                            <i class="zmdi zmdi-search"></i>
+                        </button>
+                        <input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" value="${searchInput}" name="searchInput" placeholder="Search">
+                    </form>
                 </div>
             </div>
 

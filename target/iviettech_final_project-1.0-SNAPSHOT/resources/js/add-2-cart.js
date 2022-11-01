@@ -2,9 +2,20 @@ jQuery(document).ready(function($) {
     $('#add2cart_btn').click(function(e) {
         e.preventDefault();
         if($("#size :selected").text() == 'Select an option' || $("#color :selected").text() == 'Select an option' ){
+            if($("#size :selected").text() == 'Select an option') {
+                $("#div_size").css({
+                    'border': '1px solid red'
+                });
+            }
+            if($("#color :selected").text() == 'Select an option') {
+                $("#div_color").css({
+                    'border': '1px solid red'
+                });
+            }
+
             Swal.fire(
-                'Size and Color?',
-                'Please, select an option!',
+                'Choose a size and color ?',
+                '',
                 'question'
             );
         } else {
