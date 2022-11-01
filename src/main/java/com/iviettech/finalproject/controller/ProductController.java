@@ -23,6 +23,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.iviettech.finalproject.helper.PasswordEncoder.createHash;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -271,13 +272,22 @@ public class ProductController {
         }
         orderDetailRepository.saveAll(orderDetailList);
         session.removeAttribute("shopping_cart");
-        sendActivationEmail(order);
+        doOrder(order);
         return "thankyou";
     }
 
-    private void sendActivationEmail(OrderEntity order)  {
+    public void doOrder(OrderEntity order){
+        String confirmationCode = createHash(order.getEmail()+order.getId());
+        order.setConfirmCode(confirmationCode);
+
+        orderRepository.save(order);
+
+        sendConfirmationEmail(order);
+    }
+
+    private void sendConfirmationEmail(OrderEntity order)  {
         String subject = "Confirm Your Order";
-        String confirmationUrl = "http://localhost:8080/activateAccount?name=" + order.getFirstName()+order.getLastName()+ "&ordercode=" + order.getId();
+        String confirmationUrl = "http://localhost:8080/confirmOrder?email=" + order.getEmail() + "&code=" + order.getConfirmCode();
         String mailBody = "<h1> Dear " + order.getFirstName()+" "+order.getLastName() + ",<h1>"
                 + "<h4>You've ordered successfully from our website. Enjoy with us</h4>"
                 + "<br/>Please click on the following link to confirm your order."
@@ -288,6 +298,22 @@ public class ProductController {
         } catch (MessagingException | UnsupportedEncodingException e) {
             System.out.println(e);
         }
+    }
+
+    @RequestMapping(value = "confirmOrder", method = GET)
+    public String confirmOrder(@RequestParam(name = "email") String email,
+                                  @RequestParam(name = "orderCode") String orderCode,
+                                  Model model) {
+
+        int result = orderRepository.confirmOrder(email, orderCode);
+        if (result == 1) {
+            model.addAttribute("message", "Your account has been activated. Now, you can login. Thank you.");
+            model.addAttribute("cssBootstrap", "alert-success");
+        } else {
+            model.addAttribute("message", "Your activation code is not correct.");
+            model.addAttribute("cssBootstrap", "alert-danger");
+        }
+        return "login";
     }
 
 
