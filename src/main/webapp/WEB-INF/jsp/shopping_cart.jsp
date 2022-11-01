@@ -312,6 +312,21 @@
 </script>
 <!--===============================================================================================-->
 <script src="/resources/js/main.js"></script>
+<!--===============================================================================================-->
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.btn').on('click', function() {
+            var $this = $(this);
+            $this.button('loading');
+            // setTimeout(function() {
+            //   $this.button('reset');
+            // }, 8000);
+        });
+    });
+</script>
+<!--===============================================================================================-->
 </body>
 </html>
