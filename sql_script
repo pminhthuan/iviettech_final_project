@@ -27,66 +27,66 @@ INSERT INTO manufactors ( name) VALUES ( 'Prada');
 INSERT INTO manufactors ( name) VALUES ( 'Hermes');
 INSERT INTO manufactors ( name) VALUES ( 'Bottega Veneta');
 
-INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) 
-VALUES ( 28, 'Men''s Cotton Compact with Reflective Lettering', 15, 2, 1);  
-INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) 
-VALUES ( 32,'Men''s Cotton T-Shirt USA Premium Version', 18, 2, 1);
-INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) 
-VALUES ( 22,'Men''s Round Neck T-shirt', 12, 2, 2);
-INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) 
-VALUES ( 30,'Men''s Sport Sweatshirts', 20, 2, 1);
-INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) 
-VALUES ( 55,'Men''s Long Sleeve Plain Shirt', 28, 1, 2);
-INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) 
-VALUES ( 49,'Men''s Long Sleeve Shirt With Chest Pocket', 25, 1, 2);       
-INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) 
-VALUES ( 45,'Cool Short Sleeve Men''s Shirt', 24, 1, 2); 
-INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) 
-VALUES ( 52,'Bamboo Dots Men''s Short Sleeve Shirt', 28, 1, 1); 
-INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) 
-VALUES ( 47,'Fashion Men''s Long Sleeve Plaid Shirt', 24, 1, 3);
-INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) --Áo Phao Nam có mũ Siêu Nhẹ Siêu Ấm, ảnh: "phm5001"
-VALUES ( 99,'Men''s Life Jacket With Cap Super Light Super Warm', 50, 5, 2); 
-INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Áo Khoác Nam Bomber Bổ Ngực "akm5047"
-VALUES ( 109,'Men''s Bomber Jacket Split Bust', 60, 5, 2);
-INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Áo Phao Nam VIP 3 Lớp Siêu Ấm "pvm5003"
-VALUES ( 159,'Super Warm 3 Layers VIP Men''s Life jacket', 82, 5, 2);
-INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Áo Phao Nam VIP 3 Lớp Siêu Ấm "akm4027"
-VALUES ( 79,'3C Men''s 2 Layers Sports Jacket', 35, 5, 2);
-INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Quần Âu Nam Ống Đứng Vải Nano Melange "qam3191"
-VALUES ( 95,'Nano Melange Fabric Men''s Stand Up Pants', 50, 3, 4);
-INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Quần Âu Nam Vải Nano Cao Cấp Giữ Phom "qam3127"
-VALUES ( 104,'High Quality Nano Fabric Men''s Trousers Keeps Shape', 57, 3, 4);
-INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Áo Sơ Mi Nữ Cổ Nơ Bèo Tay "smn4274"
-VALUES ( 45,'Women''s Shirt with Bow Neck with Ruffled Sleeves', 22, 7, 1);
-INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Áo Sơ Mi Nữ Tay Dài Form Rộng "smn5056"
-VALUES ( 42,'Women''s Long Sleeve Shirt Wide Form', 20, 7, 1);
-INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Áo Sơ Mi Nữ Tay Ngắn Nano "scn3000"
-VALUES ( 47,'Nano Short Sleeve Women''s Shirt', 24, 7, 1);
-INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Áo Sơ Mi Dài Tay Nữ Cafe "smn5202"
-VALUES ( 53,'Women''s Cafe Long Sleeve Shirt', 26, 7, 1);
-INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Áo T-Shirt Nữ Cotton USA Phiên Bản Premium "tsn5302"
-VALUES ( 32,'Cotton USA Women''s T-Shirt Premium Edition', 14, 8, 1);
-INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Áo Thun Nữ Form Rộng "tsn5168"
-VALUES ( 30,'Women''s T-shirt Wide Form', 13, 8, 1);
-INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Áo T-Shirt Nữ Cotton USA "tsn5234"
-VALUES ( 35,'Women''s Cotton T-Shirt USA', 15, 8, 2);
-INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Váy Voan Cổ Vuông Xẻ Tà Chấm Bi "van5152"
-VALUES ( 59,'Square Neck Chiffon Dress With Polka Dot Slits', 29, 9, 1);
-INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Váy Lụa Xòe Cổ V "van5184"
-VALUES ( 55,'V-neck Silk Skirt', 25, 9, 1);
-INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Váy Voan Hoa Nhí Cổ Tim Tay Bồng "van5124"
-VALUES ( 52,'Small Floral Chiffon Dress Puffy Sleeve Heart Neck', 22, 9, 2);
-INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Áo Phao Nữ Siêu Nhẹ Có Mũ "phn4000"
-VALUES ( 107,'Women''s Super Light Lifejacket With Hood', 60, 11, 2);
-INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Áo Khoác Gió Nữ Thể Thao "akn4024"
-VALUES ( 89,'Women''s Sports Wind Jacket', 40, 11, 4);
-INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Bộ Đồ Thể Thao Trẻ Emo "sdk5007"
-VALUES ( 96,'Children''s Sports Suits', 43, 12, 2);
-INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Bộ Đồ Trẻ Em Thu Đông In Mặt Cười Đáng Yêu "btk5027"
-VALUES ( 99,'Children''s Suits Autumn and Winter With Lovely Smiley Print', 45, 12, 2);
-INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id ) ---Bộ Đồ Trẻ Em Thu Đông In Mặt Cười Đáng Yêu "btk5027"
-VALUES ( 40,'Children''s Long Sleeve T-shirt with Bear Print', 20, 15, 2);
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) 
+VALUES ( 28, 'Men''s Cotton Compact with Reflective Lettering', 15, 2, 1, '2022-11-02');  
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) 
+VALUES ( 32,'Men''s Cotton T-Shirt USA Premium Version', 18, 2, 1, '2022-09-27');
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) 
+VALUES ( 22,'Men''s Round Neck T-shirt', 12, 2, 2, '2022-11-05');
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) 
+VALUES ( 30,'Men''s Sport Sweatshirts', 20, 2, 1, '2022-10-15');
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) 
+VALUES ( 55,'Men''s Long Sleeve Plain Shirt', 28, 1, 2, '2022-07-15');
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) 
+VALUES ( 49,'Men''s Long Sleeve Shirt With Chest Pocket', 25, 1, 2, '2022-07-15');       
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) 
+VALUES ( 45,'Cool Short Sleeve Men''s Shirt', 24, 1, 2, '2022-09-30'); 
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) 
+VALUES ( 52,'Bamboo Dots Men''s Short Sleeve Shirt', 28, 1, 1, '2022-07-15'); 
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) 
+VALUES ( 47,'Fashion Men''s Long Sleeve Plaid Shirt', 24, 1, 3, '2022-10-15');
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) --Áo Phao Nam có mũ Siêu Nhẹ Siêu Ấm, ảnh: "phm5001"
+VALUES ( 99,'Men''s Life Jacket With Cap Super Light Super Warm', 50, 5, 2, '2022-07-15'); 
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) ---Áo Khoác Nam Bomber Bổ Ngực "akm5047"
+VALUES ( 109,'Men''s Bomber Jacket Split Bust', 60, 5, 2, '2022-10-15');
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) ---Áo Phao Nam VIP 3 Lớp Siêu Ấm "pvm5003"
+VALUES ( 159,'Super Warm 3 Layers VIP Men''s Life jacket', 82, 5, 2, '2022-07-15');
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) ---Áo Phao Nam VIP 3 Lớp Siêu Ấm "akm4027"
+VALUES ( 79,'3C Men''s 2 Layers Sports Jacket', 35, 5, 2, '2022-10-28');
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) ---Quần Âu Nam Ống Đứng Vải Nano Melange "qam3191"
+VALUES ( 95,'Nano Melange Fabric Men''s Stand Up Pants', 50, 3, 4, '2022-07-15');
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) ---Quần Âu Nam Vải Nano Cao Cấp Giữ Phom "qam3127"
+VALUES ( 104,'High Quality Nano Fabric Men''s Trousers Keeps Shape', 57, 3, 4, '2022-07-15');
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) ---Áo Sơ Mi Nữ Cổ Nơ Bèo Tay "smn4274"
+VALUES ( 45,'Women''s Shirt with Bow Neck with Ruffled Sleeves', 22, 7, 1, '2022-07-15');
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) ---Áo Sơ Mi Nữ Tay Dài Form Rộng "smn5056"
+VALUES ( 42,'Women''s Long Sleeve Shirt Wide Form', 20, 7, 1, '2022-09-27');
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) ---Áo Sơ Mi Nữ Tay Ngắn Nano "scn3000"
+VALUES ( 47,'Nano Short Sleeve Women''s Shirt', 24, 7, 1, '2022-07-15');
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) ---Áo Sơ Mi Dài Tay Nữ Cafe "smn5202"
+VALUES ( 53,'Women''s Cafe Long Sleeve Shirt', 26, 7, 1, '2022-07-15');
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) ---Áo T-Shirt Nữ Cotton USA Phiên Bản Premium "tsn5302"
+VALUES ( 32,'Cotton USA Women''s T-Shirt Premium Edition', 14, 8, 1, '2022-07-15');
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) ---Áo Thun Nữ Form Rộng "tsn5168"
+VALUES ( 30,'Women''s T-shirt Wide Form', 13, 8, 1, '2022-07-15');
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) ---Áo T-Shirt Nữ Cotton USA "tsn5234"
+VALUES ( 35,'Women''s Cotton T-Shirt USA', 15, 8, 2, '2022-07-15');
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) ---Váy Voan Cổ Vuông Xẻ Tà Chấm Bi "van5152"
+VALUES ( 59,'Square Neck Chiffon Dress With Polka Dot Slits', 29, 9, 1, '2022-07-15');
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) ---Váy Lụa Xòe Cổ V "van5184"
+VALUES ( 55,'V-neck Silk Skirt', 25, 9, 1, '2022-07-15');
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) ---Váy Voan Hoa Nhí Cổ Tim Tay Bồng "van5124"
+VALUES ( 52,'Small Floral Chiffon Dress Puffy Sleeve Heart Neck', 22, 9, 2, '2022-09-27');
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) ---Áo Phao Nữ Siêu Nhẹ Có Mũ "phn4000"
+VALUES ( 107,'Women''s Super Light Lifejacket With Hood', 60, 11, 2, '2022-10-15');
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) ---Áo Khoác Gió Nữ Thể Thao "akn4024"
+VALUES ( 89,'Women''s Sports Wind Jacket', 40, 11, 4, '2022-08-15');
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) ---Bộ Đồ Thể Thao Trẻ Emo "sdk5007"
+VALUES ( 96,'Children''s Sports Suits', 43, 12, 2, '2022-10-12');
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) ---Bộ Đồ Trẻ Em Thu Đông In Mặt Cười Đáng Yêu "btk5027"
+VALUES ( 99,'Children''s Suits Autumn and Winter With Lovely Smiley Print', 45, 12, 2, '2022-10-15');
+INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) ---Bộ Đồ Trẻ Em Thu Đông In Mặt Cười Đáng Yêu "btk5027"
+VALUES ( 40,'Children''s Long Sleeve T-shirt with Bear Print', 20, 15, 2, '2022-07-20');
 
 
 INSERT INTO product_image (image_alt, image_url, is_main_image, product_id) VALUES ('Men''s Cotton Compact', '/resources/images/products/tsm1-den-1.jpg',1, 1);
@@ -524,10 +524,29 @@ INSERT INTO banners (image_url, image_link, ) VALUES ();
 
 
 
+<ul>
+	<li  style="list-style-type: disc;">High quality 100% Cotton USA material</li>
+	<li  style="list-style-type: disc;">Sustainable cotton: Contributing to protecting the living environment</li>
+	<li  style="list-style-type: disc;">High quality yarn: Excellent fineness and dyeability</li>
+	<li  style="list-style-type: disc;">Good sweat absorption, cool, very suitable for hot and humid weather in Vietnam</li>
+	<li  style="list-style-type: disc;">Light stretch, conforms to body movement</li>
+	<li  style="list-style-type: disc;">The loose shape helps to create freedom of movement for the wearer</li>
+	<li  style="list-style-type: disc;">Wide range of colors easily combined with shorts or jeans</li>
+</ul>
 
 
-
-
+<ul>
+	<li style="list-style-type: disc;">100% Cotton</li>
+	<li style="list-style-type: disc;">Imported</li>
+	<li style="list-style-type: disc;">Pull On closure</li>
+	<li style="list-style-type: disc;">Machine Wash</li>
+	<li style="list-style-type: disc;">Soft, breathable cotton</li>
+	<li style="list-style-type: disc;">Moisture wicking technology keeps you cool and dry</li>
+	<li style="list-style-type: disc;">Tag-free to prevent irritation</li>
+	<li style="list-style-type: disc;">Classic length for easy tucking</li>
+	<li style="list-style-type: disc;">Durable stitching</li>
+	<li style="list-style-type: disc;">Lay-flat collar</li>
+</ul>
 
 
 
