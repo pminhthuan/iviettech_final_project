@@ -23,7 +23,7 @@ public class SpringConfig {
         dataSource.setDriverClassName("org.postgresql.Driver");
         dataSource.setUrl("jdbc:postgresql://localhost:5432/final_project");
         dataSource.setUsername("postgres");
-        dataSource.setPassword("huong");
+        dataSource.setPassword("12345");
         return  dataSource;
     }
 

@@ -82,7 +82,18 @@
                             <td>${p.original_price}</td>
                             <td>${p.actual_price}</td>
                             <td>${p.description}</td>
-                            <td>${p.status}</td>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${p.status == 0}">
+<%--                                        <label style="color: red">${p.status}</label>--%>
+                                        <a href="<c:url value="/admin/updateProductStatus/${p.id}"/>">Active</a>
+                                    </c:when>
+                                    <c:otherwise>
+<%--                                        <label style="color: green">${p.status}</label>--%>
+                                        <a href="<c:url value="/admin/updateProductStatus/${p.id}"/>">Re-Active</a>
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
                             <td>
                                 <a href="<c:url value="/admin/adProductImage/${p.id}"/>">Image</a>
                             </td>
