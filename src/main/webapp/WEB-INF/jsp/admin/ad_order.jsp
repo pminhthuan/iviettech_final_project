@@ -74,12 +74,12 @@
                             </td>
                             <td>${o.phoneNumber}</td>
                             <td>${o.email}</td>
-                            <td>${o.address}</td>
+                            <td>${o.addressDetail}</td>
                             <td>${o.requireDate}</td>
                             <td>${o.shippingDate}</td>
                             <td>${o.totalAmount}</td>
-                            <td>${o.status}</td>
-                            <td>${o.note}</td>
+                            <td>${o.orderStatus}</td>
+                            <td>${o.notesOfCustomer}</td>
                             <td>
                                 <a href="<c:url value="/admin/editOrder/${o.id}"/>">Edit</a>
                             </td>

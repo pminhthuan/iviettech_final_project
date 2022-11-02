@@ -74,7 +74,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Note</label>
-                                <form:input path="note" type="text" class="form-control" placeholder="Note"/>
+                                <form:input path="notesOfCustomer" type="text" class="form-control" placeholder="Note"/>
                             </div>
 
                             <br>

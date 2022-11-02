@@ -12,6 +12,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -179,8 +180,8 @@ public class AdminController {
 
     //Product Image
     @RequestMapping(value = "/adProductImage/{id}", method = GET)
-    public String viewProductImage(@PathVariable("id") int id, Model model) {
-
+    public String viewProductImage(@PathVariable("id") int id, Model model,HttpSession session) {
+        session.setAttribute("idpro",id);
         List<ProductImageEntity> productImageList =
                 productImageRepository.findByProduct_Id(id);
         model.addAttribute("productImageList", productImageList);
@@ -199,15 +200,11 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/adProductImage/uploadFile", method = RequestMethod.POST)
-    public String saveImage(@ModelAttribute ProductImageEntity productImage,
+    public String saveImage(HttpSession session,
                             @RequestParam(value = "file", required = false) MultipartFile photo ) {
-        productImage.setImageUrl(adminService.uploadFile(photo));
-        productImage.setProduct(productImage.getProduct());
-//        productImage.setImageAlt(adminService.uploadFile());
-
-        productImageRepository.save(productImage);
-
-        return "redirect:/admin/adProductImage/" + productImage.getProduct().getId();
+        int id = (int) session.getAttribute("idpro");
+        adminService.uploadFile(photo,id);
+        return "redirect:/admin/adProductImage/" +id;
     }
 
 
@@ -392,6 +389,16 @@ public class AdminController {
         model.addAttribute("orderDetailList", orderDetailList);
 
         return "admin/ad_order_detail";
+    }
+
+    //Report during the date
+    @RequestMapping(value = "/adReportDate", method = GET)
+    public String viewReportDate(Model model) {
+        List<OrderEntity> orderList =
+                (List<OrderEntity>) orderRepository.findByRequireDateDuringTheDate();
+        model.addAttribute("orderList", orderList);
+
+        return "admin/ad_order";
     }
 
     @InitBinder

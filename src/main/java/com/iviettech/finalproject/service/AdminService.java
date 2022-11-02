@@ -1,6 +1,7 @@
 package com.iviettech.finalproject.service;
 
 import com.iviettech.finalproject.entity.ProductEntity;
+import com.iviettech.finalproject.entity.ProductImageEntity;
 import com.iviettech.finalproject.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AdminService {
@@ -58,12 +60,12 @@ public class AdminService {
 //        model.addAttribute("product", productEntity);
     }
 
-    public String uploadFile(MultipartFile file) {
+    public void uploadFile(MultipartFile file,int id) {
         if( null != file && !file.isEmpty()){
             try {
                 byte[] bytes = file.getBytes();
-                String path = "D:\\final\\iviettech_final_project\\src\\main\\webapp\\resources\\images";
-
+                String path = "D:\\final\\iviettech_final_project\\src\\main\\webapp\\resources\\images\\products\\";
+                String name = file.getOriginalFilename();
                 File dir = new File(path);
                 if (!dir.exists()) {
                     dir.mkdirs();
@@ -72,24 +74,28 @@ public class AdminService {
 //                String name = String.valueOf(new Date().getTime()+".jpg");
 
                 // Create the file on server
-                String fileSource = dir.getAbsolutePath() + File.separator + file.getOriginalFilename()+".jpg";
-                File serverFile = new File(fileSource);
-                System.out.println("=====Path image to server: " + serverFile.getPath());
-                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-                stream.write(bytes);
-                stream.close();
+                String fileSource = "/resources/images/product/" + name;
+//                File serverFile = new File(fileSource);
+//                System.out.println("=====Path image to server: " + serverFile.getPath());
+//                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+//                stream.write(bytes);
+//                stream.close();
+                ProductImageEntity imageEntity = new ProductImageEntity();
+                Optional<ProductEntity> productEntity = productRepository.findById(id);
+                imageEntity.setProduct(productEntity.get());
+                imageEntity.setImageUrl(fileSource);
+                imageEntity.setImageAlt(name);
+                productImageRepository.save(imageEntity);
 
-                return fileSource;
 
             } catch (IOException e) {
-                System.out.println("====== Error uplaod file:" + e.getMessage());
+                System.out.println("====== Error upload file:" + e.getMessage());
             }
 
         } else {
             System.out.println("====== File not exists");
         }
 
-        return null;
     }
 
 }
