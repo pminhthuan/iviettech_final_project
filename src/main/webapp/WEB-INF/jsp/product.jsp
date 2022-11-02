@@ -80,21 +80,13 @@
                         </button>
                     </a>
                     <div class="dropdown-content">
-                        <a href="#">
-                            <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5">
-                                Link 1
+                        <c:forEach items="${cate.categoryDetailEntityList}" var="cateDetail">
+                        <a href="<c:url value="/shop/category/categorydetail/${cateDetail.id}"/>">
+                            <button class="stext-106 cl6 hov1 bor3 trans-04 m-tb-5">
+                                ${cateDetail.description}
                             </button>
                         </a>
-                        <a href="#">
-                            <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5">
-                                Link 2
-                            </button>
-                        </a>
-                        <a href="#">
-                            <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5">
-                                Link 3
-                            </button>
-                        </a>
+                        </c:forEach>
                     </div>
                 </div>
                 </c:forEach>
@@ -102,9 +94,6 @@
 <%--                    Men--%>
 <%--                </button>--%>
 
-<%--                <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".bag">--%>
-<%--                    Bag--%>
-<%--                </button>--%>
             </div>
 
             <div class="flex-w flex-c-m m-tb-10">
@@ -143,37 +132,37 @@
 
                         <ul>
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
+                                <a href="/shop" class="filter-link stext-106 trans-04 filter-link-active">
                                     Default
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
+                                <a href="/shop/filter/bestseller" class="filter-link stext-106 trans-04">
                                     Popularity
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    Average rating
+                                <a href="/shop/filter/rating" class="filter-link stext-106 trans-04">
+                                    High rating
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
+                                <a href="#" class="filter-link stext-106 trans-04 ">
                                     Newness
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
+                                <a href="/shop/filter/asc" class="filter-link stext-106 trans-04">
                                     Price: Low to High
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
+                                <a href="/shop/filter/desc" class="filter-link stext-106 trans-04">
                                     Price: High to Low
                                 </a>
                             </li>
@@ -187,7 +176,7 @@
 
                         <ul>
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
+                                <a href="/shop" class="filter-link stext-106 trans-04 filter-link-active">
                                     All
                                 </a>
                             </li>

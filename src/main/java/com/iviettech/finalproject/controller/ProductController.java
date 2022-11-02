@@ -18,10 +18,7 @@ import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.iviettech.finalproject.helper.PasswordEncoder.createHash;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -78,7 +75,6 @@ public class ProductController {
     public String viewShop(Model model) {
         List<ProductImageEntity> productEntityList = productImageRepository.getProductListWithImage();
         List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
-        //List<CategoryDetailEntity> categoryDetailEntityList = categoryDetailRepository.findAllByCategory_Id()
         model.addAttribute("categories", categoryEntityList);
         model.addAttribute("productList", productEntityList);
         model.addAttribute("activeLink", "how-active1");
@@ -93,6 +89,18 @@ public class ProductController {
         model.addAttribute("categories", categoryEntityList);
         model.addAttribute("productList", productEntityList);
         model.addAttribute("tag", id);
+
+        return "product";
+    }
+
+    @RequestMapping(value = "/shop/category/categorydetail/{id}",method = GET)
+    public String showProductByCategoryDetail(@PathVariable("id") int id, Model model) {
+        List<ProductImageEntity> productEntityList = productImageRepository.getProductListWithImageAndCategoryDetail(id);
+        List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
+        Optional<CategoryDetailEntity> cateDetail = categoryDetailRepository.findById(id);
+        model.addAttribute("categories", categoryEntityList);
+        model.addAttribute("productList", productEntityList);
+        model.addAttribute("tag", cateDetail.get().getCategory().getId());
 
         return "product";
     }
@@ -118,7 +126,61 @@ public class ProductController {
     }
 
 
-    @RequestMapping(value = "/shop/search", method = GET)
+    @RequestMapping(value = "/shop/filter/bestseller",method = GET)
+    public String showProductBestSeller(Model model) {
+        List<ProductImageEntity> productEntityList = productImageRepository.getProductListBestSeller();
+        List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
+        model.addAttribute("categories", categoryEntityList);
+        model.addAttribute("productList", productEntityList);
+
+        return "product";
+    }
+
+    @RequestMapping(value = "/shop/filter/rating",method = GET)
+    public String showProductHighRating(Model model) {
+        List<ProductImageEntity> productEntityList = productImageRepository.getProductListHighRating();
+        List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
+        model.addAttribute("categories", categoryEntityList);
+        model.addAttribute("productList", productEntityList);
+
+        return "product";
+    }
+
+    @RequestMapping(value = "/shop/filter/newness",method = GET)
+    public String showProductNewness(Model model) {
+        List<ProductImageEntity> productEntityList = productImageRepository.getProductListNewness();
+        List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
+        model.addAttribute("categories", categoryEntityList);
+        model.addAttribute("productList", productEntityList);
+
+        return "product";
+    }
+
+    @RequestMapping(value = "/shop/filter/asc",method = GET)
+    public String showProductLowToHighPrice(Model model) {
+        List<ProductImageEntity> productEntityList = productImageRepository.getProductListLowToHighPrice();
+        List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
+        model.addAttribute("categories", categoryEntityList);
+        model.addAttribute("productList", productEntityList);
+
+        return "product";
+    }
+
+
+    @RequestMapping(value = "/shop/filter/desc",method = GET)
+    public String showProductHighToLowPrice(Model model) {
+        List<ProductImageEntity> productEntityList = productImageRepository.getProductListHighToLowPrice();
+        List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
+        model.addAttribute("categories", categoryEntityList);
+        model.addAttribute("productList", productEntityList);
+
+        return "product";
+    }
+
+
+
+
+    @RequestMapping(value = "/shop/filter", method = GET)
     public String search(@RequestParam("searchInput")String searchInput, Model model) {
         List<ProductImageEntity> resultList;
         if (searchInput.isEmpty()) {

@@ -1,7 +1,7 @@
 INSERT INTO categories ( name) VALUES ( 'Men');
 INSERT INTO categories ( name) VALUES ( 'Women');
 INSERT INTO categories ( name) VALUES ( 'Kids');
--- INSERT INTO categories ( name) VALUES ( 'Accessories');
+INSERT INTO categories ( name) VALUES ( 'Accessories');
 
 INSERT INTO category_detail (description, name, category_id) VALUES ('Men''s Shirt', 'Shirt', 1);
 INSERT INTO category_detail (description, name, category_id) VALUES ('Men''s T-Shirt', 'T-Shirt', 1);
@@ -18,9 +18,9 @@ INSERT INTO category_detail (description, name, category_id) VALUES ('Kid''s Sui
 INSERT INTO category_detail (description, name, category_id) VALUES ('Kid''s Jacket', 'Jacket', 3);
 INSERT INTO category_detail (description, name, category_id) VALUES ('Kid''s Trouser', 'Trouser', 3);
 INSERT INTO category_detail (description, name, category_id) VALUES ('Kid''s T-Shirt', 'T-Shirt', 3);
--- INSERT INTO category_detail (description, name, category_id) VALUES ('Wallet', 'Wallet', 4);
--- INSERT INTO category_detail (description, name, category_id) VALUES ('Belt', 'Belt', 4);
--- INSERT INTO category_detail (description, name, category_id) VALUES ('HandBag', 'HandBag', 4);
+INSERT INTO category_detail (description, name, category_id) VALUES ('Wallet', 'Wallet', 4);
+INSERT INTO category_detail (description, name, category_id) VALUES ('Belt', 'Belt', 4);
+INSERT INTO category_detail (description, name, category_id) VALUES ('HandBag', 'HandBag', 4);
 
 INSERT INTO manufactors ( name) VALUES ( 'Versace');
 INSERT INTO manufactors ( name) VALUES ( 'Prada');
@@ -54,7 +54,7 @@ VALUES ( 159,'Super Warm 3 Layers VIP Men''s Life jacket', 82, 5, 2, '2022-07-15
 INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) ---Áo Phao Nam VIP 3 Lớp Siêu Ấm "akm4027"
 VALUES ( 79,'3C Men''s 2 Layers Sports Jacket', 35, 5, 2, '2022-10-28');
 INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) ---Quần Âu Nam Ống Đứng Vải Nano Melange "qam3191"
-VALUES ( 95,'Nano Melange Fabric Men''s Stand Up Pants', 50, 3, 4, '2022-07-15');
+VALUES ( 95,'Nano Melange Fabric Men''s Stand Up Pants', 50, 3, 4, '2022-10-18');
 INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) ---Quần Âu Nam Vải Nano Cao Cấp Giữ Phom "qam3127"
 VALUES ( 104,'High Quality Nano Fabric Men''s Trousers Keeps Shape', 57, 3, 4, '2022-07-15');
 INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) ---Áo Sơ Mi Nữ Cổ Nơ Bèo Tay "smn4274"
@@ -64,17 +64,17 @@ VALUES ( 42,'Women''s Long Sleeve Shirt Wide Form', 20, 7, 1, '2022-09-27');
 INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) ---Áo Sơ Mi Nữ Tay Ngắn Nano "scn3000"
 VALUES ( 47,'Nano Short Sleeve Women''s Shirt', 24, 7, 1, '2022-07-15');
 INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) ---Áo Sơ Mi Dài Tay Nữ Cafe "smn5202"
-VALUES ( 53,'Women''s Cafe Long Sleeve Shirt', 26, 7, 1, '2022-07-15');
+VALUES ( 53,'Women''s Cafe Long Sleeve Shirt', 26, 7, 1, '2022-10-14');
 INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) ---Áo T-Shirt Nữ Cotton USA Phiên Bản Premium "tsn5302"
 VALUES ( 32,'Cotton USA Women''s T-Shirt Premium Edition', 14, 8, 1, '2022-07-15');
 INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) ---Áo Thun Nữ Form Rộng "tsn5168"
-VALUES ( 30,'Women''s T-shirt Wide Form', 13, 8, 1, '2022-07-15');
+VALUES ( 30,'Women''s T-shirt Wide Form', 13, 8, 1, '2022-09-10');
 INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) ---Áo T-Shirt Nữ Cotton USA "tsn5234"
-VALUES ( 35,'Women''s Cotton T-Shirt USA', 15, 8, 2, '2022-07-15');
+VALUES ( 35,'Women''s Cotton T-Shirt USA', 15, 8, 2, '2022-08-22');
 INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) ---Váy Voan Cổ Vuông Xẻ Tà Chấm Bi "van5152"
 VALUES ( 59,'Square Neck Chiffon Dress With Polka Dot Slits', 29, 9, 1, '2022-07-15');
 INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) ---Váy Lụa Xòe Cổ V "van5184"
-VALUES ( 55,'V-neck Silk Skirt', 25, 9, 1, '2022-07-15');
+VALUES ( 55,'V-neck Silk Skirt', 25, 9, 1, '2022-08-20');
 INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) ---Váy Voan Hoa Nhí Cổ Tim Tay Bồng "van5124"
 VALUES ( 52,'Small Floral Chiffon Dress Puffy Sleeve Heart Neck', 22, 9, 2, '2022-09-27');
 INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) ---Áo Phao Nữ Siêu Nhẹ Có Mũ "phn4000"

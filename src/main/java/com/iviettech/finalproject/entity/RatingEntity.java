@@ -25,6 +25,9 @@ public class RatingEntity {
     @Column(name = "content", length = 5000)
     private String content;
 
+    @Column(name = "star_value")
+    private int starValue;
+
     @Column(name = "created_date")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern="dd/MM/yyyy")
