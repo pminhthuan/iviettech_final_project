@@ -299,7 +299,7 @@ public class ProductController {
         String subject = "Thanks for your order";
         String mailBody = "<h3> Dear " + order.getFirstName()+" "+order.getLastName() + ",<h3>"
                 + "<p>Thank you for your order! Your product will be shipped soon!</p>"
-                + "<p>Here is your order number: +"+order.getId()+"</p>"
+                + "<p>Here is your order number: "+order.getId()+"</p>"
                 + "<p>If you have any questions or concerns about your order, feel free to reach out to our Customer Service anytime 9AM-5PM, Monday-Friday. Be sure to have the order number handy so we can help you even faster!</p>"
                 + "<p>We look forward to your feedback on your purchase! Thank you again!</p>"
                 + "<p>Kind regards,</p>"

@@ -440,9 +440,9 @@
     $('.btn').on('click', function() {
       var $this = $(this);
       $this.button('loading');
-      // setTimeout(function() {
-      //   $this.button('reset');
-      // }, 8000);
+      setTimeout(function() {
+        $this.button('reset');
+      }, 10000);
     });
   });
 </script>

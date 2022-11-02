@@ -295,7 +295,6 @@
     });
 
 
-
     // before check out button is clicked, update the HREF attribute of the <a> tag
     // the HRED includes the query param ?data which contains all productID & latest quantity pairs
     $("#btn_check_out").click(function(){
@@ -321,9 +320,9 @@
         $('.btn').on('click', function() {
             var $this = $(this);
             $this.button('loading');
-            // setTimeout(function() {
-            //   $this.button('reset');
-            // }, 8000);
+            setTimeout(function() {
+              $this.button('reset');
+            }, 8000);
         });
     });
 </script>
