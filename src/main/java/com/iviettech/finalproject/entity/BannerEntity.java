@@ -21,6 +21,12 @@ public class BannerEntity {
     @Column(name = "image_link", length = 1024)
     private String imageLink;
 
+    @Column(name = "name", length = 1024)
+    private String name;
+
+    @Column(name = "description", length = 1024)
+    private String description;
+
     @Column(name = "status", columnDefinition = "integer default 0")
     private int status;
 

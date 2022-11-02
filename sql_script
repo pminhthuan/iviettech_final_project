@@ -513,8 +513,69 @@ INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Brown',2
 INSERT INTO product_detail (color, quantity, size, product_id) VALUES ('Navi',20,'Free Size', 29);
 
 
+INSERT INTO banners (image_url, image_link, ) VALUES ();
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table border="1" cellpadding="1" cellspacing="1" style="width:500px;">
+	<tbody>
+		<tr>
+			<td>&nbsp;</td>
+			<td style="text-align: center;"><strong>S</strong></td>
+			<td style="text-align: center;"><strong>M</strong></td>
+			<td style="text-align: center;"><strong>L</strong></td>
+			<td style="text-align: center;"><strong>XL</strong></td>
+			<td style="text-align: center;"><strong>XXL</strong></td>
+		</tr>
+		<tr>
+			<td>Body Length</td>
+			<td style="text-align: center;">28</td>
+			<td style="text-align: center;">29</td>
+			<td style="text-align: center;">30</td>
+			<td style="text-align: center;">31</td>
+			<td style="text-align: center;">32</td>
+		</tr>
+		<tr>
+			<td>Body Length Tolerance</td>
+			<td style="text-align: center;">-/+ 1</td>
+			<td style="text-align: center;">-/+ 1</td>
+			<td style="text-align: center;">-/+ 1</td>
+			<td style="text-align: center;">-/+ 1</td>
+			<td style="text-align: center;">-/+ 1</td>
+		</tr>
+		<tr>
+			<td>Chest Tolerance</td>
+			<td style="text-align: center;">-/+ 1</td>
+			<td style="text-align: center;">-/+ 1</td>
+			<td style="text-align: center;">-/+ 1</td>
+			<td style="text-align: center;">-/+ 1</td>
+			<td style="text-align: center;">-/+ 1</td>
+		</tr>
+		<tr>
+			<td>Chest Width (Laid Flat)</td>
+			<td style="text-align: center;">18</td>
+			<td style="text-align: center;">20</td>
+			<td style="text-align: center;">22</td>
+			<td style="text-align: center;">24</td>
+			<td style="text-align: center;">26</td>
+		</tr>
+	</tbody>
+</table>
 
 
 

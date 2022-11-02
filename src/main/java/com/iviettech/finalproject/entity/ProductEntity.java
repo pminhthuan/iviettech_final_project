@@ -38,6 +38,11 @@ public class ProductEntity {
     @Column(name = "actual_price")
     private double actual_price;
 
+    @Column(name = "add_date")
+    @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern="dd/MM/yyyy")
+    private Date addDate;
+
     @ManyToOne
     @JoinColumn(name = "manufactor_id")
     private ManufactorEntity manufactor;

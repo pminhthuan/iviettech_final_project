@@ -111,7 +111,7 @@
 						</span>
 
                     <p class="stext-102 cl3 p-t-23">
-                        <c:out value="${productEntity.get().description}"/>
+
                     </p>
 
                     <!--  -->
@@ -224,9 +224,7 @@
                     <!-- - -->
                     <div class="tab-pane fade show active" id="description" role="tabpanel">
                         <div class="how-pos2 p-lr-15-md">
-                            <p class="stext-102 cl6">
-                                Aenean sit amet gravida nisi. Nam fermentum est felis, quis feugiat nunc fringilla sit amet. Ut in blandit ipsum. Quisque luctus dui at ante aliquet, in hendrerit lectus interdum. Morbi elementum sapien rhoncus pretium maximus. Nulla lectus enim, cursus et elementum sed, sodales vitae eros. Ut ex quam, porta consequat interdum in, faucibus eu velit. Quisque rhoncus ex ac libero varius molestie. Aenean tempor sit amet orci nec iaculis. Cras sit amet nulla libero. Curabitur dignissim, nunc nec laoreet consequat, purus nunc porta lacus, vel efficitur tellus augue in ipsum. Cras in arcu sed metus rutrum iaculis. Nulla non tempor erat. Duis in egestas nunc.
-                            </p>
+                                ${productEntity.get().description}
                         </div>
                     </div>
 
@@ -234,57 +232,7 @@
                     <div class="tab-pane fade" id="information" role="tabpanel">
                         <div class="row">
                             <div class="col-sm-10 col-md-8 col-lg-6 m-lr-auto">
-                                <ul class="p-lr-28 p-lr-15-sm">
-                                    <li class="flex-w flex-t p-b-7">
-											<span class="stext-102 cl3 size-205">
-												Weight
-											</span>
-
-                                        <span class="stext-102 cl6 size-206">
-												0.79 kg
-											</span>
-                                    </li>
-
-                                    <li class="flex-w flex-t p-b-7">
-											<span class="stext-102 cl3 size-205">
-												Dimensions
-											</span>
-
-                                        <span class="stext-102 cl6 size-206">
-												110 x 33 x 100 cm
-											</span>
-                                    </li>
-
-                                    <li class="flex-w flex-t p-b-7">
-											<span class="stext-102 cl3 size-205">
-												Materials
-											</span>
-
-                                        <span class="stext-102 cl6 size-206">
-												60% cotton
-											</span>
-                                    </li>
-
-                                    <li class="flex-w flex-t p-b-7">
-											<span class="stext-102 cl3 size-205">
-												Color
-											</span>
-
-                                        <span class="stext-102 cl6 size-206">
-												Black, Blue, Grey, Green, Red, White
-											</span>
-                                    </li>
-
-                                    <li class="flex-w flex-t p-b-7">
-											<span class="stext-102 cl3 size-205">
-												Size
-											</span>
-
-                                        <span class="stext-102 cl6 size-206">
-												XL, L, M, S
-											</span>
-                                    </li>
-                                </ul>
+                                ${productEntity.get().additionInfo}
                             </div>
                         </div>
                     </div>
