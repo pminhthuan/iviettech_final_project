@@ -81,7 +81,7 @@
                             <td>${o.orderStatus}</td>
                             <td>${o.notesOfCustomer}</td>
                             <td>
-                                <a href="<c:url value="/admin/editOrder/${o.id}"/>">Edit</a>
+                                <a href="<c:url value="/admin/editOrder/${o.id}"/>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                             </td>
                         </tr>
                     </c:forEach>

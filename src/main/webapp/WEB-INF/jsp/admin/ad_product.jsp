@@ -46,10 +46,10 @@
                         <tr>
                             <th>Id</th>
                             <th>Product name</th>
-                            <th>Category detail</th>
+                            <th>Category</th>
                             <th>Manufactor</th>
-                            <th>Orginal price</th>
-                            <th>Actual price</th>
+                            <th>Orginal</th>
+                            <th>Actual</th>
                             <th>Discription</th>
                             <th>Status</th>
                             <th>Image</th>
@@ -60,10 +60,10 @@
                         <tr>
                             <th>Id</th>
                             <th>Product name</th>
-                            <th>Category detail</th>
+                            <th>Category</th>
                             <th>Manufactor</th>
-                            <th>Orginal price</th>
-                            <th>Actual price</th>
+                            <th>Orginal</th>
+                            <th>Actual</th>
                             <th>Discription</th>
                             <th>Status</th>
                             <th>Image</th>
@@ -77,7 +77,7 @@
                             <td>
                                 <a href="<c:url value="/admin/adProductDetail/${p.id}"/>">${p.name}</a>
                             </td>
-                            <td>${p.categoryDetail.name}</td>
+                            <td>${p.categoryDetail.description}</td>
                             <td>${p.manufactor.name}</td>
                             <td>${p.original_price}</td>
                             <td>${p.actual_price}</td>
@@ -95,10 +95,14 @@
                                 </c:choose>
                             </td>
                             <td>
-                                <a href="<c:url value="/admin/adProductImage/${p.id}"/>">Image</a>
+                                <a href="<c:url value="/admin/adProductImage/${p.id}"/>">
+                                    <i class="fa fa-camera" aria-hidden="true" style="font-size: 24px;text-align: center"></i>
+                                </a>
                             </td>
                             <td>
-                                <a href="<c:url value="/admin/editProduct/${p.id}"/>">Edit</a>
+                                <a href="<c:url value="/admin/editProduct/${p.id}"/>">
+                                    <i class="fa fa-pencil" aria-hidden="true" style="font-size:18px;color:greenyellow;text-align: center"></i>
+                                </a>
                             </td>
                         </tr>
                         </c:forEach>
