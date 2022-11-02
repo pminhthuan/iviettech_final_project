@@ -67,7 +67,7 @@
                                         <td>${cd.description}</td>
                                         <td>${cd.category.name}</td>
                                         <td>
-                                            <a href="<c:url value="/admin/editCategoryDetail/${cd.id}"/>">Edit</a>
+                                            <a href="<c:url value="/admin/editCategoryDetail/${cd.id}"/>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                         </td>
                                     </tr>
                                 </c:forEach>
@@ -107,7 +107,7 @@
                                         <td>${c.id}</td>
                                         <td>${c.name}</td>
                                         <td>
-                                            <a href="<c:url value="/admin/editCategory/${c.id}"/>">Edit</a>
+                                            <a href="<c:url value="/admin/editCategory/${c.id}"/>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                         </td>
                                     </tr>
                                 </c:forEach>

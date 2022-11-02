@@ -392,14 +392,14 @@ public class AdminController {
     }
 
     //Report during the date
-    @RequestMapping(value = "/adReportDate", method = GET)
-    public String viewReportDate(Model model) {
-        List<OrderEntity> orderList =
-                (List<OrderEntity>) orderRepository.findByRequireDateDuringTheDate();
-        model.addAttribute("orderList", orderList);
-
-        return "admin/ad_order";
-    }
+//    @RequestMapping(value = "/adReportDate", method = GET)
+//    public String viewReportDate(Model model) {
+//        List<OrderEntity> orderList =
+//                (List<OrderEntity>) orderRepository.findByRequireDateDuringTheDate();
+//        model.addAttribute("orderList", orderList);
+//
+//        return "admin/ad_order";
+//    }
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {

@@ -64,7 +64,7 @@
                             <td>${pd.size}</td>
                             <td>${pd.quantity}</td>
                             <td>
-                                <a href="<c:url value="/admin/editProductDetail/${pd.id}"/>">Edit</a>
+                                <a href="<c:url value="/admin/editProductDetail/${pd.id}"/>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                             </td>
                         </tr>
                     </c:forEach>
