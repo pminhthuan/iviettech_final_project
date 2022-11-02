@@ -2,21 +2,23 @@ package com.iviettech.finalproject.controller;
 
 import com.iviettech.finalproject.entity.*;
 import com.iviettech.finalproject.repository.*;
+import com.iviettech.finalproject.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpSession;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.nio.file.Path;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -24,6 +26,9 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @Controller
 @RequestMapping(value = "/admin")
 public class AdminController {
+
+    @Autowired
+    private AdminService adminService;
 
     @Autowired
     ProductRepository productRepository;
@@ -104,6 +109,27 @@ public class AdminController {
         return "redirect:/admin/adProduct";
     }
 
+    @RequestMapping(value = "/updateProductStatus/{id}")
+    public String updateProductStatus(@ModelAttribute ProductEntity product ,@PathVariable int id, Model model) {
+
+        List<ProductEntity> productEntity =
+                (List<ProductEntity>) productRepository.findAll();
+        for (ProductEntity p : productEntity) {
+            if (p.getId() == id) {
+                if (p.getStatus() == 0) {
+                    p.setStatus(1);
+                } else {
+                    p.setStatus(0);
+                }
+                break;
+            }
+        }
+        model.addAttribute("product", product);
+        productRepository.save(product);
+        return "redirect:/admin/adProduct";
+
+    }
+
     //Product Details
 
     @RequestMapping(value = "/adProductDetail/{id}", method = GET)
@@ -154,15 +180,33 @@ public class AdminController {
 
     //Product Image
     @RequestMapping(value = "/adProductImage/{id}", method = GET)
-    public String viewProductImage(@PathVariable("id") int id, Model model) {
-
+    public String viewProductImage(@PathVariable("id") int id, Model model,HttpSession session) {
+        session.setAttribute("idpro",id);
         List<ProductImageEntity> productImageList =
                 productImageRepository.findByProduct_Id(id);
         model.addAttribute("productImageList", productImageList);
+        model.addAttribute("action", "uploadFile");
 
         return "admin/ad_product_image";
 
     }
+
+    @RequestMapping(value = "/deleteImage/{id}/{pid}", method = GET)
+    public String deleteProductImage(@PathVariable("id") int id, @PathVariable("pid") int pid, Model model) {
+
+        productImageRepository.deleteById(id);
+
+        return "redirect:/admin/adProductImage/" + pid;
+    }
+
+    @RequestMapping(value = "/adProductImage/uploadFile", method = RequestMethod.POST)
+    public String saveImage(HttpSession session,
+                            @RequestParam(value = "file", required = false) MultipartFile photo ) {
+        int id = (int) session.getAttribute("idpro");
+        adminService.uploadFile(photo,id);
+        return "redirect:/admin/adProductImage/" +id;
+    }
+
 
     //Category
     @RequestMapping(value = "/adCategory", method = GET)
@@ -226,7 +270,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/newCategoryDetail", method = POST, produces = "text/plain;charset=UTF-8")
-    public String saveCategory(CategoryDetailEntity categoryDetail, Model model) {
+    public String saveCategoryDetail(CategoryDetailEntity categoryDetail, Model model) {
         categoryDetailRepository.save(categoryDetail);
         model.addAttribute("message","You are add success!");
         return "redirect:/admin/adCategory";
@@ -304,6 +348,38 @@ public class AdminController {
         return "admin/ad_order";
     }
 
+    @RequestMapping(value = "/newOrder", method = GET)
+    public String newOrder(Model model) {
+        model.addAttribute("order", new OrderEntity());
+        model.addAttribute("msg", "Add a order");
+        model.addAttribute("action", "neworder");
+
+        return "admin/ad_edit_order";
+    }
+
+//    @RequestMapping(value = "/newOrder", method = POST, produces = "text/plain;charset=UTF-8")
+//    public String saveOrder(OrderEntity order, Model model) {
+//        orderRepository.save(order);
+//        model.addAttribute("message","You are add success!");
+//        return "redirect:/admin/adOrder";
+//    }
+
+    @RequestMapping(value = "/editOrder/{id}", method = GET)
+    public String editOrder(Model model, @PathVariable int id) {
+        model.addAttribute("order", orderRepository.findById(id));
+        model.addAttribute("msg", "Update order information");
+        model.addAttribute("type", "updateOrder");
+        model.addAttribute("action", "/admin/updateOrder");
+
+        return "admin/ad_edit_order";
+    }
+
+    @RequestMapping(value = "/updateOrder", method = POST)
+    public String updateOrder(@ModelAttribute OrderEntity order) {
+        orderRepository.save(order);
+        return "redirect:/admin/adOrder";
+    }
+
     //Order Detail
     @RequestMapping(value = "/adOrderDetail/{id}", method = GET)
     public String viewOrderDetail(Model model, @PathVariable("id") int id) {
@@ -314,6 +390,16 @@ public class AdminController {
 
         return "admin/ad_order_detail";
     }
+
+    //Report during the date
+//    @RequestMapping(value = "/adReportDate", method = GET)
+//    public String viewReportDate(Model model) {
+//        List<OrderEntity> orderList =
+//                (List<OrderEntity>) orderRepository.findByRequireDateDuringTheDate();
+//        model.addAttribute("orderList", orderList);
+//
+//        return "admin/ad_order";
+//    }
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {

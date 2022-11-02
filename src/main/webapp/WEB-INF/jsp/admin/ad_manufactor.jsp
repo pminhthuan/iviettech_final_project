@@ -56,7 +56,7 @@
               <tr>
                 <td>${m.id}</td>
                 <td>
-                  <a href="<c:url value="/admin/editManufactor/${m.id}"/>">${m.name}</a>
+                  <a href="<c:url value="/admin/editManufactor/${m.id}"/>"><i class="fa fa-pencil" aria-hidden="true"></i> ${m.name}</a>
                 </td>
               </tr>
             </c:forEach>
