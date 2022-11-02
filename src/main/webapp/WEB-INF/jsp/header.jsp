@@ -31,10 +31,6 @@
                     </a>
 
                     <a href="#" class="flex-c-m trans-04 p-lr-25">
-                        EN
-                    </a>
-
-                    <a href="#" class="flex-c-m trans-04 p-lr-25">
                         USD
                     </a>
                 </div>
@@ -65,10 +61,6 @@
                             <a href="/shop">Shop</a>
                         </li>
 
-                        <!-- <li class="label1" data-label1="hot">
-                            <a href="/cart">Shopping Cart</a>
-                        </li>
-                        -->
                         <li >
                             <a href="/cart">Shopping Cart</a>
                         </li>
@@ -202,15 +194,15 @@
             </li>
 
             <li>
-                <a href="blog.html">Blog</a>
+                <a href="/blog">Blog</a>
             </li>
 
             <li>
-                <a href="about.html">About</a>
+                <a href="/about">About</a>
             </li>
 
             <li>
-                <a href="contact.html">Contact</a>
+                <a href="/contact">Contact</a>
             </li>
         </ul>
     </div>
@@ -222,11 +214,11 @@
                 <img src="/resources/images/icons/icon-close2.png" alt="CLOSE">
             </button>
 
-            <form class="wrap-search-header flex-w p-l-15">
+            <form class="wrap-search-header flex-w p-l-15" action="/shop/search" method="get">
                 <button class="flex-c-m trans-04">
                     <i class="zmdi zmdi-search"></i>
                 </button>
-                <input class="plh3" type="text" name="search" placeholder="Search...">
+                <input class="plh3" type="text" name="searchInput" value="${searchInput}" placeholder="Search...">
             </form>
         </div>
     </div>

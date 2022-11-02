@@ -23,6 +23,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.iviettech.finalproject.helper.PasswordEncoder.createHash;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -77,6 +78,7 @@ public class ProductController {
     public String viewShop(Model model) {
         List<ProductImageEntity> productEntityList = productImageRepository.getProductListWithImage();
         List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
+        //List<CategoryDetailEntity> categoryDetailEntityList = categoryDetailRepository.findAllByCategory_Id()
         model.addAttribute("categories", categoryEntityList);
         model.addAttribute("productList", productEntityList);
         model.addAttribute("activeLink", "how-active1");
@@ -113,6 +115,23 @@ public class ProductController {
         model.addAttribute("productDetailEntityList",productDetailEntityList);
         model.addAttribute("categoryDetailEntity",categoryDetailRepository.findAllByCategoryDetailId(categoryDetailId));
         return "product_detail";
+    }
+
+
+    @RequestMapping(value = "/shop/search", method = GET)
+    public String search(@RequestParam("searchInput")String searchInput, Model model) {
+        List<ProductImageEntity> resultList;
+        if (searchInput.isEmpty()) {
+            resultList = productImageRepository.getProductListWithImage();
+        } else {
+            resultList = productImageRepository.getProductBySearch(searchInput, searchInput);
+        }
+        List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
+
+        model.addAttribute("categories", categoryEntityList);
+        model.addAttribute("searchInput",searchInput);
+        model.addAttribute("productList", resultList);
+        return "product";
     }
 
 
@@ -271,17 +290,20 @@ public class ProductController {
         }
         orderDetailRepository.saveAll(orderDetailList);
         session.removeAttribute("shopping_cart");
-        sendActivationEmail(order);
+        sendConfirmationEmail(order);
         return "thankyou";
     }
 
-    private void sendActivationEmail(OrderEntity order)  {
-        String subject = "Confirm Your Order";
-        String confirmationUrl = "http://localhost:8080/activateAccount?name=" + order.getFirstName()+order.getLastName()+ "&ordercode=" + order.getId();
-        String mailBody = "<h1> Dear " + order.getFirstName()+" "+order.getLastName() + ",<h1>"
-                + "<h4>You've ordered successfully from our website. Enjoy with us</h4>"
-                + "<br/>Please click on the following link to confirm your order."
-                + "<br/>" + confirmationUrl;
+
+    private void sendConfirmationEmail(OrderEntity order)  {
+        String subject = "Thanks for your order";
+        String mailBody = "<h3> Dear " + order.getFirstName()+" "+order.getLastName() + ",<h3>"
+                + "<p>Thank you for your order! Your product will be shipped soon!</p>"
+                + "<p>Here is your order number: +"+order.getId()+"</p>"
+                + "<p>If you have any questions or concerns about your order, feel free to reach out to our Customer Service anytime 9AM-5PM, Monday-Friday. Be sure to have the order number handy so we can help you even faster!</p>"
+                + "<p>We look forward to your feedback on your purchase! Thank you again!</p>"
+                + "<p>Kind regards,</p>"
+                + "<p>T&T Fashion</p>";
 
         try {
             GmailSender.send(order.getEmail(), subject, mailBody, true);

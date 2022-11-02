@@ -108,7 +108,7 @@
             </li>
             <li class="list-group-item d-flex justify-content-between">
               <span>Total (USD)</span>
-                  <strong>$<c:out value="${sessionScope.total_price_in_cart}"/></strong>
+              <strong><span id="total_price_cart">$<c:out value="${sessionScope.total_price_in_cart}"/></span></strong>
             </li>
           </ul>
 
@@ -243,6 +243,50 @@
                 <label class="custom-control-label" for="paypal">PayPal</label>
               </div>
             </div>
+
+
+            <div class="m-1" id="paypal-success" style="display: none";>
+              <div class="alert alert-success alert-dismissible fade show">
+                <strong>Success!</strong>
+                <span> Your order has been purchased successfully. Thank you for your payment!</span> <br>
+                <span id="paypal-transaction-id"> Transaction ID: </span>
+              </div>
+            </div>
+            <!-- Replace with your own sandbox Business account app client ID -->
+            <script src="https://www.paypal.com/sdk/js?client-id=ATi1AbbuU-e1J1_UP4KvtvtboUG1adhcX9-19g40-MWOsAv5FSJkNAuWo4y5_hdSymXhDOfuoDJN6_T0&currency=USD" data-namespace="paypal_sdk"></script>
+            <!-- Set up a container element for the button -->
+            <div id="paypal-button-container"></div>
+            <script>
+              paypal_sdk.Buttons({
+                // Sets up the transaction when a payment button is clicked
+                createOrder: (data, actions) => {
+                  let total_price = $("#total_price_cart").html();
+                  total_price = Number(total_price.substr(total_price.indexOf("$") + 1));
+                  return actions.order.create({
+                    purchase_units: [{
+                      amount: {
+                        value: total_price
+                      }
+                    }]
+                  });
+                },
+                // Finalize the transaction after payer approval
+                onApprove: (data, actions) => {
+                  return actions.order.capture().then(function(orderData) {
+                    // Successful capture! For dev/demo purposes:
+                    console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                    const transaction = orderData.purchase_units[0].payments.captures[0];
+                    //alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
+                    $("#paypal-button-container").hide();
+                    $("#paypal-success").show();
+                    $("#paypal-transaction-id").text(transaction.id);
+
+                  });
+                }
+              }).render('#paypal-button-container');
+            </script>
+
+
             <%--        <div class="row">--%>
             <%--          <div class="col-md-6 mb-3">--%>
             <%--            <label for="cc-name">Name on card</label>--%>
@@ -387,6 +431,22 @@
     });
   });
 </script>
+<!--===============================================================================================-->
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.btn').on('click', function() {
+      var $this = $(this);
+      $this.button('loading');
+      // setTimeout(function() {
+      //   $this.button('reset');
+      // }, 8000);
+    });
+  });
+</script>
+<!--===============================================================================================-->
 </body>
 
 </html>
