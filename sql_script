@@ -78,7 +78,7 @@ VALUES ( 55,'V-neck Silk Skirt', 25, 9, 1, '2022-08-20');
 INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) ---Váy Voan Hoa Nhí Cổ Tim Tay Bồng "van5124"
 VALUES ( 52,'Small Floral Chiffon Dress Puffy Sleeve Heart Neck', 22, 9, 2, '2022-09-27');
 INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) ---Áo Phao Nữ Siêu Nhẹ Có Mũ "phn4000"
-VALUES ( 107,'Women''s Super Light Lifejacket With Hood', 60, 11, 2, '2022-10-15');
+VALUES ( 107,'Women''s Super Light Life Jacket With Hood', 60, 11, 2, '2022-10-15');
 INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) ---Áo Khoác Gió Nữ Thể Thao "akn4024"
 VALUES ( 89,'Women''s Sports Wind Jacket', 40, 11, 4, '2022-08-15');
 INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) ---Bộ Đồ Thể Thao Trẻ Emo "sdk5007"
