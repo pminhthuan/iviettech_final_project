@@ -39,8 +39,8 @@
                             <c:if test="${type.equals('updateProduct')}">
                                 <div class="form-group">
                                     <label class="control-label">ID</label>
-                                    <form:input path="id" type="text" class="form-control" id="id" placeholder="ID" disabled="true"/>
-                                    <form:hidden path="id" />
+                                    <form:input path="id" type="text" class="form-control" id="id" placeholder="ID" readonly="true"/>
+<%--                                    <form:hidden path="id" />--%>
                                 </div>
                             </c:if>
                             <div class="form-group">

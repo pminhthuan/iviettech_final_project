@@ -86,11 +86,14 @@
                                 <c:choose>
                                     <c:when test="${p.status == 0}">
 <%--                                        <label style="color: red">${p.status}</label>--%>
-                                        <a href="<c:url value="/admin/updateProductStatus/${p.id}"/>">Active</a>
+                                        <a href="<c:url value="/admin/updateProductStatus/${p.id}"/>">
+                                            <i class="fa fa-check" aria-hidden="true"></i></a>
                                     </c:when>
                                     <c:otherwise>
 <%--                                        <label style="color: green">${p.status}</label>--%>
-                                        <a href="<c:url value="/admin/updateProductStatus/${p.id}"/>">Re-Active</a>
+                                        <a href="<c:url value="/admin/updateProductStatus/${p.id}"/>">
+                                            <i class="fa fa-times" aria-hidden="true" style="color: red"></i>
+                                        </a>
                                     </c:otherwise>
                                 </c:choose>
                             </td>

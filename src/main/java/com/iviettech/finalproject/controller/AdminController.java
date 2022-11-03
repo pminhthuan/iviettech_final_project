@@ -18,6 +18,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.nio.file.Path;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -112,18 +114,18 @@ public class AdminController {
     @RequestMapping(value = "/updateProductStatus/{id}")
     public String updateProductStatus(@ModelAttribute ProductEntity product ,@PathVariable int id, Model model) {
 
-        List<ProductEntity> productEntity =
-                (List<ProductEntity>) productRepository.findAll();
-        for (ProductEntity p : productEntity) {
-            if (p.getId() == id) {
-                if (p.getStatus() == 0) {
-                    p.setStatus(1);
+//       ProductEntity productEntity =
+//                 productRepository.findById(id);
+//        for (ProductEntity p : productEntity) {
+//            if (product.getId() == id) {
+                if (product.getStatus() == 0) {
+                    product.setStatus(1);
                 } else {
-                    p.setStatus(0);
+                    product.setStatus(0);
                 }
-                break;
-            }
-        }
+//                break;
+//            }
+//        }
         model.addAttribute("product", product);
         productRepository.save(product);
         return "redirect:/admin/adProduct";
@@ -133,7 +135,8 @@ public class AdminController {
     //Product Details
 
     @RequestMapping(value = "/adProductDetail/{id}", method = GET)
-    public String viewProductDetail(@PathVariable("id") int id, Model model) {
+    public String viewProductDetail(@PathVariable("id") int id, Model model, HttpSession session) {
+        session.setAttribute("idpro",id);
         List<ProductDetailEntity> productDetailsList =
                 (List<ProductDetailEntity>) productDetailRepository.findProductDetailEntityByProduct_Id(id);
         model.addAttribute("productDetailsList", productDetailsList);
@@ -142,9 +145,13 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/newProductDetail", method = GET)
-    public String newProductDetail(Model model) {
-        model.addAttribute("productDetail", new ProductDetailEntity());
+    public String newProductDetail(Model model, HttpSession session) {
+//        int id = (int) session.getAttribute("idpro");
+        ProductDetailEntity productDetailEntity = new ProductDetailEntity();
+//        productDetailEntity.getProduct().setId(id);
+        model.addAttribute("productDetail", productDetailEntity);
         model.addAttribute("msg", "Add a new product detail");
+        model.addAttribute("type", "newProductDetail");
         model.addAttribute("action", "newProductDetail");
 
         setProductDropDownlist(model);
@@ -153,7 +160,9 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/newProductDetail", method = POST, produces = "text/plain;charset=UTF-8")
-    public String saveProductDetail(ProductDetailEntity productDetail, Model model) {
+    public String saveProductDetail(ProductDetailEntity productDetail, Model model, HttpSession session) {
+        int id = (int) session.getAttribute("idpro");
+
         productDetailRepository.save(productDetail);
         model.addAttribute("message","You are add success!");
         return "redirect:/admin/adProductDetail/" + productDetail.getProduct().getId();
@@ -375,7 +384,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/updateOrder", method = POST)
-    public String updateOrder(@ModelAttribute OrderEntity order) {
+    public String updateOrder(@ModelAttribute("order") OrderEntity order) {
         orderRepository.save(order);
         return "redirect:/admin/adOrder";
     }
@@ -391,15 +400,30 @@ public class AdminController {
         return "admin/ad_order_detail";
     }
 
-    //Report during the date
-//    @RequestMapping(value = "/adReportDate", method = GET)
-//    public String viewReportDate(Model model) {
-//        List<OrderEntity> orderList =
-//                (List<OrderEntity>) orderRepository.findByRequireDateDuringTheDate();
-//        model.addAttribute("orderList", orderList);
-//
-//        return "admin/ad_order";
-//    }
+//    Report during the date
+    @RequestMapping(value = "/adReportDate", method = GET)
+    public String viewReportDate(Model model) {
+        LocalDateTime date = LocalDateTime.now();
+        String dt = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.ENGLISH).format(date);
+        List<OrderEntity> orderList =
+                (List<OrderEntity>) orderRepository.getOrderEntitiesByRequireDate1(dt);
+        model.addAttribute("orderList", orderList);
+
+        return "admin/ad_order";
+    }
+
+//    Report during the month
+    @RequestMapping(value = "/adReportMonth", method = GET)
+    public String viewReportMonth(Model model) {
+        LocalDateTime date = LocalDateTime.now();
+        String dt2 = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.ENGLISH).format(date);
+        String dt1 = DateTimeFormatter.ofPattern("01/MM/yyyy", Locale.ENGLISH).format(date);
+        List<OrderEntity> orderList =
+                (List<OrderEntity>) orderRepository.getOrderEntitiesByRequireDate2(dt1,dt2);
+        model.addAttribute("orderList", orderList);
+
+        return "admin/ad_order";
+    }
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {

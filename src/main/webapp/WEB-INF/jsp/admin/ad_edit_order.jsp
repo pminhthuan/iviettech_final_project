@@ -39,33 +39,33 @@
                             <c:if test="${type.equals('updateOrder')}">
                                 <div class="form-group">
                                     <label class="control-label">ID</label>
-                                    <form:input path="id" type="text" class="form-control" id="id" placeholder="ID" disabled="true"/>
-                                    <form:hidden path="id" />
+                                    <form:input path="id" type="text" class="form-control" id="id" placeholder="ID" readonly="true"/>
+<%--                                    <form:hidden path="id" />--%>
                                         <%--                                    <form:hidden path="product.id" />--%>
                                 </div>
                             </c:if>
                             <div class="row">
                                 <div class="form-group mb-3 col-xs-12 col-sm-6">
                                     <label class="control-label">First name (*)</label>
-                                    <form:input path="firstName" type="text" class="form-control" placeholder="First name" required="true" disabled="true"/>
+                                    <form:input path="firstName" type="text" class="form-control" placeholder="First name" required="true" readonly="true"/>
                                 </div>
                                 <div class="form-group mb-3 col-xs-12 col-sm-6">
                                     <label class="control-label">Last name (*)</label>
-                                    <form:input path="lastName" type="text" class="form-control" placeholder="Last name" required="true" disabled="true"/>
+                                    <form:input path="lastName" type="text" class="form-control" placeholder="Last name" required="true" readonly="true"/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Phone (*)</label>
-                                <form:input path="phoneNumber" type="text" class="form-control" placeholder="0123456789" required="true" disabled="true"/>
+                                <form:input path="phoneNumber" type="text" class="form-control" placeholder="0123456789" required="true" readonly="true"/>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Email (*)</label>
-                                <form:input path="email" type="text" class="form-control" placeholder="abc@email.com" required="true" disabled="true"/>
+                                <form:input path="email" type="text" class="form-control" placeholder="abc@email.com" required="true" readonly="true"/>
                             </div>
                             <div class="row">
                                 <div class="form-group mb-3 col-xs-12 col-sm-6">
                                     <label class="control-label">Require Date (*)</label>
-                                    <form:input path="requireDate" type="date" class="form-control" name="requireDate" required="true" disabled="true"/>
+                                    <form:input path="requireDate" type="date" class="form-control" name="requireDate" required="true" readonly="true"/>
                                 </div>
                                 <div class="form-group mb-3 col-xs-12 col-sm-6">
                                         <label class="control-label">Shipping Date (*)</label>
