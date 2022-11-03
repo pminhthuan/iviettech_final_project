@@ -9,6 +9,9 @@ import com.iviettech.finalproject.pojo.CartItem;
 import com.iviettech.finalproject.repository.*;
 import com.iviettech.finalproject.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -440,6 +443,13 @@ public class ProductController {
     public String viewAbout(Model model) {
 
         return "about";
+    }
+
+    @GetMapping("/shop/page")
+    public String paginate(Model model, @RequestParam("p") Optional<Integer>p){
+        Pageable pageable = PageRequest.of(p.orElse(0), 16);
+        Page<ProductImageEntity> page = (Page<ProductImageEntity>) productImageRepository.getProductListWithImage();
+        return "";
     }
 
 }
