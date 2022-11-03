@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -44,6 +45,9 @@ public class AdminService {
     @Autowired
     OrderDetailRepository orderDetailRepository;
 
+    @Autowired
+    ServletContext servletContext;
+
     public void updateProductStatus(int id) {
         List<ProductEntity> productEntity =
                 (List<ProductEntity>) productRepository.findAll();
@@ -64,7 +68,8 @@ public class AdminService {
         if( null != file && !file.isEmpty()){
             try {
                 byte[] bytes = file.getBytes();
-                String path = "D:\\final\\iviettech_final_project\\src\\main\\webapp\\resources\\images\\products\\";
+//                String path = "D:\\final\\iviettech_final_project\\src\\main\\webapp\\resources\\images\\products\\";
+                String path = servletContext.getRealPath("/resources/images/product/");
                 String name = file.getOriginalFilename();
                 File dir = new File(path);
                 if (!dir.exists()) {
@@ -72,18 +77,18 @@ public class AdminService {
                 }
 
 //                String name = String.valueOf(new Date().getTime()+".jpg");
-
+                String source = "/resources/images/product/" + name;
                 // Create the file on server
-                String fileSource = "/resources/images/product/" + name;
-//                File serverFile = new File(fileSource);
-//                System.out.println("=====Path image to server: " + serverFile.getPath());
-//                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-//                stream.write(bytes);
-//                stream.close();
+                String fileSource = path + File.separator + file.getOriginalFilename();
+                File serverFile = new File(fileSource);
+                System.out.println("=====Path image to server: " + serverFile.getPath());
+                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
+                stream.write(bytes);
+                stream.close();
                 ProductImageEntity imageEntity = new ProductImageEntity();
                 Optional<ProductEntity> productEntity = productRepository.findById(id);
                 imageEntity.setProduct(productEntity.get());
-                imageEntity.setImageUrl(fileSource);
+                imageEntity.setImageUrl(source);
                 imageEntity.setImageAlt(name);
                 productImageRepository.save(imageEntity);
 
@@ -97,5 +102,6 @@ public class AdminService {
         }
 
     }
+
 
 }
