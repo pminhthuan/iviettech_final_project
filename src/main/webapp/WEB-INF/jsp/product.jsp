@@ -182,31 +182,31 @@
                             </li>
 
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
+                                <a href="<c:url value="/shop/filter/${0}-${50}"/>" class="filter-link stext-106 trans-04">
                                     $0.00 - $50.00
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
+                                <a href="<c:url value="/shop/filter/${50}-${100}"/>" class="filter-link stext-106 trans-04">
                                     $50.00 - $100.00
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
+                                <a href="<c:url value="/shop/filter/${100}-${150}"/>" class="filter-link stext-106 trans-04">
                                     $100.00 - $150.00
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
+                                <a href="<c:url value="/shop/filter/${150}-${200}"/>" class="filter-link stext-106 trans-04">
                                     $150.00 - $200.00
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="#" class="filter-link stext-106 trans-04">
+                                <a href="<c:url value="/shop/filter/${200}-${100000}"/>" class="filter-link stext-106 trans-04">
                                     $200.00+
                                 </a>
                             </li>
@@ -224,7 +224,7 @@
 										<i class="zmdi zmdi-circle"></i>
 									</span>
 
-                                <a href="#" class="filter-link stext-106 trans-04">
+                                <a href="<c:url value="/shop/filter/Black"/>" class="filter-link stext-106 trans-04">
                                     Black
                                 </a>
                             </li>
@@ -234,7 +234,7 @@
 										<i class="zmdi zmdi-circle"></i>
 									</span>
 
-                                <a href="#" class="filter-link stext-106 trans-04 filter-link-active">
+                                <a href="<c:url value="/shop/filter/Blue"/>" class="filter-link stext-106 trans-04 filter-link-active">
                                     Blue
                                 </a>
                             </li>
@@ -244,18 +244,18 @@
 										<i class="zmdi zmdi-circle"></i>
 									</span>
 
-                                <a href="#" class="filter-link stext-106 trans-04">
+                                <a href="<c:url value="/shop/filter/Grey"/>" class="filter-link stext-106 trans-04">
                                     Grey
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-									<span class="fs-15 lh-12 m-r-6" style="color: #00ad5f;">
+									<span class="fs-15 lh-12 m-r-6" style="color: yellow;">
 										<i class="zmdi zmdi-circle"></i>
 									</span>
 
-                                <a href="#" class="filter-link stext-106 trans-04">
-                                    Green
+                                <a href="<c:url value="/shop/filter/Yellow"/>" class="filter-link stext-106 trans-04">
+                                    Yellow
                                 </a>
                             </li>
 
@@ -264,7 +264,7 @@
 										<i class="zmdi zmdi-circle"></i>
 									</span>
 
-                                <a href="#" class="filter-link stext-106 trans-04">
+                                <a href="<c:url value="/shop/filter/Red"/>" class="filter-link stext-106 trans-04">
                                     Red
                                 </a>
                             </li>
@@ -274,7 +274,7 @@
 										<i class="zmdi zmdi-circle-o"></i>
 									</span>
 
-                                <a href="#" class="filter-link stext-106 trans-04">
+                                <a href="<c:url value="/shop/filter/White"/>" class="filter-link stext-106 trans-04">
                                     White
                                 </a>
                             </li>
@@ -328,13 +328,13 @@
                         </a>
                     </div>
 
-                    <div class="block2-txt flex-w flex-t p-t-14">
+                    <div class="block2-txt flex-w flex-t p-t-10">
                         <div class="block2-txt-child1 flex-col-l ">
                             <a href="/shop/view/${p.product.id}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
                                     ${p.product.name}
                             </a>
 
-                            <span class="stext-105 cl3">
+                            <span class="stext-105 cl3 price">
 									$${p.product.actual_price}
 								</span>
                         </div>

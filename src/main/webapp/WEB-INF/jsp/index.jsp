@@ -386,13 +386,13 @@
                                         </a>
                                     </div>
 
-                                    <div class="block2-txt flex-w flex-t p-t-14">
+                                    <div class="block2-txt flex-w flex-t p-t-10">
                                         <div class="block2-txt-child1 flex-col-l ">
                                             <a href="<c:url value="/shop/view/${p.product.id}"/>" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
                                                 ${p.product.name}
                                             </a>
 
-                                            <span class="stext-105 cl3">
+                                            <span class="stext-105 cl3 price">
 													$${p.product.actual_price}
 												</span>
                                         </div>
@@ -434,7 +434,7 @@
                                                 Converse All Star Hi Plimsolls
                                             </a>
 
-                                            <span class="stext-105 cl3">
+                                            <span class="stext-105 cl3 price">
 													$75.00
 												</span>
                                         </div>
@@ -466,7 +466,7 @@
                                                 Femme T-Shirt In Stripe
                                             </a>
 
-                                            <span class="stext-105 cl3">
+                                            <span class="stext-105 cl3 price">
 													$25.85
 												</span>
                                         </div>
@@ -498,7 +498,7 @@
                                                 Herschel supply
                                             </a>
 
-                                            <span class="stext-105 cl3">
+                                            <span class="stext-105 cl3 price">
 													$63.16
 												</span>
                                         </div>
@@ -530,7 +530,7 @@
                                                 Herschel supply
                                             </a>
 
-                                            <span class="stext-105 cl3">
+                                            <span class="stext-105 cl3 price">
 													$63.15
 												</span>
                                         </div>
@@ -562,7 +562,7 @@
                                                 T-Shirt with Sleeve
                                             </a>
 
-                                            <span class="stext-105 cl3">
+                                            <span class="stext-105 cl3 price">
 													$18.49
 												</span>
                                         </div>
@@ -594,7 +594,7 @@
                                                 Pretty Little Thing
                                             </a>
 
-                                            <span class="stext-105 cl3">
+                                            <span class="stext-105 cl3 price">
 													$54.79
 												</span>
                                         </div>
@@ -626,7 +626,7 @@
                                                 Mini Silver Mesh Watch
                                             </a>
 
-                                            <span class="stext-105 cl3">
+                                            <span class="stext-105 cl3 price">
 													$86.85
 												</span>
                                         </div>
@@ -658,7 +658,7 @@
                                                 Square Neck Back
                                             </a>
 
-                                            <span class="stext-105 cl3">
+                                            <span class="stext-105 cl3 price">
 													$29.64
 												</span>
                                         </div>
@@ -698,7 +698,7 @@
                                                 Herschel supply
                                             </a>
 
-                                            <span class="stext-105 cl3">
+                                            <span class="stext-105 cl3 price">
 													$35.31
 												</span>
                                         </div>
@@ -730,7 +730,7 @@
                                                 Classic Trench Coat
                                             </a>
 
-                                            <span class="stext-105 cl3">
+                                            <span class="stext-105 cl3 price">
 													$75.00
 												</span>
                                         </div>
@@ -762,7 +762,7 @@
                                                 Vintage Inspired Classic
                                             </a>
 
-                                            <span class="stext-105 cl3">
+                                            <span class="stext-105 cl3 price">
 													$93.20
 												</span>
                                         </div>
@@ -794,7 +794,7 @@
                                                 Converse All Star Hi Plimsolls
                                             </a>
 
-                                            <span class="stext-105 cl3">
+                                            <span class="stext-105 cl3 price">
 													$75.00
 												</span>
                                         </div>
@@ -826,7 +826,7 @@
                                                 Herschel supply
                                             </a>
 
-                                            <span class="stext-105 cl3">
+                                            <span class="stext-105 cl3 price">
 													$63.16
 												</span>
                                         </div>
@@ -858,7 +858,7 @@
                                                 T-Shirt with Sleeve
                                             </a>
 
-                                            <span class="stext-105 cl3">
+                                            <span class="stext-105 cl3 price">
 													$18.49
 												</span>
                                         </div>
@@ -890,7 +890,7 @@
                                                 Mini Silver Mesh Watch
                                             </a>
 
-                                            <span class="stext-105 cl3">
+                                            <span class="stext-105 cl3 price">
 													$86.85
 												</span>
                                         </div>
@@ -930,7 +930,7 @@
                                                 Only Check Trouser
                                             </a>
 
-                                            <span class="stext-105 cl3">
+                                            <span class="stext-105 cl3 price">
 													$25.50
 												</span>
                                         </div>
@@ -962,7 +962,7 @@
                                                 Vintage Inspired Classic
                                             </a>
 
-                                            <span class="stext-105 cl3">
+                                            <span class="stext-105 cl3 price">
 													$93.20
 												</span>
                                         </div>
@@ -994,7 +994,7 @@
                                                 Shirt in Stretch Cotton
                                             </a>
 
-                                            <span class="stext-105 cl3">
+                                            <span class="stext-105 cl3 price">
 													$52.66
 												</span>
                                         </div>

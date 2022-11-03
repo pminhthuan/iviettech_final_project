@@ -94,7 +94,7 @@
               <li class="list-group-item d-flex justify-content-between lh-condensed">
                 <div>
                   <h6 class="my-0">${item.title}</h6>
-                  <small class="text-muted">x ${item.quantity}</small>
+                  <small class="text-muted">${item.quantity} x ${item.price}, ${item.color}, ${item.size}</small>
                 </div>
                 <span class="text-muted">$${item.totalPriceInNumber}</span>
               </li>

@@ -2183,7 +2183,7 @@ input.num-product::-webkit-inner-spin-button {
 .cl1 {color: #717fe0;}
 .cl2 {color: #333;}
 .cl3 {color: #666;}
-.cl4 {color: #999;}
+.cl4 {color: #343a40;}
 .cl5 {color: #222;}
 .cl6 {color: #888;}
 .cl7 {color: #b2b2b2;}
@@ -2192,6 +2192,11 @@ input.num-product::-webkit-inner-spin-button {
 .cl10 {color: #1d1d1d;}
 .cl11 {color: #f9ba48;}
 .cl12 {color: #ccc;}
+
+.price {
+  color: #222;
+  font-weight: bold;
+}
 
 /*//////////////////////////////////////////////////////////////////
 [ S-Text 0 - 15 ]*/

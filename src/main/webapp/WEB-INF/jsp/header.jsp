@@ -252,7 +252,7 @@
                         </a>
 
                         <span class="header-cart-item-info">
-								${cart.quantity} x $${cart.price}
+								${cart.quantity} x $${cart.price}, ${cart.color}, ${cart.size}
 							</span>
                     </div>
                 </li>

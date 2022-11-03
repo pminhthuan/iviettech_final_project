@@ -34,7 +34,7 @@ VALUES ( 32,'Men''s Cotton T-Shirt USA Premium Version', 18, 2, 1, '2022-09-27')
 INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) 
 VALUES ( 22,'Men''s Round Neck T-shirt', 12, 2, 2, '2022-11-05');
 INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) 
-VALUES ( 30,'Men''s Sport Sweatshirts', 20, 2, 1, '2022-10-15');
+VALUES ( 30,'Men''s Sport Sweat Shirts', 20, 2, 1, '2022-10-15');
 INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) 
 VALUES ( 55,'Men''s Long Sleeve Plain Shirt', 28, 1, 2, '2022-07-15');
 INSERT INTO products ( actual_price, name, orginal_price, category_detail_id, manufactor_id, add_date ) 

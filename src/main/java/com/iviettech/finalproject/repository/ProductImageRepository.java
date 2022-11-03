@@ -79,6 +79,20 @@ public interface ProductImageRepository extends CrudRepository<ProductImageEntit
     List<ProductImageEntity> getProductListHighToLowPrice();
 
 
+    @Query(value = "select * from products as p left join product_image  as i on p.id = i.product_id\n" +
+            "left join (select p.id, p.name, sum(pt.quantity) from products as p \n" +
+            "left join product_detail as pt on pt.product_id = p.id group by p.id) as q on q.id = p.id\n" +
+            "where i.is_main_image = 1 and q.sum > 0 and p.actual_price between ? and ?",
+            nativeQuery = true)
+    List<ProductImageEntity> getProductListByPriceBetween(double fromPrice, double toPrice);
+
+    @Query(value = "select * from products as p left join product_image  as i on p.id = i.product_id\n" +
+            "left join (select p.id, pt.color, p.name, sum(pt.quantity) from products as p \n" +
+            "left join product_detail as pt on pt.product_id = p.id group by p.id, pt.color) as q on q.id = p.id\n" +
+            "where i.is_main_image = 1 and q.sum > 0 and color ilike %:color%",
+            nativeQuery = true)
+    List<ProductImageEntity> getProductListByColor(@Param("color") String color);
+
     List<ProductImageEntity> findByProduct_Id(int id);
 
 

@@ -13,7 +13,8 @@ import java.util.List;
 @Table(name = "orders")
 public class OrderEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @TableGenerator(name = "id_gen", initialValue = 3000)
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "id_gen")
     @Column(name = "id")
     private int id;
 

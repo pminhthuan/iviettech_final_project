@@ -126,6 +126,23 @@ public class ProductController {
     }
 
 
+    @RequestMapping(value = "/shop/search", method = GET)
+    public String search(@RequestParam("searchInput")String searchInput, Model model) {
+        List<ProductImageEntity> resultList;
+        if (searchInput.isEmpty()) {
+            resultList = productImageRepository.getProductListWithImage();
+        } else {
+            resultList = productImageRepository.getProductBySearch(searchInput, searchInput);
+        }
+        List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
+
+        model.addAttribute("categories", categoryEntityList);
+        model.addAttribute("searchInput",searchInput);
+        model.addAttribute("productList", resultList);
+        return "product";
+    }
+
+
     @RequestMapping(value = "/shop/filter/bestseller",method = GET)
     public String showProductBestSeller(Model model) {
         List<ProductImageEntity> productEntityList = productImageRepository.getProductListBestSeller();
@@ -178,21 +195,24 @@ public class ProductController {
     }
 
 
-
-
-    @RequestMapping(value = "/shop/filter", method = GET)
-    public String search(@RequestParam("searchInput")String searchInput, Model model) {
-        List<ProductImageEntity> resultList;
-        if (searchInput.isEmpty()) {
-            resultList = productImageRepository.getProductListWithImage();
-        } else {
-            resultList = productImageRepository.getProductBySearch(searchInput, searchInput);
-        }
+    @RequestMapping(value = "/shop/filter/{fromPrice}-{toPrice}", method = GET)
+    public String showProductByPrice(@PathVariable("fromPrice")double fromPrice,@PathVariable("toPrice")double toPrice, Model model) {
+        List<ProductImageEntity> productEntityList = productImageRepository.getProductListByPriceBetween(fromPrice, toPrice);
         List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
 
         model.addAttribute("categories", categoryEntityList);
-        model.addAttribute("searchInput",searchInput);
-        model.addAttribute("productList", resultList);
+        model.addAttribute("productList", productEntityList);
+        return "product";
+    }
+
+
+    @RequestMapping(value = "/shop/filter/{color}", method = GET)
+    public String showProductByColor(@PathVariable("color")String color, Model model) {
+        List<ProductImageEntity> productEntityList = productImageRepository.getProductListByColor(color);
+        List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
+
+        model.addAttribute("categories", categoryEntityList);
+        model.addAttribute("productList", productEntityList);
         return "product";
     }
 
