@@ -17,6 +17,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.nio.file.Path;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -146,10 +147,11 @@ public class AdminController {
 
     @RequestMapping(value = "/newProductDetail", method = GET)
     public String newProductDetail(Model model, HttpSession session) {
-//        int id = (int) session.getAttribute("idpro");
-        ProductDetailEntity productDetailEntity = new ProductDetailEntity();
+        int id = (int) session.getAttribute("idpro");
+
 //        productDetailEntity.getProduct().setId(id);
-        model.addAttribute("productDetail", productDetailEntity);
+//        model.addAttribute("productDetail", productDetailRepository.getByProductId(id));
+        model.addAttribute("productDetail", new ProductDetailEntity());
         model.addAttribute("msg", "Add a new product detail");
         model.addAttribute("type", "newProductDetail");
         model.addAttribute("action", "newProductDetail");
@@ -160,8 +162,8 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/newProductDetail", method = POST, produces = "text/plain;charset=UTF-8")
-    public String saveProductDetail(ProductDetailEntity productDetail, Model model, HttpSession session) {
-        int id = (int) session.getAttribute("idpro");
+    public String saveProductDetail(ProductDetailEntity productDetail, Model model) {
+//        int id = (int) session.getAttribute("idpro");
 
         productDetailRepository.save(productDetail);
         model.addAttribute("message","You are add success!");
@@ -403,10 +405,19 @@ public class AdminController {
 //    Report during the date
     @RequestMapping(value = "/adReportDate", method = GET)
     public String viewReportDate(Model model) {
-        LocalDateTime date = LocalDateTime.now();
-        String dt = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.ENGLISH).format(date);
-        List<OrderEntity> orderList =
-                (List<OrderEntity>) orderRepository.getOrderEntitiesByRequireDate1(dt);
+//        LocalDateTime date = LocalDateTime.now();
+//        String dt = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH).format(date);
+        List<OrderEntity> orderList = orderRepository.findByRequireDate(new Date());
+        model.addAttribute("orderList", orderList);
+
+        return "admin/ad_order";
+    }
+
+    // report in week
+    @RequestMapping(value = "/adReportWeek", method = GET)
+    public String viewReportWeek(Model model) {
+
+        List<OrderEntity> orderList = orderRepository.getOrderWeek();
         model.addAttribute("orderList", orderList);
 
         return "admin/ad_order";
@@ -415,11 +426,24 @@ public class AdminController {
 //    Report during the month
     @RequestMapping(value = "/adReportMonth", method = GET)
     public String viewReportMonth(Model model) {
-        LocalDateTime date = LocalDateTime.now();
-        String dt2 = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.ENGLISH).format(date);
-        String dt1 = DateTimeFormatter.ofPattern("01/MM/yyyy", Locale.ENGLISH).format(date);
-        List<OrderEntity> orderList =
-                (List<OrderEntity>) orderRepository.getOrderEntitiesByRequireDate2(dt1,dt2);
+//        LocalDateTime date = LocalDateTime.now();
+//        String dt2 = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.ENGLISH).format(date);
+//        String dt1 = DateTimeFormatter.ofPattern("01/MM/yyyy", Locale.ENGLISH).format(date);
+//        Date date1 = new SimpleDateFormat("01/MM/yyyy").parse(String.valueOf(new Date()));
+//        Date date2 = new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(new Date()));
+////        Date date = new Date();
+
+        List<OrderEntity> orderList = orderRepository.getOrderMonth();
+        model.addAttribute("orderList", orderList);
+
+        return "admin/ad_order";
+    }
+
+    // report in year
+    @RequestMapping(value = "/adReportYear", method = GET)
+    public String viewReportYear(Model model) {
+
+        List<OrderEntity> orderList = orderRepository.getOrderYear();
         model.addAttribute("orderList", orderList);
 
         return "admin/ad_order";
