@@ -11,6 +11,7 @@
 <html>
 <head>
     <title>Product image</title>
+    <link rel="icon" type="image/png" href="/resources/images/icons/logo_T_T_Black.png"/>
     <link rel="stylesheet" type="text/css" href="/resources/admin/assets/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/resources/admin/css/dashboard.css">
     <link rel="stylesheet" type="text/css" href="/resources/admin/css/custom.css">
@@ -119,6 +120,7 @@
 
                                                             <span class="stext-105 cl3">
                                                                          <a href="<c:url value="/admin/deleteImage/${pi.id}/${pi.product.id}"/>">
+                                                                             <i class="fa fa-trash" aria-hidden="true" style="font-size:36px;"></i>
                                                                              Delete
                                                                          </a>
                                                                     </span>

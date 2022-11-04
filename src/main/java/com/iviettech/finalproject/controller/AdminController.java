@@ -57,8 +57,14 @@ public class AdminController {
     @Autowired
     OrderDetailRepository orderDetailRepository;
 
+    @Autowired
+    UserRepository userRepository;
+
     @RequestMapping(method = GET)
     public String viewAdmin(Model model) {
+
+        Double totalDay = orderRepository.getTotalDay();
+        model.addAttribute("totalDay", totalDay);
 
         return "admin/ad_home";
     }
@@ -113,27 +119,27 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/updateProductStatus/{id}")
-    public String updateProductStatus(@ModelAttribute ProductEntity product ,@PathVariable int id, Model model) {
+    public String updateProductStatus(@PathVariable int id, Model model) {
 
-//       ProductEntity productEntity =
-//                 productRepository.findById(id);
-//        for (ProductEntity p : productEntity) {
-//            if (product.getId() == id) {
-                if (product.getStatus() == 0) {
-                    product.setStatus(1);
-                } else {
-                    product.setStatus(0);
-                }
+       Optional<ProductEntity> productEntity = productRepository.findById(id);
+       if (productEntity.isPresent()) {
+           ProductEntity product = productEntity.get();
+           if (product.getStatus() == 0) {
+               product.setStatus(1);
+           } else {
+               product.setStatus(0);
+           }
 //                break;
 //            }
 //        }
-        model.addAttribute("product", product);
-        productRepository.save(product);
+           model.addAttribute("product", product);
+           productRepository.save(product);
+       }
         return "redirect:/admin/adProduct";
 
     }
 
-    //Product Details
+    // ---------------------------Product Details
 
     @RequestMapping(value = "/adProductDetail/{id}", method = GET)
     public String viewProductDetail(@PathVariable("id") int id, Model model, HttpSession session) {
@@ -149,6 +155,7 @@ public class AdminController {
     public String newProductDetail(Model model, HttpSession session) {
         int id = (int) session.getAttribute("idpro");
 
+        model.addAttribute("idpro", id);
 //        productDetailEntity.getProduct().setId(id);
 //        model.addAttribute("productDetail", productDetailRepository.getByProductId(id));
         model.addAttribute("productDetail", new ProductDetailEntity());
@@ -162,12 +169,12 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/newProductDetail", method = POST, produces = "text/plain;charset=UTF-8")
-    public String saveProductDetail(ProductDetailEntity productDetail, Model model) {
-//        int id = (int) session.getAttribute("idpro");
+    public String saveProductDetail(ProductDetailEntity productDetail, Model model, HttpSession session) {
+        int id = (int) session.getAttribute("idpro");
 
         productDetailRepository.save(productDetail);
         model.addAttribute("message","You are add success!");
-        return "redirect:/admin/adProductDetail/" + productDetail.getProduct().getId();
+        return "redirect:/admin/adProductDetail/" + id;
     }
 
     @RequestMapping(value = "/editProductDetail/{id}", method = GET)
@@ -400,6 +407,43 @@ public class AdminController {
         model.addAttribute("orderDetailList", orderDetailList);
 
         return "admin/ad_order_detail";
+    }
+
+//------------------------Account------
+
+    @RequestMapping(value = "/adAccount", method = GET)
+    public String viewAccount(Model model) {
+        List<UserEntity> userList =
+                (List<UserEntity>) userRepository.findAll();
+
+        model.addAttribute("userList", userList);
+
+        return "admin/ad_account";
+    }
+
+    @RequestMapping(value = "/newAccount", method = GET)
+    public String newAccount(Model model) {
+        model.addAttribute("account", new UserEntity());
+        model.addAttribute("msg", "Add account");
+        model.addAttribute("action", "newAccount");
+
+        return "admin/ad_edit_account";
+    }
+
+    @RequestMapping(value = "/editAccount/{id}", method = GET)
+    public String editAccount(Model model, @PathVariable int id) {
+        model.addAttribute("account", userRepository.findById(id));
+        model.addAttribute("msg", "Update account information");
+        model.addAttribute("type", "updateAccount");
+        model.addAttribute("action", "/admin/updateAccount");
+
+        return "admin/ad_edit_account";
+    }
+
+    @RequestMapping(value = "/updateAccount", method = POST)
+    public String updateAccount(@ModelAttribute UserEntity user) {
+        userRepository.save(user);
+        return "redirect:/admin/adAccount";
     }
 
 //    Report during the date
