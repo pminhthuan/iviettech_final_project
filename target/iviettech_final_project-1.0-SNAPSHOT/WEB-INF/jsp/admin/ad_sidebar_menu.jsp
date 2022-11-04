@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="/resources/admin/css/styles.css">
     <script src="/resources/admin/js/all.js" crossorigin="anonymous"></script>
     <script src="/resources/admin/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="/resources/admin/js/scripts.js"></script>
+<%--    <script src="/resources/admin/js/scripts.js"></script>--%>
     <script src="/resources/admin/js/Chart.min.js" crossorigin="anonymous"></script>
     <script src="/resources/admin/assets/demo/chart-area-demo.js"></script>
     <script src="/resources/admin/assets/demo/chart-bar-demo.js"></script>
@@ -50,33 +50,47 @@
                 </div>
                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                     <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                    Manage
+                    Report
                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                 </a>
                 <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                    <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                            Reports
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
+<%--                    <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">--%>
+<%--                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">--%>
+<%--                            Reports--%>
+<%--                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>--%>
+<%--                        </a>--%>
+<%--                        <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">--%>
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="admin/adReportDate">During the day</a>
+                                <a class="nav-link" href="/admin/adReportDate">During the day</a>
+                                <a class="nav-link" href="/admin/adReportWeek">In Week</a>
                                 <a class="nav-link" href="/admin/adReportMonth">In Month</a>
-                                <a class="nav-link" href="password.html">Forgot Password</a>
+                                <a class="nav-link" href="/admin/adReportYear">In Year</a>
                             </nav>
-                        </div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                            Error
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="401.html">401 Page</a>
-                                <a class="nav-link" href="404.html">404 Page</a>
-                                <a class="nav-link" href="500.html">500 Page</a>
-                            </nav>
-                        </div>
+<%--                        </div>--%>
+<%--                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">--%>
+<%--                            Error--%>
+<%--                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>--%>
+<%--                        </a>--%>
+<%--                        <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">--%>
+<%--                            <nav class="sb-sidenav-menu-nested nav">--%>
+<%--                                <a class="nav-link" href="401.html">401 Page</a>--%>
+<%--                                <a class="nav-link" href="404.html">404 Page</a>--%>
+<%--                                <a class="nav-link" href="500.html">500 Page</a>--%>
+<%--                            </nav>--%>
+<%--                        </div>--%>
+<%--                    </nav>--%>
+                </div>
+                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
+                    <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                    Member
+                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                </a>
+                <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingThree" data-bs-parent="#sidenavAccordion">
+                    <nav class="sb-sidenav-menu-nested nav">
+                        <a class="nav-link" href="/admin/adAccount">Account</a>
+                        <a class="nav-link" href="/admin/adCategory">Category</a>
+                        <a class="nav-link" href="/admin/adManyfactor">Manufactor</a>
+                        <a class="nav-link" href="/admin/adOrder">Order</a>
                     </nav>
                 </div>
                 <div class="sb-sidenav-menu-heading">Addons</div>

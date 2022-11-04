@@ -11,14 +11,15 @@
 <html>
 <head>
     <title>Product</title>
+    <link rel="icon" type="image/png" href="/resources/images/icons/logo_T_T_Black.png"/>
     <link rel="stylesheet" type="text/css" href="/resources/admin/assets/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/resources/admin/css/dashboard.css">
     <link rel="stylesheet" type="text/css" href="/resources/admin/css/custom.css">
     <link rel="stylesheet" type="text/css" href="/resources/admin/css/styles.css">
     <script src="/resources/admin/js/all.js" crossorigin="anonymous"></script>
     <script src="/resources/admin/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="/resources/admin/js/scripts.js"></script>
-    <script src="/resources/admin/js/Chart.min.js" crossorigin="anonymous"></script>
+<%--    <script src="/resources/admin/js/scripts.js"></script>--%>
+<%--    <script src="/resources/admin/js/Chart.min.js" crossorigin="anonymous"></script>--%>
     <script src="/resources/admin/assets/demo/chart-area-demo.js"></script>
     <script src="/resources/admin/assets/demo/chart-bar-demo.js"></script>
     <script src="/resources/admin/js/simple-datatables@latest.js" crossorigin="anonymous"></script>

@@ -10,7 +10,8 @@
 <html>
 <head>
     <title>Header admin</title>
-    <link rel="stylesheet" type="text/css" href="/resources/admin/assets/dist/css/bootstrap.min.css">
+    <link rel="icon" type="image/png" href="/resources/images/icons/logo_T_T_Black.png"/>
+<%--    <link rel="stylesheet" type="text/css" href="/resources/admin/assets/dist/css/bootstrap.min.css">--%>
     <link rel="stylesheet" type="text/css" href="/resources/admin/css/dashboard.css">
     <link rel="stylesheet" type="text/css" href="/resources/admin/css/custom.css">
     <link rel="stylesheet" type="text/css" href="/resources/admin/css/styles.css">
@@ -22,21 +23,20 @@
     <script src="/resources/admin/assets/demo/chart-bar-demo.js"></script>
     <script src="/resources/admin/js/simple-datatables@latest.js" crossorigin="anonymous"></script>
     <script src="/resources/admin/js/datatables-simple-demo.js"></script>
-
-
 </head>
 <body>
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
     <!-- Navbar Brand-->
-    <a class="navbar-brand ps-3" href="/admin">Start Bootstrap</a>
+    <a style="color:white" class="navbar-brand ps-3" href="/admin"><img src="/resources/images/icons/logo%20T&T_white.png" height="47px"> T&T Fashion</a>
     <!-- Sidebar Toggle-->
     <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
     <!-- Navbar Search-->
     <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-        <div class="input-group">
-            <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-            <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-        </div>
+<%--        <div class="input-group">--%>
+<%--            <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />--%>
+<%--            <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>--%>
+<%--        </div>--%>
+
     </form>
     <!-- Navbar-->
     <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
