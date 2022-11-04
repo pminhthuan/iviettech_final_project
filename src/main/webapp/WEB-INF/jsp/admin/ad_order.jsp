@@ -43,8 +43,8 @@
                         <th>Phone</th>
                         <th>Email</th>
                         <th>Address</th>
-                        <th>Require date</th>
-                        <th>Shipping date</th>
+                        <th>Req date</th>
+                        <th>Ship date</th>
                         <th>Total</th>
                         <th>Status</th>
                         <th>Note</th>
@@ -58,8 +58,8 @@
                         <th>Phone</th>
                         <th>Email</th>
                         <th>Address</th>
-                        <th>Require date</th>
-                        <th>Shipping date</th>
+                        <th>Req date</th>
+                        <th>Ship date</th>
                         <th>Total</th>
                         <th>Status</th>
                         <th>Note</th>
@@ -79,7 +79,21 @@
                             <td>${o.requireDate}</td>
                             <td>${o.shippingDate}</td>
                             <td>${o.totalAmount}</td>
-                            <td>${o.orderStatus}</td>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${o.orderStatus == 0}">
+
+                                        <a href="<c:url value="/admin/updateOrderStatus/${o.id}"/>">
+                                            <i class="fa fa-check" aria-hidden="true"></i></a>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <%--                                        <label style="color: green">${p.status}</label>--%>
+                                        <a href="<c:url value="/admin/updateOrderStatus/${o.id}"/>">
+                                            <i class="fa fa-times" aria-hidden="true" style="color: red"></i>
+                                        </a>
+                                    </c:otherwise>
+                                </c:choose>
+                            </td>
                             <td>${o.notesOfCustomer}</td>
                             <td>
                                 <a href="<c:url value="/admin/editOrder/${o.id}"/>"><i class="fa fa-pencil" aria-hidden="true"></i></a>

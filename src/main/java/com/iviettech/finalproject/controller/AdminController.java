@@ -66,6 +66,26 @@ public class AdminController {
         Double totalDay = orderRepository.getTotalDay();
         model.addAttribute("totalDay", totalDay);
 
+        // dashboard chart
+        int[] totalPricePerMonth = new int[12];
+        int[] totalOrderPerMonth = new int[12];
+        List<OrderEntity> allOrders = (List<OrderEntity>) orderRepository.findAll();
+        for (OrderEntity order : allOrders) {
+            int month = order.getRequireDate().getMonth();
+            totalPricePerMonth[month] = totalPricePerMonth[month] + (int)order.getTotalAmount();
+            totalOrderPerMonth[month] = totalOrderPerMonth[month] + 1;
+        }
+        String totalOrderPrice = Arrays.toString(totalPricePerMonth).substring(1, Arrays.toString(totalPricePerMonth).length() - 1);
+        String totalOrderNumber = Arrays.toString(totalOrderPerMonth).substring(1, Arrays.toString(totalOrderPerMonth).length() - 1);
+        // for bar chart
+        model.addAttribute("total_order_price", totalOrderPrice);
+        model.addAttribute("total_order_number", totalOrderNumber);
+
+
+        // for data table
+        // get latest 5 pending order (order status = 0 for example)
+        model.addAttribute("order_data_list", orderRepository.findTop5ByOrderStatusOrderByIdDesc(0));
+
         return "admin/ad_home";
     }
 
@@ -129,9 +149,6 @@ public class AdminController {
            } else {
                product.setStatus(0);
            }
-//                break;
-//            }
-//        }
            model.addAttribute("product", product);
            productRepository.save(product);
        }
@@ -396,6 +413,24 @@ public class AdminController {
     public String updateOrder(@ModelAttribute("order") OrderEntity order) {
         orderRepository.save(order);
         return "redirect:/admin/adOrder";
+    }
+
+    @RequestMapping(value = "/updateOrderStatus/{id}")
+    public String updateOrderStatus(@PathVariable int id, Model model) {
+
+        Optional<OrderEntity> orderEntity = orderRepository.findById(id);
+        if (orderEntity.isPresent()) {
+            OrderEntity order = orderEntity.get();
+            if (order.getOrderStatus() == 0) {
+                order.setOrderStatus(1);
+            } else {
+                order.setOrderStatus(0);
+            }
+            model.addAttribute("order", order);
+            orderRepository.save(order);
+        }
+        return "redirect:/admin/adProduct";
+
     }
 
     //Order Detail
