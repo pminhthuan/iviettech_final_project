@@ -74,36 +74,49 @@ public class ProductController {
         return "index";
     }
 
-    @RequestMapping(value = "/shop",method = GET)
-    public String viewShop(Model model) {
-        List<ProductImageEntity> productEntityList = productImageRepository.getProductListWithImage();
+    @GetMapping("/shop")
+    public String paginate(Model model, @RequestParam(value = "p", required = false, defaultValue = "0") Integer p){
+        Pageable pageable = PageRequest.of(p, 12);
+        Page<ProductImageEntity> productEntityList =  productImageRepository.getProductListWithImagePageable(pageable);
         List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
+        //System.out.println(p.get());
+
         model.addAttribute("categories", categoryEntityList);
-        model.addAttribute("productList", productEntityList);
+        model.addAttribute("productListP", productEntityList);
         model.addAttribute("activeLink", "how-active1");
+        model.addAttribute("tagPages", p);
+        model.addAttribute("url", "/shop/?");
         return "product";
     }
 
 
     @RequestMapping(value = "/shop/category/{id}",method = GET)
-    public String showProductByCategory(@PathVariable("id") int id, Model model) {
-        List<ProductImageEntity> productEntityList = productImageRepository.getProductListWithImageAndCategory(id);
+    public String showProductByCategory(@PathVariable("id") int id, Model model,
+                                        @RequestParam(value = "p", required = false, defaultValue = "0") Integer p) {
+        Pageable pageable = PageRequest.of(p, 12);
+        Page<ProductImageEntity> productEntityList = productImageRepository.getProductListWithImageAndCategory(id, pageable);
         List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
         model.addAttribute("categories", categoryEntityList);
-        model.addAttribute("productList", productEntityList);
+        model.addAttribute("productListP", productEntityList);
         model.addAttribute("tag", id);
+        model.addAttribute("tagPages", p);
+        model.addAttribute("url", "/shop/category/"+id+"/?");
 
         return "product";
     }
 
     @RequestMapping(value = "/shop/category/categorydetail/{id}",method = GET)
-    public String showProductByCategoryDetail(@PathVariable("id") int id, Model model) {
-        List<ProductImageEntity> productEntityList = productImageRepository.getProductListWithImageAndCategoryDetail(id);
+    public String showProductByCategoryDetail(@PathVariable("id") int id, Model model,
+                                              @RequestParam(value = "p", required = false, defaultValue = "0") Integer p) {
+        Pageable pageable = PageRequest.of(p, 12);
+        Page<ProductImageEntity> productEntityList = productImageRepository.getProductListWithImageAndCategoryDetail(id, pageable);
         List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
         Optional<CategoryDetailEntity> cateDetail = categoryDetailRepository.findById(id);
         model.addAttribute("categories", categoryEntityList);
-        model.addAttribute("productList", productEntityList);
+        model.addAttribute("productListP", productEntityList);
         model.addAttribute("tag", cateDetail.get().getCategory().getId());
+        model.addAttribute("tagPages", p);
+        model.addAttribute("url", "/shop/category/categorydetail/"+id+"/?");
 
         return "product";
     }
@@ -130,92 +143,135 @@ public class ProductController {
 
 
     @RequestMapping(value = "/shop/search", method = GET)
-    public String search(@RequestParam("searchInput")String searchInput, Model model) {
-        List<ProductImageEntity> resultList;
+    public String search(@RequestParam("searchInput")String searchInput, Model model,
+                         @RequestParam(value = "p", required = false, defaultValue = "0") Integer p) {
+        Pageable pageable = PageRequest.of(p, 12);
+        Page<ProductImageEntity> resultList;
         if (searchInput.isEmpty()) {
-            resultList = productImageRepository.getProductListWithImage();
+            resultList = productImageRepository.getProductListWithImagePageable(pageable);
         } else {
-            resultList = productImageRepository.getProductBySearch(searchInput, searchInput);
+            resultList = productImageRepository.getProductBySearch(searchInput, searchInput, pageable);
         }
         List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
 
         model.addAttribute("categories", categoryEntityList);
         model.addAttribute("searchInput",searchInput);
-        model.addAttribute("productList", resultList);
+        model.addAttribute("productListP", resultList);
+        model.addAttribute("tagPages", p);
+        model.addAttribute("url", "/shop/search?searchInput="+searchInput+"&");
         return "product";
     }
 
 
     @RequestMapping(value = "/shop/filter/bestseller",method = GET)
-    public String showProductBestSeller(Model model) {
-        List<ProductImageEntity> productEntityList = productImageRepository.getProductListBestSeller();
+    public String showProductBestSeller(Model model, @RequestParam(value = "p", required = false, defaultValue = "0") Integer p) {
+        Pageable pageable = PageRequest.of(p, 12);
+        Page<ProductImageEntity> productEntityList = productImageRepository.getProductListBestSeller(pageable);
         List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
         model.addAttribute("categories", categoryEntityList);
-        model.addAttribute("productList", productEntityList);
+        model.addAttribute("productListP", productEntityList);
+        model.addAttribute("tagPages", p);
+        model.addAttribute("url", "/shop/filter/bestseller/?");
 
         return "product";
     }
 
     @RequestMapping(value = "/shop/filter/rating",method = GET)
-    public String showProductHighRating(Model model) {
-        List<ProductImageEntity> productEntityList = productImageRepository.getProductListHighRating();
+    public String showProductHighRating(Model model, @RequestParam(value = "p", required = false, defaultValue = "0") Integer p) {
+        Pageable pageable = PageRequest.of(p, 12);
+        Page<ProductImageEntity> productEntityList = productImageRepository.getProductListHighRating(pageable);
         List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
         model.addAttribute("categories", categoryEntityList);
-        model.addAttribute("productList", productEntityList);
+        model.addAttribute("productListP", productEntityList);
+        model.addAttribute("tagPages", p);
+        model.addAttribute("url", "/shop/filter/rating/?");
 
         return "product";
     }
 
     @RequestMapping(value = "/shop/filter/newness",method = GET)
-    public String showProductNewness(Model model) {
-        List<ProductImageEntity> productEntityList = productImageRepository.getProductListNewness();
+    public String showProductNewness(Model model, @RequestParam(value = "p", required = false, defaultValue = "0") Integer p) {
+        Pageable pageable = PageRequest.of(p, 12);
+        Page<ProductImageEntity> productEntityList = productImageRepository.getProductListNewness(pageable);
         List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
         model.addAttribute("categories", categoryEntityList);
-        model.addAttribute("productList", productEntityList);
+        model.addAttribute("productListP", productEntityList);
+        model.addAttribute("tagPages", p);
+        model.addAttribute("url", "/shop/filter/newness/?");
 
         return "product";
     }
 
     @RequestMapping(value = "/shop/filter/asc",method = GET)
-    public String showProductLowToHighPrice(Model model) {
-        List<ProductImageEntity> productEntityList = productImageRepository.getProductListLowToHighPrice();
+    public String showProductLowToHighPrice(Model model, @RequestParam(value = "p", required = false, defaultValue = "0") Integer p) {
+        Pageable pageable = PageRequest.of(p, 12);
+        Page<ProductImageEntity> productEntityList = productImageRepository.getProductListLowToHighPrice(pageable);
         List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
         model.addAttribute("categories", categoryEntityList);
-        model.addAttribute("productList", productEntityList);
+        model.addAttribute("productListP", productEntityList);
+        model.addAttribute("tagPages", p);
+        model.addAttribute("url", "/shop/filter/asc/?");
 
         return "product";
     }
 
 
     @RequestMapping(value = "/shop/filter/desc",method = GET)
-    public String showProductHighToLowPrice(Model model) {
-        List<ProductImageEntity> productEntityList = productImageRepository.getProductListHighToLowPrice();
+    public String showProductHighToLowPrice(Model model, @RequestParam(value = "p", required = false, defaultValue = "0") Integer p) {
+        Pageable pageable = PageRequest.of(p, 12);
+        Page<ProductImageEntity> productEntityList = productImageRepository.getProductListHighToLowPrice(pageable);
         List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
         model.addAttribute("categories", categoryEntityList);
-        model.addAttribute("productList", productEntityList);
+        model.addAttribute("productListP", productEntityList);
+        model.addAttribute("tagPages", p);
+        model.addAttribute("url", "/shop/filter/desc/?");
 
         return "product";
     }
 
 
-    @RequestMapping(value = "/shop/filter/{fromPrice}-{toPrice}", method = GET)
-    public String showProductByPrice(@PathVariable("fromPrice")double fromPrice,@PathVariable("toPrice")double toPrice, Model model) {
-        List<ProductImageEntity> productEntityList = productImageRepository.getProductListByPriceBetween(fromPrice, toPrice);
+    @RequestMapping(value = "/shop/filter/{fromPrice}/{toPrice}", method = GET)
+    public String showProductByPrice(@PathVariable("fromPrice")double fromPrice,@PathVariable("toPrice")double toPrice, Model model,
+                                     @RequestParam(value = "p", required = false, defaultValue = "0") Integer p) {
+        Pageable pageable = PageRequest.of(p, 12);
+        Page<ProductImageEntity> productEntityList = productImageRepository.getProductListByPriceBetween(fromPrice, toPrice, pageable);
         List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
 
         model.addAttribute("categories", categoryEntityList);
-        model.addAttribute("productList", productEntityList);
+        model.addAttribute("productListP", productEntityList);
+        model.addAttribute("tagPages", p);
+        model.addAttribute("url", "/shop/filter/"+fromPrice+"/"+toPrice+"/?");
         return "product";
     }
 
+    @GetMapping(value = "feaured")
+    public String testtest(Model model) {
+        List<ProductEntity> allProducts = (List<ProductEntity>) productRepository.findAll();
+
+        Map<Integer, ProductEntity> allFeaturedProducts = new HashMap();
+        for (ProductEntity productEntity : allProducts) {
+            if (!allFeaturedProducts.containsKey(productEntity.getCategoryDetail().getId())) {
+                allFeaturedProducts.put(productEntity.getCategoryDetail().getId(), productEntity);
+                continue;
+            }
+        }
+
+        List<ProductEntity> allFeatureProductList = new ArrayList<>(allFeaturedProducts.values());
+        return "product";
+    }
 
     @RequestMapping(value = "/shop/filter/{color}", method = GET)
-    public String showProductByColor(@PathVariable("color")String color, Model model) {
-        List<ProductImageEntity> productEntityList = productImageRepository.getProductListByColor(color);
+    public String showProductByColor(@PathVariable("color")String color, Model model,
+                                     @RequestParam(value = "p", required = false, defaultValue = "0") Integer p) {
+        Pageable pageable = PageRequest.of(p, 12);
+        Page<ProductImageEntity> productEntityList = productImageRepository.getProductListByColor(color, pageable);
         List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
 
         model.addAttribute("categories", categoryEntityList);
-        model.addAttribute("productList", productEntityList);
+        model.addAttribute("productListP", productEntityList);
+        model.addAttribute("tagPages", p);
+        model.addAttribute("url", "/shop/filter/"+color+"/?");
+
         return "product";
     }
 
@@ -224,6 +280,7 @@ public class ProductController {
     @ResponseBody
     // return 1 -> there is a new item has been added to cart
     // return 0 -> item already existing in the cart, just update its quantity
+    // return 2 -> quantity not enough
     public String add2cart(@RequestBody String body, HttpSession session) {
         try {
             String[] data = body.split(",,");
@@ -238,32 +295,37 @@ public class ProductController {
                 int quantity = Integer.parseInt(data[6]);
                 int proDetailId = productDetailRepository.findProductDetailId(Integer.parseInt(data[0]),data[5],data[4]);
                 String returnedValue;// 0 or 1
-
-                // cart is empty
-                if (session.getAttribute("shopping_cart") == null) {
-                    List<CartItem> cart = new ArrayList<CartItem>();
-                    cart.add(new CartItem(productId, quantity, imgSource, title, price, size, color, proDetailId));
-                    session.setAttribute("shopping_cart", cart);
-                    returnedValue = "1";
-                } else { // cart has items
-                    List<CartItem> cart = (List<CartItem>) session.getAttribute("shopping_cart");
-                    int index = checkExistingInCart(proDetailId, cart);
-                    // the product ID doesn't existing in the cart yet
-                    if (index == -1) {
+                // check quantity in stock
+                if (quantity <= productDetailRepository.findQuantity(proDetailId)){
+                    // cart is empty
+                    if (session.getAttribute("shopping_cart") == null) {
+                        List<CartItem> cart = new ArrayList<CartItem>();
                         cart.add(new CartItem(productId, quantity, imgSource, title, price, size, color, proDetailId));
+                        session.setAttribute("shopping_cart", cart);
                         returnedValue = "1";
-                    } else {
-                        // the product ID is existing in the cart yet
-                        // then update the quantity by the new one
-                        int newQuantity = cart.get(index).getQuantity() + quantity;
-                        cart.get(index).setQuantity(newQuantity);
-                        cart.get(index).updateTotalPrice();
-                        returnedValue = "0";
+                    } else { // cart has items
+                        List<CartItem> cart = (List<CartItem>) session.getAttribute("shopping_cart");
+                        int index = checkExistingInCart(proDetailId, cart);
+                        // the product ID doesn't existing in the cart yet
+                        if (index == -1) {
+                            cart.add(new CartItem(productId, quantity, imgSource, title, price, size, color, proDetailId));
+                            returnedValue = "1";
+                        } else {
+                            // the product ID is existing in the cart yet
+                            // then update the quantity by the new one
+                            int newQuantity = cart.get(index).getQuantity() + quantity;
+                            cart.get(index).setQuantity(newQuantity);
+                            cart.get(index).updateTotalPrice();
+                            returnedValue = "0";
+                        }
+                        session.setAttribute("shopping_cart", cart);
                     }
-                    session.setAttribute("shopping_cart", cart);
+                    // save comment to DB
+                    return returnedValue;
+                } else {
+                    return "2";
                 }
-                // save comment to DB
-                return returnedValue;
+
             } else {
                 return "ERROR||ERROR";
             }
@@ -443,19 +505,6 @@ public class ProductController {
     public String viewAbout(Model model) {
 
         return "about";
-    }
-
-    @GetMapping("/shop/page")
-    public String paginate(Model model, @RequestParam("p") Optional<Integer>p){
-        Pageable pageable = PageRequest.of(p.orElse(0), 12);
-        Page<ProductImageEntity> productEntityList =  productImageRepository.getProductListWithImagePageable(pageable);
-        List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
-
-        model.addAttribute("categories", categoryEntityList);
-        model.addAttribute("productListP", productEntityList);
-        model.addAttribute("activeLink", "how-active1");
-        //model.addAttribute("totalPageNumber", totalPageNumber);
-        return "product";
     }
 
 }

@@ -182,31 +182,31 @@
                             </li>
 
                             <li class="p-b-6">
-                                <a href="<c:url value="/shop/filter/${0}-${50}"/>" class="filter-link stext-106 trans-04">
+                                <a href="<c:url value="/shop/filter/${0}/${50}"/>" class="filter-link stext-106 trans-04">
                                     $0.00 - $50.00
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="<c:url value="/shop/filter/${50}-${100}"/>" class="filter-link stext-106 trans-04">
+                                <a href="<c:url value="/shop/filter/${50}/${100}"/>" class="filter-link stext-106 trans-04">
                                     $50.00 - $100.00
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="<c:url value="/shop/filter/${100}-${150}"/>" class="filter-link stext-106 trans-04">
+                                <a href="<c:url value="/shop/filter/${100}/${150}"/>" class="filter-link stext-106 trans-04">
                                     $100.00 - $150.00
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="<c:url value="/shop/filter/${150}-${200}"/>" class="filter-link stext-106 trans-04">
+                                <a href="<c:url value="/shop/filter/${150}/${200}"/>" class="filter-link stext-106 trans-04">
                                     $150.00 - $200.00
                                 </a>
                             </li>
 
                             <li class="p-b-6">
-                                <a href="<c:url value="/shop/filter/${200}-${100000}"/>" class="filter-link stext-106 trans-04">
+                                <a href="<c:url value="/shop/filter/${200}/${100000}"/>" class="filter-link stext-106 trans-04">
                                     $200.00+
                                 </a>
                             </li>
@@ -354,14 +354,14 @@
 <%--            </a>--%>
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
-            <li class="page-item ">
-                <a class="page-link" href="/shop/page/?p=${productListP.number - 1}" tabindex="-1">Previous</a>
+            <li class="page-item ${productListP.number == 0?"disabled":""}">
+                <a class="page-link " href="${url}p=${productListP.number - 1}" tabindex="-1">Previous</a>
             </li>
-            <c:forEach items="${productListP.totalPages}" var="number">
-            <li class="page-item"><a class="page-link" href="/shop/page/?p=0">${number}</a></li>
+            <c:forEach begin="0" end="${productListP.totalPages - 1}" var="i">
+            <li class="page-item ${tagPages == i? "active":""}"><a class="page-link" href="${url}p=${i}">${i+1}</a></li>
             </c:forEach>
-            <li class="page-item">
-                <a class="page-link" href="/shop/page/?p=${productListP.number + 1}">Next</a>
+            <li class="page-item ${productListP.number == productListP.totalPages - 1?"disabled":""}">
+                <a class="page-link" href="${url}p=${productListP.number + 1}">Next</a>
             </li>
         </ul>
     </nav>

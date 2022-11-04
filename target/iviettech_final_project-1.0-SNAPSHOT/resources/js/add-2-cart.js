@@ -53,6 +53,12 @@ jQuery(document).ready(function($) {
                             'is added to cart !',
                             'success');
                         location.replace("/cart");
+                    } else if (data == "2"){
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            text: 'Quantity not enough!'
+                        })
                     } else {
                         // alert("Oops, there is something wrong - please try again later!")
                         Swal.fire({

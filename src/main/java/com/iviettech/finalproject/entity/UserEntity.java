@@ -51,6 +51,7 @@ public class UserEntity {
     private int status;
 
     @ManyToOne
+    @ColumnDefault(value = "1")
     @JoinColumn(name = "role_id")
     private RoleEntity role;
 

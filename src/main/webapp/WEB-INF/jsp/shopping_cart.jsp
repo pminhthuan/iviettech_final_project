@@ -276,7 +276,7 @@
     /* Handle when increasing the product quantity in cart */
     $(".btn-num-product-up").click(function() {
         let oldValue = $(this).parent().parent().find('input').val();
-        if (oldValue == 5) {
+        if (oldValue == 50) {
             return;
         } else {
             var newVal = parseFloat(oldValue) + 1;

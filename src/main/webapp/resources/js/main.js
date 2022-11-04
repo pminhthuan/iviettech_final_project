@@ -225,7 +225,7 @@
 
     $('.btn-num-product-up').on('click', function(){
         var numProduct = Number($(this).prev().val());
-        if(numProduct <5 ) $(this).prev().val(numProduct + 1);
+        if(numProduct <50 ) $(this).prev().val(numProduct + 1);
     });
 
     /*==================================================================

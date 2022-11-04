@@ -34,5 +34,9 @@ public interface ProductDetailRepository extends CrudRepository<ProductDetailEnt
             nativeQuery = true)
     int findProductDetailId(int id, String color, String size);
 
+    @Query(value = "select p.quantity from product_detail p where p.id = ?1",
+            nativeQuery = true)
+    int findQuantity(int id);
+
 
 }

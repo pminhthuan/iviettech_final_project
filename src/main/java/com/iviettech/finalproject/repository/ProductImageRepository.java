@@ -36,7 +36,7 @@ public interface ProductImageRepository extends CrudRepository<ProductImageEntit
             "left join categories as c ON c.id = cd.category_id\n" +
             "where i.is_main_image = 1 and q.sum > 0 and c.id = ?1 ",
             nativeQuery = true)
-    List<ProductImageEntity> getProductListWithImageAndCategory(int id);
+    Page<ProductImageEntity> getProductListWithImageAndCategory(int id, Pageable pageable);
 
 
     @Query(value = "select * from products as p left join product_image  as i on p.id = i.product_id\n" +
@@ -44,7 +44,7 @@ public interface ProductImageRepository extends CrudRepository<ProductImageEntit
             "left join product_detail as pt on pt.product_id = p.id group by p.id) as q on q.id = p.id\n" +
             "where i.is_main_image = 1 and q.sum > 0 and p.category_detail_id = ?1 ",
             nativeQuery = true)
-    List<ProductImageEntity> getProductListWithImageAndCategoryDetail(int id);
+    Page<ProductImageEntity> getProductListWithImageAndCategoryDetail(int id, Pageable pageable);
 
     @Query(value = "select * from products as p left join product_image  as i on p.id = i.product_id\n" +
             "left join (select od.product_id, sum(od.quantity) from order_details as od group by od.product_id) \n" +
@@ -54,7 +54,7 @@ public interface ProductImageRepository extends CrudRepository<ProductImageEntit
             "where i.is_main_image = 1 and q.sum > 0 and o.sum is not null\n" +
             "order by o.sum desc ",
             nativeQuery = true)
-    List<ProductImageEntity> getProductListBestSeller();
+    Page<ProductImageEntity> getProductListBestSeller(Pageable pageable);
 
     @Query(value = "select * from products as p left join product_image  as i on p.id = i.product_id\n" +
             "left join (select p.id, p.name, sum(pt.quantity) from products as p \n" +
@@ -63,7 +63,7 @@ public interface ProductImageRepository extends CrudRepository<ProductImageEntit
             "where i.is_main_image = 1 and q.sum > 0 \n" +
             "order by r.avg desc",
             nativeQuery = true)
-    List<ProductImageEntity> getProductListHighRating();
+    Page<ProductImageEntity> getProductListHighRating(Pageable pageable);
 
     @Query(value = "select * from products as p left join product_image  as i on p.id = i.product_id\n" +
             "left join (select p.id, p.name, sum(pt.quantity) from products as p \n" +
@@ -71,7 +71,7 @@ public interface ProductImageRepository extends CrudRepository<ProductImageEntit
             "where i.is_main_image = 1 and q.sum > 0 \n" +
             "order by p.add_date desc",
             nativeQuery = true)
-    List<ProductImageEntity> getProductListNewness();
+    Page<ProductImageEntity> getProductListNewness(Pageable pageable);
 
     @Query(value = "select * from products as p left join product_image  as i on p.id = i.product_id\n" +
             "left join (select p.id, p.name, sum(pt.quantity) from products as p \n" +
@@ -79,7 +79,7 @@ public interface ProductImageRepository extends CrudRepository<ProductImageEntit
             "where i.is_main_image = 1 and q.sum > 0 \n" +
             "order by p.actual_price asc",
             nativeQuery = true)
-    List<ProductImageEntity> getProductListLowToHighPrice();
+    Page<ProductImageEntity> getProductListLowToHighPrice(Pageable pageable);
 
     @Query(value = "select * from products as p left join product_image  as i on p.id = i.product_id\n" +
             "left join (select p.id, p.name, sum(pt.quantity) from products as p \n" +
@@ -87,7 +87,7 @@ public interface ProductImageRepository extends CrudRepository<ProductImageEntit
             "where i.is_main_image = 1 and q.sum > 0 \n" +
             "order by p.actual_price desc",
             nativeQuery = true)
-    List<ProductImageEntity> getProductListHighToLowPrice();
+    Page<ProductImageEntity> getProductListHighToLowPrice(Pageable pageable);
 
 
     @Query(value = "select * from products as p left join product_image  as i on p.id = i.product_id\n" +
@@ -95,14 +95,14 @@ public interface ProductImageRepository extends CrudRepository<ProductImageEntit
             "left join product_detail as pt on pt.product_id = p.id group by p.id) as q on q.id = p.id\n" +
             "where i.is_main_image = 1 and q.sum > 0 and p.actual_price between ? and ?",
             nativeQuery = true)
-    List<ProductImageEntity> getProductListByPriceBetween(double fromPrice, double toPrice);
+    Page<ProductImageEntity> getProductListByPriceBetween(double fromPrice, double toPrice, Pageable pageable);
 
     @Query(value = "select * from products as p left join product_image  as i on p.id = i.product_id\n" +
             "left join (select p.id, pt.color, p.name, sum(pt.quantity) from products as p \n" +
             "left join product_detail as pt on pt.product_id = p.id group by p.id, pt.color) as q on q.id = p.id\n" +
             "where i.is_main_image = 1 and q.sum > 0 and color ilike %:color%",
             nativeQuery = true)
-    List<ProductImageEntity> getProductListByColor(@Param("color") String color);
+    Page<ProductImageEntity> getProductListByColor(@Param("color") String color, Pageable pageable);
 
     List<ProductImageEntity> findByProduct_Id(int id);
 
@@ -129,6 +129,6 @@ public interface ProductImageRepository extends CrudRepository<ProductImageEntit
             "where i.is_main_image = 1 and q.sum > 0 \n" +
             "and p.name ilike %:cate_name% or c.name ilike %:product_name%",
             nativeQuery = true)
-    List<ProductImageEntity> getProductBySearch(@Param("cate_name") String cateName, @Param("product_name") String productName);
+    Page<ProductImageEntity> getProductBySearch(@Param("cate_name") String cateName, @Param("product_name") String productName, Pageable pageable);
 
 }

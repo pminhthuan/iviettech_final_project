@@ -62,6 +62,10 @@
                                 <label class="control-label">Email (*)</label>
                                 <form:input path="email" type="text" class="form-control" placeholder="abc@email.com" required="true" readonly="true"/>
                             </div>
+                            <div class="form-group">
+                                <label class="control-label">Address (*)</label>
+                                <form:input path="addressDetail" type="text" class="form-control" placeholder="Address" required="true" readonly="true"/>
+                            </div>
                             <div class="row">
                                 <div class="form-group mb-3 col-xs-12 col-sm-6">
                                     <label class="control-label">Require Date (*)</label>
@@ -70,6 +74,12 @@
                                 <div class="form-group mb-3 col-xs-12 col-sm-6">
                                         <label class="control-label">Shipping Date (*)</label>
                                         <form:input path="shippingDate" type="date" class="form-control" name="shippingDate"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group mb-3 col-xs-12 col-sm-6">
+                                    <label class="control-label">Total Amount (*)</label>
+                                    <form:input path="totalAmount" type="text" class="form-control" name="totalAmount" required="true" readonly="true"/>
                                 </div>
                             </div>
                             <div class="form-group">
