@@ -47,24 +47,19 @@
                                     <form:input path="product.id" type="text" class="form-control" placeholder="product.name" required="true" readonly="true"/>
                                 </div>
                             </c:if>
-                            <c:if test="${type.equals('newProductDetail')}">
-                                <div class="form-group">
-                                    <label class="control-label">Product name (*)</label>
-                                    <form:select path="product.id" class="form-control">
-                                        <form:option value="0" label="--- Select ---" />
-                                        <form:options items="${productList}" />
-                                    </form:select>
-                                </div>
-<%--                                <div class="form-group">--%>
-<%--                                    <label class="control-label">ID</label>--%>
-<%--                                    <form:input path="id" type="text" class="form-control" id="id" placeholder="ID" readonly="true"/>--%>
-<%--                                        &lt;%&ndash;                                    <form:hidden path="id" />&ndash;%&gt;--%>
+<%--                            <c:if test="${type.equals('newProductDetail')}">--%>
+<%--&lt;%&ndash;                                <div class="form-group">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    <label class="control-label">Product name (*)</label>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    <form:select path="product.id" class="form-control">&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                        <form:option value="0" label="--- Select ---" />&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                        <form:options items="${productList}" />&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                    </form:select>&ndash;%&gt;--%>
+<%--&lt;%&ndash;                                </div>&ndash;%&gt;--%>
+<%--                                <div>--%>
+<%--                                    <label class="control-label">Product name (*)</label>--%>
+<%--                                    <form:input path="product.id" type="text" class="form-control" placeholder="product.name" required="true" readonly="true"/>--%>
 <%--                                </div>--%>
-                                <div>
-                                    <label class="control-label">Product name (*)</label>
-                                    <form:input path="product.id" type="text" class="form-control" placeholder="product.name" required="true" readonly="true"/>
-                                </div>
-                            </c:if>
+<%--                            </c:if>--%>
                             <div class="form-group">
                                 <label class="control-label">Size (*)</label>
                                 <form:select path="size" class="form-control">

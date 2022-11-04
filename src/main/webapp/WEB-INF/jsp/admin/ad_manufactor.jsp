@@ -10,6 +10,7 @@
 <html>
 <head>
   <title>Mamufactor</title>
+  <link rel="icon" type="image/png" href="/resources/images/icons/logo_T_T_Black.png"/>
   <link rel="stylesheet" type="text/css" href="/resources/admin/assets/dist/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="/resources/admin/css/dashboard.css">
   <link rel="stylesheet" type="text/css" href="/resources/admin/css/custom.css">
