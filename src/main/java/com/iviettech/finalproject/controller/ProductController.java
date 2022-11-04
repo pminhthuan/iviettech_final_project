@@ -447,9 +447,15 @@ public class ProductController {
 
     @GetMapping("/shop/page")
     public String paginate(Model model, @RequestParam("p") Optional<Integer>p){
-        Pageable pageable = PageRequest.of(p.orElse(0), 16);
-        Page<ProductImageEntity> page = (Page<ProductImageEntity>) productImageRepository.getProductListWithImage();
-        return "";
+        Pageable pageable = PageRequest.of(p.orElse(0), 12);
+        Page<ProductImageEntity> productEntityList =  productImageRepository.getProductListWithImagePageable(pageable);
+        List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
+
+        model.addAttribute("categories", categoryEntityList);
+        model.addAttribute("productListP", productEntityList);
+        model.addAttribute("activeLink", "how-active1");
+        //model.addAttribute("totalPageNumber", totalPageNumber);
+        return "product";
     }
 
 }

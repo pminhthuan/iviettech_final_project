@@ -2,6 +2,8 @@ package com.iviettech.finalproject.repository;
 
 import com.iviettech.finalproject.entity.ProductEntity;
 import com.iviettech.finalproject.entity.ProductImageEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -17,6 +19,15 @@ public interface ProductImageRepository extends CrudRepository<ProductImageEntit
             "where i.is_main_image = 1 and q.sum > 0",
             nativeQuery = true)
     List<ProductImageEntity> getProductListWithImage();
+
+
+    @Query(value = "select * from products as p left join product_image  as i on p.id = i.product_id\n" +
+            "left join (select p.id, p.name, sum(pt.quantity) from products as p left join product_detail as pt\n" +
+            "on pt.product_id = p.id group by p.id) as q on q.id = p.id\n" +
+            "where i.is_main_image = 1 and q.sum > 0",
+            nativeQuery = true)
+    Page<ProductImageEntity> getProductListWithImagePageable(Pageable pageable);
+
 
     @Query(value = "select * from products as p left join product_image  as i on p.id = i.product_id\n" +
             "left join (select p.id, p.name, sum(pt.quantity) from products as p \n" +

@@ -310,7 +310,7 @@
 
         <div class="row">
             <!-- single product -->
-            <c:forEach items="${productList}" var="p">
+            <c:forEach items="${productListP.content}" var="p">
                 <div class="col-lg-3 col-md-4 col-sm-6">
                 <!-- Block2 -->
                     <div class="block2">
@@ -354,14 +354,14 @@
 <%--            </a>--%>
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1">Previous</a>
+            <li class="page-item ">
+                <a class="page-link" href="/shop/page/?p=${productListP.number - 1}" tabindex="-1">Previous</a>
             </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <c:forEach items="${productListP.totalPages}" var="number">
+            <li class="page-item"><a class="page-link" href="/shop/page/?p=0">${number}</a></li>
+            </c:forEach>
             <li class="page-item">
-                <a class="page-link" href="#">Next</a>
+                <a class="page-link" href="/shop/page/?p=${productListP.number + 1}">Next</a>
             </li>
         </ul>
     </nav>
