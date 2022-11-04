@@ -61,9 +61,10 @@
                         </a>
                         <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="admin/adReportDate">During the day</a>
+                                <a class="nav-link" href="/admin/adReportDate">During the day</a>
+                                <a class="nav-link" href="/admin/adReportWeek">In Week</a>
                                 <a class="nav-link" href="/admin/adReportMonth">In Month</a>
-                                <a class="nav-link" href="password.html">Forgot Password</a>
+                                <a class="nav-link" href="/admin/adReportYear">In Year</a>
                             </nav>
                         </div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">

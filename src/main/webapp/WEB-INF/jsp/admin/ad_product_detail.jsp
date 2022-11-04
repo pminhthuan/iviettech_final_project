@@ -40,6 +40,7 @@
                 <table id="datatablesSimple">
                     <thead>
                     <tr>
+                        <th>ID</th>
                         <th>Product name</th>
                         <th>Color</th>
                         <th>Size</th>
@@ -49,6 +50,7 @@
                     </thead>
                     <tfoot>
                     <tr>
+                        <th>ID</th>
                         <th>Product name</th>
                         <th>Color</th>
                         <th>Size</th>
@@ -59,6 +61,7 @@
                     <tbody>
                     <c:forEach items="${productDetailsList}" var="pd">
                         <tr>
+                            <td>${pd.id}</td>
                             <td>${pd.product.name}</td>
                             <td>${pd.color}</td>
                             <td>${pd.size}</td>
