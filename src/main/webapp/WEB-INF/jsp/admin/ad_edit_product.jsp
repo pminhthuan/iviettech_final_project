@@ -41,7 +41,9 @@
                                 <div class="form-group">
                                     <label class="control-label">ID</label>
                                     <form:input path="id" type="text" class="form-control" id="id" placeholder="ID" readonly="true"/>
-<%--                                    <form:hidden path="id" />--%>
+                                    <form:hidden path="addDate" />
+                                    <form:hidden path="additionInfo" />
+
                                 </div>
                             </c:if>
                             <div class="form-group">

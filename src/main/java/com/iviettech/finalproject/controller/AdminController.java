@@ -1,26 +1,25 @@
 package com.iviettech.finalproject.controller;
 
 import com.iviettech.finalproject.entity.*;
+import com.iviettech.finalproject.helper.ProductRawExport;
 import com.iviettech.finalproject.repository.*;
 import com.iviettech.finalproject.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.supercsv.io.CsvBeanWriter;
+import org.supercsv.io.ICsvBeanWriter;
+import org.supercsv.prefs.CsvPreference;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.nio.file.Path;
-import java.text.ParseException;
+import java.io.IOException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -66,10 +65,30 @@ public class AdminController {
         Double totalDay = orderRepository.getTotalDay();
         model.addAttribute("totalDay", totalDay);
 
+        // dashboard chart
+        int[] totalPricePerMonth = new int[12];
+        int[] totalOrderPerMonth = new int[12];
+        List<OrderEntity> allOrders = (List<OrderEntity>) orderRepository.findAll();
+        for (OrderEntity order : allOrders) {
+            int month = order.getRequireDate().getMonth();
+            totalPricePerMonth[month] = totalPricePerMonth[month] + (int)order.getTotalAmount();
+            totalOrderPerMonth[month] = totalOrderPerMonth[month] + 1;
+        }
+        String totalOrderPrice = Arrays.toString(totalPricePerMonth).substring(1, Arrays.toString(totalPricePerMonth).length() - 1);
+        String totalOrderNumber = Arrays.toString(totalOrderPerMonth).substring(1, Arrays.toString(totalOrderPerMonth).length() - 1);
+        // for bar chart
+        model.addAttribute("total_order_price", totalOrderPrice);
+        model.addAttribute("total_order_number", totalOrderNumber);
+
+
+        // for data table
+        // get latest 5 pending order (order status = 0 for example)
+        model.addAttribute("order_data_list", orderRepository.findTop5ByOrderStatusOrderByIdDesc(0));
+
         return "admin/ad_home";
     }
 
-    //Product
+    //-----------------------------Product
 
     @RequestMapping(value = "/adProduct", method = GET)
     public String viewProduct(Model model) {
@@ -129,14 +148,43 @@ public class AdminController {
            } else {
                product.setStatus(0);
            }
-//                break;
-//            }
-//        }
            model.addAttribute("product", product);
            productRepository.save(product);
        }
         return "redirect:/admin/adProduct";
 
+    }
+
+    @GetMapping("/exportProduct")
+    public void exportCSVfile(HttpServletResponse response) throws IOException {
+        response.setContentType("text/csv");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+        String currentDateTime = dateFormatter.format(new Date());
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=Product_" + currentDateTime + ".csv";
+        response.setHeader(headerKey, headerValue);
+
+        List<ProductEntity> productEntityList = (List<ProductEntity>) productRepository.findAll();
+
+        ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
+        String[] csvHeader = { "Name", "Category_Detail_ID", "Orginal_Price", "Actual_Price", "Manufactor_ID", "Add_Date", "Status", "Description", "Infor" };
+        String[] nameMapping = { "name", "category_detail_id", "original_price", "actual_price", "manufactor_id", "add_date", "status", "description", "addition_info"};
+
+        csvWriter.writeHeader(csvHeader);
+
+        for (ProductEntity productEntity : productEntityList) {
+            try {
+//                BookRawExport data = new BookRawExport(bookEntity);
+                ProductRawExport data = new ProductRawExport(productEntity);
+                csvWriter.write(data, nameMapping);
+            } catch (Exception e) {
+                System.out.println("Skip this record/data");
+                continue;
+            }
+        }
+
+        csvWriter.close();
     }
 
     // ---------------------------Product Details
@@ -396,6 +444,24 @@ public class AdminController {
     public String updateOrder(@ModelAttribute("order") OrderEntity order) {
         orderRepository.save(order);
         return "redirect:/admin/adOrder";
+    }
+
+    @RequestMapping(value = "/updateOrderStatus/{id}")
+    public String updateOrderStatus(@PathVariable int id, Model model) {
+
+        Optional<OrderEntity> orderEntity = orderRepository.findById(id);
+        if (orderEntity.isPresent()) {
+            OrderEntity order = orderEntity.get();
+            if (order.getOrderStatus() == 0) {
+                order.setOrderStatus(1);
+            } else {
+                order.setOrderStatus(0);
+            }
+            model.addAttribute("order", order);
+            orderRepository.save(order);
+        }
+        return "redirect:/admin/adProduct";
+
     }
 
     //Order Detail

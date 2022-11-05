@@ -1,12 +1,15 @@
 package com.iviettech.finalproject.entity;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "manufactors")
 public class ManufactorEntity {
     @Id
