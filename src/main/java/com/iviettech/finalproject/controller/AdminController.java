@@ -1,26 +1,25 @@
 package com.iviettech.finalproject.controller;
 
 import com.iviettech.finalproject.entity.*;
+import com.iviettech.finalproject.helper.ProductRawExport;
 import com.iviettech.finalproject.repository.*;
 import com.iviettech.finalproject.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.supercsv.io.CsvBeanWriter;
+import org.supercsv.io.ICsvBeanWriter;
+import org.supercsv.prefs.CsvPreference;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.nio.file.Path;
-import java.text.ParseException;
+import java.io.IOException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -89,7 +88,7 @@ public class AdminController {
         return "admin/ad_home";
     }
 
-    //Product
+    //-----------------------------Product
 
     @RequestMapping(value = "/adProduct", method = GET)
     public String viewProduct(Model model) {
@@ -154,6 +153,38 @@ public class AdminController {
        }
         return "redirect:/admin/adProduct";
 
+    }
+
+    @GetMapping("/exportProduct")
+    public void exportCSVfile(HttpServletResponse response) throws IOException {
+        response.setContentType("text/csv");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+        String currentDateTime = dateFormatter.format(new Date());
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=Product_" + currentDateTime + ".csv";
+        response.setHeader(headerKey, headerValue);
+
+        List<ProductEntity> productEntityList = (List<ProductEntity>) productRepository.findAll();
+
+        ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
+        String[] csvHeader = { "Name", "Category_Detail_ID", "Orginal_Price", "Actual_Price", "Manufactor_ID", "Add_Date", "Status", "Description", "Infor" };
+        String[] nameMapping = { "name", "category_detail_id", "original_price", "actual_price", "manufactor_id", "add_date", "status", "description", "addition_info"};
+
+        csvWriter.writeHeader(csvHeader);
+
+        for (ProductEntity productEntity : productEntityList) {
+            try {
+//                BookRawExport data = new BookRawExport(bookEntity);
+                ProductRawExport data = new ProductRawExport(productEntity);
+                csvWriter.write(data, nameMapping);
+            } catch (Exception e) {
+                System.out.println("Skip this record/data");
+                continue;
+            }
+        }
+
+        csvWriter.close();
     }
 
     // ---------------------------Product Details

@@ -2,20 +2,17 @@ package com.iviettech.finalproject.service;
 
 import com.iviettech.finalproject.entity.ProductEntity;
 import com.iviettech.finalproject.entity.ProductImageEntity;
+import com.iviettech.finalproject.helper.CSVHelper;
 import com.iviettech.finalproject.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpSession;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -48,21 +45,6 @@ public class AdminService {
     @Autowired
     ServletContext servletContext;
 
-    public void updateProductStatus(int id) {
-        List<ProductEntity> productEntity =
-                (List<ProductEntity>) productRepository.findAll();
-        for (ProductEntity p : productEntity) {
-            if (p.getId() == id) {
-                if (p.getStatus() == 0) {
-                    p.setStatus(1);
-                } else {
-                    p.setStatus(0);
-                }
-                break;
-            }
-        }
-//        model.addAttribute("product", productEntity);
-    }
 
     public void uploadFile(MultipartFile file,int id) {
         if( null != file && !file.isEmpty()){
@@ -101,6 +83,17 @@ public class AdminService {
             System.out.println("====== File not exists");
         }
 
+    }
+
+
+    public void saveProduct(MultipartFile file) {
+        try {
+            List<ProductEntity> productEntityList = CSVHelper.readProductData(file.getInputStream());
+
+            productRepository.saveAll(productEntityList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 

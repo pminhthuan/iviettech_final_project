@@ -113,7 +113,11 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </div
+            <br>
+            <a href="/admin/exportProduct">
+                <button type="button" class="btn btn-success">Export to CSV</button>
+            </a>
 
 <%--            <div>--%>
 <%--                <button href="/admin/newProduct" class="accordion-button fa-solid fa-plus me-0" type="button">--%>
