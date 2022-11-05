@@ -308,64 +308,76 @@
             </div>
         </div>
 
-        <div class="row">
-            <!-- single product -->
-            <c:forEach items="${productListP.content}" var="p">
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                <!-- Block2 -->
-                    <div class="block2">
-                    <div class="block2-pic hov-img0">
-                        <a href="<c:url value="/shop/view/${p.product.id}"/>">
-                            <img src="${p.imageUrl}" alt="${p.imageAlt}">
-                        </a>
 
-                        <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                            Quick View
-                        </a>
-                    </div>
+        <c:choose>
+            <c:when test="${productListP.hasContent()}">
+                <div class="row">
+                    <!-- single product -->
+                    <c:forEach items="${productListP.content}" var="p">
+                        <div class="col-lg-3 col-md-4 col-sm-6">
+                            <!-- Block2 -->
+                            <div class="block2">
+                                <div class="block2-pic hov-img0">
+                                    <a href="<c:url value="/shop/view/${p.product.id}"/>">
+                                        <img src="${p.imageUrl}" alt="${p.imageAlt}">
+                                    </a>
 
-                    <div class="block2-txt flex-w flex-t p-t-10">
-                        <div class="block2-txt-child1 flex-col-l ">
-                            <a href="/shop/view/${p.product.id}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                    ${p.product.name}
-                            </a>
+                                    <a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+                                        Quick View
+                                    </a>
+                                </div>
 
-                            <span class="stext-105 cl3 price">
+                                <div class="block2-txt flex-w flex-t p-t-10">
+                                    <div class="block2-txt-child1 flex-col-l ">
+                                        <a href="/shop/view/${p.product.id}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+                                                ${p.product.name}
+                                        </a>
+
+                                        <span class="stext-105 cl3 price">
 									$${p.product.actual_price}
 								</span>
-                        </div>
+                                    </div>
 
-                        <div class="block2-txt-child2 flex-r p-t-3">
-                            <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                <img class="icon-heart1 dis-block trans-04" src="/resources/images/icons/icon-heart-01.png" alt="ICON">
-                                <img class="icon-heart2 dis-block trans-04 ab-t-l" src="/resources/images/icons/icon-heart-02.png" alt="ICON">
-                            </a>
+                                    <div class="block2-txt-child2 flex-r p-t-3">
+                                        <a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+                                            <img class="icon-heart1 dis-block trans-04" src="/resources/images/icons/icon-heart-01.png" alt="ICON">
+                                            <img class="icon-heart2 dis-block trans-04 ab-t-l" src="/resources/images/icons/icon-heart-02.png" alt="ICON">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </c:forEach>
                 </div>
-            </div>
-            </c:forEach>
-        </div>
+            </c:when>
+                <c:otherwise>
+                    <div class="alert alert-warning" role="alert" style="text-align: center">
+                        ${msg != null?msg:"Product is updating..."}
+                    </div>
+                </c:otherwise>
+            </c:choose>
 
         <!-- Load more -->
-        <div class="flex-c-m flex-w w-full p-t-45">
-<%--            <a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">--%>
-<%--                Load More--%>
-<%--            </a>--%>
-    <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-            <li class="page-item ${productListP.number == 0?"disabled":""}">
-                <a class="page-link " href="${url}p=${productListP.number - 1}" tabindex="-1">Previous</a>
-            </li>
-            <c:forEach begin="0" end="${productListP.totalPages - 1}" var="i">
-            <li class="page-item ${tagPages == i? "active":""}"><a class="page-link" href="${url}p=${i}">${i+1}</a></li>
-            </c:forEach>
-            <li class="page-item ${productListP.number == productListP.totalPages - 1?"disabled":""}">
-                <a class="page-link" href="${url}p=${productListP.number + 1}">Next</a>
-            </li>
-        </ul>
-    </nav>
-        </div>
+        <c:if test="${productListP.hasContent()}">
+            <div class="flex-c-m flex-w w-full p-t-45">
+                    <%--            <a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">--%>
+                    <%--                Load More--%>
+                    <%--            </a>--%>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item ${productListP.number == 0?"disabled":""}">
+                            <a class="page-link " href="${url}p=${productListP.number - 1}" tabindex="-1">Previous</a>
+                        </li>
+                        <c:forEach begin="0" end="${productListP.totalPages - 1}" var="i">
+                            <li class="page-item ${tagPages == i? "active":""}"><a class="page-link" href="${url}p=${i}">${i+1}</a></li>
+                        </c:forEach>
+                        <li class="page-item ${productListP.number == productListP.totalPages - 1?"disabled":""}">
+                            <a class="page-link" href="${url}p=${productListP.number + 1}">Next</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </c:if>
     </div>
 </div>
 

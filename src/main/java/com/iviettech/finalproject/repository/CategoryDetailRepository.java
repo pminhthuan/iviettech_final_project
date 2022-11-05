@@ -15,4 +15,7 @@ public interface CategoryDetailRepository extends CrudRepository<CategoryDetailE
     CategoryDetailEntity findAllByCategoryDetailId(int cateDetailId);
 
     List<CategoryDetailEntity> findAllByCategory_Id(int categoryId);
+
+    @Query(value = "select ct.category_id from category_detail ct where ct.id = ?1", nativeQuery = true)
+    int getCategoryIdByCateDetail(int id);
 }

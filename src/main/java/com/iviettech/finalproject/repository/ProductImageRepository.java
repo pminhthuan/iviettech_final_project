@@ -36,7 +36,7 @@ public interface ProductImageRepository extends CrudRepository<ProductImageEntit
             "left join categories as c ON c.id = cd.category_id\n" +
             "where i.is_main_image = 1 and q.sum > 0 and c.id = ?1 ",
             nativeQuery = true)
-    Page<ProductImageEntity> getProductListWithImageAndCategory(int id, Pageable pageable);
+    Page<ProductImageEntity> getProductListWithImageByCategory(int id, Pageable pageable);
 
 
     @Query(value = "select * from products as p left join product_image  as i on p.id = i.product_id\n" +
@@ -44,7 +44,7 @@ public interface ProductImageRepository extends CrudRepository<ProductImageEntit
             "left join product_detail as pt on pt.product_id = p.id group by p.id) as q on q.id = p.id\n" +
             "where i.is_main_image = 1 and q.sum > 0 and p.category_detail_id = ?1 ",
             nativeQuery = true)
-    Page<ProductImageEntity> getProductListWithImageAndCategoryDetail(int id, Pageable pageable);
+    Page<ProductImageEntity> getProductListWithImageByCategoryDetail(int id, Pageable pageable);
 
     @Query(value = "select * from products as p left join product_image  as i on p.id = i.product_id\n" +
             "left join (select od.product_id, sum(od.quantity) from order_details as od group by od.product_id) \n" +

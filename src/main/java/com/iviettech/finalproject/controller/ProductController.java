@@ -67,18 +67,20 @@ public class ProductController {
 
     @RequestMapping(method = GET)
     public String viewHome(Model model) {
-        List<ProductImageEntity> productEntityList = productImageRepository.getProductListWithImage();
-        List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
+        List<ProductImageEntity> productEntityList = productService.getProductListWithImage();
+        List<ProductImageEntity> productFeaturedList = productService.getProductListFeatured();
+        List<CategoryEntity> categoryEntityList = productService.getCategoryList();
         model.addAttribute("categories", categoryEntityList);
         model.addAttribute("productList", productEntityList);
+        model.addAttribute("productFeaturedList", productFeaturedList);
         return "index";
     }
 
     @GetMapping("/shop")
     public String paginate(Model model, @RequestParam(value = "p", required = false, defaultValue = "0") Integer p){
         Pageable pageable = PageRequest.of(p, 12);
-        Page<ProductImageEntity> productEntityList =  productImageRepository.getProductListWithImagePageable(pageable);
-        List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
+        Page<ProductImageEntity> productEntityList =  productService.getProductListWithImagePage(pageable);
+        List<CategoryEntity> categoryEntityList = productService.getCategoryList();
         //System.out.println(p.get());
 
         model.addAttribute("categories", categoryEntityList);
@@ -94,8 +96,8 @@ public class ProductController {
     public String showProductByCategory(@PathVariable("id") int id, Model model,
                                         @RequestParam(value = "p", required = false, defaultValue = "0") Integer p) {
         Pageable pageable = PageRequest.of(p, 12);
-        Page<ProductImageEntity> productEntityList = productImageRepository.getProductListWithImageAndCategory(id, pageable);
-        List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
+        Page<ProductImageEntity> productEntityList = productService.getProductListWithImageByCategory(id,pageable);
+        List<CategoryEntity> categoryEntityList = productService.getCategoryList();
         model.addAttribute("categories", categoryEntityList);
         model.addAttribute("productListP", productEntityList);
         model.addAttribute("tag", id);
@@ -109,12 +111,12 @@ public class ProductController {
     public String showProductByCategoryDetail(@PathVariable("id") int id, Model model,
                                               @RequestParam(value = "p", required = false, defaultValue = "0") Integer p) {
         Pageable pageable = PageRequest.of(p, 12);
-        Page<ProductImageEntity> productEntityList = productImageRepository.getProductListWithImageAndCategoryDetail(id, pageable);
-        List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
-        Optional<CategoryDetailEntity> cateDetail = categoryDetailRepository.findById(id);
+        Page<ProductImageEntity> productEntityList = productService.getProductListWithImageByCategoryDetail(id, pageable);
+        List<CategoryEntity> categoryEntityList = productService.getCategoryList();
+
         model.addAttribute("categories", categoryEntityList);
         model.addAttribute("productListP", productEntityList);
-        model.addAttribute("tag", cateDetail.get().getCategory().getId());
+        model.addAttribute("tag", productService.getCategoryIdByCateDetail(id));
         model.addAttribute("tagPages", p);
         model.addAttribute("url", "/shop/category/categorydetail/"+id+"/?");
 
@@ -124,13 +126,13 @@ public class ProductController {
 
     @RequestMapping(value = "/shop/view/{id}",method = GET)
     public String showOrderDetail(@PathVariable("id") int id, Model model) {
-        List<ProductImageEntity> productImageEntityList = productImageRepository.findByProduct_Id(id);
-        List<String> productColorList = productDetailRepository.getColorByProductId(id);
-        List<String> productSizeList = productDetailRepository.getSizeByProductId(id);
-        List<ProductDetailEntity> productDetailEntityList = productDetailRepository.findProductDetailEntityByProduct_Id(id);
-        int categoryDetailId = productRepository.getCategoryDetailIdByProductId(id);
+        List<ProductImageEntity> productImageEntityList = productService.findByProduct_Id(id);
+        List<String> productColorList = productService.getColorByProductId(id);
+        List<String> productSizeList = productService.getSizeByProductId(id);
+        List<ProductDetailEntity> productDetailEntityList = productService.findProductDetailEntityByProductId(id);
+        int categoryDetailId = productService.getCategoryDetailIdByProductId(id);
 
-        List<ProductImageEntity> relatedProductList = productImageRepository.getRelatedProductByCategoryDetail(categoryDetailId, id); //related product
+        List<ProductImageEntity> relatedProductList = productService.getRelatedProductByCategoryDetail(categoryDetailId, id); //related product
         model.addAttribute("relatedProductList", relatedProductList); //related product
         model.addAttribute("productImageEntityList", productImageEntityList);
         model.addAttribute("productEntity", productRepository.findById(id));
@@ -145,18 +147,16 @@ public class ProductController {
     @RequestMapping(value = "/shop/search", method = GET)
     public String search(@RequestParam("searchInput")String searchInput, Model model,
                          @RequestParam(value = "p", required = false, defaultValue = "0") Integer p) {
+
         Pageable pageable = PageRequest.of(p, 12);
-        Page<ProductImageEntity> resultList;
-        if (searchInput.isEmpty()) {
-            resultList = productImageRepository.getProductListWithImagePageable(pageable);
-        } else {
-            resultList = productImageRepository.getProductBySearch(searchInput, searchInput, pageable);
-        }
-        List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
+        Page<ProductImageEntity> resultList = productService.search(searchInput, searchInput, pageable);
+        String msg = productService.checkSearchResult(searchInput, searchInput, pageable);
+        List<CategoryEntity> categoryEntityList = productService.getCategoryList();
 
         model.addAttribute("categories", categoryEntityList);
         model.addAttribute("searchInput",searchInput);
         model.addAttribute("productListP", resultList);
+        model.addAttribute("msg", msg);
         model.addAttribute("tagPages", p);
         model.addAttribute("url", "/shop/search?searchInput="+searchInput+"&");
         return "product";
@@ -166,8 +166,8 @@ public class ProductController {
     @RequestMapping(value = "/shop/filter/bestseller",method = GET)
     public String showProductBestSeller(Model model, @RequestParam(value = "p", required = false, defaultValue = "0") Integer p) {
         Pageable pageable = PageRequest.of(p, 12);
-        Page<ProductImageEntity> productEntityList = productImageRepository.getProductListBestSeller(pageable);
-        List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
+        Page<ProductImageEntity> productEntityList = productService.getProductListBestSeller(pageable);
+        List<CategoryEntity> categoryEntityList = productService.getCategoryList();
         model.addAttribute("categories", categoryEntityList);
         model.addAttribute("productListP", productEntityList);
         model.addAttribute("tagPages", p);
@@ -179,8 +179,8 @@ public class ProductController {
     @RequestMapping(value = "/shop/filter/rating",method = GET)
     public String showProductHighRating(Model model, @RequestParam(value = "p", required = false, defaultValue = "0") Integer p) {
         Pageable pageable = PageRequest.of(p, 12);
-        Page<ProductImageEntity> productEntityList = productImageRepository.getProductListHighRating(pageable);
-        List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
+        Page<ProductImageEntity> productEntityList = productService.getProductListHighRating(pageable);
+        List<CategoryEntity> categoryEntityList = productService.getCategoryList();
         model.addAttribute("categories", categoryEntityList);
         model.addAttribute("productListP", productEntityList);
         model.addAttribute("tagPages", p);
@@ -192,8 +192,8 @@ public class ProductController {
     @RequestMapping(value = "/shop/filter/newness",method = GET)
     public String showProductNewness(Model model, @RequestParam(value = "p", required = false, defaultValue = "0") Integer p) {
         Pageable pageable = PageRequest.of(p, 12);
-        Page<ProductImageEntity> productEntityList = productImageRepository.getProductListNewness(pageable);
-        List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
+        Page<ProductImageEntity> productEntityList = productService.getProductListNewness(pageable);
+        List<CategoryEntity> categoryEntityList = productService.getCategoryList();
         model.addAttribute("categories", categoryEntityList);
         model.addAttribute("productListP", productEntityList);
         model.addAttribute("tagPages", p);
@@ -205,8 +205,8 @@ public class ProductController {
     @RequestMapping(value = "/shop/filter/asc",method = GET)
     public String showProductLowToHighPrice(Model model, @RequestParam(value = "p", required = false, defaultValue = "0") Integer p) {
         Pageable pageable = PageRequest.of(p, 12);
-        Page<ProductImageEntity> productEntityList = productImageRepository.getProductListLowToHighPrice(pageable);
-        List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
+        Page<ProductImageEntity> productEntityList = productService.getProductListLowToHighPrice(pageable);
+        List<CategoryEntity> categoryEntityList = productService.getCategoryList();
         model.addAttribute("categories", categoryEntityList);
         model.addAttribute("productListP", productEntityList);
         model.addAttribute("tagPages", p);
@@ -219,8 +219,8 @@ public class ProductController {
     @RequestMapping(value = "/shop/filter/desc",method = GET)
     public String showProductHighToLowPrice(Model model, @RequestParam(value = "p", required = false, defaultValue = "0") Integer p) {
         Pageable pageable = PageRequest.of(p, 12);
-        Page<ProductImageEntity> productEntityList = productImageRepository.getProductListHighToLowPrice(pageable);
-        List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
+        Page<ProductImageEntity> productEntityList = productService.getProductListHighToLowPrice(pageable);
+        List<CategoryEntity> categoryEntityList = productService.getCategoryList();
         model.addAttribute("categories", categoryEntityList);
         model.addAttribute("productListP", productEntityList);
         model.addAttribute("tagPages", p);
@@ -234,8 +234,8 @@ public class ProductController {
     public String showProductByPrice(@PathVariable("fromPrice")double fromPrice,@PathVariable("toPrice")double toPrice, Model model,
                                      @RequestParam(value = "p", required = false, defaultValue = "0") Integer p) {
         Pageable pageable = PageRequest.of(p, 12);
-        Page<ProductImageEntity> productEntityList = productImageRepository.getProductListByPriceBetween(fromPrice, toPrice, pageable);
-        List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
+        Page<ProductImageEntity> productEntityList = productService.getProductListByPriceBetween(fromPrice, toPrice, pageable);
+        List<CategoryEntity> categoryEntityList = productService.getCategoryList();
 
         model.addAttribute("categories", categoryEntityList);
         model.addAttribute("productListP", productEntityList);
@@ -244,28 +244,12 @@ public class ProductController {
         return "product";
     }
 
-    @GetMapping(value = "feaured")
-    public String testtest(Model model) {
-        List<ProductEntity> allProducts = (List<ProductEntity>) productRepository.findAll();
-
-        Map<Integer, ProductEntity> allFeaturedProducts = new HashMap();
-        for (ProductEntity productEntity : allProducts) {
-            if (!allFeaturedProducts.containsKey(productEntity.getCategoryDetail().getId())) {
-                allFeaturedProducts.put(productEntity.getCategoryDetail().getId(), productEntity);
-                continue;
-            }
-        }
-
-        List<ProductEntity> allFeatureProductList = new ArrayList<>(allFeaturedProducts.values());
-        return "product";
-    }
-
     @RequestMapping(value = "/shop/filter/{color}", method = GET)
     public String showProductByColor(@PathVariable("color")String color, Model model,
                                      @RequestParam(value = "p", required = false, defaultValue = "0") Integer p) {
         Pageable pageable = PageRequest.of(p, 12);
-        Page<ProductImageEntity> productEntityList = productImageRepository.getProductListByColor(color, pageable);
-        List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
+        Page<ProductImageEntity> productEntityList = productService.getProductListByColor(color, pageable);
+        List<CategoryEntity> categoryEntityList = productService.getCategoryList();
 
         model.addAttribute("categories", categoryEntityList);
         model.addAttribute("productListP", productEntityList);
@@ -274,6 +258,7 @@ public class ProductController {
 
         return "product";
     }
+
 
 
     @PostMapping(value = "/add2cart", produces = "text/plain;charset=UTF-8")
