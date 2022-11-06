@@ -58,6 +58,9 @@
 
 <!-- Shopping Cart -->
 <div class="container">
+    <div class="alert alert-danger" role="alert" style="text-align: center; ${msg == null?"display: none":""}">
+        ${msg}
+    </div>
     <div class="site-section">
         <div class="container">
             <c:choose>
