@@ -22,12 +22,31 @@
                 </div>
 
                 <div class="right-top-bar flex-w h-full">
+<%--                    <a href="#" class="flex-c-m trans-04 p-lr-25">--%>
+<%--                        My Account--%>
+<%--                        <span class="caret"></span>--%>
+<%--                    </a>--%>
+                    <div class="dropdown dropdown-topbar">
+                        <a href="" class="flex-c-m trans-04 p-lr-25">
+                           <c:choose>
+                               <c:when test="${sessionScope.user != null}">Hello ${sessionScope.user.firstName}!</c:when>
+                               <c:otherwise>My Account</c:otherwise>
+                           </c:choose>
+                        </a>
+                        <div class="dropdown-content dropdown-content-topbar">
+                            <a href="" class="flex-c-m trans-04 p-lr-25">
+                                My Profile
+                            </a>
+                            <a href="/login" class="flex-c-m trans-04 p-lr-25" style="${sessionScope.user != null?"display: none":""}">
+                                Login
+                            </a>
+                            <a href="/logout" class="flex-c-m trans-04 p-lr-25" style="${sessionScope.user == null?"display: none":""}">
+                                Logout
+                            </a>
+                        </div>
+                    </div>
                     <a href="#" class="flex-c-m trans-04 p-lr-25">
                         Help & FAQs
-                    </a>
-
-                    <a href="#" class="flex-c-m trans-04 p-lr-25">
-                        My Account
                     </a>
 
                     <a href="#" class="flex-c-m trans-04 p-lr-25">
@@ -157,9 +176,22 @@
                         Help & FAQs
                     </a>
 
-                    <a href="#" class="flex-c-m p-lr-10 trans-04">
-                        My Account
-                    </a>
+                    <div class="dropdown dropdown-topbar">
+                        <a class="flex-c-m trans-04 p-lr-25">
+                            My Profile
+                        </a>
+                        <div class="dropdown-content dropdown-content-topbar">
+                            <a href="" class="flex-c-m trans-04 p-lr-25">
+                                My Profile
+                            </a>
+                            <a href="" class="flex-c-m trans-04 p-lr-25">
+                                Login
+                            </a>
+                            <a href="" class="flex-c-m trans-04 p-lr-25">
+                                Logout
+                            </a>
+                        </div>
+                    </div>
 
                     <a href="#" class="flex-c-m p-lr-10 trans-04">
                         EN

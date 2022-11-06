@@ -293,6 +293,7 @@ public class ProductController {
     }
 
 
+
     @RequestMapping(value = "/contact",method = GET)
     public String viewContact(Model model) {
 
