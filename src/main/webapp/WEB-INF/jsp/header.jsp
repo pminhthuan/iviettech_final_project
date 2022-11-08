@@ -29,7 +29,7 @@
                     <div class="dropdown dropdown-topbar">
                         <a href="" class="flex-c-m trans-04 p-lr-25">
                            <c:choose>
-                               <c:when test="${sessionScope.user != null}">Hello ${sessionScope.user.firstName}!</c:when>
+                               <c:when test="${sessionScope.user != null}">Welcome ${sessionScope.user.firstName}!</c:when>
                                <c:otherwise>My Account</c:otherwise>
                            </c:choose>
                         </a>

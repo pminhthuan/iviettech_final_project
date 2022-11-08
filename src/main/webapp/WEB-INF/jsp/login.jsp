@@ -77,8 +77,8 @@
             ${message}
         </div>
         <div class="login">
-            <div class="alert alert-danger" role="alert" style="text-align: center; ${errorSignUp == null?"display: none":""}">
-                ${errorSignUp}
+            <div class="alert alert-danger" role="alert" style="text-align: center; ${errorSignIn == null?"display: none":""}">
+                ${errorSignIn}
             </div>
             <form action="/login" method="post">
                 <!-- Email input -->

@@ -81,8 +81,8 @@ public class UserController {
                 model.addAttribute("errorSignIn", "Login failed. You account not activated yet");
                 return "login";
             } else if (result == 2) {
-                model.addAttribute("message", "Welcome " + email);
-                model.addAttribute("cssBootstrap", "alert-success");
+                //model.addAttribute("message", "Welcome " + email);
+                //model.addAttribute("cssBootstrap", "alert-success");
                 session.setAttribute("user", userService.findUser(email, password));
             }
         }
