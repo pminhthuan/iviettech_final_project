@@ -1,5 +1,6 @@
 package com.iviettech.finalproject.service;
 
+import com.iviettech.finalproject.entity.RoleEntity;
 import com.iviettech.finalproject.entity.UserEntity;
 import com.iviettech.finalproject.helper.GmailSender;
 import com.iviettech.finalproject.repository.UserRepository;
@@ -22,12 +23,14 @@ public class UserService {
         return user != null ? true:false;
     }
 
-    public void doRegistration(UserEntity user){
+    public void doRegistration(UserEntity user, RoleEntity role){
         String hashPassword = createHash(user.getPassword());
         user.setPassword(hashPassword);
 
         String activationCode = createHash(user.getEmail()+user.getPassword());
         user.setActivationCode(activationCode);
+        role.setId(1);
+        user.setRole(role);
 
         userRepository.save(user);
 

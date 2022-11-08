@@ -1,5 +1,6 @@
 package com.iviettech.finalproject.controller;
 
+import com.iviettech.finalproject.entity.RoleEntity;
 import com.iviettech.finalproject.entity.UserEntity;
 import com.iviettech.finalproject.repository.UserRepository;
 import com.iviettech.finalproject.service.UserService;
@@ -37,7 +38,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/register",method = RequestMethod.POST)
-    public String doRegister(UserEntity user , Model model) {
+    public String doRegister(UserEntity user, RoleEntity role, Model model) {
         boolean isEmailExisting = userService.isEmailExisting(user.getEmail());
 
         if (isEmailExisting){
@@ -46,7 +47,7 @@ public class UserController {
             model.addAttribute("accounts", user); // keep entered data
             return "register";
         }
-        userService.doRegistration(user);
+        userService.doRegistration(user, role);
         model.addAttribute("message", "Thanks for your registration. Please go to your mailbox to activate your account.");
         model.addAttribute("cssBootstrap", "alert-success");
         return "login";
