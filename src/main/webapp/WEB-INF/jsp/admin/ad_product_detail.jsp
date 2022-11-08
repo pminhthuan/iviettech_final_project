@@ -1,3 +1,4 @@
+
 <%--
   Created by IntelliJ IDEA.
   User: phamv
@@ -6,6 +7,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <title>Product detail</title>
@@ -24,9 +27,9 @@
     <script src="/resources/admin/js/datatables-simple-demo.js"></script>
 </head>
 <body class="sb-nav-fixed">
-<%@include file="ad_header.jsp"%>
+<jsp:include page="ad_header.jsp"/>
 <div id="layoutSidenav">
-    <%@include file="ad_sidebar_menu.jsp"%>
+    <jsp:include page="ad_sidebar_menu.jsp"/>
     <div id="layoutSidenav_content">
         <main>
             <div class="card mb-4">
@@ -77,7 +80,7 @@
             </div>
         </div>
         </main>
-        <%@include file="ad_footer.jsp"%>
+        <jsp:include page="ad_footer.jsp"/>
     </div>
 </div>
 </body>

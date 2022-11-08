@@ -24,9 +24,9 @@
     <script src="/resources/admin/js/datatables-simple-demo.js"></script>
 </head>
 <body>
-<%@include file="ad_header.jsp"%>
+<jsp:include page="ad_header.jsp"/>
 <div id="layoutSidenav">
-    <%@include file="ad_sidebar_menu.jsp"%>
+    <jsp:include page="ad_sidebar_menu.jsp"/>
     <div id="layoutSidenav_content">
         <main>
             <div class="card mb-4">
@@ -77,7 +77,7 @@
                 </div>
             </div>
         </main>
-        <%@include file="ad_footer.jsp"%>
+        <jsp:include page="ad_footer.jsp"/>
     </div>
 </div>
 </body>
