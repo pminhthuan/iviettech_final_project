@@ -34,8 +34,14 @@
                            </c:choose>
                         </a>
                         <div class="dropdown-content dropdown-content-topbar">
+                            <a href="" class="flex-c-m trans-04 p-lr-25" style="${sessionScope.user.role.id != 2?"display: none":""}">
+                                Admin Page
+                            </a>
                             <a href="" class="flex-c-m trans-04 p-lr-25">
                                 My Profile
+                            </a>
+                            <a href="" class="flex-c-m trans-04 p-lr-25" style="${sessionScope.user == null?"display: none":""}">
+                                Purchase History
                             </a>
                             <a href="/login" class="flex-c-m trans-04 p-lr-25" style="${sessionScope.user != null?"display: none":""}">
                                 Login
