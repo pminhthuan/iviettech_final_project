@@ -294,6 +294,7 @@ public class ProductService {
         if (user != null){
             order.setUser(user);
         }
+
         order.setRequireDate(Date.valueOf(LocalDate.now()));
         orderRepository.save(order);
         List<CartItem> cart = (List<CartItem>) session.getAttribute("shopping_cart");

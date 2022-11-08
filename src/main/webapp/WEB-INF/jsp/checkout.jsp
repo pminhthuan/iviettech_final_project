@@ -173,7 +173,7 @@
                   <%--              <option value="${province.id }">${province.nameEn}</option>--%>
                   <%--              </c:forEach>--%>
                   <%--            </select>--%>
-                <form:select path="province" class="custom-select d-block w-100" id="province" required="true">
+                <form:select path="province.id" class="custom-select d-block w-100" id="province" required="true">
                   <form:option value='-1'>Select an option</form:option>
                   <form:options items="${province}"/>
                 </form:select>
@@ -183,7 +183,7 @@
               </div>
               <div class="col-md-4 mb-3">
                 <label for="district">District</label>
-                <form:select path="district" class="custom-select d-block w-100" id="district" required="true">
+                <form:select path="district.id" class="custom-select d-block w-100" id="district" required="true">
                 </form:select>
                 <div class="invalid-feedback">
                   Please provide a valid district.
@@ -191,7 +191,7 @@
               </div>
               <div class="col-md-4 mb-3">
                 <label for="ward">Ward</label>
-                <form:select path="ward" class="custom-select d-block w-100" id="ward" required="true">
+                <form:select path="ward.id" class="custom-select d-block w-100" id="ward" required="true">
                 </form:select>
                 <div class="invalid-feedback">
                   Please provide a valid ward.
