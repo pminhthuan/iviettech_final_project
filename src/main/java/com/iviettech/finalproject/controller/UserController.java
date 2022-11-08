@@ -83,7 +83,7 @@ public class UserController {
             } else if (result == 2) {
                 model.addAttribute("message", "Welcome " + email);
                 model.addAttribute("cssBootstrap", "alert-success");
-                session.setAttribute("user", new UserEntity());
+                session.setAttribute("user", userService.findUser(email, password));
             }
         }
 

@@ -50,9 +50,7 @@ public class UserService {
     }
 
     public int doLogin(String email, String password){
-        String hashPassword = createHash(password);
-
-        UserEntity findUser = userRepository.findByEmailAndPassword(email, hashPassword);
+        UserEntity findUser = findUser(email,password);
         if(findUser == null){
             return 0; // incorrect user name or password
         } else {
@@ -61,6 +59,12 @@ public class UserService {
             }
             return 2; // login ok
         }
+    }
+
+    public UserEntity findUser (String email, String password){
+        String hashPassword = createHash(password);
+        UserEntity findUser = userRepository.findByEmailAndPassword(email, hashPassword);
+        return findUser;
     }
 
 }
