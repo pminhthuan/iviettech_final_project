@@ -1,18 +1,24 @@
 package com.iviettech.finalproject.service;
 
-import com.iviettech.finalproject.entity.ProductEntity;
-import com.iviettech.finalproject.entity.ProductImageEntity;
-import com.iviettech.finalproject.helper.CSVHelper;
+import com.iviettech.finalproject.entity.*;
+import com.iviettech.finalproject.helper.*;
 import com.iviettech.finalproject.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.supercsv.io.CsvBeanWriter;
+import org.supercsv.io.ICsvBeanWriter;
+import org.supercsv.prefs.CsvPreference;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,6 +50,10 @@ public class AdminService {
 
     @Autowired
     ServletContext servletContext;
+
+    public void findByOrderID(int id) {
+        List<OrderDetailEntity> orderDetailEntityList = orderDetailRepository.findByOrderEntityId(id);
+    }
 
 
     public void uploadFile(MultipartFile file,int id) {
@@ -95,6 +105,145 @@ public class AdminService {
             e.printStackTrace();
         }
     }
+
+    public void exportProduct(HttpServletResponse response) throws IOException {
+        response.setContentType("text/csv");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+        String currentDateTime = dateFormatter.format(new Date());
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=Product_" + currentDateTime + ".csv";
+        response.setHeader(headerKey, headerValue);
+
+        List<ProductEntity> productEntityList = (List<ProductEntity>) productRepository.findAll();
+
+        ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
+        String[] csvHeader = { "ID", "Name", "Category_Detail_ID", "Orginal_Price", "Actual_Price", "Manufactor_ID", "Add_Date", "Status", "Description", "Infor" };
+        String[] nameMapping = { "id", "name", "category_detail_id", "original_price", "actual_price", "manufactor_id", "add_date", "status", "description", "addition_info"};
+
+        csvWriter.writeHeader(csvHeader);
+
+        for (ProductEntity productEntity : productEntityList) {
+            try {
+//                BookRawExport data = new BookRawExport(bookEntity);
+                ProductRawExport data = new ProductRawExport(productEntity);
+                csvWriter.write(data, nameMapping);
+            } catch (Exception e) {
+                System.out.println("Skip this record/data");
+                continue;
+            }
+        }
+
+        csvWriter.close();
+    }
+
+    //---------------------ProductDetail
+
+    public void exportProductDetail(HttpServletResponse response) throws IOException {
+        response.setContentType("text/csv");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+        String currentDateTime = dateFormatter.format(new Date());
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=ProductDetail_" + currentDateTime + ".csv";
+        response.setHeader(headerKey, headerValue);
+
+        List<ProductDetailEntity> productDetailEntityList =
+                (List<ProductDetailEntity>) productDetailRepository.findAll();
+
+        ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
+        String[] csvHeader = { "ID", "Color", "Quantity", "Size", "Product_ID" };
+        String[] nameMapping = { "id", "color", "quantity", "size", "product_id" };
+
+        csvWriter.writeHeader(csvHeader);
+
+        for (ProductDetailEntity productDetailEntity : productDetailEntityList) {
+            try {
+//                BookRawExport data = new BookRawExport(bookEntity);
+                ProductDetailRawExport data = new ProductDetailRawExport(productDetailEntity);
+                csvWriter.write(data, nameMapping);
+            } catch (Exception e) {
+                System.out.println("Skip this record/data");
+                continue;
+            }
+        }
+
+        csvWriter.close();
+    }
+
+//    public void saveProductDetail(MultipartFile file) {
+//        try {
+//            List<ProductDetailEntity> productDetailEntityListEntityList = CSVHelper.readProductData(file.getInputStream());
+//
+//            productRepository.saveAll(productEntityList);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+
+
+    //-----------------------------------------order
+    public void exportOrderDetail(HttpServletResponse response) throws IOException {
+        response.setContentType("text/csv");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+        String currentDateTime = dateFormatter.format(new Date());
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=Order_" + currentDateTime + ".csv";
+        response.setHeader(headerKey, headerValue);
+
+        List<OrderDetailEntity> orderDetailEntityList = (List<OrderDetailEntity>) orderDetailRepository.findAll();
+
+        ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
+        String[] csvHeader = { "id", "OrderID", "First_Name", "Last_Name", "Email", "Phone_Number", "Address", "Product_Name", "Color", "Size", "Quantity", "Price", "Require_Date", "All_Total", "Payment" };
+        String[] nameMapping = { "id", "order_id", "first_name", "last_name", "email", "phone", "address", "product_id", "color", "size", "quantity", "price", "req_date", "total_amount", "payment"};
+
+        csvWriter.writeHeader(csvHeader);
+
+        for (OrderDetailEntity orderDetail : orderDetailEntityList) {
+            try {
+//                BookRawExport data = new BookRawExport(bookEntity);
+                OrderDetailRawExport data = new OrderDetailRawExport(orderDetail);
+                csvWriter.write(data, nameMapping);
+            } catch (Exception e) {
+                System.out.println("Skip this record/data");
+                continue;
+            }
+        }
+
+        csvWriter.close();
+    }
+    public void exportOrder(HttpServletResponse response) throws IOException {
+        response.setContentType("text/csv");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
+        String currentDateTime = dateFormatter.format(new Date());
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=Order_" + currentDateTime + ".csv";
+        response.setHeader(headerKey, headerValue);
+
+        List<OrderEntity> orderEntityList = (List<OrderEntity>) orderRepository.findAll();
+
+        ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
+        String[] csvHeader = { "OrderID", "First_Name", "Last_Name", "Email", "Phone_Number", "Address", "Product_Name", "Color", "Size", "Quantity", "Price", "Require_Date", "All_Total", "Payment" };
+        String[] nameMapping = { "order_id", "first_name", "last_name", "email", "phone", "address", "product_id", "color", "size", "quantity", "price", "req_date", "total_amount", "payment"};
+
+        csvWriter.writeHeader(csvHeader);
+
+        for (OrderEntity order : orderEntityList) {
+            try {
+//                BookRawExport data = new BookRawExport(bookEntity);
+                OrderRawExport data = new OrderRawExport(order);
+                csvWriter.write(data, nameMapping);
+            } catch (Exception e) {
+                System.out.println("Skip this record/data");
+                continue;
+            }
+        }
+
+        csvWriter.close();
+    }
+
 
 
 }
