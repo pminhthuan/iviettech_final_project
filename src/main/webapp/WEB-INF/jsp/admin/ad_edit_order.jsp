@@ -41,8 +41,12 @@
                                 <div class="form-group">
                                     <label class="control-label">ID</label>
                                     <form:input path="id" type="text" class="form-control" id="id" placeholder="ID" readonly="true"/>
-<%--                                    <form:hidden path="id" />--%>
-                                        <%--                                    <form:hidden path="product.id" />--%>
+                                    <form:hidden path="orderStatus" />
+                                    <form:hidden path="paymentStatus" />
+                                    <form:hidden path="province" />
+                                    <form:hidden path="ward" />
+                                    <form:hidden path="district" />
+
                                 </div>
                             </c:if>
                             <div class="row">
