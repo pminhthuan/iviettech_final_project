@@ -40,8 +40,20 @@ public class UserEntity {
     @Comment(value = "1: male; 2: female; 3: others")
     private int gender;
 
-    @Column(name = "address", length = 2000)
-    private String address;
+    @Column(name = "address_detail", length = 2000)
+    private String addressDetail;
+
+    @ManyToOne
+    @JoinColumn(name = "province")
+    private ProvinceEntity province;
+
+    @ManyToOne
+    @JoinColumn(name = "district")
+    private DistrictEntity district;
+
+    @ManyToOne
+    @JoinColumn(name = "ward")
+    private WardEntity ward;
 
     @Column(name = "activation_code")
     private String activationCode;

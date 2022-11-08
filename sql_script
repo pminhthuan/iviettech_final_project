@@ -1,3 +1,7 @@
+INSERT INTO roles ( name) VALUES ( 'Customer');
+INSERT INTO roles ( name) VALUES ( 'Admin');
+
+
 INSERT INTO categories ( name) VALUES ( 'Men');
 INSERT INTO categories ( name) VALUES ( 'Women');
 INSERT INTO categories ( name) VALUES ( 'Kids');

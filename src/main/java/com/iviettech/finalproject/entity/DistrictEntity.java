@@ -1,6 +1,8 @@
 package com.iviettech.finalproject.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
@@ -36,6 +38,15 @@ public class DistrictEntity {
     @JoinColumn(name = "province_code")
     private ProvinceEntity provinceEntity;
 
-    @OneToMany(mappedBy = "districtEntity",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "districtEntity")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<WardEntity> wardEntityList;
+
+    @OneToMany(mappedBy = "district")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<OrderEntity> orderList;
+
+    @OneToMany(mappedBy = "district")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<UserEntity> userList;
 }

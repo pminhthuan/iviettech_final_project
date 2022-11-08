@@ -290,6 +290,10 @@ public class ProductService {
     }
 
     public void doCheckout(OrderEntity order, HttpSession session) {
+        UserEntity user = (UserEntity) session.getAttribute("user");
+        if (user != null){
+            order.setUser(user);
+        }
         order.setRequireDate(Date.valueOf(LocalDate.now()));
         orderRepository.save(order);
         List<CartItem> cart = (List<CartItem>) session.getAttribute("shopping_cart");

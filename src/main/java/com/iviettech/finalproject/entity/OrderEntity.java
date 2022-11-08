@@ -1,6 +1,7 @@
 package com.iviettech.finalproject.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -47,14 +48,17 @@ public class OrderEntity {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Column(name = "province", length = 1024)
-    private String province;
+    @ManyToOne
+    @JoinColumn(name = "province")
+    private ProvinceEntity province;
 
-    @Column(name = "district", length = 1024)
-    private String district;
+    @ManyToOne
+    @JoinColumn(name = "district")
+    private DistrictEntity district;
 
-    @Column(name = "ward", length = 1024)
-    private String ward;
+    @ManyToOne
+    @JoinColumn(name = "ward")
+    private WardEntity ward;
 
     @Column(name = "address_detail", length = 2000)
     private String addressDetail;
