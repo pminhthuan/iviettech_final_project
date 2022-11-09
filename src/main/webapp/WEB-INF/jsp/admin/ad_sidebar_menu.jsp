@@ -88,9 +88,6 @@
                 <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingThree" data-bs-parent="#sidenavAccordion">
                     <nav class="sb-sidenav-menu-nested nav">
                         <a class="nav-link" href="/admin/adAccount">Account</a>
-                        <a class="nav-link" href="/admin/adCategory">Category</a>
-                        <a class="nav-link" href="/admin/adManyfactor">Manufactor</a>
-                        <a class="nav-link" href="/admin/adOrder">Order</a>
                     </nav>
                 </div>
                 <div class="sb-sidenav-menu-heading">Addons</div>
@@ -106,7 +103,7 @@
         </div>
         <div class="sb-sidenav-footer">
             <div class="small">Logged in as:</div>
-            Start Bootstrap
+            Admin T&T Fashion
         </div>
     </nav>
 </div>

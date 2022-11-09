@@ -26,9 +26,9 @@
     <script src="/resources/admin/js/datatables-simple-demo.js"></script>
 </head>
 <body class="sb-nav-fixed">
-<%@include file="ad_header.jsp"%>
+<jsp:include page="ad_header.jsp"/>
 <div id="layoutSidenav">
-    <%@include file="ad_sidebar_menu.jsp"%>
+    <jsp:include page="ad_sidebar_menu.jsp"/>
     <div id="layoutSidenav_content">
         <main>
             <div class="container" style="margin-top: 60px;">
@@ -41,8 +41,12 @@
                                 <div class="form-group">
                                     <label class="control-label">ID</label>
                                     <form:input path="id" type="text" class="form-control" id="id" placeholder="ID" readonly="true"/>
-<%--                                    <form:hidden path="id" />--%>
-                                        <%--                                    <form:hidden path="product.id" />--%>
+                                    <form:hidden path="orderStatus" />
+                                    <form:hidden path="paymentStatus" />
+                                    <form:hidden path="province" />
+                                    <form:hidden path="ward" />
+                                    <form:hidden path="district" />
+
                                 </div>
                             </c:if>
                             <div class="row">
@@ -96,7 +100,7 @@
             </div>
 
         </main>
-        <%@include file="ad_footer.jsp"%>
+        <jsp:include page="ad_footer.jsp"/>
     </div>
 </div>
 </body>

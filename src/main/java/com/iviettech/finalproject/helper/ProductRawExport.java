@@ -1,7 +1,10 @@
 package com.iviettech.finalproject.helper;
 
 import com.iviettech.finalproject.entity.ProductEntity;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.text.SimpleDateFormat;
 
@@ -30,7 +33,11 @@ public class ProductRawExport {
         this.original_price = productEntity.getOriginal_price();
         this.actual_price = productEntity.getActual_price();
         this.manufactor_id = productEntity.getManufactor().getId();
-        this.add_date = new SimpleDateFormat("yyyy-MM-dd").format(productEntity.getAddDate());
+        try {
+            this.add_date = new SimpleDateFormat("yyyy-MM-dd").format(productEntity.getAddDate());
+        } catch (Exception e) {
+            System.out.println(e.getCause());
+        }
         this.status = productEntity.getStatus();
         this.description = productEntity.getDescription();
         this.addition_info = productEntity.getAdditionInfo();

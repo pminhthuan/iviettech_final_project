@@ -25,9 +25,9 @@
     <script src="/resources/admin/js/datatables-simple-demo.js"></script>
 </head>
 <body class="sb-nav-fixed">
-<%@include file="ad_header.jsp"%>
+<jsp:include page="ad_header.jsp"/>
 <div id="layoutSidenav">
-    <%@include file="ad_sidebar_menu.jsp"%>
+    <jsp:include page="ad_sidebar_menu.jsp"/>
     <div id="layoutSidenav_content">
         <main>
             <div class="container" style="margin-top: 60px;">
@@ -40,11 +40,16 @@
                                 <div class="form-group">
                                     <label class="control-label">ID</label>
                                     <form:input path="id" type="text" class="form-control" id="id" placeholder="ID" readonly="true"/>
-                                    <form:hidden path="email" />
-                                    <form:hidden path="password" />
+<%--                                    <form:hidden path="email" />--%>
+<%--                                    <form:hidden path="password" />--%>
+<%--                                    <form:hidden path="province" />--%>
+<%--                                    <form:hidden path="district" />--%>
+<%--                                    <form:hidden path="ward" />--%>
+
                                         <%--                                    <form:hidden path="product.id" />--%>
                                 </div>
                             </c:if>
+
                             <div class="row">
                                 <div class="form-group mb-3 col-xs-12 col-sm-6">
                                     <label class="control-label">First name (*)</label>
@@ -54,6 +59,10 @@
                                     <label class="control-label">Last name (*)</label>
                                     <form:input path="lastName" type="text" class="form-control" placeholder="Last name" required="true"/>
                                 </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Email (*)</label>
+                                <form:input path="email" type="text" class="form-control" placeholder="Email" required="true"/>
                             </div>
                             <div class="row">
                                 <div class="form-group mb-3 col-xs-12 col-sm-6">
@@ -77,8 +86,24 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Address (*)</label>
-                                <form:input path="address" type="text" class="form-control" placeholder="Address" required="true"/>
+                                <form:input path="addressDetail" type="text" class="form-control" placeholder="Address" required="true"/>
                             </div>
+                            <div class="row">
+                                <div class="form-group mb-3 col-xs-12 col-sm-6">
+                                    <label class="control-label">Actual price (*)</label>
+                                    <form:select path="role" class="form-control">
+                                        <form:option value="1" label="Customer"/>
+                                        <form:option value="2" label="Admin" />
+                                    </form:select>
+                                </div>
+                            </div>
+<%--                            <c:if test="${type.equals('newAccount')}">--%>
+<%--                                <div class="form-group">--%>
+<%--                                    <label class="control-label">ID</label>--%>
+<%--                                    <form:select path="password" type="password" class="form-control" readonly="true"/>--%>
+<%--                                    <form:option value="E412D0EDAE7E4C37EAF763643BA006B27AFEF2E747DB3E65B1C5355AB1B3564C" label="Default password: 12345"/>--%>
+<%--                                </div>--%>
+<%--                            </c:if>--%>
                             <br>
                             <button type="submit" class="btn btn-info">Save</button>
                         </fieldset>
@@ -87,7 +112,7 @@
             </div>
 
         </main>
-        <%@include file="ad_footer.jsp"%>
+        <jsp:include page="ad_footer.jsp"/>
     </div>
 </div>
 
