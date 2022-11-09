@@ -159,20 +159,9 @@
               </div>
             </div>
 
-            <%--        <div class="mb-3">--%>
-            <%--          <label for="address2">Address 2 <span class="text-muted">(Optional)</span></label>--%>
-            <%--          <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">--%>
-            <%--        </div>--%>
-
             <div class="row">
               <div class="col-md-4 mb-3">
                 <label for="province">Province</label>
-                  <%--            <select class="custom-select d-block w-100" id="province" required>--%>
-                  <%--              <option value='-1'>Select an option</option>--%>
-                  <%--              <c:forEach items="${province}" var="province">--%>
-                  <%--              <option value="${province.id }">${province.nameEn}</option>--%>
-                  <%--              </c:forEach>--%>
-                  <%--            </select>--%>
                 <form:select path="province.id" class="custom-select d-block w-100" id="province" required="true">
                   <form:option value='-1'>Select an option</form:option>
                   <form:options items="${province}"/>

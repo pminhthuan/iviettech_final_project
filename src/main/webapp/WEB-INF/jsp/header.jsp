@@ -37,17 +37,17 @@
                             <a href="" class="flex-c-m trans-04 p-lr-25" style="${sessionScope.user.role.id != 2?"display: none":""}">
                                 Admin Page
                             </a>
-                            <a href="" class="flex-c-m trans-04 p-lr-25">
+                            <a href="/profile" class="flex-c-m trans-04 p-lr-25">
                                 My Profile
-                            </a>
-                            <a href="" class="flex-c-m trans-04 p-lr-25" style="${sessionScope.user == null?"display: none":""}">
-                                Purchase History
                             </a>
                             <a href="/login" class="flex-c-m trans-04 p-lr-25" style="${sessionScope.user != null?"display: none":""}">
                                 Login
                             </a>
                             <a href="/logout" class="flex-c-m trans-04 p-lr-25" style="${sessionScope.user == null?"display: none":""}">
                                 Logout
+                            </a>
+                            <a href="/register" class="flex-c-m trans-04 p-lr-25" style="${sessionScope.user != null?"display: none":""}">
+                                Register
                             </a>
                         </div>
                     </div>

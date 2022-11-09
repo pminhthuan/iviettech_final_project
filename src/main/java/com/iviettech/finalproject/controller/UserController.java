@@ -1,17 +1,19 @@
 package com.iviettech.finalproject.controller;
 
+import com.iviettech.finalproject.entity.OrderEntity;
 import com.iviettech.finalproject.entity.RoleEntity;
 import com.iviettech.finalproject.entity.UserEntity;
 import com.iviettech.finalproject.repository.UserRepository;
+import com.iviettech.finalproject.service.ProductService;
 import com.iviettech.finalproject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+
+import java.util.Map;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -23,6 +25,9 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private ProductService productService;
 
 
     @RequestMapping(value = "/login",method = RequestMethod.GET)
@@ -97,5 +102,27 @@ public class UserController {
         session.removeAttribute("user");
         return "redirect:/";
     }
+
+    @RequestMapping(value = "/profile",method = RequestMethod.GET)
+    public String viewProfile(Model model) {
+
+        Map<Integer, String> provinceMap = productService.getProvinces();
+        model.addAttribute("user", new UserEntity());
+        model.addAttribute("province",provinceMap);
+        return "profile";
+    }
+
+    @RequestMapping(value = "/purcharehistory",method = RequestMethod.GET)
+    public String viewPurchaseHistory() {
+
+        return "purchare_history";
+    }
+
+    @RequestMapping(value = "/changepass",method = RequestMethod.GET)
+    public String viewChangePass() {
+
+        return "change_pass";
+    }
+
 
 }
