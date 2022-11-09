@@ -5,6 +5,7 @@ import com.iviettech.finalproject.helper.*;
 import com.iviettech.finalproject.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.ICsvBeanWriter;
@@ -18,9 +19,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class AdminService {
@@ -51,8 +50,48 @@ public class AdminService {
     @Autowired
     ServletContext servletContext;
 
-    public void findByOrderID(int id) {
-        List<OrderDetailEntity> orderDetailEntityList = orderDetailRepository.findByOrderEntityId(id);
+    public void setCategoryDropDownlist(Model model) {
+        List<CategoryEntity> cateList = (List<CategoryEntity>) categoryRepository.findAll();
+        if (!cateList.isEmpty()) {
+            Map<Integer, String> cateMap = new LinkedHashMap<>();
+            for(CategoryEntity categoryEntity : cateList) {
+                cateMap.put(categoryEntity.getId(), categoryEntity.getName());
+            }
+            model.addAttribute("cateList", cateMap);
+        }
+    }
+
+    public void setManufactorDropDownlist(Model model) {
+        List<ManufactorEntity> manufactorList = (List<ManufactorEntity>) manufactorRepository.findAll();
+        if (!manufactorList.isEmpty()) {
+            Map<Integer, String> manufactorMap = new LinkedHashMap<>();
+            for(ManufactorEntity manufactorEntity : manufactorList) {
+                manufactorMap.put(manufactorEntity.getId(), manufactorEntity.getName());
+            }
+            model.addAttribute("manufactorList", manufactorMap);
+        }
+    }
+
+    public void setCategoryDetailDropDownlist(Model model) {
+        List<CategoryDetailEntity> cateDetailList = (List<CategoryDetailEntity>) categoryDetailRepository.findAll();
+        if (!cateDetailList.isEmpty()) {
+            Map<Integer, String> cateDetailMap = new LinkedHashMap<>();
+            for(CategoryDetailEntity categoryDetailEntity : cateDetailList) {
+                cateDetailMap.put(categoryDetailEntity.getId(), categoryDetailEntity.getDescription());
+            }
+            model.addAttribute("categoryDetailList", cateDetailMap);
+        }
+    }
+
+    public void setProductDropDownlist(Model model) {
+        List<ProductEntity> productList = (List<ProductEntity>) productRepository.findAll();
+        if (!productList.isEmpty()) {
+            Map<Integer, String> productMap = new LinkedHashMap<>();
+            for(ProductEntity productEntity : productList) {
+                productMap.put(productEntity.getId(), productEntity.getName());
+            }
+            model.addAttribute("productList", productMap);
+        }
     }
 
 

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: phamv
@@ -31,9 +32,6 @@
         <main>
             <div class="card mb-4">
                 <div class="card-header">
-                    <a
-                            href="/admin/#"
-                            class="btn btn-primary btn-block text-uppercase me-1">Add Account</a>
                     <i class="fas fa-table me-1"></i>
                     Account
                 </div>
@@ -42,19 +40,23 @@
                         <thead>
                         <tr>
                             <th>Name</th>
+                            <th>Email</th>
                             <th>Gender</th>
                             <th>Age</th>
                             <th>Phone</th>
                             <th>Address</th>
+                            <th>Role</th>
                         </tr>
                         </thead>
                         <tfoot>
                         <tr>
                             <th>Name</th>
+                            <th>Email</th>
                             <th>Gender</th>
                             <th>Age</th>
                             <th>Phone</th>
                             <th>Address</th>
+                            <th>Role</th>
                         </tr>
                         </tfoot>
                         <tbody>
@@ -63,13 +65,29 @@
                                 <td>
                                     <a href="/admin/editAccount/${a.id}">${a.firstName} ${a.lastName}</a>
                                 </td>
+                                <td>${a.email}</td>
 <%--                                <td>--%>
 <%--                                    <a href="<c:url value="/admin/editManufactor/${m.id}"/>"><i class="fa fa-pencil" aria-hidden="true"></i> ${m.name}</a>--%>
 <%--                                </td>--%>
                                 <td>${a.gender}</td>
                                 <td>${a.age}</td>
                                 <td>${a.phoneNumber}</td>
-                                <td>${a.address}</td>
+                                <td>${a.addressDetail}</td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${a.role.id == 1}">
+                                            <%--                                        <label style="color: red">${p.status}</label>--%>
+                                            <a href="<c:url value="/admin/updateRoleAccount/${a.id}"/>">
+                                                <i class="fa fa-check" aria-hidden="true"></i></a>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <%--                                        <label style="color: green">${p.status}</label>--%>
+                                            <a href="<c:url value="/admin/updateRoleAccount/${a.id}"/>">
+                                                <i class="fa fa-times" aria-hidden="true" style="color: red"></i>
+                                            </a>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </td>
                             </tr>
                         </c:forEach>
                         </tbody>

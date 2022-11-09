@@ -118,7 +118,7 @@
             <br>
             <div class="row col-md-12" style="margin-left: 5vw">
                 <div class="col-md-6">
-                    <h4>Import Book data as a CSV file...</h4>
+                    <h4>Import Product data as a CSV file...</h4>
                     <c:if test="${mssImport != null}">
                         <div class="alert alert-danger">
                             <c:out value="${mssImport}"/>

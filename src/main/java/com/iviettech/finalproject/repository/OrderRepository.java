@@ -1,10 +1,8 @@
 package com.iviettech.finalproject.repository;
 
 import com.iviettech.finalproject.entity.OrderEntity;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -25,8 +23,8 @@ public interface OrderRepository extends CrudRepository<OrderEntity, Integer> {
     List<OrderEntity> getOrderYear();
 
 
-    @Query(value = "SELECT * FROM orders WHERE require_date BETWEEN ?1 AND ?2", nativeQuery = true)
-    List<OrderEntity> getOrderFromTo(Date date1, Date date2);
+    @Query(value = "SELECT * FROM orders WHERE (require_date BETWEEN ?1 AND ?2) AND order_status = ?3", nativeQuery = true)
+    List<OrderEntity> getOrderFromTo(Date date1, Date date2, int status);
 
     List<OrderEntity> findTop5ByOrderStatusOrderByIdDesc(int orderStatus);
 

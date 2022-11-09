@@ -104,9 +104,9 @@ public class AdminController {
         model.addAttribute("msg", "Add a new product");
         model.addAttribute("action", "newProduct");
 
-        setCategoryDetailDropDownlist(model);
-        setManufactorDropDownlist(model);
-        setCategoryDropDownlist(model);
+        adminService.setCategoryDetailDropDownlist(model);
+        adminService.setManufactorDropDownlist(model);
+        adminService.setCategoryDropDownlist(model);
 
         return "admin/ad_edit_product";
     }
@@ -125,9 +125,9 @@ public class AdminController {
         model.addAttribute("type", "updateProduct");
         model.addAttribute("action", "/admin/updateProduct");
 
-        setCategoryDetailDropDownlist(model);
-        setManufactorDropDownlist(model);
-        setCategoryDropDownlist(model);
+        adminService.setCategoryDetailDropDownlist(model);
+        adminService.setManufactorDropDownlist(model);
+        adminService.setCategoryDropDownlist(model);
         return "admin/ad_edit_product";
     }
 
@@ -211,7 +211,7 @@ public class AdminController {
         model.addAttribute("type", "newProductDetail");
         model.addAttribute("action", "newProductDetail");
 
-        setProductDropDownlist(model);
+        adminService.setProductDropDownlist(model);
 
         return "admin/ad_edit_product_detail";
     }
@@ -232,7 +232,7 @@ public class AdminController {
         model.addAttribute("type", "updateProductDetail");
         model.addAttribute("action", "/admin/updateProductDetail");
 
-        setProductDropDownlist(model);
+        adminService.setProductDropDownlist(model);
 
         return "admin/ad_edit_product_detail";
     }
@@ -330,7 +330,7 @@ public class AdminController {
         model.addAttribute("msg", "Add a category detail");
         model.addAttribute("action", "newCategoryDetail");
 
-        setCategoryDropDownlist(model);
+        adminService.setCategoryDropDownlist(model);
 
         return "admin/ad_edit_category_detail";
     }
@@ -349,7 +349,7 @@ public class AdminController {
         model.addAttribute("type", "updateCategoryDetail");
         model.addAttribute("action", "/admin/updateCategoryDetail");
 
-        setCategoryDropDownlist(model);
+        adminService.setCategoryDropDownlist(model);
 
         return "admin/ad_edit_category_detail";
     }
@@ -460,7 +460,7 @@ public class AdminController {
             model.addAttribute("order", order);
             orderRepository.save(order);
         }
-        return "redirect:/admin/adProduct";
+        return "redirect:/admin/adOrder";
 
     }
 
@@ -473,6 +473,22 @@ public class AdminController {
         model.addAttribute("orderDetailList", orderDetailList);
 
         return "admin/ad_order_detail";
+    }
+
+    @RequestMapping("/seachOrder")
+    public String seachOrder(@RequestParam(name = "startDate", required = false) String startDate,
+                             @RequestParam(name = "endDate", required = false) String endDate, Model model){
+
+        java.sql.Date date1 = java.sql.Date.valueOf(startDate);
+        java.sql.Date date2 = java.sql.Date.valueOf(endDate);
+
+        List<OrderEntity> orderList =  orderRepository.getOrderFromTo(date1, date2, 0);
+
+        model.addAttribute("orderList", orderList);
+
+
+        //return "redirect:/admin/adOrder";
+        return "admin/ad_order";
     }
 
 //------------------------Account------
@@ -491,10 +507,18 @@ public class AdminController {
     public String newAccount(Model model) {
         model.addAttribute("account", new UserEntity());
         model.addAttribute("msg", "Add account");
+        model.addAttribute("type", "newAccount");
         model.addAttribute("action", "newAccount");
 
         return "admin/ad_edit_account";
     }
+
+//    @RequestMapping(value = "/newAccount", method = POST, produces = "text/plain;charset=UTF-8")
+//    public String saveAccount(UserEntity user, Model model) {
+//        userRepository.save(user);
+//        model.addAttribute("message","You are add success!");
+//        return "redirect:/admin/adAccount";
+//    }
 
     @RequestMapping(value = "/editAccount/{id}", method = GET)
     public String editAccount(Model model, @PathVariable int id) {
@@ -507,10 +531,29 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/updateAccount", method = POST)
-    public String updateAccount(@ModelAttribute UserEntity user) {
+    public String updateAccount(@ModelAttribute("account") UserEntity user) {
         userRepository.save(user);
         return "redirect:/admin/adAccount";
     }
+
+//    @RequestMapping(value = "/updateRoleAccount/{id}")
+//    public String updateRoleAccount(@PathVariable int id, Model model) {
+//
+//        Optional<UserEntity> userEntity = userRepository.findById(id);
+//        if (userEntity.isPresent()) {
+//            UserEntity user = userEntity.get();
+//            if (user.getRole().getId() == 1) {
+//                user.setRole(new RoleEntity(2, 2));
+//            } else {
+//                user.getRole().setId(1);
+//            }
+//            model.addAttribute("user", user);
+//            userRepository.save(user);
+//        }
+//        return "redirect:/admin/adAccount";
+//
+//    }
+
 
 //    Report during the date
     @RequestMapping(value = "/adReportDate", method = GET)
@@ -567,47 +610,5 @@ public class AdminController {
     }
 
     //Map
-    private void setCategoryDropDownlist(Model model) {
-        List<CategoryEntity> cateList = (List<CategoryEntity>) categoryRepository.findAll();
-        if (!cateList.isEmpty()) {
-            Map<Integer, String> cateMap = new LinkedHashMap<>();
-            for(CategoryEntity categoryEntity : cateList) {
-                cateMap.put(categoryEntity.getId(), categoryEntity.getName());
-            }
-            model.addAttribute("cateList", cateMap);
-        }
-    }
 
-    private void setManufactorDropDownlist(Model model) {
-        List<ManufactorEntity> manufactorList = (List<ManufactorEntity>) manufactorRepository.findAll();
-        if (!manufactorList.isEmpty()) {
-            Map<Integer, String> manufactorMap = new LinkedHashMap<>();
-            for(ManufactorEntity manufactorEntity : manufactorList) {
-                manufactorMap.put(manufactorEntity.getId(), manufactorEntity.getName());
-            }
-            model.addAttribute("manufactorList", manufactorMap);
-        }
-    }
-
-    private void setCategoryDetailDropDownlist(Model model) {
-        List<CategoryDetailEntity> cateDetailList = (List<CategoryDetailEntity>) categoryDetailRepository.findAll();
-        if (!cateDetailList.isEmpty()) {
-            Map<Integer, String> cateDetailMap = new LinkedHashMap<>();
-            for(CategoryDetailEntity categoryDetailEntity : cateDetailList) {
-                cateDetailMap.put(categoryDetailEntity.getId(), categoryDetailEntity.getDescription());
-            }
-            model.addAttribute("categoryDetailList", cateDetailMap);
-        }
-    }
-
-    private void setProductDropDownlist(Model model) {
-        List<ProductEntity> productList = (List<ProductEntity>) productRepository.findAll();
-        if (!productList.isEmpty()) {
-            Map<Integer, String> productMap = new LinkedHashMap<>();
-            for(ProductEntity productEntity : productList) {
-                productMap.put(productEntity.getId(), productEntity.getName());
-            }
-            model.addAttribute("productList", productMap);
-        }
-    }
 }
