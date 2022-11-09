@@ -12,7 +12,7 @@
 <html lang="en">
 
 <head>
-    <title>Login</title>
+    <title>Profile</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
@@ -62,7 +62,7 @@
         </a>
 
         <span class="stext-109 cl4">
-                Login
+                Profile
             </span>
     </div>
 </div>
@@ -71,7 +71,7 @@
 <!--================Login Box Area =================-->
 <div class="site-section">
     <div class="container">
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="/resources/fonts/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
         <div class="container">
             <div class="row flex-lg-nowrap">
                 <div class="col-12 col-lg-auto mb-3" style="width: 200px;">
@@ -79,7 +79,7 @@
                         <div class="e-navlist e-navlist--active-bg">
                             <ul class="nav">
                                 <li class="nav-item"><a class="nav-link px-2 active" href="#"><i class="fa fa-user fa-fw mr-1" aria-hidden="true"></i></i><span>Overview</span></a></li>
-                                <li class="nav-item"><a class="nav-link px-2" href="/purcharehistory"><i class="fa fa-history fa-fw mr-1" aria-hidden="true"></i></i><span>Purchase History</span></a></li>
+                                <li class="nav-item"><a class="nav-link px-2" href="/purcharehistory"><i class="fa fa-history fa-fw mr-1" aria-hidden="true"></i></i><span>Order History</span></a></li>
                                 <li class="nav-item"><a class="nav-link px-2" href="/changepass"><i class="fa fa-fw fa-cog fa-fw mr-1"></i><span>Change Password</span></a></li>
                             </ul>
                         </div>
@@ -260,13 +260,13 @@
 <!--===============================================================================================-->
 <script src="/resources/js/main.js"></script>
 <!--===============================================================================================-->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.js" integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM=" crossorigin="anonymous"></script>
+<%--<script src="https://code.jquery.com/jquery-3.5.1.slim.js" integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM=" crossorigin="anonymous"></script>--%>
 <%--<script>window.jQuery || document.write('<script src="../assets/js//resources/vendor/jquery.slim.min.js"><\/script>')</script>--%>
 <script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.02.js"></script>
 <script src="/resources/js/form-validation.js"></script>
 <!--===============================================================================================-->
 
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="/resources/vendor/jquery/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         $("#province").change(function() {

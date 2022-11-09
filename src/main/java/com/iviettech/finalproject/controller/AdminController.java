@@ -59,8 +59,16 @@ public class AdminController {
     @Autowired
     UserRepository userRepository;
 
+    private boolean isAdminRole() {
+        String email = "a@gmail.com"; // get from http session
+        return "ROLE_ADMIN".equalsIgnoreCase(userRepository.findByEmail(email).getRole().getRoleName());
+    }
+
     @RequestMapping(method = GET)
     public String viewAdmin(Model model) {
+        if (!isAdminRole()) {
+            return "redirect:/";
+        }
 
         Double totalDay = orderRepository.getTotalDay();
         model.addAttribute("totalDay", totalDay);
@@ -92,6 +100,10 @@ public class AdminController {
 
     @RequestMapping(value = "/adProduct", method = GET)
     public String viewProduct(Model model) {
+        if (!isAdminRole()) {
+            return "redirect:/";
+        }
+
         List<ProductEntity> productList = (List<ProductEntity>) productRepository.findAll();
         model.addAttribute("productList", productList);
 
@@ -100,6 +112,10 @@ public class AdminController {
 
     @RequestMapping(value = "/newProduct", method = GET)
     public String newProduct(Model model) {
+        if (!isAdminRole()) {
+            return "redirect:/";
+        }
+
         model.addAttribute("product", new ProductEntity());
         model.addAttribute("msg", "Add a new product");
         model.addAttribute("action", "newProduct");
@@ -113,6 +129,11 @@ public class AdminController {
 
     @RequestMapping(value = "/newProduct", method = POST, produces = "text/plain;charset=UTF-8")
     public String saveProduct(ProductEntity product, Model model) {
+        if (!isAdminRole()) {
+            return "redirect:/";
+        }
+
+
         productRepository.save(product);
         model.addAttribute("message","You are add success!");
         return "redirect:/admin/adProduct";

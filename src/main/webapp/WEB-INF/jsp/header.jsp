@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <body class="animsition">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/resources/vendor/jquery/jquery.min.js"></script>
 <script src="/resources/js/active-link.js"></script>
 <!-- Header -->
 <header class="header-v4">
@@ -37,7 +37,7 @@
                             <a href="" class="flex-c-m trans-04 p-lr-25" style="${sessionScope.user.role.id != 2?"display: none":""}">
                                 Admin Page
                             </a>
-                            <a href="/profile" class="flex-c-m trans-04 p-lr-25">
+                            <a href="/profile" class="flex-c-m trans-04 p-lr-25" style="${sessionScope.user == null?"display: none":""}">
                                 My Profile
                             </a>
                             <a href="/login" class="flex-c-m trans-04 p-lr-25" style="${sessionScope.user != null?"display: none":""}">

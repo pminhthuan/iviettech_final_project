@@ -45,10 +45,16 @@ public class ProductController {
     public String viewHome(Model model) {
         List<ProductImageEntity> productEntityList = productService.getProductListWithImage();
         List<ProductImageEntity> productFeaturedList = productService.getProductListFeatured();
+        List<ProductImageEntity> productBestSellerList = productService.getProductListBestSeller();
+        List<ProductImageEntity> productLastedUpdateList = productService.getProductListLastedUpdate();
+        List<ProductImageEntity> productHighRateList = productService.getProductListHighRating();
         List<CategoryEntity> categoryEntityList = productService.getCategoryList();
         model.addAttribute("categories", categoryEntityList);
         model.addAttribute("productList", productEntityList);
         model.addAttribute("productFeaturedList", productFeaturedList);
+        model.addAttribute("productBestSellerList", productBestSellerList);
+        model.addAttribute("productLastedUpdateList", productLastedUpdateList);
+        model.addAttribute("productHighRateList", productHighRateList);
         return "index";
     }
 
@@ -116,6 +122,7 @@ public class ProductController {
         model.addAttribute("productSizeList", productSizeList);
         model.addAttribute("productDetailEntityList",productDetailEntityList);
         model.addAttribute("categoryDetailEntity",categoryDetailRepository.findAllByCategoryDetailId(categoryDetailId));
+        model.addAttribute("rating", new RatingEntity());
         return "product_detail";
     }
 
@@ -261,10 +268,11 @@ public class ProductController {
 
     @RequestMapping(value = "/checkout",method = RequestMethod.GET)
     public String viewCheckoutForm(Model model, @RequestParam(value = "data", required = false) String data, HttpSession session) {
-        Map<Integer, String> provinceMap = productService.getProvinces();
-        model.addAttribute("order", new OrderEntity());
-        model.addAttribute("province",provinceMap);
-        if (productService.updateCartBeforeCheckout(data, session) == 0){
+        if (productService.checkQuantityBeforeCheckout(data, session) == 0){
+            productService.updateCartBeforeCheckout(data, session);
+            Map<Integer, String> provinceMap = productService.getProvinces();
+            model.addAttribute("order", new OrderEntity());
+            model.addAttribute("province",provinceMap);
             return "checkout";
         } else {
             List<CartItem> cart = productService.viewCart(session);

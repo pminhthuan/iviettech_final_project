@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -270,7 +271,7 @@
                                     </div>
 
                                     <!-- Add review -->
-                                    <form class="w-full">
+                                    <form:form class="w-full" id="submitCommentForm" method="post" modelAttribute="rating">
                                         <h5 class="mtext-108 cl2 p-b-7">
                                             Add a review
                                         </h5>
@@ -290,31 +291,31 @@
 													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
 													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
 													<i class="item-rating pointer zmdi zmdi-star-outline"></i>
-													<input class="dis-none" type="number" name="rating">
+													<form:input path="starValue" id="rating" class="dis-none" type="number" name="rating"/>
 												</span>
                                         </div>
 
                                         <div class="row p-b-25">
                                             <div class="col-12 p-b-5">
-                                                <label class="stext-102 cl3" for="review">Your review</label>
-                                                <textarea class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10" id="review" name="review"></textarea>
+                                                <label class="stext-102 cl3" for="content">Your review</label>
+                                                <form:textarea path="content" class="size-110 bor8 stext-102 cl2 p-lr-20 p-tb-10" id="content" name="review"/>
                                             </div>
 
                                             <div class="col-sm-6 p-b-5">
                                                 <label class="stext-102 cl3" for="name">Name</label>
-                                                <input class="size-111 bor8 stext-102 cl2 p-lr-20" id="name" type="text" name="name">
+                                                <form:input path="fullName" id="username" class="size-111 bor8 stext-102 cl2 p-lr-20" type="text" name="name"/>
                                             </div>
 
-                                            <div class="col-sm-6 p-b-5">
-                                                <label class="stext-102 cl3" for="email">Email</label>
-                                                <input class="size-111 bor8 stext-102 cl2 p-lr-20" id="email" type="text" name="email">
-                                            </div>
+<%--                                            <div class="col-sm-6 p-b-5">--%>
+<%--                                                <label class="stext-102 cl3" for="email">Email</label>--%>
+<%--                                                <input class="size-111 bor8 stext-102 cl2 p-lr-20" id="email" type="text" name="email">--%>
+<%--                                            </div>--%>
                                         </div>
 
-                                        <button class="flex-c-m stext-101 cl0 size-112 bg7 bor11 hov-btn3 p-lr-15 trans-04 m-b-10">
+                                        <button type="submit" class="flex-c-m stext-101 cl0 size-112 bg7 bor11 hov-btn3 p-lr-15 trans-04 m-b-10">
                                             Submit
                                         </button>
-                                    </form>
+                                    </form:form>
                                 </div>
                             </div>
                         </div>
@@ -348,8 +349,8 @@
                                     <img src="${p.imageUrl}" alt="${p.imageUrl}">
                                 </a>
 
-                                <a href="<c:url value="/shop/view/${p.product.id}"/>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                    Quick View
+                                <!-- <a href="<c:url value="/shop/view/${p.product.id}"/>" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+                                    Quick View -->
                                 </a>
                             </div>
 

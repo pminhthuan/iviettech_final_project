@@ -54,7 +54,28 @@ public interface ProductImageRepository extends CrudRepository<ProductImageEntit
             "where i.is_main_image = 1 and q.sum > 0 and o.sum is not null\n" +
             "order by o.sum desc ",
             nativeQuery = true)
+    List<ProductImageEntity> getProductListBestSeller();
+
+    @Query(value = "select * from products as p left join product_image  as i on p.id = i.product_id\n" +
+            "left join (select od.product_id, sum(od.quantity) from order_details as od group by od.product_id) \n" +
+            "as o on o.product_id = p.id \n" +
+            "left join (select p.id, p.name, sum(pt.quantity) from products as p \n" +
+            "left join product_detail as pt on pt.product_id = p.id group by p.id) as q on q.id = p.id\n" +
+            "where i.is_main_image = 1 and q.sum > 0 and o.sum is not null\n" +
+            "order by o.sum desc ",
+            nativeQuery = true)
     Page<ProductImageEntity> getProductListBestSeller(Pageable pageable);
+
+
+    @Query(value = "select * from products as p left join product_image  as i on p.id = i.product_id\n" +
+            "left join (select p.id, p.name, sum(pt.quantity) from products as p \n" +
+            "left join product_detail as pt on pt.product_id = p.id group by p.id) as q on q.id = p.id\n" +
+            "left join (select product_id, avg(star_value) from rating group by product_id) as r on r.product_id = p.id\n" +
+            "where i.is_main_image = 1 and q.sum > 0 \n" +
+            "order by r.avg desc",
+            nativeQuery = true)
+    List<ProductImageEntity> getProductListHighRating();
+
 
     @Query(value = "select * from products as p left join product_image  as i on p.id = i.product_id\n" +
             "left join (select p.id, p.name, sum(pt.quantity) from products as p \n" +
@@ -64,6 +85,14 @@ public interface ProductImageRepository extends CrudRepository<ProductImageEntit
             "order by r.avg desc",
             nativeQuery = true)
     Page<ProductImageEntity> getProductListHighRating(Pageable pageable);
+
+    @Query(value = "select * from products as p left join product_image  as i on p.id = i.product_id\n" +
+            "left join (select p.id, p.name, sum(pt.quantity) from products as p \n" +
+            "left join product_detail as pt on pt.product_id = p.id group by p.id) as q on q.id = p.id\n" +
+            "where i.is_main_image = 1 and q.sum > 0 \n" +
+            "order by p.add_date desc",
+            nativeQuery = true)
+    List<ProductImageEntity> getProductListLastedUpdate();
 
     @Query(value = "select * from products as p left join product_image  as i on p.id = i.product_id\n" +
             "left join (select p.id, p.name, sum(pt.quantity) from products as p \n" +

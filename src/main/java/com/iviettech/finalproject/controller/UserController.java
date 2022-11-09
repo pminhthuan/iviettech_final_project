@@ -1,6 +1,5 @@
 package com.iviettech.finalproject.controller;
 
-import com.iviettech.finalproject.entity.OrderEntity;
 import com.iviettech.finalproject.entity.RoleEntity;
 import com.iviettech.finalproject.entity.UserEntity;
 import com.iviettech.finalproject.repository.UserRepository;
@@ -126,7 +125,7 @@ public class UserController {
     @RequestMapping(value = "/purcharehistory",method = RequestMethod.GET)
     public String viewPurchaseHistory() {
 
-        return "purchare_history";
+        return "order_history";
     }
 
     @RequestMapping(value = "/changepass",method = RequestMethod.GET)

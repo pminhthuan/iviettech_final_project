@@ -162,8 +162,8 @@
             <div class="row">
               <div class="col-md-4 mb-3">
                 <label for="province">Province</label>
-                <form:select path="province.id" class="custom-select d-block w-100" id="province" value="${sessionScope.user.province.id}" required="true">
-                  <form:option value='-1'>Select an option</form:option>
+                <form:select path="province.id" class="custom-select d-block w-100" id="province" required="true">
+                  <form:option value='${sessionScope.user.province.id}'>${sessionScope.user.province.fullNameEn}</form:option>
                   <form:options items="${province}"/>
                 </form:select>
                 <div class="invalid-feedback">
@@ -173,6 +173,7 @@
               <div class="col-md-4 mb-3">
                 <label for="district">District</label>
                 <form:select path="district.id" class="custom-select d-block w-100" id="district" value="${sessionScope.user.district.id}" required="true">
+                  <form:option value='${sessionScope.user.district.id}'>${sessionScope.user.district.fullNameEn}</form:option>
                 </form:select>
                 <div class="invalid-feedback">
                   Please provide a valid district.
@@ -181,6 +182,7 @@
               <div class="col-md-4 mb-3">
                 <label for="ward">Ward</label>
                 <form:select path="ward.id" class="custom-select d-block w-100" id="ward" value="${sessionScope.user.ward.id}" required="true">
+                  <form:option value='${sessionScope.user.ward.id}'>${sessionScope.user.ward.fullNameEn}</form:option>
                 </form:select>
                 <div class="invalid-feedback">
                   Please provide a valid ward.
@@ -369,12 +371,12 @@
 <!--===============================================================================================-->
 <script src="/resources/js/main.js"></script>
 <!--===============================================================================================-->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.js" integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM=" crossorigin="anonymous"></script>
+<%--<script src="https://code.jquery.com/jquery-3.5.1.slim.js" integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM=" crossorigin="anonymous"></script>--%>
 <%--<script>window.jQuery || document.write('<script src="../assets/js//resources/vendor/jquery.slim.min.js"><\/script>')</script>--%>
 <script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.02.js"></script>
 <script src="/resources/js/form-validation.js"></script>
 <!--===============================================================================================-->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="/resources/vendor/jquery/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
   $(document).ready(function() {
     $("#province").change(function() {
@@ -421,6 +423,8 @@
   });
 </script>
 <!--===============================================================================================-->
+<%--<script src="/resources/vendor/jquery/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>--%>
+<%--<script src="/resources/js/bootstrap.min.js"></script>--%>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
 

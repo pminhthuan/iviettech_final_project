@@ -58,6 +58,20 @@ public class ProductService {
         return productImageRepository.getProductListWithImage();
     }
 
+    public List<ProductImageEntity> getProductListBestSeller(){
+        return productImageRepository.getProductListBestSeller();
+    }
+
+    public List<ProductImageEntity> getProductListHighRating(){
+        return productImageRepository.getProductListHighRating();
+    }
+
+
+    public List<ProductImageEntity> getProductListLastedUpdate(){
+        return productImageRepository.getProductListLastedUpdate();
+    }
+
+
     public List<CategoryEntity> getCategoryList(){
         List<CategoryEntity> categoryEntityList = (List<CategoryEntity>) categoryRepository.findAll();
         return categoryEntityList;
@@ -260,7 +274,7 @@ public class ProductService {
     }
 
 
-    public int updateCartBeforeCheckout(String data, HttpSession session) {
+    public int checkQuantityBeforeCheckout(String data, HttpSession session) {
         // data: 1-2--4-1
         // product detail id = 1, quantity = 2
         // product detail id = 4, quantity = 19999
@@ -282,11 +296,32 @@ public class ProductService {
                         }
                     }
                 }
+            }
+        }
+        return 1;
+    }
+
+    public void updateCartBeforeCheckout(String data, HttpSession session){
+        if (!data.isEmpty()) {
+            String[] tmpData = data.split("__");
+            List<CartItem> cart;
+            if (session.getAttribute("shopping_cart") != null) {
+                cart = (List<CartItem>) session.getAttribute("shopping_cart");
+                for (CartItem item : cart) {
+                    for (int i = 0; i < tmpData.length; i++) {
+                        if (item.getProductDetailId() == Integer.valueOf(tmpData[i].split("_")[0])) {
+                            if (Integer.valueOf(tmpData[i].split("_")[1])<=productDetailRepository.findQuantity(item.getProductDetailId())){
+                                // update the product quantity and then save to http session shopping_cart
+                                item.setQuantity(Integer.valueOf(tmpData[i].split("_")[1]));
+                                item.updateTotalPrice();
+                            }
+                        }
+                    }
+                }
                 session.setAttribute("shopping_cart", cart);
                 session.setAttribute("total_price_in_cart", calculateTotalPrice(cart));
             }
         }
-        return 1;
     }
 
     public void doCheckout(OrderEntity order, HttpSession session) {
