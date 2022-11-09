@@ -113,7 +113,7 @@
                                                 <%-- </div>--%>
                                                 </div>
                                                 <div class="text-center text-sm-right">
-                                                    <span class="badge badge-secondary">administrator</span>
+                                                    <span class="badge badge-secondary">${sessionScope.user.role.id == 2?"administrator":"customer"}</span>
                                                 <%-- <div class="text-muted"><small>Joined 09 Dec 2017</small></div>--%>
                                                 </div>
                                             </div>
@@ -123,12 +123,12 @@
                                         </ul>
                                             <div class="card h-100">
                                                 <div class="card-body">
-                                                    <form:form method="post" action="" modelAttribute="user">
+                                                    <form:form method="post" action="updateProfile" modelAttribute="user">
                                                     <div class="row gutters">
                                                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                                             <h6 class="mb-2 text-primary">Personal Details</h6>
                                                         </div>
-                                                        <form:hidden path="id"></form:hidden>
+                                                        <form:hidden path="id" value="${user.id}"></form:hidden>
                                                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                                             <div class="form-group">
                                                                 <label for="firstName">First Name</label>
@@ -144,7 +144,7 @@
                                                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                                             <div class="form-group">
                                                                 <label for="email">Email</label>
-                                                                <form:input path="email" type="email" class="form-control" id="email" placeholder="Enter email address"/>
+                                                                <form:input path="email" type="email" class="form-control" id="email" placeholder="Enter email address" disabled="true"/>
                                                             </div>
                                                         </div>
                                                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
