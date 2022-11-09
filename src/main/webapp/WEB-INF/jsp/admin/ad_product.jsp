@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <title>Product</title>
@@ -19,15 +20,15 @@
     <script src="/resources/admin/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="/resources/admin/js/scripts.js"></script>
     <script src="/resources/admin/js/Chart.min.js" crossorigin="anonymous"></script>
-    <script src="/resources/admin/assets/demo/chart-area-demo.js"></script>
-    <script src="/resources/admin/assets/demo/chart-bar-demo.js"></script>
+<%--    <script src="/resources/admin/assets/demo/chart-area-demo.js"></script>--%>
+<%--    <script src="/resources/admin/assets/demo/chart-bar-demo.js"></script>--%>
     <script src="/resources/admin/js/simple-datatables@latest.js" crossorigin="anonymous"></script>
     <script src="/resources/admin/js/datatables-simple-demo.js"></script>
 </head>
 <body class="sb-nav-fixed">
-<%@include file="ad_header.jsp"%>
+<jsp:include page="ad_header.jsp"/>
 <div id="layoutSidenav">
-    <%@include file="ad_sidebar_menu.jsp"%>
+    <jsp:include page="ad_sidebar_menu.jsp"/>
     <div id="layoutSidenav_content">
         <main>
             <div class="card mb-4">
@@ -113,11 +114,53 @@
                         </tbody>
                     </table>
                 </div>
-            </div
+            </div>
             <br>
-            <a href="/admin/exportProduct">
-                <button type="button" class="btn btn-success">Export to CSV</button>
-            </a>
+            <div class="row col-md-12" style="margin-left: 5vw">
+                <div class="col-md-6">
+                    <h4>Import Product data as a CSV file...</h4>
+                    <c:if test="${mssImport != null}">
+                        <div class="alert alert-danger">
+                            <c:out value="${mssImport}"/>
+                        </div>
+                    </c:if>
+                    <form:form action="/admin/importProduct" method="POST" enctype="multipart/form-data">
+                        <div class="input-group">
+                            <input name="file" type="file" class="form-control"/>
+                            <button type="submit" class="btn btn-info">Import</button>&emsp;
+                        </div>
+                    </form:form>
+                    <div>
+                        <span class="input-group-btn">
+                            <a href="/admin/exportProduct">
+                                <button type="button" class="btn btn-success">Export Product</button>
+                            </a>
+                        </span> &emsp;
+                        <span class="input-group-btn">
+                            <a href="/admin/exportProductDetail">
+                                <button type="button" class="btn btn-success">Export Product Detail</button>
+                            </a>
+                        </span>
+                    </div>
+                    <br>
+                    <%--                    <span class="input-group-btn">--%>
+                    <%--                        <button type="button" class="btn btn-success">Export to CSV</button>--%>
+                    <%--                    </span>--%>
+                    <%--                    <button type="button" class="btn btn-success">Export to CSV</button>--%>
+
+                    <%--                    <a href="/export-csv">--%>
+                    <%--                        <button type="button" class="btn btn-success">Export to CSV</button>--%>
+                    <%--                    </a>--%>
+                </div>
+            </div>
+<%--            <div>--%>
+
+<%--                <a href="/admin/exportProduct">--%>
+<%--                    <button type="button" class="btn btn-success">Export to CSV</button>--%>
+<%--                </a>--%>
+
+<%--            </div>--%>
+
 
 <%--            <div>--%>
 <%--                <button href="/admin/newProduct" class="accordion-button fa-solid fa-plus me-0" type="button">--%>
@@ -127,7 +170,7 @@
 <%--                </button>--%>
 <%--            </div>--%>
         </main>
-        <%@include file="ad_footer.jsp"%>
+        <jsp:include page="ad_footer.jsp"/>
     </div>
 </div>
 

@@ -34,7 +34,7 @@
                            </c:choose>
                         </a>
                         <div class="dropdown-content dropdown-content-topbar">
-                            <a href="" class="flex-c-m trans-04 p-lr-25" style="${sessionScope.user.role.id != 2?"display: none":""}">
+                            <a href="/admin" class="flex-c-m trans-04 p-lr-25" style="${sessionScope.user.role.id != 2?"display: none":""}">
                                 Admin Page
                             </a>
                             <a href="/profile" class="flex-c-m trans-04 p-lr-25" style="${sessionScope.user == null?"display: none":""}">

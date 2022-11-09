@@ -27,60 +27,84 @@
 
   </head>
   <body class="sb-nav-fixed">
-  <%@include file="ad_header.jsp"%>
+  <jsp:include page="ad_header.jsp"/>
   <div id="layoutSidenav">
-      <%@include file="ad_sidebar_menu.jsp"%>
+      <jsp:include page="ad_sidebar_menu.jsp"/>
       <div id="layoutSidenav_content">
           <main>
-              <%@include file="ad_dashboard.jsp"%>
+              <jsp:include page="ad_dashboard.jsp"/>
 <%--              <div class="container-fluid px-4">--%>
 <%--                  <h1 class="mt-4">Dashboard</h1>--%>
-<%--                  <ol class="breadcrumb mb-4">--%>
-<%--                      <li class="breadcrumb-item active">Dashboard</li>--%>
-<%--                  </ol>--%>
 <%--                  <div class="row">--%>
-<%--                      <div class="col-xl-3 col-md-6">--%>
-<%--                          <div class="card bg-primary text-white mb-4">--%>
-<%--                              <div class="card-body">Primary Card</div>--%>
-<%--                              <div class="card-footer d-flex align-items-center justify-content-between">--%>
+<%--                      <div class="col-xl-6">--%>
+<%--                          <div class="card mb-4">--%>
+<%--                              <div class="card-header">--%>
+<%--                                  <i class="fas fa-chart-bar me-1"></i>--%>
+<%--                                  Order quantity per months--%>
+<%--                              </div>--%>
+<%--                              <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>--%>
+<%--                          </div>--%>
+<%--                      </div>--%>
+<%--                      <div class="col-xl-6">--%>
+<%--                          <div class="card mb-4">--%>
+<%--                              <div class="card-header">--%>
+<%--                                  <i class="fas fa-chart-area me-1"></i>--%>
+<%--                                  Order prices per months--%>
+<%--                              </div>--%>
+<%--                              <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>--%>
+<%--                          </div>--%>
+<%--                      </div>--%>
+<%--                  </div>--%>
+<%--                  <div class="card mb-4">--%>
+<%--                      <div class="card-header">--%>
+<%--                          <i class="fas fa-table me-1"></i>--%>
+<%--                          Last 5 pending orders--%>
+<%--                      </div>--%>
+<%--                      <div class="card-body">--%>
+<%--                          <table id="datatablesSimple">--%>
+<%--                              <thead>--%>
+<%--                              <tr>--%>
+<%--                                  <th>Id</th>--%>
+<%--                                  <th>Name</th>--%>
+<%--                                  <th>Phone</th>--%>
+<%--                                  <th>Email</th>--%>
+<%--                                  <th>Address</th>--%>
+<%--                                  <th>Total</th>--%>
+<%--                              </tr>--%>
+<%--                              </thead>--%>
+<%--                              <tfoot>--%>
+<%--                              <tr>--%>
+<%--                                  <th>Id</th>--%>
+<%--                                  <th>Name</th>--%>
+<%--                                  <th>Phone</th>--%>
+<%--                                  <th>Email</th>--%>
+<%--                                  <th>Address</th>--%>
+<%--                                  <th>Total</th>--%>
+<%--                              </tr>--%>
+<%--                              </tfoot>--%>
+<%--                              <tbody>--%>
+<%--                              <c:forEach items="${order_data_list}" var="order">--%>
+<%--                                  <tr>--%>
+<%--                                      <td>${order.id}</td>--%>
+<%--                                      <td>--%>
+<%--                                          <a href="<c:url value="/admin/adOrderDetail/${order.id}"/>">${order.firstName} ${order.lastName}</a>--%>
+<%--                                      </td>--%>
+<%--                                      <td>${order.phoneNumber}</td>--%>
+<%--                                      <td>${order.email}</td>--%>
+<%--                                      <td>${order.addressDetail}</td>--%>
+<%--                                      <td>--%>
+<%--                                              ${order.totalAmount}--%>
+<%--                                      </td>--%>
+<%--                                  </tr>--%>
+<%--                              </c:forEach>--%>
 
-<%--                                  <a class="small text-white stretched-link" href="#">View Details</a>--%>
-<%--                                  <a class="small text-white stretched-link" >${totalDay}</a>--%>
-<%--                                  <div class="small text-white"><i class="fas fa-angle-right"></i></div>--%>
-<%--                              </div>--%>
-<%--                          </div>--%>
-<%--                      </div>--%>
-<%--                      <div class="col-xl-3 col-md-6">--%>
-<%--                          <div class="card bg-warning text-white mb-4">--%>
-<%--                              <div class="card-body">Warning Card</div>--%>
-<%--                              <div class="card-footer d-flex align-items-center justify-content-between">--%>
-<%--                                  <a class="small text-white stretched-link" href="#">View Details</a>--%>
-<%--                                  <div class="small text-white"><i class="fas fa-angle-right"></i></div>--%>
-<%--                              </div>--%>
-<%--                          </div>--%>
-<%--                      </div>--%>
-<%--                      <div class="col-xl-3 col-md-6">--%>
-<%--                          <div class="card bg-success text-white mb-4">--%>
-<%--                              <div class="card-body">Success Card</div>--%>
-<%--                              <div class="card-footer d-flex align-items-center justify-content-between">--%>
-<%--                                  <a class="small text-white stretched-link" href="#">View Details</a>--%>
-<%--                                  <div class="small text-white"><i class="fas fa-angle-right"></i></div>--%>
-<%--                              </div>--%>
-<%--                          </div>--%>
-<%--                      </div>--%>
-<%--                      <div class="col-xl-3 col-md-6">--%>
-<%--                          <div class="card bg-danger text-white mb-4">--%>
-<%--                              <div class="card-body">Danger Card</div>--%>
-<%--                              <div class="card-footer d-flex align-items-center justify-content-between">--%>
-<%--                                  <a class="small text-white stretched-link" href="#">View Details</a>--%>
-<%--                                  <div class="small text-white"><i class="fas fa-angle-right"></i></div>--%>
-<%--                              </div>--%>
-<%--                          </div>--%>
+<%--                              </tbody>--%>
+<%--                          </table>--%>
 <%--                      </div>--%>
 <%--                  </div>--%>
 <%--              </div>--%>
           </main>
-          <%@include file="ad_footer.jsp"%>
+          <jsp:include page="ad_footer.jsp"/>
       </div>
   </div>
 
