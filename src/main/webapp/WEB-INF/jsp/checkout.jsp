@@ -127,14 +127,14 @@
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="firstName">First name</label>
-                <form:input path="firstName" type="text" class="form-control" id="firstName" placeholder="" value="" required="true"/>
+                <form:input path="firstName" type="text" class="form-control" id="firstName" placeholder="" value="${sessionScope.user.firstName}" required="true"/>
                 <div class="invalid-feedback">
                   Valid first name is required.
                 </div>
               </div>
               <div class="col-md-6 mb-3">
                 <label for="lastName">Last name</label>
-                <form:input path="lastName" type="text" class="form-control" id="lastName" placeholder="" value="" required="true"/>
+                <form:input path="lastName" type="text" class="form-control" id="lastName" placeholder="" value="${sessionScope.user.lastName}" required="true"/>
                 <div class="invalid-feedback">
                   Valid last name is required.
                 </div>
@@ -144,7 +144,7 @@
             <div class="mb-3">
               <label for="phoneNumber">Phone number</label>
               <div class="input-group">
-                <form:input path="phoneNumber"  type="text" class="form-control" id="phoneNumber" placeholder="0905545462" required="true"/>
+                <form:input path="phoneNumber"  type="text" class="form-control" id="phoneNumber" value="${sessionScope.user.phoneNumber}" placeholder="0905545462" required="true"/>
                 <div class="invalid-feedback" style="width: 100%;">
                   Your phone number is required.
                 </div>
@@ -153,7 +153,7 @@
 
             <div class="mb-3">
               <label for="email">Email <span class="text-muted">(Optional)</span></label>
-              <form:input path="email" type="email" class="form-control" id="email" placeholder="example@gmail.com"/>
+              <form:input path="email" type="email" class="form-control" id="email" value="${sessionScope.user.email}" placeholder="example@gmail.com"/>
               <div class="invalid-feedback">
                 Please enter a valid email address for shipping updates.
               </div>
@@ -162,7 +162,7 @@
             <div class="row">
               <div class="col-md-4 mb-3">
                 <label for="province">Province</label>
-                <form:select path="province.id" class="custom-select d-block w-100" id="province" required="true">
+                <form:select path="province.id" class="custom-select d-block w-100" id="province" value="${sessionScope.user.province.id}" required="true">
                   <form:option value='-1'>Select an option</form:option>
                   <form:options items="${province}"/>
                 </form:select>
@@ -172,7 +172,7 @@
               </div>
               <div class="col-md-4 mb-3">
                 <label for="district">District</label>
-                <form:select path="district.id" class="custom-select d-block w-100" id="district" required="true">
+                <form:select path="district.id" class="custom-select d-block w-100" id="district" value="${sessionScope.user.district.id}" required="true">
                 </form:select>
                 <div class="invalid-feedback">
                   Please provide a valid district.
@@ -180,7 +180,7 @@
               </div>
               <div class="col-md-4 mb-3">
                 <label for="ward">Ward</label>
-                <form:select path="ward.id" class="custom-select d-block w-100" id="ward" required="true">
+                <form:select path="ward.id" class="custom-select d-block w-100" id="ward" value="${sessionScope.user.ward.id}" required="true">
                 </form:select>
                 <div class="invalid-feedback">
                   Please provide a valid ward.
@@ -189,7 +189,7 @@
             </div>
             <div class="mb-3">
               <label for="address">Address detail</label>
-              <form:input path="addressDetail" type="text" class="form-control" id="address" placeholder="234 Hang Ma St or Phuong Nam Village" required="true"/>
+              <form:input path="addressDetail" type="text" class="form-control" id="address" value="${sessionScope.user.addressDetail}" placeholder="234 Hang Ma St or Phuong Nam Village" required="true"/>
               <div class="invalid-feedback">
                 Please enter your shipping address.
               </div>

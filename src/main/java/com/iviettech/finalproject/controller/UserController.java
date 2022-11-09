@@ -104,11 +104,22 @@ public class UserController {
     }
 
     @RequestMapping(value = "/profile",method = RequestMethod.GET)
-    public String viewProfile(Model model) {
-
+    public String viewProfile(Model model, HttpSession session) {
+        UserEntity user = (UserEntity) session.getAttribute("user");
         Map<Integer, String> provinceMap = productService.getProvinces();
-        model.addAttribute("user", new UserEntity());
+        model.addAttribute("user", user);
         model.addAttribute("province",provinceMap);
+        return "profile";
+    }
+
+
+    @RequestMapping(value = "/updateProfile", method = POST, produces = "text/plain;charset=UTF-8")
+    public String updateProfile(UserEntity user, Model model, HttpSession session) {
+        userService.updateUser(user);
+        Map<Integer, String> provinceMap = productService.getProvinces();
+        model.addAttribute("user", user);
+        model.addAttribute("province",provinceMap);
+        session.setAttribute("user", user);
         return "profile";
     }
 
