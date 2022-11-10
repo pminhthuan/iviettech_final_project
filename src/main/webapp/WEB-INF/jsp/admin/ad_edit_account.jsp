@@ -41,12 +41,10 @@
                                     <label class="control-label">ID</label>
                                     <form:input path="id" type="text" class="form-control" id="id" placeholder="ID" readonly="true"/>
 <%--                                    <form:hidden path="email" />--%>
-<%--                                    <form:hidden path="password" />--%>
-<%--                                    <form:hidden path="province" />--%>
-<%--                                    <form:hidden path="district" />--%>
-<%--                                    <form:hidden path="ward" />--%>
-
-                                        <%--                                    <form:hidden path="product.id" />--%>
+                                    <form:hidden path="password" />
+                                    <form:hidden path="province" />
+                                    <form:hidden path="district" />
+                                    <form:hidden path="ward" />
                                 </div>
                             </c:if>
 

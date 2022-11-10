@@ -1,6 +1,5 @@
 package com.iviettech.finalproject.service;
 
-import com.iviettech.finalproject.entity.OrderEntity;
 import com.iviettech.finalproject.entity.RoleEntity;
 import com.iviettech.finalproject.entity.UserEntity;
 import com.iviettech.finalproject.helper.GmailSender;
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
-import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 
 import static com.iviettech.finalproject.helper.PasswordEncoder.createHash;

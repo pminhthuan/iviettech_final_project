@@ -1,7 +1,7 @@
 package com.iviettech.finalproject.controller;
 
 import com.iviettech.finalproject.entity.*;
-import com.iviettech.finalproject.helper.ProductRawExport;
+import com.iviettech.finalproject.helper.CSVHelper;
 import com.iviettech.finalproject.repository.*;
 import com.iviettech.finalproject.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,16 +11,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.supercsv.io.CsvBeanWriter;
-import org.supercsv.io.ICsvBeanWriter;
-import org.supercsv.prefs.CsvPreference;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -59,50 +57,52 @@ public class AdminController {
     @Autowired
     UserRepository userRepository;
 
-    private boolean isAdminRole() {
-        String email = "a@gmail.com"; // get from http session
-        return "ROLE_ADMIN".equalsIgnoreCase(userRepository.findByEmail(email).getRole().getRoleName());
-    }
+
 
     @RequestMapping(method = GET)
-    public String viewAdmin(Model model) {
-        if (!isAdminRole()) {
+    public String viewAdmin(Model model, HttpSession session) {
+
+        if (!adminService.isAdminRole(session)) {
             return "redirect:/";
         }
 
         Double totalDay = orderRepository.getTotalDay();
         model.addAttribute("totalDay", totalDay);
 
-        // dashboard chart
-        int[] totalPricePerMonth = new int[12];
-        int[] totalOrderPerMonth = new int[12];
-        List<OrderEntity> allOrders = (List<OrderEntity>) orderRepository.findAll();
-        for (OrderEntity order : allOrders) {
-            int month = order.getRequireDate().getMonth();
-            totalPricePerMonth[month] = totalPricePerMonth[month] + (int)order.getTotalAmount();
-            totalOrderPerMonth[month] = totalOrderPerMonth[month] + 1;
-        }
-        String totalOrderPrice = Arrays.toString(totalPricePerMonth).substring(1, Arrays.toString(totalPricePerMonth).length() - 1);
-        String totalOrderNumber = Arrays.toString(totalOrderPerMonth).substring(1, Arrays.toString(totalOrderPerMonth).length() - 1);
-        // for bar chart
-        model.addAttribute("total_order_price", totalOrderPrice);
-        model.addAttribute("total_order_number", totalOrderNumber);
+        adminService.dashboard_char(model);
 
-
-        // for data table
-        // get latest 5 pending order (order status = 0 for example)
-        model.addAttribute("order_data_list", orderRepository.findTop5ByOrderStatusOrderByIdDesc(0));
+//        // dashboard chart
+//        int[] totalPricePerMonth = new int[12];
+//        int[] totalOrderPerMonth = new int[12];
+//        List<OrderEntity> allOrders = (List<OrderEntity>) orderRepository.findAll();
+//        for (OrderEntity order : allOrders) {
+//            int month = order.getRequireDate().getMonth();
+//            totalPricePerMonth[month] = totalPricePerMonth[month] + (int)order.getTotalAmount();
+//            totalOrderPerMonth[month] = totalOrderPerMonth[month] + 1;
+//        }
+//        String totalOrderPrice = Arrays.toString(totalPricePerMonth).substring(1, Arrays.toString(totalPricePerMonth).length() - 1);
+//        String totalOrderNumber = Arrays.toString(totalOrderPerMonth).substring(1, Arrays.toString(totalOrderPerMonth).length() - 1);
+//        // for bar chart
+//        model.addAttribute("total_order_price", totalOrderPrice);
+//        model.addAttribute("total_order_number", totalOrderNumber);
+//
+//
+//        // for data table
+//        // get latest 5 pending order (order status = 0 for example)
+//        model.addAttribute("order_data_list", orderRepository.findTop5ByOrderStatusOrderByIdDesc(0));
 
         return "admin/ad_home";
     }
 
+
     //-----------------------------Product
 
     @RequestMapping(value = "/adProduct", method = GET)
-    public String viewProduct(Model model) {
-        if (!isAdminRole()) {
+    public String viewProduct(Model model, HttpSession session) {
+        if (!adminService.isAdminRole(session)) {
             return "redirect:/";
         }
+
 
         List<ProductEntity> productList = (List<ProductEntity>) productRepository.findAll();
         model.addAttribute("productList", productList);
@@ -111,27 +111,31 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/newProduct", method = GET)
-    public String newProduct(Model model) {
-        if (!isAdminRole()) {
+    public String newProduct(Model model, HttpSession session ) {
+        if (!adminService.isAdminRole(session)) {
             return "redirect:/";
         }
 
-        model.addAttribute("product", new ProductEntity());
-        model.addAttribute("msg", "Add a new product");
-        model.addAttribute("action", "newProduct");
+        adminService.newProduct(model);
 
-        adminService.setCategoryDetailDropDownlist(model);
-        adminService.setManufactorDropDownlist(model);
-        adminService.setCategoryDropDownlist(model);
+//        model.addAttribute("product", new ProductEntity());
+//        model.addAttribute("msg", "Add a new product");
+//        model.addAttribute("action", "newProduct");
+//
+//        adminService.setCategoryDetailDropDownlist(model);
+//        adminService.setManufactorDropDownlist(model);
+//        adminService.setCategoryDropDownlist(model);
 
         return "admin/ad_edit_product";
     }
 
     @RequestMapping(value = "/newProduct", method = POST, produces = "text/plain;charset=UTF-8")
-    public String saveProduct(ProductEntity product, Model model) {
-        if (!isAdminRole()) {
+    public String saveProduct(ProductEntity product, Model model, HttpSession session) {
+
+        if (!adminService.isAdminRole(session)) {
             return "redirect:/";
         }
+
 
 
         productRepository.save(product);
@@ -140,78 +144,81 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/editProduct/{id}", method = GET)
-    public String editProduct(Model model, @PathVariable int id) {
-        model.addAttribute("product", productRepository.findById(id));
-        model.addAttribute("msg", "Update product information");
-        model.addAttribute("type", "updateProduct");
-        model.addAttribute("action", "/admin/updateProduct");
+    public String editProduct(Model model, @PathVariable int id, HttpSession session) {
 
-        adminService.setCategoryDetailDropDownlist(model);
-        adminService.setManufactorDropDownlist(model);
-        adminService.setCategoryDropDownlist(model);
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
+
+        adminService.editProduct(model, id);
+
+//        model.addAttribute("product", productRepository.findById(id));
+//        model.addAttribute("msg", "Update product information");
+//        model.addAttribute("type", "updateProduct");
+//        model.addAttribute("action", "/admin/updateProduct");
+//
+//        adminService.setCategoryDetailDropDownlist(model);
+//        adminService.setManufactorDropDownlist(model);
+//        adminService.setCategoryDropDownlist(model);
         return "admin/ad_edit_product";
     }
 
     @RequestMapping(value = "/updateProduct", method = POST)
-    public String updateProduct(@ModelAttribute ProductEntity product) {
+    public String updateProduct(@ModelAttribute ProductEntity product, HttpSession session) {
+
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
+
         productRepository.save(product);
         return "redirect:/admin/adProduct";
     }
 
     @RequestMapping(value = "/updateProductStatus/{id}")
-    public String updateProductStatus(@PathVariable int id, Model model) {
+    public String updateProductStatus(@PathVariable int id, Model model, HttpSession session) {
 
-       Optional<ProductEntity> productEntity = productRepository.findById(id);
-       if (productEntity.isPresent()) {
-           ProductEntity product = productEntity.get();
-           if (product.getStatus() == 0) {
-               product.setStatus(1);
-           } else {
-               product.setStatus(0);
-           }
-           model.addAttribute("product", product);
-           productRepository.save(product);
-       }
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
+        adminService.updateProductStatus(id, model);
+
         return "redirect:/admin/adProduct";
 
     }
 
     @GetMapping("/exportProduct")
-    public void exportCSVfile(HttpServletResponse response) throws IOException {
-        response.setContentType("text/csv");
-        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss");
-        String currentDateTime = dateFormatter.format(new Date());
+    public void exportProduct(HttpServletResponse response) throws IOException {
 
-        String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=Product_" + currentDateTime + ".csv";
-        response.setHeader(headerKey, headerValue);
+        adminService.exportProduct(response);
 
-        List<ProductEntity> productEntityList = (List<ProductEntity>) productRepository.findAll();
+    }
 
-        ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
-        String[] csvHeader = { "Name", "Category_Detail_ID", "Orginal_Price", "Actual_Price", "Manufactor_ID", "Add_Date", "Status", "Description", "Infor" };
-        String[] nameMapping = { "name", "category_detail_id", "original_price", "actual_price", "manufactor_id", "add_date", "status", "description", "addition_info"};
-
-        csvWriter.writeHeader(csvHeader);
-
-        for (ProductEntity productEntity : productEntityList) {
+    @RequestMapping(value = "/importProduct", method = POST)
+    public String importProduct(@RequestParam(value = "file", required = false) MultipartFile file, Model model) {
+        if (CSVHelper.hasCSVFormat(file)) {
             try {
-//                BookRawExport data = new BookRawExport(bookEntity);
-                ProductRawExport data = new ProductRawExport(productEntity);
-                csvWriter.write(data, nameMapping);
+                adminService.saveImportProduct(file);
+                model.addAttribute("mssImport", "The CSV file has been imported successfully");
+//                return "redirect:/admin/adProduct";
             } catch (Exception e) {
-                System.out.println("Skip this record/data");
-                continue;
+                model.addAttribute("mssImport","The CSV file has NOT been imported");
+
+//                return "redirect:/admin/adProduct";
             }
         }
+//        model.addAttribute("mssImport","Please upload a proper CSV file!");
 
-        csvWriter.close();
+        return "redirect:/admin/adProduct";
     }
 
     // ---------------------------Product Details
 
     @RequestMapping(value = "/adProductDetail/{id}", method = GET)
     public String viewProductDetail(@PathVariable("id") int id, Model model, HttpSession session) {
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
+
         session.setAttribute("idpro",id);
         List<ProductDetailEntity> productDetailsList =
                 (List<ProductDetailEntity>) productDetailRepository.findProductDetailEntityByProduct_Id(id);
@@ -222,23 +229,35 @@ public class AdminController {
 
     @RequestMapping(value = "/newProductDetail", method = GET)
     public String newProductDetail(Model model, HttpSession session) {
-        int id = (int) session.getAttribute("idpro");
 
-        model.addAttribute("idpro", id);
-//        productDetailEntity.getProduct().setId(id);
-//        model.addAttribute("productDetail", productDetailRepository.getByProductId(id));
-        model.addAttribute("productDetail", new ProductDetailEntity());
-        model.addAttribute("msg", "Add a new product detail");
-        model.addAttribute("type", "newProductDetail");
-        model.addAttribute("action", "newProductDetail");
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
 
-        adminService.setProductDropDownlist(model);
+        adminService.newProductDetail(model, session);
+
+//        int id = (int) session.getAttribute("idpro");
+//
+//        model.addAttribute("idpro", id);
+////        productDetailEntity.getProduct().setId(id);
+////        model.addAttribute("productDetail", productDetailRepository.getByProductId(id));
+//        model.addAttribute("productDetail", new ProductDetailEntity());
+//        model.addAttribute("msg", "Add a new product detail");
+//        model.addAttribute("type", "newProductDetail");
+//        model.addAttribute("action", "newProductDetail");
+//
+//        adminService.setProductDropDownlist(model);
 
         return "admin/ad_edit_product_detail";
     }
 
     @RequestMapping(value = "/newProductDetail", method = POST, produces = "text/plain;charset=UTF-8")
     public String saveProductDetail(ProductDetailEntity productDetail, Model model, HttpSession session) {
+
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
+
         int id = (int) session.getAttribute("idpro");
 
         productDetailRepository.save(productDetail);
@@ -247,39 +266,69 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/editProductDetail/{id}", method = GET)
-    public String editProductDetail(Model model, @PathVariable int id) {
-        model.addAttribute("productDetail", productDetailRepository.findById(id));
-        model.addAttribute("msg", "Update product detail information");
-        model.addAttribute("type", "updateProductDetail");
-        model.addAttribute("action", "/admin/updateProductDetail");
+    public String editProductDetail(Model model, @PathVariable int id, HttpSession session) {
 
-        adminService.setProductDropDownlist(model);
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
+
+        adminService.editProductDetail(model, id, session);
+
+//        model.addAttribute("productDetail", productDetailRepository.findById(id));
+//        model.addAttribute("msg", "Update product detail information");
+//        model.addAttribute("type", "updateProductDetail");
+//        model.addAttribute("action", "/admin/updateProductDetail");
+//
+//        adminService.setProductDropDownlist(model);
 
         return "admin/ad_edit_product_detail";
     }
 
     @RequestMapping(value = "/updateProductDetail", method = POST)
-    public String updateProductDetail(@ModelAttribute ProductDetailEntity productDetail) {
+    public String updateProductDetail(@ModelAttribute ProductDetailEntity productDetail, HttpSession session ) {
+
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
+
         productDetailRepository.save(productDetail);
 
         return "redirect:/admin/adProductDetail/" + productDetail.getProduct().getId();
     }
 
+    @GetMapping("/exportProductDetail")
+    public void exportProductDetail(HttpServletResponse response) throws IOException {
+        adminService.exportProductDetail(response);
+    }
+
     //Product Image
     @RequestMapping(value = "/adProductImage/{id}", method = GET)
     public String viewProductImage(@PathVariable("id") int id, Model model,HttpSession session) {
-        session.setAttribute("idpro",id);
-        List<ProductImageEntity> productImageList =
-                productImageRepository.findByProduct_Id(id);
-        model.addAttribute("productImageList", productImageList);
-        model.addAttribute("action", "uploadFile");
+
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
+        adminService.viewProductImage(id, model,session);
+
+//        session.setAttribute("idpro",id);
+//        List<ProductImageEntity> productImageList =
+//                productImageRepository.findByProduct_Id(id);
+//        model.addAttribute("productImageList", productImageList);
+//        model.addAttribute("action", "uploadFile");
 
         return "admin/ad_product_image";
 
     }
 
     @RequestMapping(value = "/deleteImage/{id}/{pid}", method = GET)
-    public String deleteProductImage(@PathVariable("id") int id, @PathVariable("pid") int pid, Model model) {
+    public String deleteProductImage(@PathVariable("id") int id,
+                                     @PathVariable("pid") int pid,
+                                     HttpSession session ) {
+
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
+
 
         productImageRepository.deleteById(id);
 
@@ -289,15 +338,24 @@ public class AdminController {
     @RequestMapping(value = "/adProductImage/uploadFile", method = RequestMethod.POST)
     public String saveImage(HttpSession session,
                             @RequestParam(value = "file", required = false) MultipartFile photo ) {
+
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
+
         int id = (int) session.getAttribute("idpro");
-        adminService.uploadFile(photo,id);
+        adminService.uploadImage(photo,id);
         return "redirect:/admin/adProductImage/" +id;
     }
 
 
     //Category
     @RequestMapping(value = "/adCategory", method = GET)
-    public String viewCategory(Model model){
+    public String viewCategory(Model model, HttpSession session){
+
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
 
         List<CategoryEntity> categoryList =
                 (List<CategoryEntity>) categoryRepository.findAll();
@@ -312,7 +370,11 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/newCategory", method = GET)
-    public String newCategory(Model model) {
+    public String newCategory(Model model, HttpSession session) {
+
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
         model.addAttribute("category", new CategoryEntity());
         model.addAttribute("msg", "Add a category");
         model.addAttribute("action", "newCategory");
@@ -321,14 +383,24 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/newCategory", method = POST, produces = "text/plain;charset=UTF-8")
-    public String saveCategory(CategoryEntity category, Model model) {
+    public String saveCategory(CategoryEntity category, Model model, HttpSession session) {
+
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
+
         categoryRepository.save(category);
         model.addAttribute("message","You are add success!");
         return "redirect:/admin/adCategory";
     }
 
     @RequestMapping(value = "/editCategory/{id}", method = GET)
-    public String editCategory(Model model, @PathVariable int id) {
+    public String editCategory(Model model, @PathVariable int id, HttpSession session) {
+
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
+
         model.addAttribute("category", categoryRepository.findById(id));
         model.addAttribute("msg", "Update category information");
         model.addAttribute("type", "updateCategory");
@@ -338,7 +410,12 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/updateCategory", method = POST)
-    public String updateCategory(@ModelAttribute CategoryEntity category) {
+    public String updateCategory(@ModelAttribute CategoryEntity category, HttpSession session) {
+
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
+
         categoryRepository.save(category);
         return "redirect:/admin/adCategory";
     }
@@ -346,7 +423,12 @@ public class AdminController {
     //Category detail
 
     @RequestMapping(value = "/newCategoryDetail", method = GET)
-    public String newCategoryDetail(Model model) {
+    public String newCategoryDetail(Model model, HttpSession session) {
+
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
+
         model.addAttribute("categoryDetail", new CategoryDetailEntity());
         model.addAttribute("msg", "Add a category detail");
         model.addAttribute("action", "newCategoryDetail");
@@ -357,14 +439,27 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/newCategoryDetail", method = POST, produces = "text/plain;charset=UTF-8")
-    public String saveCategoryDetail(CategoryDetailEntity categoryDetail, Model model) {
+    public String saveCategoryDetail(CategoryDetailEntity categoryDetail,
+                                     Model model, HttpSession session) {
+
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
+
         categoryDetailRepository.save(categoryDetail);
         model.addAttribute("message","You are add success!");
         return "redirect:/admin/adCategory";
     }
 
     @RequestMapping(value = "/editCategoryDetail/{id}", method = GET)
-    public String editCategoryDetail(Model model, @PathVariable int id) {
+    public String editCategoryDetail(Model model, HttpSession session,
+                                     @PathVariable int id) {
+
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
+
+
         model.addAttribute("categoryDetail", categoryDetailRepository.findById(id));
         model.addAttribute("msg", "Update category detail information");
         model.addAttribute("type", "updateCategoryDetail");
@@ -376,14 +471,23 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/updateCategoryDetail", method = POST)
-    public String updateCategoryDetail(@ModelAttribute CategoryDetailEntity categoryDetail) {
+    public String updateCategoryDetail(@ModelAttribute CategoryDetailEntity categoryDetail, HttpSession session) {
+
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
+
         categoryDetailRepository.save(categoryDetail);
         return "redirect:/admin/adCategory";
     }
 
     //Manufactor
     @RequestMapping(value = "/adManyfactor", method = GET)
-    public String viewManufactor(Model model) {
+    public String viewManufactor(Model model, HttpSession session) {
+
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
 
         List<ManufactorEntity> manufactorList =
                 (List<ManufactorEntity>) manufactorRepository.findAll();
@@ -393,7 +497,12 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/newManufactor", method = GET)
-    public String newManufactor(Model model) {
+    public String newManufactor(Model model, HttpSession session) {
+
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
+
         model.addAttribute("manufactor", new ManufactorEntity());
         model.addAttribute("msg", "Add a manufactor");
         model.addAttribute("action", "newManufactor");
@@ -402,14 +511,26 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/newManufactor", method = POST, produces = "text/plain;charset=UTF-8")
-    public String saveManufactor(ManufactorEntity manufactor, Model model) {
+    public String saveManufactor(ManufactorEntity manufactor,
+                                 Model model, HttpSession session) {
+
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
+
         manufactorRepository.save(manufactor);
         model.addAttribute("message","You are add success!");
         return "redirect:/admin/adManyfactor";
     }
 
     @RequestMapping(value = "/editManufactor/{id}", method = GET)
-    public String editManufactor(Model model, @PathVariable int id) {
+    public String editManufactor(Model model,HttpSession session,
+                                 @PathVariable int id) {
+
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
+
         model.addAttribute("manufactor", manufactorRepository.findById(id));
         model.addAttribute("msg", "Update manufactor information");
         model.addAttribute("type", "updateManufactor");
@@ -419,14 +540,24 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/updateManufactor", method = POST)
-    public String updateManufactor(@ModelAttribute ManufactorEntity manufactor) {
+    public String updateManufactor(@ModelAttribute ManufactorEntity manufactor,
+                                   HttpSession session) {
+
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
+
         manufactorRepository.save(manufactor);
         return "redirect:/admin/adManyfactor";
     }
 
     //Order
     @RequestMapping(value = "/adOrder", method = GET)
-    public String viewOrder(Model model) {
+    public String viewOrder(Model model, HttpSession session) {
+
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
 
         List<OrderEntity> orderList =
                 (List<OrderEntity>) orderRepository.findAll();
@@ -436,7 +567,12 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/newOrder", method = GET)
-    public String newOrder(Model model) {
+    public String newOrder(Model model, HttpSession session) {
+
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
+
         model.addAttribute("order", new OrderEntity());
         model.addAttribute("msg", "Add a order");
         model.addAttribute("action", "neworder");
@@ -452,7 +588,12 @@ public class AdminController {
 //    }
 
     @RequestMapping(value = "/editOrder/{id}", method = GET)
-    public String editOrder(Model model, @PathVariable int id) {
+    public String editOrder(Model model, @PathVariable int id, HttpSession session) {
+
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
+
         model.addAttribute("order", orderRepository.findById(id));
         model.addAttribute("msg", "Update order information");
         model.addAttribute("type", "updateOrder");
@@ -462,13 +603,23 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/updateOrder", method = POST)
-    public String updateOrder(@ModelAttribute("order") OrderEntity order) {
+    public String updateOrder(@ModelAttribute("order") OrderEntity order, HttpSession session) {
+
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
+
         orderRepository.save(order);
         return "redirect:/admin/adOrder";
     }
 
     @RequestMapping(value = "/updateOrderStatus/{id}")
-    public String updateOrderStatus(@PathVariable int id, Model model) {
+    public String updateOrderStatus(@PathVariable int id, Model model, HttpSession session) {
+
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
+
 
         Optional<OrderEntity> orderEntity = orderRepository.findById(id);
         if (orderEntity.isPresent()) {
@@ -487,7 +638,11 @@ public class AdminController {
 
     //Order Detail
     @RequestMapping(value = "/adOrderDetail/{id}", method = GET)
-    public String viewOrderDetail(Model model, @PathVariable("id") int id) {
+    public String viewOrderDetail(Model model, @PathVariable("id") int id, HttpSession session) {
+
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
 
         List<OrderDetailEntity> orderDetailList =
                 (List<OrderDetailEntity>) orderDetailRepository.findByOrderEntityId(id);
@@ -498,7 +653,13 @@ public class AdminController {
 
     @RequestMapping("/seachOrder")
     public String seachOrder(@RequestParam(name = "startDate", required = false) String startDate,
-                             @RequestParam(name = "endDate", required = false) String endDate, Model model){
+                             @RequestParam(name = "endDate", required = false) String endDate,
+                             Model model, HttpSession session){
+
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
+
 
         java.sql.Date date1 = java.sql.Date.valueOf(startDate);
         java.sql.Date date2 = java.sql.Date.valueOf(endDate);
@@ -512,10 +673,20 @@ public class AdminController {
         return "admin/ad_order";
     }
 
+    @GetMapping("/exportOrder")
+    public void exportOrder(HttpServletResponse response) throws IOException {
+        adminService.exportOrderDetail(response);
+    }
+
 //------------------------Account------
 
     @RequestMapping(value = "/adAccount", method = GET)
-    public String viewAccount(Model model) {
+    public String viewAccount(Model model, HttpSession session) {
+
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
+
         List<UserEntity> userList =
                 (List<UserEntity>) userRepository.findAll();
 
@@ -525,7 +696,12 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/newAccount", method = GET)
-    public String newAccount(Model model) {
+    public String newAccount(Model model, HttpSession session) {
+
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
+
         model.addAttribute("account", new UserEntity());
         model.addAttribute("msg", "Add account");
         model.addAttribute("type", "newAccount");
@@ -542,7 +718,12 @@ public class AdminController {
 //    }
 
     @RequestMapping(value = "/editAccount/{id}", method = GET)
-    public String editAccount(Model model, @PathVariable int id) {
+    public String editAccount(Model model, @PathVariable int id, HttpSession session) {
+
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
+
         model.addAttribute("account", userRepository.findById(id));
         model.addAttribute("msg", "Update account information");
         model.addAttribute("type", "updateAccount");
@@ -552,7 +733,12 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/updateAccount", method = POST)
-    public String updateAccount(@ModelAttribute("account") UserEntity user) {
+    public String updateAccount(@ModelAttribute("account") UserEntity user, HttpSession session) {
+
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
+
         userRepository.save(user);
         return "redirect:/admin/adAccount";
     }
@@ -578,7 +764,12 @@ public class AdminController {
 
 //    Report during the date
     @RequestMapping(value = "/adReportDate", method = GET)
-    public String viewReportDate(Model model) {
+    public String viewReportDate(Model model, HttpSession session) {
+
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
+
 //        LocalDateTime date = LocalDateTime.now();
 //        String dt = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH).format(date);
         List<OrderEntity> orderList = orderRepository.findByRequireDate(new Date());
@@ -589,7 +780,11 @@ public class AdminController {
 
     // report in week
     @RequestMapping(value = "/adReportWeek", method = GET)
-    public String viewReportWeek(Model model) {
+    public String viewReportWeek(Model model, HttpSession session) {
+
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
 
         List<OrderEntity> orderList = orderRepository.getOrderWeek();
         model.addAttribute("orderList", orderList);
@@ -599,7 +794,11 @@ public class AdminController {
 
 //    Report during the month
     @RequestMapping(value = "/adReportMonth", method = GET)
-    public String viewReportMonth(Model model) {
+    public String viewReportMonth(Model model, HttpSession session) {
+
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
 //        LocalDateTime date = LocalDateTime.now();
 //        String dt2 = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.ENGLISH).format(date);
 //        String dt1 = DateTimeFormatter.ofPattern("01/MM/yyyy", Locale.ENGLISH).format(date);
@@ -615,7 +814,11 @@ public class AdminController {
 
     // report in year
     @RequestMapping(value = "/adReportYear", method = GET)
-    public String viewReportYear(Model model) {
+    public String viewReportYear(Model model, HttpSession session) {
+
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
 
         List<OrderEntity> orderList = orderRepository.getOrderYear();
         model.addAttribute("orderList", orderList);

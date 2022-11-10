@@ -78,12 +78,12 @@
                                         <c:when test="${a.role.id == 1}">
                                             <%--                                        <label style="color: red">${p.status}</label>--%>
                                             <a href="<c:url value="/admin/updateRoleAccount/${a.id}"/>">
-                                                <i class="fa fa-check" aria-hidden="true"></i></a>
+                                                CUSTOMER</a>
                                         </c:when>
                                         <c:otherwise>
                                             <%--                                        <label style="color: green">${p.status}</label>--%>
                                             <a href="<c:url value="/admin/updateRoleAccount/${a.id}"/>">
-                                                <i class="fa fa-times" aria-hidden="true" style="color: red"></i>
+                                                ADMIN
                                             </a>
                                         </c:otherwise>
                                     </c:choose>

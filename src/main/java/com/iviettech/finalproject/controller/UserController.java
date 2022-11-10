@@ -88,6 +88,7 @@ public class UserController {
             } else if (result == 2) {
                 //model.addAttribute("message", "Welcome " + email);
                 //model.addAttribute("cssBootstrap", "alert-success");
+                session.setAttribute("email", email);
                 session.setAttribute("user", userService.findUser(email, password));
             }
         }
@@ -98,6 +99,7 @@ public class UserController {
 
     @RequestMapping(value = "/logout",method = RequestMethod.GET)
     public String doLogout(HttpSession session) {
+        session.removeAttribute("email");
         session.removeAttribute("user");
         return "redirect:/";
     }
