@@ -1,14 +1,14 @@
 package com.iviettech.finalproject.service;
 
 import com.iviettech.finalproject.entity.*;
-import com.iviettech.finalproject.helper.CSVHelper;
-import com.iviettech.finalproject.helper.OrderDetailRawExport;
-import com.iviettech.finalproject.helper.ProductDetailRawExport;
-import com.iviettech.finalproject.helper.ProductRawExport;
+import com.iviettech.finalproject.helper.*;
 import com.iviettech.finalproject.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
 import org.supercsv.io.CsvBeanWriter;
@@ -60,8 +60,39 @@ public class AdminService {
 
     // ------------------ check role admin
     public boolean isAdminRole(HttpSession session) {
-        String email = (String) session.getAttribute("email"); // get from http session
-        return "Admin".equalsIgnoreCase(userRepository.findByEmail(email).getRole().getRoleName());
+
+        try {
+            String email = (String) session.getAttribute("email"); // get from http session
+            return "Admin".equalsIgnoreCase(userRepository.findByEmail(email).getRole().getRoleName());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+
+    }
+
+    //----------ReportTotal
+    public ReportTotal setTotal() {
+        ReportTotal reportTotal = new ReportTotal();
+        reportTotal.setTotalPrice(reportTotal.totalPrice(orderRepository.getOrder()));
+        reportTotal.setTotalYear(reportTotal.totalPrice(orderRepository.getOrderYear()));
+        reportTotal.setTotalMonth(reportTotal.totalPrice(orderRepository.getOrderMonth()));
+        reportTotal.setTotalWeek(reportTotal.totalPrice(orderRepository.getOrderWeek()));
+        reportTotal.setTotalOrder(reportTotal.countOrder(orderRepository.getOrder()));
+        reportTotal.setYearOrder(reportTotal.countOrder(orderRepository.getOrderYear()));
+        reportTotal.setMonthOrder(reportTotal.countOrder(orderRepository.getOrderMonth()));
+        reportTotal.setWeekOrder(reportTotal.countOrder(orderRepository.getOrderWeek()));
+        reportTotal.setPercentYear((int) (((reportTotal.getTotalYear()) / (reportTotal.getTotalPrice())) * 100));
+        reportTotal.setPercentMonth((int) (((reportTotal.getTotalMonth()) / reportTotal.getTotalYear())) * 100);
+        reportTotal.setPercentWeek((int) (((reportTotal.getTotalWeek()) / reportTotal.getTotalMonth())) * 100);
+
+        return reportTotal;
+    }
+
+    //---------viewReprotCard
+    public void viewReportCard(Model model) {
+        ReportTotal reportTotal = setTotal();
+        model.addAttribute("allTotal", reportTotal);
     }
 
     //-------------------Dashboard chart
@@ -99,7 +130,7 @@ public class AdminService {
     }
 
     //-------------EditProduct
-    public void editProduct(Model model, @PathVariable int id) {
+    public void editProduct(Model model, int id) {
         model.addAttribute("product", productRepository.findById(id));
         model.addAttribute("msg", "Update product information");
         model.addAttribute("type", "updateProduct");
@@ -112,7 +143,7 @@ public class AdminService {
 
     //------------------ update status product
 
-    public void updateProductStatus(@PathVariable int id, Model model) {
+    public void updateProductStatus(int id, Model model) {
         Optional<ProductEntity> productEntity = productRepository.findById(id);
         if (productEntity.isPresent()) {
             ProductEntity product = productEntity.get();
@@ -205,8 +236,170 @@ public class AdminService {
     }
 
 
+    //---------------viewCateAndCateDetail
+    public void viewCateAndCateDetail(Model model, HttpSession session) {
+        List<CategoryEntity> categoryList =
+                (List<CategoryEntity>) categoryRepository.findAll();
 
+        List<CategoryDetailEntity> categoryDetailList =
+                (List<CategoryDetailEntity>) categoryDetailRepository.findAll();
 
+        model.addAttribute("categoryList", categoryList);
+        model.addAttribute("categoryDetailList",categoryDetailList);
+    }
+
+    //--------------------newCategory
+    public void newCategory(Model model) {
+        model.addAttribute("category", new CategoryEntity());
+        model.addAttribute("msg", "Add a category");
+        model.addAttribute("action", "newCategory");
+    }
+
+    //------------------editCate
+    public void editCategory(Model model,int id) {
+        model.addAttribute("category", categoryRepository.findById(id));
+        model.addAttribute("msg", "Update category information");
+        model.addAttribute("type", "updateCategory");
+        model.addAttribute("action", "/admin/updateCategory");
+    }
+
+    //--------newCategoryDetail
+    public void newCateDetail(Model model) {
+        model.addAttribute("categoryDetail", new CategoryDetailEntity());
+        model.addAttribute("msg", "Add a category detail");
+        model.addAttribute("action", "newCategoryDetail");
+
+        setCategoryDropDownlist(model);
+    }
+
+    public void editCateDetail(Model model, int id) {
+        model.addAttribute("categoryDetail", categoryDetailRepository.findById(id));
+        model.addAttribute("msg", "Update category detail information");
+        model.addAttribute("type", "updateCategoryDetail");
+        model.addAttribute("action", "/admin/updateCategoryDetail");
+
+        setCategoryDropDownlist(model);
+    }
+
+    //---------------viewManufactor
+    public void viewManufactor(Model model) {
+        List<ManufactorEntity> manufactorList =
+                (List<ManufactorEntity>) manufactorRepository.findAll();
+        model.addAttribute("manufactorList", manufactorList);
+    }
+
+    //--------newManufactor
+
+    public void newManufactor(Model model) {
+        model.addAttribute("manufactor", new ManufactorEntity());
+        model.addAttribute("msg", "Add a manufactor");
+        model.addAttribute("action", "newManufactor");
+    }
+
+    //---------------editmanufactor
+    public void editManufactor(Model model, int id) {
+        model.addAttribute("manufactor", manufactorRepository.findById(id));
+        model.addAttribute("msg", "Update manufactor information");
+        model.addAttribute("type", "updateManufactor");
+        model.addAttribute("action", "/admin/updateManufactor");
+    }
+
+    //-------------viewOrder
+    public void viewOrder(Model model) {
+        List<OrderEntity> orderList =
+                (List<OrderEntity>) orderRepository.findAll();
+        model.addAttribute("orderList", orderList);
+    }
+
+    //--------------------newOrder
+    public void newOrder(Model model) {
+        model.addAttribute("order", new OrderEntity());
+        model.addAttribute("msg", "Add a order");
+        model.addAttribute("action", "neworder");
+    }
+
+    public void editOrder(Model model, int id) {
+        model.addAttribute("order", orderRepository.findById(id));
+        model.addAttribute("msg", "Update order information");
+        model.addAttribute("type", "updateOrder");
+        model.addAttribute("action", "/admin/updateOrder");
+    }
+
+    //--------------updateOrderStatus
+    public void updateOrderStatus(int id, Model model) {
+        Optional<OrderEntity> orderEntity = orderRepository.findById(id);
+        if (orderEntity.isPresent()) {
+            OrderEntity order = orderEntity.get();
+            if (order.getOrderStatus() == 0) {
+                order.setOrderStatus(1);
+            } else {
+                order.setOrderStatus(0);
+            }
+            model.addAttribute("order", order);
+            orderRepository.save(order);
+        }
+    }
+
+    //-----------------viewOrderDetail
+    public void viewOrderDetail(Model model, int id) {
+        List<OrderDetailEntity> orderDetailList =
+                (List<OrderDetailEntity>) orderDetailRepository.findByOrderEntityId(id);
+        model.addAttribute("orderDetailList", orderDetailList);
+    }
+
+    //------------seachOrder
+    public void seachOrder(Model model, String startDate, String endDate) {
+        java.sql.Date date1 = java.sql.Date.valueOf(startDate);
+        java.sql.Date date2 = java.sql.Date.valueOf(endDate);
+
+        List<OrderEntity> orderList =  orderRepository.getOrderFromTo(date1, date2, 0);
+
+        model.addAttribute("orderList", orderList);
+    }
+
+    //------------viewAccount
+    public void viewAccount(Model model) {
+        List<UserEntity> userList =
+                (List<UserEntity>) userRepository.findAll();
+
+        model.addAttribute("userList", userList);
+    }
+
+    //---------editAccount
+    public void editAccount(Model model, int id) {
+        model.addAttribute("account", userRepository.findById(id));
+        model.addAttribute("msg", "Update account information");
+        model.addAttribute("type", "updateAccount");
+        model.addAttribute("action", "/admin/updateAccount");
+    }
+
+    //------report
+    public void reportDate(Model model) {
+        List<OrderEntity> orderList = orderRepository.findByRequireDate(new Date());
+        model.addAttribute("orderList", orderList);
+    }
+
+    public void reportWeek(Model model) {
+        List<OrderEntity> orderList = orderRepository.getOrderWeek();
+        model.addAttribute("orderList", orderList);
+    }
+
+    public void reportMonth(Model model) {
+        List<OrderEntity> orderList = orderRepository.getOrderMonth();
+        model.addAttribute("orderList", orderList);
+    }
+
+    public void reportYear(Model model) {
+        List<OrderEntity> orderList = orderRepository.getOrderYear();
+        model.addAttribute("orderList", orderList);
+    }
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        sdf.setLenient(true);
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
+    }
 
 
   //---------------------Map

@@ -77,12 +77,11 @@
                                     <c:choose>
                                         <c:when test="${a.role.id == 1}">
                                             <%--                                        <label style="color: red">${p.status}</label>--%>
-                                            <a href="<c:url value="/admin/updateRoleAccount/${a.id}"/>">
-                                                CUSTOMER</a>
+                                            <a style="color: yellow"></a>CUSTOMER</a>
                                         </c:when>
                                         <c:otherwise>
                                             <%--                                        <label style="color: green">${p.status}</label>--%>
-                                            <a href="<c:url value="/admin/updateRoleAccount/${a.id}"/>">
+                                            <a style="color: red">
                                                 ADMIN
                                             </a>
                                         </c:otherwise>
