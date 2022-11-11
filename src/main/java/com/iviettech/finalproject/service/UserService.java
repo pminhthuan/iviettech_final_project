@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
+
 import java.io.UnsupportedEncodingException;
 
 import static com.iviettech.finalproject.helper.PasswordEncoder.createHash;
@@ -61,6 +62,17 @@ public class UserService {
                 return 1; // account not activated yet.
             }
             return 2; // login ok
+        }
+    }
+
+    public void rememberMe(String email, String password, String remember, HttpServletResponse response){
+        if (remember != null){
+            Cookie cookieEmail = new Cookie("email",email);
+            cookieEmail.setMaxAge(3600);
+            response.addCookie(cookieEmail);
+            Cookie cookiePass = new Cookie("pass",password);
+            cookiePass.setMaxAge(3600);
+            response.addCookie(cookiePass);
         }
     }
 

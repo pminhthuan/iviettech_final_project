@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import java.util.Map;
@@ -75,7 +76,8 @@ public class UserController {
     @RequestMapping(value = "login", method = POST)
     public String doLogin(@RequestParam("email") String email,
                           @RequestParam("pass") String password,
-                          Model model, HttpSession session) {
+                          @RequestParam(name = "remember", required = false) String remember,
+                          Model model, HttpSession session, HttpServletResponse response) {
         int result = userService.doLogin(email, password);
 
         if (result == 0) {
@@ -86,6 +88,7 @@ public class UserController {
                 model.addAttribute("errorSignIn", "Login failed. You account not activated yet");
                 return "login";
             } else if (result == 2) {
+                userService.rememberMe(email, password, remember, response);
                 //model.addAttribute("message", "Welcome " + email);
                 //model.addAttribute("cssBootstrap", "alert-success");
                 session.setAttribute("email", email);
