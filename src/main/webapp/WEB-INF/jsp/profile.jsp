@@ -177,6 +177,7 @@
                                                             <div class="form-group">
                                                                 <label for="district">District</label>
                                                                 <form:select path="district.id" class="custom-select d-block w-100" id="district" required="true">
+                                                                    <form:option value='${sessionScope.user.district.id}'>${sessionScope.user.district.fullNameEn}</form:option>
                                                                 </form:select>
                                                             </div>
                                                         </div>
@@ -184,6 +185,7 @@
                                                             <div class="form-group">
                                                                 <label for="ward">Ward</label>
                                                                 <form:select path="ward.id" class="custom-select d-block w-100" id="ward" required="true">
+                                                                    <form:option value='${sessionScope.user.ward.id}'>${sessionScope.user.ward.fullNameEn}</form:option>
                                                                 </form:select>
                                                             </div>
                                                         </div>
