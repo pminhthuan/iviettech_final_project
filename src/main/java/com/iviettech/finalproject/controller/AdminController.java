@@ -761,6 +761,32 @@ public class AdminController {
 //
 //    }
 
+    //------------------chart
+    @GetMapping(value = "/adChart")
+    public String adChart(HttpSession session, Model model){
+
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
+        adminService.dashboard_char(model);
+
+        return "admin/ad_chart";
+    }
+    //--------allTable
+
+    @RequestMapping(value = "/adTable", method = GET)
+    public String editAccount(Model model, HttpSession session) {
+
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
+
+
+
+        return "admin/ad_table";
+    }
+
+
 
 //    Report during the date
     @RequestMapping(value = "/adReportDate", method = GET)

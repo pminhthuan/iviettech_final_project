@@ -83,8 +83,8 @@ public class AdminService {
         reportTotal.setMonthOrder(reportTotal.countOrder(orderRepository.getOrderMonth()));
         reportTotal.setWeekOrder(reportTotal.countOrder(orderRepository.getOrderWeek()));
         reportTotal.setPercentYear((int) (((reportTotal.getTotalYear()) / (reportTotal.getTotalPrice())) * 100));
-        reportTotal.setPercentMonth((int) (((reportTotal.getTotalMonth()) / reportTotal.getTotalYear())) * 100);
-        reportTotal.setPercentWeek((int) (((reportTotal.getTotalWeek()) / reportTotal.getTotalMonth())) * 100);
+        reportTotal.setPercentMonth((int) (((reportTotal.getTotalMonth()) / (reportTotal.getTotalYear())) * 100));
+        reportTotal.setPercentWeek((int) (((reportTotal.getTotalWeek()) / (reportTotal.getTotalMonth())) * 100));
 
         return reportTotal;
     }

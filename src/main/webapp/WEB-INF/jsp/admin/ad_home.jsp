@@ -36,6 +36,7 @@
               <jsp:include page="ad_view_total.jsp"/>
 
               <jsp:include page="ad_dashboard.jsp"/>
+              <jsp:include page="ad_last_5_order.jsp"/>
 <%--              <div class="container-fluid px-4">--%>
 <%--                  <h1 class="mt-4">Dashboard</h1>--%>
 <%--                  <div class="row">--%>

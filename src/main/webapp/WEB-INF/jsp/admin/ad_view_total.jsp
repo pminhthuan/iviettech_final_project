@@ -40,11 +40,11 @@
                     </span>
         <span class="info-box-number">${allTotal.weekOrder} Order</span>
         <div class="card-footer progress">
-<%--          <div class="progress-bar width-${allTotal.percentWeek}"></div>--%>
-  <div class="progress-bar width-5"></div>
+          <div class="progress-bar width-${allTotal.percentWeek}"></div>
+<%--  <div class="progress-bar width-5"></div>--%>
         </div>
         <span class="progress-description">
-                                ${allTotal.percentWeek}%The Month's Income
+                                ${allTotal.percentWeek}% of this month
                             </span>
       </div>
     </div>
@@ -64,7 +64,7 @@
           <div class="progress-bar width-${allTotal.percentMonth}"></div>
         </div>
         <span class="progress-description">
-            ${allTotal.percentMonth}%The Year's Income
+            ${allTotal.percentMonth}% of this year
         </span>
       </div>
     </div>
