@@ -5,20 +5,15 @@ import com.iviettech.finalproject.helper.CSVHelper;
 import com.iviettech.finalproject.repository.*;
 import com.iviettech.finalproject.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -66,30 +61,10 @@ public class AdminController {
             return "redirect:/";
         }
 
-        Double totalDay = orderRepository.getTotalDay();
-        model.addAttribute("totalDay", totalDay);
+        adminService.viewReportCard(model);
 
         adminService.dashboard_char(model);
 
-//        // dashboard chart
-//        int[] totalPricePerMonth = new int[12];
-//        int[] totalOrderPerMonth = new int[12];
-//        List<OrderEntity> allOrders = (List<OrderEntity>) orderRepository.findAll();
-//        for (OrderEntity order : allOrders) {
-//            int month = order.getRequireDate().getMonth();
-//            totalPricePerMonth[month] = totalPricePerMonth[month] + (int)order.getTotalAmount();
-//            totalOrderPerMonth[month] = totalOrderPerMonth[month] + 1;
-//        }
-//        String totalOrderPrice = Arrays.toString(totalPricePerMonth).substring(1, Arrays.toString(totalPricePerMonth).length() - 1);
-//        String totalOrderNumber = Arrays.toString(totalOrderPerMonth).substring(1, Arrays.toString(totalOrderPerMonth).length() - 1);
-//        // for bar chart
-//        model.addAttribute("total_order_price", totalOrderPrice);
-//        model.addAttribute("total_order_number", totalOrderNumber);
-//
-//
-//        // for data table
-//        // get latest 5 pending order (order status = 0 for example)
-//        model.addAttribute("order_data_list", orderRepository.findTop5ByOrderStatusOrderByIdDesc(0));
 
         return "admin/ad_home";
     }
@@ -357,14 +332,15 @@ public class AdminController {
             return "redirect:/";
         }
 
-        List<CategoryEntity> categoryList =
-                (List<CategoryEntity>) categoryRepository.findAll();
-
-        List<CategoryDetailEntity> categoryDetailList =
-                (List<CategoryDetailEntity>) categoryDetailRepository.findAll();
-
-        model.addAttribute("categoryList", categoryList);
-        model.addAttribute("categoryDetailList",categoryDetailList);
+        adminService.viewCateAndCateDetail(model, session);
+//        List<CategoryEntity> categoryList =
+//                (List<CategoryEntity>) categoryRepository.findAll();
+//
+//        List<CategoryDetailEntity> categoryDetailList =
+//                (List<CategoryDetailEntity>) categoryDetailRepository.findAll();
+//
+//        model.addAttribute("categoryList", categoryList);
+//        model.addAttribute("categoryDetailList",categoryDetailList);
 
         return "admin/ad_category";
     }
@@ -375,9 +351,10 @@ public class AdminController {
         if (!adminService.isAdminRole(session)) {
             return "redirect:/";
         }
-        model.addAttribute("category", new CategoryEntity());
-        model.addAttribute("msg", "Add a category");
-        model.addAttribute("action", "newCategory");
+        adminService.newCategory(model);
+//        model.addAttribute("category", new CategoryEntity());
+//        model.addAttribute("msg", "Add a category");
+//        model.addAttribute("action", "newCategory");
 
         return "admin/ad_edit_category";
     }
@@ -401,10 +378,12 @@ public class AdminController {
             return "redirect:/";
         }
 
-        model.addAttribute("category", categoryRepository.findById(id));
-        model.addAttribute("msg", "Update category information");
-        model.addAttribute("type", "updateCategory");
-        model.addAttribute("action", "/admin/updateCategory");
+        adminService.editCategory(model, id);
+
+//        model.addAttribute("category", categoryRepository.findById(id));
+//        model.addAttribute("msg", "Update category information");
+//        model.addAttribute("type", "updateCategory");
+//        model.addAttribute("action", "/admin/updateCategory");
 
         return "admin/ad_edit_category";
     }
@@ -428,12 +407,13 @@ public class AdminController {
         if (!adminService.isAdminRole(session)) {
             return "redirect:/";
         }
+        adminService.newCateDetail(model);
 
-        model.addAttribute("categoryDetail", new CategoryDetailEntity());
-        model.addAttribute("msg", "Add a category detail");
-        model.addAttribute("action", "newCategoryDetail");
+//        model.addAttribute("categoryDetail", new CategoryDetailEntity());
+//        model.addAttribute("msg", "Add a category detail");
+//        model.addAttribute("action", "newCategoryDetail");
 
-        adminService.setCategoryDropDownlist(model);
+//        adminService.setCategoryDropDownlist(model);
 
         return "admin/ad_edit_category_detail";
     }
@@ -459,13 +439,15 @@ public class AdminController {
             return "redirect:/";
         }
 
+        adminService.editCateDetail(model, id);
 
-        model.addAttribute("categoryDetail", categoryDetailRepository.findById(id));
-        model.addAttribute("msg", "Update category detail information");
-        model.addAttribute("type", "updateCategoryDetail");
-        model.addAttribute("action", "/admin/updateCategoryDetail");
 
-        adminService.setCategoryDropDownlist(model);
+//        model.addAttribute("categoryDetail", categoryDetailRepository.findById(id));
+//        model.addAttribute("msg", "Update category detail information");
+//        model.addAttribute("type", "updateCategoryDetail");
+//        model.addAttribute("action", "/admin/updateCategoryDetail");
+//
+//        adminService.setCategoryDropDownlist(model);
 
         return "admin/ad_edit_category_detail";
     }
@@ -489,9 +471,11 @@ public class AdminController {
             return "redirect:/";
         }
 
-        List<ManufactorEntity> manufactorList =
-                (List<ManufactorEntity>) manufactorRepository.findAll();
-        model.addAttribute("manufactorList", manufactorList);
+        adminService.viewManufactor(model);
+
+//        List<ManufactorEntity> manufactorList =
+//                (List<ManufactorEntity>) manufactorRepository.findAll();
+//        model.addAttribute("manufactorList", manufactorList);
 
         return "admin/ad_manufactor";
     }
@@ -503,9 +487,10 @@ public class AdminController {
             return "redirect:/";
         }
 
-        model.addAttribute("manufactor", new ManufactorEntity());
-        model.addAttribute("msg", "Add a manufactor");
-        model.addAttribute("action", "newManufactor");
+        adminService.newManufactor(model);
+//        model.addAttribute("manufactor", new ManufactorEntity());
+//        model.addAttribute("msg", "Add a manufactor");
+//        model.addAttribute("action", "newManufactor");
 
         return "admin/ad_edit_manufactor";
     }
@@ -531,10 +516,12 @@ public class AdminController {
             return "redirect:/";
         }
 
-        model.addAttribute("manufactor", manufactorRepository.findById(id));
-        model.addAttribute("msg", "Update manufactor information");
-        model.addAttribute("type", "updateManufactor");
-        model.addAttribute("action", "/admin/updateManufactor");
+        adminService.editManufactor(model, id);
+
+//        model.addAttribute("manufactor", manufactorRepository.findById(id));
+//        model.addAttribute("msg", "Update manufactor information");
+//        model.addAttribute("type", "updateManufactor");
+//        model.addAttribute("action", "/admin/updateManufactor");
 
         return "admin/ad_edit_manufactor";
     }
@@ -559,9 +546,11 @@ public class AdminController {
             return "redirect:/";
         }
 
-        List<OrderEntity> orderList =
-                (List<OrderEntity>) orderRepository.findAll();
-        model.addAttribute("orderList", orderList);
+        adminService.viewOrder(model);
+
+//        List<OrderEntity> orderList =
+//                (List<OrderEntity>) orderRepository.findAll();
+//        model.addAttribute("orderList", orderList);
 
         return "admin/ad_order";
     }
@@ -573,9 +562,11 @@ public class AdminController {
             return "redirect:/";
         }
 
-        model.addAttribute("order", new OrderEntity());
-        model.addAttribute("msg", "Add a order");
-        model.addAttribute("action", "neworder");
+        adminService.newOrder(model);
+
+//        model.addAttribute("order", new OrderEntity());
+//        model.addAttribute("msg", "Add a order");
+//        model.addAttribute("action", "neworder");
 
         return "admin/ad_edit_order";
     }
@@ -594,10 +585,12 @@ public class AdminController {
             return "redirect:/";
         }
 
-        model.addAttribute("order", orderRepository.findById(id));
-        model.addAttribute("msg", "Update order information");
-        model.addAttribute("type", "updateOrder");
-        model.addAttribute("action", "/admin/updateOrder");
+        adminService.editOrder(model, id);
+
+//        model.addAttribute("order", orderRepository.findById(id));
+//        model.addAttribute("msg", "Update order information");
+//        model.addAttribute("type", "updateOrder");
+//        model.addAttribute("action", "/admin/updateOrder");
 
         return "admin/ad_edit_order";
     }
@@ -620,18 +613,19 @@ public class AdminController {
             return "redirect:/";
         }
 
+        adminService.updateOrderStatus(id, model);
 
-        Optional<OrderEntity> orderEntity = orderRepository.findById(id);
-        if (orderEntity.isPresent()) {
-            OrderEntity order = orderEntity.get();
-            if (order.getOrderStatus() == 0) {
-                order.setOrderStatus(1);
-            } else {
-                order.setOrderStatus(0);
-            }
-            model.addAttribute("order", order);
-            orderRepository.save(order);
-        }
+//        Optional<OrderEntity> orderEntity = orderRepository.findById(id);
+//        if (orderEntity.isPresent()) {
+//            OrderEntity order = orderEntity.get();
+//            if (order.getOrderStatus() == 0) {
+//                order.setOrderStatus(1);
+//            } else {
+//                order.setOrderStatus(0);
+//            }
+//            model.addAttribute("order", order);
+//            orderRepository.save(order);
+//        }
         return "redirect:/admin/adOrder";
 
     }
@@ -644,9 +638,11 @@ public class AdminController {
             return "redirect:/";
         }
 
-        List<OrderDetailEntity> orderDetailList =
-                (List<OrderDetailEntity>) orderDetailRepository.findByOrderEntityId(id);
-        model.addAttribute("orderDetailList", orderDetailList);
+        adminService.viewOrderDetail(model, id);
+
+//        List<OrderDetailEntity> orderDetailList =
+//                (List<OrderDetailEntity>) orderDetailRepository.findByOrderEntityId(id);
+//        model.addAttribute("orderDetailList", orderDetailList);
 
         return "admin/ad_order_detail";
     }
@@ -659,14 +655,15 @@ public class AdminController {
         if (!adminService.isAdminRole(session)) {
             return "redirect:/";
         }
+        adminService.seachOrder(model,startDate,endDate);
 
 
-        java.sql.Date date1 = java.sql.Date.valueOf(startDate);
-        java.sql.Date date2 = java.sql.Date.valueOf(endDate);
-
-        List<OrderEntity> orderList =  orderRepository.getOrderFromTo(date1, date2, 0);
-
-        model.addAttribute("orderList", orderList);
+//        java.sql.Date date1 = java.sql.Date.valueOf(startDate);
+//        java.sql.Date date2 = java.sql.Date.valueOf(endDate);
+//
+//        List<OrderEntity> orderList =  orderRepository.getOrderFromTo(date1, date2, 0);
+//
+//        model.addAttribute("orderList", orderList);
 
 
         //return "redirect:/admin/adOrder";
@@ -687,10 +684,12 @@ public class AdminController {
             return "redirect:/";
         }
 
-        List<UserEntity> userList =
-                (List<UserEntity>) userRepository.findAll();
+        adminService.viewAccount(model);
 
-        model.addAttribute("userList", userList);
+//        List<UserEntity> userList =
+//                (List<UserEntity>) userRepository.findAll();
+//
+//        model.addAttribute("userList", userList);
 
         return "admin/ad_account";
     }
@@ -724,10 +723,11 @@ public class AdminController {
             return "redirect:/";
         }
 
-        model.addAttribute("account", userRepository.findById(id));
-        model.addAttribute("msg", "Update account information");
-        model.addAttribute("type", "updateAccount");
-        model.addAttribute("action", "/admin/updateAccount");
+        adminService.editAccount(model, id);
+//        model.addAttribute("account", userRepository.findById(id));
+//        model.addAttribute("msg", "Update account information");
+//        model.addAttribute("type", "updateAccount");
+//        model.addAttribute("action", "/admin/updateAccount");
 
         return "admin/ad_edit_account";
     }
@@ -770,10 +770,9 @@ public class AdminController {
             return "redirect:/";
         }
 
-//        LocalDateTime date = LocalDateTime.now();
-//        String dt = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH).format(date);
-        List<OrderEntity> orderList = orderRepository.findByRequireDate(new Date());
-        model.addAttribute("orderList", orderList);
+        adminService.reportDate(model);
+//        List<OrderEntity> orderList = orderRepository.findByRequireDate(new Date());
+//        model.addAttribute("orderList", orderList);
 
         return "admin/ad_order";
     }
@@ -786,8 +785,9 @@ public class AdminController {
             return "redirect:/";
         }
 
-        List<OrderEntity> orderList = orderRepository.getOrderWeek();
-        model.addAttribute("orderList", orderList);
+        adminService.reportWeek(model);
+//        List<OrderEntity> orderList = orderRepository.getOrderWeek();
+//        model.addAttribute("orderList", orderList);
 
         return "admin/ad_order";
     }
@@ -799,15 +799,8 @@ public class AdminController {
         if (!adminService.isAdminRole(session)) {
             return "redirect:/";
         }
-//        LocalDateTime date = LocalDateTime.now();
-//        String dt2 = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.ENGLISH).format(date);
-//        String dt1 = DateTimeFormatter.ofPattern("01/MM/yyyy", Locale.ENGLISH).format(date);
-//        Date date1 = new SimpleDateFormat("01/MM/yyyy").parse(String.valueOf(new Date()));
-//        Date date2 = new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(new Date()));
-////        Date date = new Date();
 
-        List<OrderEntity> orderList = orderRepository.getOrderMonth();
-        model.addAttribute("orderList", orderList);
+        adminService.reportMonth(model);
 
         return "admin/ad_order";
     }
@@ -820,19 +813,9 @@ public class AdminController {
             return "redirect:/";
         }
 
-        List<OrderEntity> orderList = orderRepository.getOrderYear();
-        model.addAttribute("orderList", orderList);
+        adminService.reportYear(model);
 
         return "admin/ad_order";
     }
-
-    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        sdf.setLenient(true);
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
-    }
-
-    //Map
 
 }
