@@ -13,6 +13,9 @@ public interface OrderRepository extends CrudRepository<OrderEntity, Integer> {
 //    @Query(value = "SELECT o FROM orders o WHERE o.require_date = ?1", nativeQuery = true)
     List<OrderEntity> findByRequireDate(java.util.Date date);
 
+    @Query(value = "SELECT * FROM orders", nativeQuery = true)
+    List<OrderEntity> getOrder();
+
     @Query(value = "SELECT * FROM orders WHERE date_part('week',require_date) = date_part('week',CURRENT_DATE)", nativeQuery = true)
     List<OrderEntity> getOrderWeek();
 
