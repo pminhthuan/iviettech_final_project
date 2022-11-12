@@ -75,7 +75,7 @@ public class OrderEntity {
     @Column(name = "payment_method")
     private String paymentMethod;
 
-    @Column(name = "payment_status")
+    @Column(name = "payment_status") //0 not yet, 1 paid
     private int paymentStatus;
 
     @Column(name = "qr_code_payment")

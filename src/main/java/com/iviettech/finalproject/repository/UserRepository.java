@@ -23,4 +23,12 @@ public interface UserRepository extends CrudRepository<UserEntity, Integer> {
             nativeQuery = true)
     void updateUser(String firstName, String lastName, String phoneNumber, String addressDetail, int provinceId, int districtId, int wardId, int id);
 
+
+    @Transactional
+    @Modifying
+    @Query(value = "update accounts set password = ?1 where id = ?2",
+            nativeQuery = true)
+    void updatePassword(String password, int id);
+
+
 }

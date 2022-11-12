@@ -84,13 +84,13 @@
                 <!-- Email input -->
                 <div class="form-outline ">
                     <label class="form-label" for="form2Example1">Email address</label>
-                    <input type="email" id="form2Example1" class="form-control" name="email" placeholder="Email address"/>
+                    <input type="email" value="${cookie.email.value}" id="form2Example1" class="form-control" name="email" placeholder="Email address"/>
                 </div>
 
                 <!-- Password input -->
                 <div class="form-outline ">
                     <label class="form-label" for="form2Example2">Password</label>
-                    <input type="password" id="form2Example2" class="form-control" name="pass" placeholder="Password"/>
+                    <input type="password" value="${cookie.pass.value}" id="form2Example2" class="form-control" name="pass" placeholder="Password"/>
 
                 </div>
 
@@ -106,7 +106,7 @@
 
                     <div class="col">
                         <!-- Simple link -->
-                        <a href="#!">Forgot password?</a>
+                        <a href="/resetpass">Forgot password?</a>
                     </div>
                 </div>
 

@@ -241,6 +241,7 @@
                 <strong>Success!</strong>
                 <span> Your order has been purchased successfully. Thank you for your payment!</span> <br>
                 <span id="paypal-transaction-id"> Transaction ID: </span>
+                <form:hidden path="paymentStatus" id="payment-status" value="0"></form:hidden>
               </div>
             </div>
             <!-- Replace with your own sandbox Business account app client ID -->
@@ -271,7 +272,7 @@
                     $("#paypal-button-container").hide();
                     $("#paypal-success").show();
                     $("#paypal-transaction-id").text(transaction.id);
-
+                    $("#payment-status").val(1);
                   });
                 }
               }).render('#paypal-button-container');

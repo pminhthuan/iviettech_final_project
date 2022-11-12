@@ -11,7 +11,7 @@
 <html lang="en">
 
 <head>
-    <title>Order History</title>
+    <title>Reset Password</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
@@ -61,111 +61,39 @@
         </a>
 
         <span class="stext-109 cl4">
-                Order History
+                Reset Password
             </span>
     </div>
 </div>
 
 
-<!--================ Box Area =================-->
+<!-- Login -->
+
+
+<!--================Login Box Area =================-->
 <div class="site-section">
     <div class="container">
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
-        <div class="container">
-            <div class="row flex-lg-nowrap">
-                <div class="col-12 col-lg-auto mb-3" style="width: 200px;">
-                    <div class="card">
-                        <div class="e-navlist e-navlist--active-bg">
-                            <ul class="nav">
-                                <li class="nav-item"><a class="nav-link px-2 active" href="/profile"><i class="fa fa-user fa-fw mr-1" aria-hidden="true"></i></i><span>Overview</span></a></li>
-                                <li class="nav-item "><a class="nav-link px-2" href="/orderhistory"><i class="fa fa-history fa-fw mr-1" aria-hidden="true"></i></i><span>Order History</span></a></li>
-                                <li class="nav-item"><a class="nav-link px-2" href="/changepass"><i class="fa fa-fw fa-cog fa-fw mr-1"></i><span>Change Password</span></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="row">
-                        <div class="col mb-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="e-profile">
-                                        <div class="row">
-                                            <div class="col-12 col-sm-auto mb-3">
-                                                <div class="mx-auto" style="width: 140px;">
-                                                    <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px; background-color: rgb(233, 236, 239);">
-                                                        <img src="/resources/images/avatar-vo-danh-2.jpg" style="width: -webkit-fill-available;">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
-                                                <div class="text-center text-sm-left mb-2 mb-sm-0">
-                                                    <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">John Smith</h4>
-                                                    <p class="mb-0">@johnny.s</p>
-                                                    <%-- <div class="text-muted"><small>Last seen 2 hours ago</small></div>--%>
-                                                    <%-- <div class="mt-2">--%>
-                                                    <%-- <button class="btn btn-primary" type="button">--%>
-                                                    <%-- <i class="fa fa-fw fa-camera"></i>--%>
-                                                    <%-- <span>Change Photo</span>--%>
-                                                    <%-- </button>--%>
-                                                    <%-- </div>--%>
-                                                </div>
-                                                <div class="text-center text-sm-right">
-                                                    <span class="badge badge-secondary">${sessionScope.user.role.id == 2?"administrator":"customer"}</span>
-                                                    <%-- <div class="text-muted"><small>Joined 09 Dec 2017</small></div>--%>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <ul class="nav nav-tabs">
-                                            <li class="nav-item"><a href="" class="active nav-link">Order History</a></li>
-                                        </ul>
-                                        <div class="tab-content pt-3">
-                                            <div class="site-section">
-                                                <div class="container">
-                                                    <div class="site-blocks-table tb-item">
-                                                        <table class="table table-bordered">
-                                                            <thead>
-                                                            <tr>
-                                                                <th class="product-thumbnail">Image</th>
-                                                                <th class="product-name">Product</th>
-                                                                <th class="product-size">Size</th>
-                                                                <th class="product-color">Color</th>
-                                                                <th class="product-price">Price</th>
-                                                                <th class="product-quantity">Quantity</th>
-                                                            </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            <c:forEach items="${orderDetailList}" var="o">
-                                                                <tr>
-                                                                    <td class="product-thumbnail">
-                                                                        <img src="${o.product.mainProductImageURL}" alt="Image" class="img-fluid">
-                                                                    </td>
-                                                                    <td>${o.product.name}</td>
-                                                                    <td >${o.size}</td>
-                                                                    <td >${o.color}</td>
-                                                                    <td >${o.price}</td>
-                                                                    <td >${o.quantity}</td>
-                                                                </tr>
-                                                            </c:forEach>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+        <div class="alert ${cssBootstrap}" role="alert" style="text-align: center; ${message == null?"display: none":""}">
+            ${message}
+        </div>
+        <div class="login">
+            <div class="alert alert-danger" role="alert" style="text-align: center; ${errorSignIn == null?"display: none":""}">
+                ${errorSignIn}
             </div>
+            <form action="/" method="post">
+                <!-- Email input -->
+                <div class="form-outline ">
+                    <label class="form-label" for="form2Example1">Email address</label>
+                    <input type="email" id="form2Example1" class="form-control" name="email" placeholder="Email address"/>
+                </div>
+
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary btn-block mb-4">Reset</button>
+
+            </form>
         </div>
     </div>
 </div>
-
 <!-- Footer -->
 <jsp:include page="footer.jsp"></jsp:include>
 
@@ -224,4 +152,3 @@
 </body>
 
 </html>
-

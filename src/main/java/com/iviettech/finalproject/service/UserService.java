@@ -78,10 +78,10 @@ public class UserService {
     public void rememberMe(String email, String password, String remember, HttpServletResponse response){
         if (remember != null){
             Cookie cookieEmail = new Cookie("email",email);
-            cookieEmail.setMaxAge(3600);
+            cookieEmail.setMaxAge(60*60*24*30);
             response.addCookie(cookieEmail);
             Cookie cookiePass = new Cookie("pass",password);
-            cookiePass.setMaxAge(3600);
+            cookiePass.setMaxAge(60*60*24*30);
             response.addCookie(cookiePass);
         }
     }
@@ -102,6 +102,29 @@ public class UserService {
 
     public List<OrderDetailEntity> findByOrderEntityId(int id){
         return orderDetailRepository.findByOrderEntityId(id);
+    }
+
+    public void doChangePass(UserEntity user,String currentPass, String newPass, String confirmPass){
+        String hashCurrentPassword = createHash(currentPass);
+        if (hashCurrentPassword.equals(user.getPassword())) {
+            if (newPass.equals(confirmPass)){
+                String hashNewPassword = createHash(newPass);
+                userRepository.updatePassword(hashNewPassword, user.getId());
+            }
+        }
+    }
+
+    public int checkChangePass(UserEntity user,String currentPass, String newPass, String confirmPass){
+        String hashCurrentPassword = createHash(currentPass);
+        if (hashCurrentPassword.equals(user.getPassword())) {
+            if (newPass.equals(confirmPass)){
+                String hashNewPassword = createHash(newPass);
+                userRepository.updatePassword(hashNewPassword, user.getId());
+                return 0;
+            } else {
+                return 1;
+            }
+        } return 2;
     }
 
 }

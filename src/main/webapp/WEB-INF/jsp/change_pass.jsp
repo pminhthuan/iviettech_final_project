@@ -69,6 +69,9 @@
 
 <!--================Login Box Area =================-->
 <div class="site-section">
+    <div class="alert ${cssBootstrap}" role="alert" style="text-align: center; ${message == null?"display: none":""}">
+        ${message}
+    </div>
     <div class="container">
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
         <div class="container">
@@ -112,7 +115,7 @@
                                                     <%-- </div>--%>
                                                 </div>
                                                 <div class="text-center text-sm-right">
-                                                    <span class="badge badge-secondary">administrator</span>
+                                                    <span class="badge badge-secondary">${sessionScope.user.role.id == 2?"administrator":"customer"}</span>
                                                     <%-- <div class="text-muted"><small>Joined 09 Dec 2017</small></div>--%>
                                                 </div>
                                             </div>
@@ -122,7 +125,7 @@
                                         </ul>
                                         <div class="tab-content pt-3">
                                             <div class="tab-pane active">
-                                                <form class="form" novalidate="">
+                                                <form class="form" action="/changepass" method="post" novalidate="">
                                                     <div class="row">
                                                         <div class="col-12 col-sm-6 mb-3">
                                                             <div class="mb-2"><b>Change Password</b></div>
@@ -130,7 +133,7 @@
                                                                 <div class="col">
                                                                     <div class="form-group">
                                                                         <label>Current Password</label>
-                                                                        <input class="form-control" type="password" placeholder="••••••">
+                                                                        <input class="form-control" name="currentPass" type="password" placeholder="••••••">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -138,7 +141,7 @@
                                                                 <div class="col">
                                                                     <div class="form-group">
                                                                         <label>New Password</label>
-                                                                        <input class="form-control" type="password" placeholder="••••••">
+                                                                        <input id="password" name="newPass" class="form-control" type="password" placeholder="••••••">
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -146,7 +149,8 @@
                                                                 <div class="col">
                                                                     <div class="form-group">
                                                                         <label>Confirm <span class="d-none d-xl-inline">Password</span></label>
-                                                                        <input class="form-control" type="password" placeholder="••••••"></div>
+                                                                        <input id="confirm_password" name="confirmPass" class="form-control" type="password" placeholder="••••••"><span id='message'></span>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -225,6 +229,16 @@
 <%--<script>window.jQuery || document.write('<script src="../assets/js//resources/vendor/jquery.slim.min.js"><\/script>')</script>--%>
 <script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.02.js"></script>
 <script src="/resources/js/form-validation.js"></script>
+<!--===============================================================================================-->
+<%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>--%>
+<script>
+    $('#password, #confirm_password').on('keyup', function () {
+    if ($('#password').val() == $('#confirm_password').val()) {
+    $('#message').html('Matching').css('color', 'green');
+    } else
+    $('#message').html('Not Matching').css('color', 'red');
+    });
+</script>
 <!--===============================================================================================-->
 </body>
 

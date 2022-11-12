@@ -112,7 +112,7 @@
                                                     <%-- </div>--%>
                                                 </div>
                                                 <div class="text-center text-sm-right">
-                                                    <span class="badge badge-secondary">administrator</span>
+                                                    <span class="badge badge-secondary">${sessionScope.user.role.id == 2?"administrator":"customer"}</span>
                                                     <%-- <div class="text-muted"><small>Joined 09 Dec 2017</small></div>--%>
                                                 </div>
                                             </div>

@@ -147,9 +147,34 @@ public class UserController {
 
     @RequestMapping(value = "/changepass",method = RequestMethod.GET)
     public String viewChangePass() {
-
         return "change_pass";
     }
+
+    @RequestMapping(value = "/changepass",method = POST,produces = "text/plain;charset=UTF-8")
+    public String doChangePass(@RequestParam("currentPass") String currentPass,
+                               @RequestParam("newPass") String newPass,
+                               @RequestParam("confirmPass") String confirmPass, HttpSession session, Model model) {
+        UserEntity user = (UserEntity) session.getAttribute("user");
+        int check = userService.checkChangePass(user, currentPass, newPass, confirmPass);
+        if (check == 0){
+            userService.doChangePass(user, currentPass, newPass, confirmPass);
+            model.addAttribute("message", "Update Successful");
+            model.addAttribute("cssBootstrap","alert-success");
+        } else if (check == 1){
+            model.addAttribute("message", "Update Failed, Confirm Password not matching");
+            model.addAttribute("cssBootstrap","alert-danger");
+        } else {
+            model.addAttribute("message", "Update Failed, Current Password incorrect");
+            model.addAttribute("cssBootstrap","alert-danger");
+        }
+        return "change_pass";
+    }
+
+    @RequestMapping(value = "/resetpass",method = RequestMethod.GET)
+    public String viewResetPass() {
+        return "reset_pass";
+    }
+
 
 
 }
