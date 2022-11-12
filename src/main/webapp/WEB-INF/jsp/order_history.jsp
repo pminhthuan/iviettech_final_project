@@ -68,7 +68,105 @@
 
 
 <!--================ Box Area =================-->
+<div class="site-section">
+    <div class="container">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+        <div class="container">
+            <div class="row flex-lg-nowrap">
+                <div class="col-12 col-lg-auto mb-3" style="width: 200px;">
+                    <div class="card">
+                        <div class="e-navlist e-navlist--active-bg">
+                            <ul class="nav">
+                                <li class="nav-item"><a class="nav-link px-2 active" href="/profile"><i class="fa fa-user fa-fw mr-1" aria-hidden="true"></i></i><span>Overview</span></a></li>
+                                <li class="nav-item "><a class="nav-link px-2" href="/orderhistory"><i class="fa fa-history fa-fw mr-1" aria-hidden="true"></i></i><span>Order History</span></a></li>
+                                <li class="nav-item"><a class="nav-link px-2" href="/changepass"><i class="fa fa-fw fa-cog fa-fw mr-1"></i><span>Change Password</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="col">
+                    <div class="row">
+                        <div class="col mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="e-profile">
+                                        <div class="row">
+                                            <div class="col-12 col-sm-auto mb-3">
+                                                <div class="mx-auto" style="width: 140px;">
+                                                    <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px; background-color: rgb(233, 236, 239);">
+                                                        <img src="/resources/images/avatar-vo-danh-2.jpg" style="width: -webkit-fill-available;">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
+                                                <div class="text-center text-sm-left mb-2 mb-sm-0">
+                                                    <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">John Smith</h4>
+                                                    <p class="mb-0">@johnny.s</p>
+                                                    <%-- <div class="text-muted"><small>Last seen 2 hours ago</small></div>--%>
+                                                    <%-- <div class="mt-2">--%>
+                                                    <%-- <button class="btn btn-primary" type="button">--%>
+                                                    <%-- <i class="fa fa-fw fa-camera"></i>--%>
+                                                    <%-- <span>Change Photo</span>--%>
+                                                    <%-- </button>--%>
+                                                    <%-- </div>--%>
+                                                </div>
+                                                <div class="text-center text-sm-right">
+                                                    <span class="badge badge-secondary">administrator</span>
+                                                    <%-- <div class="text-muted"><small>Joined 09 Dec 2017</small></div>--%>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ul class="nav nav-tabs">
+                                            <li class="nav-item"><a href="" class="active nav-link">Order History</a></li>
+                                        </ul>
+                                        <div class="tab-content pt-3">
+                                            <div class="site-section">
+                                                <div class="container">
+                                                    <div class="site-blocks-table tb-item">
+                                                        <table class="table table-bordered">
+                                                            <thead>
+                                                            <tr>
+                                                                <th class="product-thumbnail">Date</th>
+                                                                <th class="product-name">Order Number</th>
+                                                                <th class="product-name">Total</th>
+                                                                <th class="product-price">Province</th>
+                                                                <th class="product-quantity">District</th>
+                                                                <th class="product-total">Ward</th>
+                                                                <th class="product-remove">Status</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <c:forEach items="${orderHistory}" var="o">
+                                                                <tr>
+                                                                    <td >${o.requireDate}</td>
+                                                                    <td>
+                                                                        <a href="">${o.id}</a>
+                                                                    </td>
+                                                                    <td >$${o.totalAmount}</td>
+                                                                    <td >${o.province.fullNameEn}</td>
+                                                                    <td >${o.district.fullNameEn}</td>
+                                                                    <td >${o.ward.fullNameEn}</td>
+                                                                    <td >${o.orderStatus == 0?"Order Placed":"Shipped"}</td>
+                                                                </tr>
+                                                            </c:forEach>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Footer -->
 <jsp:include page="footer.jsp"></jsp:include>

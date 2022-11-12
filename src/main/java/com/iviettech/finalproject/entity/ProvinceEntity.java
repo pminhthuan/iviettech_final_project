@@ -39,15 +39,15 @@ public class ProvinceEntity {
     private UnitEntity unitEntity;
 
     @OneToMany(mappedBy = "provinceEntity")
-    @LazyCollection(LazyCollectionOption.FALSE)
+    //@LazyCollection(LazyCollectionOption.FALSE)
     private List<DistrictEntity> districtEntityList;
 
     @OneToMany(mappedBy = "province")
-    @LazyCollection(LazyCollectionOption.FALSE)
+    //@LazyCollection(LazyCollectionOption.FALSE)
     private List<OrderEntity> orderList;
 
     @OneToMany(mappedBy = "province")
-    @LazyCollection(LazyCollectionOption.FALSE)
+    //@LazyCollection(LazyCollectionOption.FALSE)
     private List<UserEntity> userList;
 
 }

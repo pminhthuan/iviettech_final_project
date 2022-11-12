@@ -3,6 +3,7 @@ package com.iviettech.finalproject.repository;
 import com.iviettech.finalproject.entity.OrderEntity;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -30,5 +31,8 @@ public interface OrderRepository extends CrudRepository<OrderEntity, Integer> {
 
     @Query(value = "SELECT sum(total_amount) FROM orders WHERE date_part('day',require_date) = date_part('day',CURRENT_DATE) AND order_status = 0", nativeQuery = true)
     Double getTotalDay();
+
+    @Transactional
+    List<OrderEntity>findAllByUser_Id(int userId);
 
 }

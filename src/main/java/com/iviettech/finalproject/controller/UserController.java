@@ -1,5 +1,6 @@
 package com.iviettech.finalproject.controller;
 
+import com.iviettech.finalproject.entity.OrderEntity;
 import com.iviettech.finalproject.entity.RoleEntity;
 import com.iviettech.finalproject.entity.UserEntity;
 import com.iviettech.finalproject.repository.UserRepository;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import java.util.List;
 import java.util.Map;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -125,9 +127,11 @@ public class UserController {
         return "profile";
     }
 
-    @RequestMapping(value = "/purcharehistory",method = RequestMethod.GET)
-    public String viewPurchaseHistory() {
-
+    @RequestMapping(value = "/orderhistory",method = RequestMethod.GET)
+    public String viewOrderHistory(Model model, HttpSession session) {
+        UserEntity user = (UserEntity) session.getAttribute("user");
+        List<OrderEntity> orderHistory = userService.findAllByUserId(user.getId());
+        model.addAttribute("orderHistory", orderHistory);
         return "order_history";
     }
 

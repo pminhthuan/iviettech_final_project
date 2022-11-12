@@ -77,9 +77,9 @@
                     <div class="card">
                         <div class="e-navlist e-navlist--active-bg">
                             <ul class="nav">
-                                <li class="nav-item"><a class="nav-link px-2 active" href="#"><i class="fa fa-user fa-fw mr-1" aria-hidden="true"></i></i><span>Overview</span></a></li>
-                                <li class="nav-item"><a class="nav-link px-2" href="/purcharehistory"><i class="fa fa-history fa-fw mr-1" aria-hidden="true"></i></i><span>Order History</span></a></li>
-                                <li class="nav-item"><a class="nav-link px-2" href="/changepass"><i class="fa fa-fw fa-cog fa-fw mr-1"></i><span>Change Password</span></a></li>
+                                <li class="nav-item"><a class="nav-link px-2 active" href="/profile"><i class="fa fa-user fa-fw mr-1" aria-hidden="true"></i></i><span>Overview</span></a></li>
+                                <li class="nav-item"><a class="nav-link px-2" href="/orderhistory"><i class="fa fa-history fa-fw mr-1" aria-hidden="true"></i></i><span>Order History</span></a></li>
+                                <li class="nav-item active"><a class="nav-link px-2" href="/changepass"><i class="fa fa-fw fa-cog fa-fw mr-1"></i><span>Change Password</span></a></li>
                             </ul>
                         </div>
                     </div>
