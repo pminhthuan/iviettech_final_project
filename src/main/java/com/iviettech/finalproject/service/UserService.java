@@ -1,9 +1,9 @@
 package com.iviettech.finalproject.service;
 
-import com.iviettech.finalproject.entity.OrderEntity;
-import com.iviettech.finalproject.entity.RoleEntity;
-import com.iviettech.finalproject.entity.UserEntity;
+import com.iviettech.finalproject.entity.*;
 import com.iviettech.finalproject.helper.GmailSender;
+import com.iviettech.finalproject.repository.OrderDetailRepository;
+import com.iviettech.finalproject.repository.OrderRepository;
 import com.iviettech.finalproject.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +13,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 import static com.iviettech.finalproject.helper.PasswordEncoder.createHash;
 
@@ -21,6 +22,12 @@ public class UserService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    OrderRepository orderRepository;
+
+    @Autowired
+    OrderDetailRepository orderDetailRepository;
 
     public boolean isEmailExisting(String email){
         UserEntity user = userRepository.findByEmail(email);
@@ -87,6 +94,14 @@ public class UserService {
 
     public void updateUser(UserEntity user) {
         userRepository.updateUser(user.getFirstName(), user.getLastName(), user.getPhoneNumber(), user.getAddressDetail(), user.getProvince().getId(), user.getDistrict().getId(), user.getWard().getId(), user.getId());
+    }
+
+    public List<OrderEntity> findAllByUserId(int id){
+        return orderRepository.findAllByUser_Id(id);
+    }
+
+    public List<OrderDetailEntity> findByOrderEntityId(int id){
+        return orderDetailRepository.findByOrderEntityId(id);
     }
 
 }

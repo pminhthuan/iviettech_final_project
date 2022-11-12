@@ -1,5 +1,6 @@
 package com.iviettech.finalproject.controller;
 
+import com.iviettech.finalproject.entity.OrderDetailEntity;
 import com.iviettech.finalproject.entity.OrderEntity;
 import com.iviettech.finalproject.entity.RoleEntity;
 import com.iviettech.finalproject.entity.UserEntity;
@@ -135,6 +136,13 @@ public class UserController {
         List<OrderEntity> orderHistory = userService.findAllByUserId(user.getId());
         model.addAttribute("orderHistory", orderHistory);
         return "order_history";
+    }
+
+    @RequestMapping(value = "/orderhistory/detail/{id}",method = GET)
+    public String showOrderDetail(@PathVariable("id") int id, Model model) {
+        List<OrderDetailEntity> orderDetailList = userService.findByOrderEntityId(id);
+        model.addAttribute("orderDetailList", orderDetailList);
+        return "order_detail_history";
     }
 
     @RequestMapping(value = "/changepass",method = RequestMethod.GET)

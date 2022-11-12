@@ -127,27 +127,25 @@
                                                         <table class="table table-bordered">
                                                             <thead>
                                                             <tr>
-                                                                <th class="product-thumbnail">Date</th>
-                                                                <th class="product-name">Order Number</th>
-                                                                <th class="product-name">Total</th>
-                                                                <th class="product-price">Province</th>
-                                                                <th class="product-quantity">District</th>
-                                                                <th class="product-total">Ward</th>
-                                                                <th class="product-remove">Status</th>
+                                                                <th class="product-thumbnail">Image</th>
+                                                                <th class="product-name">Product</th>
+                                                                <th class="product-size">Size</th>
+                                                                <th class="product-color">Color</th>
+                                                                <th class="product-price">Price</th>
+                                                                <th class="product-quantity">Quantity</th>
                                                             </tr>
                                                             </thead>
                                                             <tbody>
-                                                            <c:forEach items="${orderHistory}" var="o">
+                                                            <c:forEach items="${orderDetailList}" var="o">
                                                                 <tr>
-                                                                    <td >${o.requireDate}</td>
-                                                                    <td>
-                                                                        <a href="<c:url value="/orderhistory/detail/${o.id}"/>">${o.id}</a>
+                                                                    <td class="product-thumbnail">
+                                                                        <img src="${o.product.mainProductImageURL}" alt="Image" class="img-fluid">
                                                                     </td>
-                                                                    <td >$${o.totalAmount}</td>
-                                                                    <td >${o.province.fullNameEn}</td>
-                                                                    <td >${o.district.fullNameEn}</td>
-                                                                    <td >${o.ward.fullNameEn}</td>
-                                                                    <td >${o.orderStatus == 0?"Order Placed":"Shipped"}</td>
+                                                                    <td>${o.product.name}</td>
+                                                                    <td >${o.size}</td>
+                                                                    <td >${o.color}</td>
+                                                                    <td >${o.price}</td>
+                                                                    <td >${o.quantity}</td>
                                                                 </tr>
                                                             </c:forEach>
                                                             </tbody>

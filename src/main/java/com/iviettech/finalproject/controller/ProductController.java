@@ -107,7 +107,7 @@ public class ProductController {
 
 
     @RequestMapping(value = "/shop/view/{id}",method = GET)
-    public String showOrderDetail(@PathVariable("id") int id, Model model) {
+    public String showProductDetail(@PathVariable("id") int id, Model model) {
         List<ProductImageEntity> productImageEntityList = productService.findByProduct_Id(id);
         List<String> productColorList = productService.getColorByProductId(id);
         List<String> productSizeList = productService.getSizeByProductId(id);
