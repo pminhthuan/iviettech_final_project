@@ -41,12 +41,10 @@
                                     <label class="control-label">ID</label>
                                     <form:input path="id" type="text" class="form-control" id="id" placeholder="ID" readonly="true"/>
 <%--                                    <form:hidden path="email" />--%>
-<%--                                    <form:hidden path="password" />--%>
-<%--                                    <form:hidden path="province" />--%>
-<%--                                    <form:hidden path="district" />--%>
-<%--                                    <form:hidden path="ward" />--%>
-
-                                        <%--                                    <form:hidden path="product.id" />--%>
+                                    <form:hidden path="password" />
+                                    <form:hidden path="province.id" />
+                                    <form:hidden path="district.id" />
+                                    <form:hidden path="ward.id" />
                                 </div>
                             </c:if>
 
@@ -90,8 +88,8 @@
                             </div>
                             <div class="row">
                                 <div class="form-group mb-3 col-xs-12 col-sm-6">
-                                    <label class="control-label">Actual price (*)</label>
-                                    <form:select path="role" class="form-control">
+                                    <label class="control-label">Role (*)</label>
+                                    <form:select path="role.id" class="form-control">
                                         <form:option value="1" label="Customer"/>
                                         <form:option value="2" label="Admin" />
                                     </form:select>

@@ -116,7 +116,7 @@
                 </div>
             </div>
             <br>
-            <div class="row col-md-12" style="margin-left: 5vw">
+            <div class="row col-md-12 container-fluid px-4">
                 <div class="col-md-6">
                     <h4>Import Product data as a CSV file...</h4>
                     <c:if test="${mssImport != null}">
