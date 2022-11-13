@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.sql.Date;
@@ -284,7 +285,9 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/checkout", method = POST, produces = "text/plain;charset=UTF-8") //produces:data type will return
-    public String saveOrder(OrderEntity order, HttpSession session) {
+    public String saveOrder(OrderEntity order, HttpSession session, HttpServletResponse response,
+                            @RequestParam(value = "saveInfo", required = false) String saveInfo) {
+        //productService.saveInfo(saveInfo, response, order);
         productService.doCheckout(order, session);
         return "thankyou";
     }
@@ -320,6 +323,20 @@ public class ProductController {
     public String viewAbout(Model model) {
 
         return "about";
+    }
+
+    @RequestMapping(value = "/shop/wishlist/{id}",method = GET)
+    public String addWishList(@PathVariable("id") int id, Model model, HttpSession session) {
+        if (session.getAttribute("user") == null){
+            if (session.getAttribute("wish_list") == null) {
+                List<FavouriteEntity> wishList = new ArrayList();
+                wishList.add(new FavouriteEntity(id));
+            } else {
+                List<FavouriteEntity> wishList = (List<FavouriteEntity>) session.getAttribute("wish_list");
+            }
+        }
+
+        return "product_detail";
     }
 
 }

@@ -19,5 +19,7 @@ public class FavouriteEntity {
     @Column(name = "price")
     private double price;
 
-
+    public FavouriteEntity(int id) {
+        this.id = id;
+    }
 }

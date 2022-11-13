@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.sql.Date;
@@ -351,6 +353,44 @@ public class ProductService {
         orderDetailRepository.saveAll(orderDetailList);
         session.removeAttribute("shopping_cart");
         sendConfirmationEmail(order);
+    }
+
+    public void saveInfo(String saveInfo, HttpServletResponse response, OrderEntity order){
+        if (saveInfo != null){
+            Cookie cookieFName = new Cookie("fname",order.getFirstName());
+            cookieFName.setMaxAge(60*60*24*30);
+            response.addCookie(cookieFName);
+            Cookie cookieLName = new Cookie("lname",order.getLastName());
+            cookieLName.setMaxAge(60*60*24*30);
+            response.addCookie(cookieLName);
+            Cookie cookiePhone = new Cookie("phonenumber",order.getPhoneNumber());
+            cookiePhone.setMaxAge(60*60*24*30);
+            response.addCookie(cookiePhone);
+            Cookie cookieEmail = new Cookie("email",order.getEmail());
+            cookieEmail.setMaxAge(60*60*24*30);
+            response.addCookie(cookieEmail);
+            Cookie cookieProvince = new Cookie("province",order.getProvince().getFullNameEn());
+            cookieProvince.setMaxAge(60*60*24*30);
+            response.addCookie(cookieProvince);
+            Cookie cookieProvinceId = new Cookie("provinceId",String.valueOf(order.getProvince().getId()));
+            cookieProvinceId.setMaxAge(60*60*24*30);
+            response.addCookie(cookieProvinceId);
+            Cookie cookieDistrict = new Cookie("district",order.getDistrict().getFullNameEn());
+            cookieDistrict.setMaxAge(60*60*24*30);
+            response.addCookie(cookieDistrict);
+            Cookie cookieDistrictId = new Cookie("districtId",String.valueOf(order.getDistrict().getId()));
+            cookieDistrictId.setMaxAge(60*60*24*30);
+            response.addCookie(cookieDistrictId);
+            Cookie cookieWard = new Cookie("ward",order.getWard().getFullNameEn());
+            cookieWard.setMaxAge(60*60*24*30);
+            response.addCookie(cookieWard);
+            Cookie cookieWardId = new Cookie("wardId",String.valueOf(order.getWard().getId()));
+            cookieWardId.setMaxAge(60*60*24*30);
+            response.addCookie(cookieWardId);
+            Cookie cookieAddressDetail = new Cookie("addressDetail",order.getAddressDetail());
+            cookieAddressDetail.setMaxAge(60*60*24*30);
+            response.addCookie(cookieAddressDetail);
+        }
     }
 
 
