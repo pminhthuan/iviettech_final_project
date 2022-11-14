@@ -220,14 +220,14 @@
                 <label class="custom-control-label" for="cod">COD</label>
               </div>
               <div class="custom-control custom-radio">
-                <form:radiobutton path="paymentMethod" value="Credit card" id="credit" title="paymentMethod" cssClass="custom-control-input"
+                <form:radiobutton path="paymentMethod" value="CreditCard" id="credit" title="paymentMethod" cssClass="custom-control-input"
                                   required="true"></form:radiobutton>
                   <%--            <form:input path="paymentMethod" id="credit" value="Credit card" name="paymentMethod" type="radio" class="custom-control-input" --%>
                   <%--                        required="true"/>--%>
                 <label class="custom-control-label" for="credit">Credit card</label>
               </div>
               <div class="custom-control custom-radio">
-                <form:radiobutton path="paymentMethod" value="Paypal" id="paypal" title="paymentMethod" cssClass="custom-control-input"
+                <form:radiobutton path="paymentMethod" value="PayPal" id="paypal" title="paymentMethod" cssClass="custom-control-input"
                                   required="true"></form:radiobutton>
                   <%--            <form:input path="paymentMethod" id="paypal" value="Paypal" name="paymentMethod" type="radio" class="custom-control-input" --%>
                   <%--                        required="true"/>--%>
@@ -437,6 +437,22 @@
       setTimeout(function() {
         $this.button('reset');
       }, 10000);
+    });
+  });
+</script>
+<!--===============================================================================================-->
+<script>
+  $(function() {
+    // when page loaded, COD is selected therefore should hide the Online payment block
+    $("#paypal-button-container").hide();
+
+    $("input:radio[name=paymentMethod]").click(function() {
+      let paymentMethodSelected = $('input:radio[name=paymentMethod]:checked').val();
+      if(paymentMethodSelected == 'PayPal' || paymentMethodSelected == 'CreditCard'){
+        $("#paypal-button-container").show();
+      } else {
+        $("#paypal-button-container").hide();
+      }
     });
   });
 </script>
