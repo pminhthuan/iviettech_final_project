@@ -33,17 +33,120 @@
     <div id="layoutSidenav_content">
         <main>
             <br>
-            <br>
-            <jsp:include page="ad_view_total.jsp"/>
 
-            <div class="row">
-                <div class="col-md-3">1</div>
-                <div class="col-md-3">2</div>
-                <div class="col-md-3">3</div>
-                <div class="col-md-3">4</div>
+            <div class="row container-fluid px-4">
+                <div class="col-xl-3 col-md-6">
+                    <div class="card bg-primary text-white mb-4">
+                        <div class="card-body">
+                            <p style="color: whitesmoke">Order in year: ${countYear}</p>
+                            <p style="color: yellow">Total in year: ${totalYear}$</p>
+                        </div>
+                        <div class="card-footer d-flex align-items-center justify-content-between">
+                            <a class="small text-white stretched-link" href="/admin/adReportYear">View Order</a>
+                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="card bg-warning text-white mb-4">
+                        <div class="card-body">
+                            <p style="color: whitesmoke">Order in month: ${countMonth}</p>
+                            <p style="color: yellow">Total in month: ${totalMonth}$</p>
+                        </div>
+                        <div class="card-footer d-flex align-items-center justify-content-between">
+                            <a class="small text-white stretched-link" href="/admin/adReportMonth">View Order</a>
+                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="card bg-success text-white mb-4">
+                        <div class="card-body">
+                            <p style="color: whitesmoke">Order in week: ${countWeek}</p>
+                            <p style="color: yellow">Total in week: ${totalWeek}$</p>
+                        </div>
+                        <div class="card-footer d-flex align-items-center justify-content-between">
+                            <a class="small text-white stretched-link" href="/admin/adReportWeek">View Order</a>
+                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6">
+                    <div class="card bg-danger text-white mb-4">
+                        <div class="card-body">
+                            <p style="color: whitesmoke">Order in day: ${countDay}</p>
+                            <p style="color: yellow">Total in day: ${totalDay}$</p>
+                        </div>
+                        <div class="card-footer d-flex align-items-center justify-content-between">
+                            <a class="small text-white stretched-link" href="/admin/adReportDate">View Order</a>
+                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row container-fluid px-4">
+                <div class="col-xl-4 col-md-6">
+                    <div class="card bg-primary text-white mb-4">
+                        <div class="card-body">
+                            <p style="color: whitesmoke">All product: ${countAllPro}</p>
+                            <p style="color: yellow">All product detail: ${countAllProDe}</p>
+                        </div>
+                        <div class="card-footer d-flex align-items-center justify-content-between">
+                            <a class="small text-white stretched-link" href="/admin/adProduct">View product</a>
+                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6">
+                    <div class="card bg-warning text-white mb-4">
+                        <div class="card-body">
+                            <p style="color: whitesmoke">Product in year: ${countProYear}</p>
+                            <p style="color: yellow">Product detail in year: ${countProDeYear}</p>
+                        </div>
+                        <div class="card-footer d-flex align-items-center justify-content-between">
+                            <a class="small text-white stretched-link" href="/admin/AdProductInYear">View product in year</a>
+                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6">
+                    <div class="card bg-success text-white mb-4">
+                        <div class="card-body">
+                            <p style="color: whitesmoke">New product in month: ${countProMonth}</p>
+                            <p style="color: yellow">Product detail in month: ${countProDeMonth}</p>
+                        </div>
+                        <div class="card-footer d-flex align-items-center justify-content-between">
+                            <a class="small text-white stretched-link" href="/admin/AdProductInMonth">View new product</a>
+                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row container-fluid px-4">
+                <div class="col-xl-6 col-md-6">
+                    <div class="card bg-primary text-white mb-4">
+                        <div class="card-body">
+                            <p style="color: whitesmoke">Category: ${countCate}, Cate detail: ${countCateDe}</p>
+                        </div>
+                        <div class="card-footer d-flex align-items-center justify-content-between">
+                            <a class="small text-white stretched-link" href="/admin/adCategory">View category</a>
+                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-md-6">
+                    <div class="card bg-warning text-white mb-4">
+                        <div class="card-body">
+                            <p style="color: whitesmoke">All manufactor: ${countManu}</p>
+                        </div>
+                        <div class="card-footer d-flex align-items-center justify-content-between">
+                            <a class="small text-white stretched-link" href="/admin/adManyfactor">View Manufactor</a>
+                            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <jsp:include page="ad_last_5_order.jsp"/>
         </main>
         <jsp:include page="ad_footer.jsp"/>
     </div>

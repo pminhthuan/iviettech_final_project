@@ -106,7 +106,7 @@
             </div>
             <div class="input-group-btn">
                 <a href="/admin/exportOrder">
-                    <button type="button" class="btn btn-success">Export Order</button>
+                    <button type="button" class="btn btn-success">Export All Order</button>
                 </a>
             </div>
         </main>
