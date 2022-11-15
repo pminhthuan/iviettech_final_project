@@ -104,7 +104,7 @@
                             <p style="color: yellow">Product detail in year: ${countProDeYear}</p>
                         </div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-white stretched-link" href="#">View product in year</a>
+                            <a class="small text-white stretched-link" href="/admin/AdProductInYear">View product in year</a>
                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>
@@ -116,7 +116,7 @@
                             <p style="color: yellow">Product detail in month: ${countProDeMonth}</p>
                         </div>
                         <div class="card-footer d-flex align-items-center justify-content-between">
-                            <a class="small text-white stretched-link" href="#">View new product</a>
+                            <a class="small text-white stretched-link" href="/admin/AdProductInMonth">View new product</a>
                             <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                         </div>
                     </div>

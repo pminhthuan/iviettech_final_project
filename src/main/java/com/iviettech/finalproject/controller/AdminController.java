@@ -791,6 +791,33 @@ public class AdminController {
         return "admin/ad_table";
     }
 
+    @GetMapping(value = "/AdProductInYear")
+    public String productInYear(Model model, HttpSession session) {
+
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
+
+        List<ProductEntity> productList = productRepository.getListProductInYear();
+        model.addAttribute("productList",productList);
+
+
+        return "admin/ad_product";
+    }
+    @GetMapping(value = "/AdProductInMonth")
+    public String productInMonth(Model model, HttpSession session) {
+
+        if (!adminService.isAdminRole(session)) {
+            return "redirect:/";
+        }
+
+        List<ProductEntity> productList = productRepository.getListProductInMonth();
+        model.addAttribute("productList",productList);
+
+
+        return "admin/ad_product";
+    }
+
 
 
 //    Report during the date
