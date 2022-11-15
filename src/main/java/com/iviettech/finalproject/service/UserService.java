@@ -127,4 +127,27 @@ public class UserService {
         } return 2;
     }
 
+    public int checkAccountEmail(String email){
+        UserEntity user = userRepository.findByEmail(email);
+        if (user != null){
+            return 1;
+        } return 0;
+    }
+
+    public void sendResetPassword(String email)  {
+        UserEntity user = userRepository.findByEmail(email);
+        String subject = "Reset Password";
+        String resetUrl = "http://localhost:8080/reset?email=" + email + "";
+        String mailBody = "<h3> Dear " + user.getFirstName()+ user.getLastName() + ",<h3>"
+                + "<p>You've requested to reset your password.</p>"
+                + "<br/>Please click on the following link to reset your account. Once activated, you do it step by step!"
+                + "<br/>" + resetUrl;
+
+        try {
+            GmailSender.send(user.getEmail(), subject, mailBody, true);
+        } catch (MessagingException | UnsupportedEncodingException e) {
+            System.out.println(e);
+        }
+    }
+
 }

@@ -176,5 +176,28 @@ public class UserController {
     }
 
 
+    @RequestMapping(value = "/resetpass", method = POST, produces = "text/plain;charset=UTF-8")
+    public String resetPass(Model model,
+                            @RequestParam("email") String email) {
+        int check = userService.checkAccountEmail(email);
+        if (check == 1){
+            userService.sendResetPassword(email);
+            model.addAttribute("message","Please go to your mailbox to activate your account!");
+            model.addAttribute("cssBootstrap","alert-success");
+        } else {
+            model.addAttribute("message","Email <" + email +"> not exist!");
+            model.addAttribute("cssBootstrap","alert-danger");
+        }
+        return "reset_pass";
+    }
+
+
+    @RequestMapping(value = "reset", method = GET)
+    public String reset(@RequestParam(name = "email") String email,
+                                  Model model) {
+
+        return "reset_pass";
+    }
+
 
 }
