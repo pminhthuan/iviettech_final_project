@@ -24,8 +24,7 @@
     <script src="/resources/admin/assets/demo/chart-bar-demo.js"></script>
     <script src="/resources/admin/js/simple-datatables@latest.js" crossorigin="anonymous"></script>
     <script src="/resources/admin/js/datatables-simple-demo.js"></script>
-    <!--===============================================================================================-->
-    <link rel="icon" type="image/png" href="/resources/images/icons/logo_T_T_Black.png"/>
+    <link rel="stylesheet" type="text/css" href="/resources/vendor/lightbox2/css/lightbox.css">
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="/resources/vendor/bootstrap/css/bootstrap.min.css">
     <!--===============================================================================================-->
@@ -60,39 +59,7 @@
     <jsp:include page="ad_sidebar_menu.jsp"/>
     <div id="layoutSidenav_content">
         <main>
-<%--            <div class="card mb-4">--%>
-<%--                <div class="card-header">--%>
-<%--                    <i class="fas fa-table me-1"></i>--%>
-<%--                    Order detail--%>
-<%--                </div>--%>
-<%--                <div class="card-body">--%>
-<%--                    <table id="datatablesSimple">--%>
-<%--                        <thead>--%>
-<%--                        <tr>--%>
-<%--                            <th>Id</th>--%>
-<%--                            <th>Image Url</th>--%>
-<%--                            <th>Image Alt</th>--%>
-<%--                        </tr>--%>
-<%--                        </thead>--%>
-<%--                        <tfoot>--%>
-<%--                        <tr>--%>
-<%--                            <th>Id</th>--%>
-<%--                            <th>Image Url</th>--%>
-<%--                            <th>Image Alt</th>--%>
-<%--                        </tr>--%>
-<%--                        </tfoot>--%>
-<%--                        <tbody>--%>
-<%--                        <c:forEach items="${productImageList}" var="pi">--%>
-<%--                            <tr>--%>
-<%--                                <td>${pi.id}</td>--%>
-<%--                                <td>--%>
-<%--                                    <img src="${pi.imageUrl}" style=width:284px, hight:379px">--%>
-<%--                                </td>--%>
-<%--                                <td>${pi.imageAlt}</td>--%>
-<%--                            </tr>--%>
-<%--                        </c:forEach>--%>
-<%--                        </tbody>--%>
-<%--                    </table>--%>
+
                     <div class="tab01">
                     <!--tab panes-->
                         <div class="tab-content p-t-50">
@@ -107,16 +74,18 @@
                                                 <!-- Block2 -->
                                                 <div class="block2">
                                                     <div class="block2-pic hov-img0">
-                                                        <a href="<c:url value="/viewImage/${pi.id}"/>">
+<%--                                                        <a href="<c:url value="/viewImage/${pi.id}"/>">--%>
+                                                        <a>
                                                             <img src="${pi.imageUrl}" alt="${pi.imageAlt}">
                                                         </a>
                                                     </div>
 
                                                     <div class="block2-txt flex-w flex-t p-t-14">
                                                         <div class="block2-txt-child1 flex-col-l ">
-                                                            <a href="<c:url value="/admin/viewImage/${pi.id}"/>" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                                                    ${p.product.name}
-                                                            </a>
+<%--                                                            <a href="<c:url value="/admin/viewImage/${pi.id}"/>" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">--%>
+<%--                                                                    ${p.product.name}--%>
+<%--                                                            </a>--%>
+                                                            <a class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">${p.product.name}</a>
 
                                                             <span class="stext-105 cl3">
                                                                          <a href="<c:url value="/admin/deleteImage/${pi.id}/${pi.product.id}"/>">

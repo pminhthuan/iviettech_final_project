@@ -1,7 +1,6 @@
 package com.iviettech.finalproject.repository;
 
 import com.iviettech.finalproject.entity.CategoryDetailEntity;
-import com.iviettech.finalproject.entity.CategoryEntity;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -18,4 +17,7 @@ public interface CategoryDetailRepository extends CrudRepository<CategoryDetailE
 
     @Query(value = "select ct.category_id from category_detail ct where ct.id = ?1", nativeQuery = true)
     int getCategoryIdByCateDetail(int id);
+
+    @Query(value = "SELECT count(*) FROM category_detail", nativeQuery = true)
+    int getAllCategoryDetail();
 }

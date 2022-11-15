@@ -375,24 +375,67 @@ public class AdminService {
 
     //------report
     public void reportDate(Model model) {
+        Integer count = orderRepository.getSumOrderInDay();
+        Double total = orderRepository.getTotalDay();
         List<OrderEntity> orderList = orderRepository.findByRequireDate(new Date());
         model.addAttribute("orderList", orderList);
+        model.addAttribute("totalDay", total);
+        model.addAttribute("countDay", count);
     }
 
     public void reportWeek(Model model) {
+        Integer count = orderRepository.getSumOrderInWeek();
+        Double total = orderRepository.getTotalWeek();
         List<OrderEntity> orderList = orderRepository.getOrderWeek();
         model.addAttribute("orderList", orderList);
+        model.addAttribute("totalWeek", total);
+        model.addAttribute("countWeek", count);
     }
 
     public void reportMonth(Model model) {
+        Integer count = orderRepository.getSumOrderInMonth();
+        Double total = orderRepository.getTotalMonth();
         List<OrderEntity> orderList = orderRepository.getOrderMonth();
         model.addAttribute("orderList", orderList);
+        model.addAttribute("totalMonth", total);
+        model.addAttribute("countMonth", count);
     }
 
     public void reportYear(Model model) {
+
+        Integer count = orderRepository.getSumOrderInYear();
+        Double total = orderRepository.getTotalYear();
         List<OrderEntity> orderList = orderRepository.getOrderYear();
         model.addAttribute("orderList", orderList);
+        model.addAttribute("totalYear", total);
+        model.addAttribute("countYear", count);
+
     }
+    public void getCountProduct(Model model) {
+        int countAllPro = productRepository.getCountAllProduct();
+        int countAllProDe = productDetailRepository.getCountAllProductDetail();
+        model.addAttribute("countAllPro", countAllPro);
+        model.addAttribute("countAllProDe", countAllProDe);
+
+        int countProYear = productRepository.getCountProductInYear();
+        int countProDeYear = productDetailRepository.getCountProductDetailInYear();
+        model.addAttribute("countProYear", countProYear);
+        model.addAttribute("countProDeYear", countProDeYear);
+
+        int countProMonth = productRepository.getCountProductInMonth();
+        int countProDeMonth = productDetailRepository.getCountProductDetailInMonth();
+        model.addAttribute("countProMonth", countProMonth);
+        model.addAttribute("countProDeMonth", countProDeMonth);
+
+        int countCate = categoryRepository.getAllCategory();
+        int countCateDe = categoryDetailRepository.getAllCategoryDetail();
+        model.addAttribute("countCate", countCate);
+        model.addAttribute("countCateDe", countCateDe);
+
+        int countManu = manufactorRepository.getAllManu();
+        model.addAttribute("countManu", countManu);
+    }
+
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {

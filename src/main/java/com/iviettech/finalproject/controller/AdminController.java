@@ -775,12 +775,17 @@ public class AdminController {
     //--------allTable
 
     @RequestMapping(value = "/adTable", method = GET)
-    public String editAccount(Model model, HttpSession session) {
+    public String allTable(Model model, HttpSession session) {
 
         if (!adminService.isAdminRole(session)) {
             return "redirect:/";
         }
 
+        adminService.reportYear(model);
+        adminService.reportWeek(model);
+        adminService.reportMonth(model);
+        adminService.reportDate(model);
+        adminService.getCountProduct(model);
 
 
         return "admin/ad_table";

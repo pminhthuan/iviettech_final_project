@@ -1,14 +1,11 @@
 package com.iviettech.finalproject.repository;
 
 import com.iviettech.finalproject.entity.ProductDetailEntity;
-import com.iviettech.finalproject.entity.ProductImageEntity;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
 import java.util.List;
 
 public interface ProductDetailRepository extends CrudRepository<ProductDetailEntity, Integer> {
@@ -38,5 +35,15 @@ public interface ProductDetailRepository extends CrudRepository<ProductDetailEnt
             nativeQuery = true)
     int findQuantity(int id);
 
+    @Query(value = "SELECT COUNT(*) AS productDetailInYear FROM product_detail INNER JOIN products ON products.id = product_detail.product_id WHERE date_part('year',add_date) = date_part('year',CURRENT_DATE)",
+            nativeQuery = true)
+    Integer getCountProductDetailInYear();
+
+    @Query(value = "SELECT COUNT(*)  FROM product_detail", nativeQuery = true)
+    Integer getCountAllProductDetail();
+
+    @Query(value = "SELECT COUNT(*) AS productDetailInMonth FROM product_detail INNER JOIN products ON products.id = product_detail.product_id WHERE date_trunc('month',add_date) = date_trunc('month',CURRENT_DATE)",
+            nativeQuery = true)
+    Integer getCountProductDetailInMonth();
 
 }
