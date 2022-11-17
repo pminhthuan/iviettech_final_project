@@ -31,7 +31,7 @@
   <div class="col-xl-3 col-md-6 col-12">
     <div class="info-box bg-primary text-white">
 <%--      <span class="info-box-icon push-bottom"><i class="material-icons edit-icon-you">style</i></span>--%>
-      <div class="card-body info-box-content">
+      <div class="card-body">
         <span class="info-box-text">Total Week</span>
         <span class="info-box-number">
                         <fmt:setLocale value="en_US"/>
@@ -52,7 +52,7 @@
   <div class="col-xl-3 col-md-6 col-12">
     <div class="info-box bg-primary text-white">
       <%--      <span class="info-box-icon push-bottom"><i class="material-icons edit-icon-you">style</i></span>--%>
-      <div class="card-body info-box-content">
+      <div class="card-body">
         <span class="info-box-text">Total Month</span>
         <span class="info-box-number">
                         <fmt:setLocale value="en_US"/>
@@ -72,7 +72,7 @@
   <div class="col-xl-3 col-md-6 col-12">
     <div class="info-box bg-primary text-white">
       <%--      <span class="info-box-icon push-bottom"><i class="material-icons edit-icon-you">style</i></span>--%>
-      <div class="card-body info-box-content">
+      <div class="card-body">
         <span class="info-box-text">Total Year</span>
         <span class="info-box-number">
                         <fmt:setLocale value="en_US"/>
@@ -92,7 +92,7 @@
   <div class="col-xl-3 col-md-6 col-12">
     <div class="info-box bg-primary text-white">
       <%--      <span class="info-box-icon push-bottom"><i class="material-icons edit-icon-you">style</i></span>--%>
-      <div class="card-body info-box-content">
+      <div class="card-body">
         <span class="info-box-text">Total Earnings</span>
         <span class="info-box-number">
                         <fmt:setLocale value="en_US"/>
