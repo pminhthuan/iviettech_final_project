@@ -331,6 +331,12 @@ public class ProductController {
         return "404";
     }
 
+    @RequestMapping(value = "/500",method = GET)
+    public String view500Page(Model model) {
+
+        return "500";
+    }
+
     @RequestMapping(value = "/shop/wishlist/{id}",method = GET)
     public String addWishList(@PathVariable("id") int id, Model model, HttpSession session) {
         if (session.getAttribute("user") == null){

@@ -4,6 +4,7 @@ import com.iviettech.finalproject.entity.OrderDetailEntity;
 import com.iviettech.finalproject.entity.OrderEntity;
 import com.iviettech.finalproject.entity.RoleEntity;
 import com.iviettech.finalproject.entity.UserEntity;
+import com.iviettech.finalproject.helper.AESEncryptor;
 import com.iviettech.finalproject.repository.UserRepository;
 import com.iviettech.finalproject.service.ProductService;
 import com.iviettech.finalproject.service.UserService;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -34,8 +37,11 @@ public class UserController {
 
 
     @RequestMapping(value = "/login",method = RequestMethod.GET)
-    public String showLoginPage(Model model) {
+    public String showLoginPage(Model model, HttpServletRequest request) {
+        String encryptedPassFromCookie = userService.getPassFromCookie(request);
+        model.addAttribute("cookie_pass", AESEncryptor.decrypt(encryptedPassFromCookie));
         model.addAttribute("user",new UserEntity());
+
         return "login";
     }
 
@@ -110,7 +116,7 @@ public class UserController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = "/profile",method = RequestMethod.GET)
+    @RequestMapping(value = "/user/profile",method = RequestMethod.GET)
     public String viewProfile(Model model, HttpSession session) {
         UserEntity user = (UserEntity) session.getAttribute("user");
         Map<Integer, String> provinceMap = productService.getProvinces();
@@ -120,7 +126,7 @@ public class UserController {
     }
 
 
-    @RequestMapping(value = "/updateProfile", method = POST, produces = "text/plain;charset=UTF-8")
+    @RequestMapping(value = "/user/updateProfile", method = POST, produces = "text/plain;charset=UTF-8")
     public String updateProfile(UserEntity user, Model model, HttpSession session) {
         userService.updateUser(user);
         Map<Integer, String> provinceMap = productService.getProvinces();
@@ -130,7 +136,7 @@ public class UserController {
         return "profile";
     }
 
-    @RequestMapping(value = "/orderhistory",method = RequestMethod.GET)
+    @RequestMapping(value = "/user/orderhistory",method = RequestMethod.GET)
     public String viewOrderHistory(Model model, HttpSession session) {
         UserEntity user = (UserEntity) session.getAttribute("user");
         List<OrderEntity> orderHistory = userService.findAllByUserId(user.getId());
@@ -138,19 +144,19 @@ public class UserController {
         return "order_history";
     }
 
-    @RequestMapping(value = "/orderhistory/detail/{id}",method = GET)
+    @RequestMapping(value = "/user/orderhistory/detail/{id}",method = GET)
     public String showOrderDetail(@PathVariable("id") int id, Model model) {
         List<OrderDetailEntity> orderDetailList = userService.findByOrderEntityId(id);
         model.addAttribute("orderDetailList", orderDetailList);
         return "order_detail_history";
     }
 
-    @RequestMapping(value = "/changepass",method = RequestMethod.GET)
+    @RequestMapping(value = "/user/changepass",method = RequestMethod.GET)
     public String viewChangePass() {
         return "change_pass";
     }
 
-    @RequestMapping(value = "/changepass",method = POST,produces = "text/plain;charset=UTF-8")
+    @RequestMapping(value = "/user/changepass",method = POST,produces = "text/plain;charset=UTF-8")
     public String doChangePass(@RequestParam("currentPass") String currentPass,
                                @RequestParam("newPass") String newPass,
                                @RequestParam("confirmPass") String confirmPass, HttpSession session, Model model) {
@@ -192,7 +198,7 @@ public class UserController {
     }
 
 
-    @RequestMapping(value = "reset", method = GET)
+    @RequestMapping(value = "/reset", method = GET)
     public String reset(@RequestParam(name = "email") String email,
                                   Model model) {
 

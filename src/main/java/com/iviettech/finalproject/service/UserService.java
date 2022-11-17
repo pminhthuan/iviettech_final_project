@@ -1,6 +1,7 @@
 package com.iviettech.finalproject.service;
 
 import com.iviettech.finalproject.entity.*;
+import com.iviettech.finalproject.helper.AESEncryptor;
 import com.iviettech.finalproject.helper.GmailSender;
 import com.iviettech.finalproject.repository.OrderDetailRepository;
 import com.iviettech.finalproject.repository.OrderRepository;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
@@ -63,6 +65,16 @@ public class UserService {
         }
     }
 
+    public String getPassFromCookie(HttpServletRequest request){
+        String encryptedPassFromCookie = "";
+        for (Cookie cookie : request.getCookies()) {
+            if (cookie.getName().equals("pass")) {
+                encryptedPassFromCookie = cookie.getValue();
+                break;
+            }
+        } return encryptedPassFromCookie;
+    }
+
     public int doLogin(String email, String password){
         UserEntity findUser = findUser(email,password);
         if(findUser == null){
@@ -80,7 +92,7 @@ public class UserService {
             Cookie cookieEmail = new Cookie("email",email);
             cookieEmail.setMaxAge(60*60*24*30);
             response.addCookie(cookieEmail);
-            Cookie cookiePass = new Cookie("pass",password);
+            Cookie cookiePass = new Cookie("pass", AESEncryptor.encrypt(password));
             cookiePass.setMaxAge(60*60*24*30);
             response.addCookie(cookiePass);
         }
