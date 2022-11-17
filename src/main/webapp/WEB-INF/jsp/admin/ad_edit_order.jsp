@@ -43,9 +43,9 @@
                                     <form:input path="id" type="text" class="form-control" id="id" placeholder="ID" readonly="true"/>
                                     <form:hidden path="orderStatus" />
                                     <form:hidden path="paymentStatus" />
-                                    <form:hidden path="province" />
-                                    <form:hidden path="ward" />
-                                    <form:hidden path="district" />
+<%--                                    <form:hidden path="province" />--%>
+<%--                                    <form:hidden path="ward" />--%>
+<%--                                    <form:hidden path="district" />--%>
 
                                 </div>
                             </c:if>
@@ -69,7 +69,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Address (*)</label>
-                                <form:input path="addressDetail" type="text" class="form-control" placeholder="Address" required="true" readonly="true"/>
+                                <form:input path="addressDetail" type="text" class="form-control" placeholder="Address" required="true"/>
                             </div>
                             <div class="row">
                                 <div class="form-group mb-3 col-xs-12 col-sm-6">
