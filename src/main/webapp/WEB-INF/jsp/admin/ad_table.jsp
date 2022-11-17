@@ -36,7 +36,7 @@
 
             <div class="row container-fluid px-4">
                 <div class="col-xl-3 col-md-6">
-                    <div class="card bg-primary text-white mb-4">
+                    <div class="card bg-danger text-white mb-4">
                         <div class="card-body">
                             <p style="color: whitesmoke">Order in year: ${countYear}</p>
                             <p style="color: yellow">Total in year: ${totalYear}$</p>
@@ -48,7 +48,7 @@
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6">
-                    <div class="card bg-warning text-white mb-4">
+                    <div class="card bg-danger text-white mb-4">
                         <div class="card-body">
                             <p style="color: whitesmoke">Order in month: ${countMonth}</p>
                             <p style="color: yellow">Total in month: ${totalMonth}$</p>
@@ -60,7 +60,7 @@
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-6">
-                    <div class="card bg-success text-white mb-4">
+                    <div class="card bg-danger text-white mb-4">
                         <div class="card-body">
                             <p style="color: whitesmoke">Order in week: ${countWeek}</p>
                             <p style="color: yellow">Total in week: ${totalWeek}$</p>
@@ -86,7 +86,7 @@
             </div>
             <div class="row container-fluid px-4">
                 <div class="col-xl-4 col-md-6">
-                    <div class="card bg-primary text-white mb-4">
+                    <div class="card bg-success text-white mb-4">
                         <div class="card-body">
                             <p style="color: whitesmoke">All product: ${countAllPro}</p>
                             <p style="color: yellow">All product detail: ${countAllProDe}</p>
@@ -98,7 +98,7 @@
                     </div>
                 </div>
                 <div class="col-xl-4 col-md-6">
-                    <div class="card bg-warning text-white mb-4">
+                    <div class="card bg-success text-white mb-4">
                         <div class="card-body">
                             <p style="color: whitesmoke">Product in year: ${countProYear}</p>
                             <p style="color: yellow">Product detail in year: ${countProDeYear}</p>
