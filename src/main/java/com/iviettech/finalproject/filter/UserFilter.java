@@ -26,9 +26,9 @@ public class UserFilter implements Filter {
         String loginURI = request.getContextPath() + "/login";
 
         boolean loggedIn = session != null && session.getAttribute("user") != null;
-        boolean loginRequest = request.getRequestURI().equals(loginURI);
+        //boolean loginRequest = request.getRequestURI().equals(loginURI);
 
-        if (loggedIn || loginRequest) {
+        if (loggedIn) {
             filterChain.doFilter(request, response);
         } else {
             response.sendRedirect(loginURI);
