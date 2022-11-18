@@ -84,7 +84,7 @@
                                     href="/admin/newCategory"
                                     class="btn btn-primary btn-block text-uppercase me-1">Add new category</a>
                             <i class="fas fa-table me-1"></i>
-                            Category Detail
+                            Category
                         </div>
                         <div class="card-body">
                             <table class="table table-hover">
