@@ -141,7 +141,7 @@
                                                                 <tr>
                                                                     <td >${o.requireDate}</td>
                                                                     <td>
-                                                                        <a href="<c:url value="/orderhistory/detail/${o.id}"/>">${o.id}</a>
+                                                                        <a href="<c:url value="/user/orderhistory/detail/${o.id}"/>">${o.id}</a>
                                                                     </td>
                                                                     <td >$${o.totalAmount}</td>
                                                                     <td >${o.province.fullNameEn}</td>

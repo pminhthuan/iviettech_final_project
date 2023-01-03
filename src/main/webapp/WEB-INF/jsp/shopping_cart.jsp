@@ -266,7 +266,7 @@
         if (oldValue == 1) {
             return;
         } else {
-            // Don't allow decrementing below zero
+            // Don't allow decrementing below 1
             if (oldValue > 1) {
                 var newVal = parseFloat(oldValue) - 1;
             } else {
